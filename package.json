@@ -5,12 +5,12 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "vuepress build",
+    "build": "vuepress build src",
     "clean": "rm -rf /dist",
     "copy-build": "cp -r .vuepress/dist/. ../",
     "copy-cname": "cp CNAME ../",
     "postbuild": "npm run copy-build && npm run copy-cname",
-    "start": "vuepress dev"
+    "start": "vuepress dev src"
   },
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.4.1",
