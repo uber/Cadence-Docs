@@ -4,12 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prebuild": "npm run clean",
     "build": "vuepress build src",
-    "clean": "rm -rf /dist",
-    "copy-build": "cp -r .vuepress/dist/. ../",
-    "copy-cname": "cp CNAME ../",
-    "postbuild": "npm run copy-build && npm run copy-cname",
+    "build-production": "npm run build && npm run copy-build && npm run copy-cname",
+    "copy-build": "cp -r src/.vuepress/dist ./dist",
+    "copy-cname": "cp config/CNAME ./dist",
     "start": "vuepress dev src"
   },
   "dependencies": {
