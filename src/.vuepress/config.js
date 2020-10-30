@@ -1,6 +1,7 @@
 const { slackUrl } = require('./constants');
 
 module.exports = {
+  dest: 'dist',
   lang: 'en-US',
   title: 'Cadence',
   patterns: [

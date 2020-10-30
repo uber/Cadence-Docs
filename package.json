@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "vuepress build src",
-    "build-production": "npm run build && npm run copy-build && npm run copy-cname",
-    "copy-build": "cp -r src/.vuepress/dist ./dist",
-    "copy-cname": "cp config/CNAME ./dist",
+    "postbuild": "npm run copy-cname",
+    "copy-cname": "cp src/.vuepress/CNAME ./dist",
     "start": "vuepress dev src"
   },
   "dependencies": {
