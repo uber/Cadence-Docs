@@ -3,6 +3,7 @@ const { slackUrl } = require('./constants');
 module.exports = {
   dest: 'dist',
   lang: 'en-US',
+  repo: 'uber/cadence-docs',
   title: 'Cadence',
   patterns: [
     '**/*.md',
