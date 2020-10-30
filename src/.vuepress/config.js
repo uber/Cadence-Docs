@@ -25,6 +25,9 @@ module.exports = {
   themeConfig: {
     docsDir: '/docs',
     logo: '/img/logo-white.svg',
+    docsRepo: 'uber/cadence-docs',
+    docsDir: 'src',
+    editLinks: true,
     nav: [
       {
         text: 'Docs',
