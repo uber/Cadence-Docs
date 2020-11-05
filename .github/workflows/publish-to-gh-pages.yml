@@ -17,7 +17,7 @@ jobs:
           npm install
           npm run build
 
-      - name: Configure custom domain
+      - name: Configure domain
         uses: finnp/create-file-action@1.0.0
         env:
           FILE_NAME: "dist/CNAME"
