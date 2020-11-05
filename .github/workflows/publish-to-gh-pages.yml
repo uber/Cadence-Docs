@@ -18,7 +18,7 @@ jobs:
           npm run build
 
       - name: Configure custom domain
-        uses: "finnp/create-file-action@1.0.0"
+        uses: "finnp/create-file-action@master"
           env:
             FILE_NAME: "dist/CNAME"
             FILE_DATA: "hello world"
