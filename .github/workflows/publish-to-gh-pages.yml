@@ -19,9 +19,9 @@ jobs:
 
       - name: Configure custom domain
         uses: finnp/create-file-action@1.0.0
-          env:
-            FILE_NAME: "dist/CNAME"
-            FILE_DATA: "hello world"
+        with:
+          FILE_NAME: "dist/CNAME"
+          FILE_DATA: "hello world"
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
