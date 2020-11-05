@@ -2,7 +2,6 @@ const { slackUrl } = require('./constants');
 
 
 module.exports = {
-  base: '/cadence-docs/',
   dest: 'dist',
   lang: 'en-US',
   title: 'Cadence',
