@@ -68,6 +68,7 @@ module.exports = {
           { text: 'Cadence Java Client', link: 'https://github.com/uber-java/cadence-client' },
           { text: 'Cadence Java Client Samples', link: 'https://github.com/uber/cadence-java-samples' },
           { text: 'Cadence Web UI', link: 'https://github.com/uber/cadence-web' },
+          { text: 'Cadence Docs', link: 'https://github.com/uber/cadence-docs' },
         ],
       },
       {
