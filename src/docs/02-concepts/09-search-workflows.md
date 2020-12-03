@@ -220,12 +220,12 @@ There are some special considerations for these attributes:
 
 - CloseStatus, CloseTime, DomainID, ExecutionTime, HistoryLength, RunID, StartTime, WorkflowID, WorkflowType are reserved by Cadence and are read-only
 - CloseStatus is a mapping of int to state:
-  - 0 = completed
-  - 1 = failed
-  - 2 = canceled
-  - 3 = terminated
-  - 4 = continuedasnew
-  - 5 = timedout
+  - 1 = completed
+  - 2 = failed
+  - 3 = canceled
+  - 4 = terminated
+  - 5 = continuedasnew
+  - 6 = timedout
 - StartTime, CloseTime and ExecutionTime are stored as INT, but support :query:queries: using both EpochTime in nanoseconds, and string in RFC3339 format (ex. `"2006-01-02T15:04:05+07:00"`)
 - CloseTime, CloseStatus, HistoryLength are only present in closed :workflow:
 - ExecutionTime is for Retry/Cron user to :query: a :workflow: that will run in the future
