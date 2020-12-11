@@ -1,0 +1,15 @@
+name: Nightly integration test
+on:
+  schedule:
+    # Run every day at 0 minutes and 0 hours (midnight GMT)
+    # - cron: '0 0 * * *'
+    - cron: '* * * * *'
+jobs:
+  nightly-integration-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          headless: true
