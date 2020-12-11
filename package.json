@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "build": "vuepress build src",
-    "start": "vuepress dev src"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "start": "vuepress dev src",
+    "test": "npm run cypress:run"
   },
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.4.1",
@@ -18,5 +21,7 @@
     "vuepress-plugin-glossary": "^1.0.2",
     "vuepress-plugin-reading-progress": "^1.0.9"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cypress": "^6.1.0"
+  }
 }

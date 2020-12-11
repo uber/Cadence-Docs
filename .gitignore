@@ -1,4 +1,8 @@
 .DS_Store
+cypress/fixtures
+cypress/plugins
+cypress/support
+cypress/videos
 dist
 node_modules
 npm-debug.log
