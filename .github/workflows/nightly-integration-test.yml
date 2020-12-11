@@ -2,8 +2,7 @@ name: Nightly integration test
 on:
   schedule:
     # Run every day at 0 minutes and 0 hours (midnight GMT)
-    # - cron: '0 0 * * *'
-    - cron: '* * * * *'
+    - cron: '0 0 * * *'
 jobs:
   nightly-integration-test:
     runs-on: ubuntu-latest
