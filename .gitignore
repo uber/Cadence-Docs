@@ -6,5 +6,7 @@ cypress/videos
 dist
 node_modules
 npm-debug.log
-package-lock.json
+# package-lock file is required for cypress github action to work.
+# See https://github.com/marketplace/actions/cypress-io#installation for more information.
+# package-lock.json
 yarn-error.log
