@@ -187,7 +187,11 @@ module.exports = {
         },
         {
           title: 'Operation Guide',
-          path: '/docs/08-operation-guide/',
+          path: '/docs/07-operation-guide/',
+          children: [
+            '07-operation-guide/',
+            '07-operation-guide/01-setup',
+          ],
         },
         {
           title: 'Glossary',
@@ -195,10 +199,10 @@ module.exports = {
         },
         {
           title: 'About',
-          path: '/docs/07-about',
+          path: '/docs/08-about',
           children: [
-            '07-about/',
-            '07-about/01-license',
+            '08-about/',
+            '08-about/01-license',
           ],
         },
       ],

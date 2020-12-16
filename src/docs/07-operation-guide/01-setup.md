@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Worker service
+title: Cluster Setup and Configuration
 permalink: /docs/operation-guide/setup
 ---
 
-# Cluster Setup
+# Cluster Setup and Configuration
 
 This section will help to understand what you need for setting up a Cadence cluster.
 
