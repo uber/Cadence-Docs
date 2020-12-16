@@ -12,3 +12,11 @@ jobs:
         with:
           browser: chrome
           headless: true
+      - name: Report failure to slack
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: cadence-docs
+          SLACK_MESSAGE: 'Nightly integration test has failed.'
+          SLACK_TITLE: cadence-docs integration test
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
