@@ -1,13 +1,9 @@
 ---
 layout: default
-title: Operation Guide
+title: Overview
 permalink: /docs/operation-guide
 ---
 
-# Operation Guide
+# Operation Guide Overview
 
 This document will cover things that you need to know to run a Cadence cluster in production. Topics including: setup, monitoring, maintenance and troubleshooting.
-
-## Links
-
-- [Cluster Setup and Configuration](01-setup/).
