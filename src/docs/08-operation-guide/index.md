@@ -8,8 +8,8 @@ permalink: /docs/operation-guide
 
 ## Overview
 
-This document will cover things that you need to know to run a Cadence cluster in production. Topics including: setup, monitoring, maintenance and troubleshooting. 
+This document will cover things that you need to know to run a Cadence cluster in production. Topics including: setup, monitoring, maintenance and troubleshooting.
 
-## Cluster Setup
+## Cluster Setup and Configuration
 
-- [Cluster Setup](01-setup/).
+- [Cluster Setup and Configuration](01-setup/).
