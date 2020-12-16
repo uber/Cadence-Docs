@@ -39,6 +39,7 @@ module.exports = {
           { text: 'Java client', link: '/docs/java-client/' },
           { text: 'Go client', link: '/docs/go-client/' },
           { text: 'Command line interface', link: '/docs/cli/' },
+          { text: 'Operation Guide', link: '/docs/operation-guide/' },
           { text: 'Glossary', link: '/GLOSSARY' },
           { text: 'About', link: '/docs/about/' },
         ],
@@ -183,6 +184,10 @@ module.exports = {
         {
           title: 'Command line interface',
           path: '/docs/06-cli/',
+        },
+        {
+          title: 'Operation Guide',
+          path: '/docs/08-operation-guide/',
         },
         {
           title: 'Glossary',
