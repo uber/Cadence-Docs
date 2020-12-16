@@ -10,11 +10,9 @@ This section will help to understand what you need for setting up a Cadence clus
 
 You need to understand some key config options in Cadence server. There are two main types of configs in Cadence server, static config and dynamic config.
 
-Also, you need understand Cadence’s dependency --- a database(Cassandra or SQL based like MySQL/Postgres) and a metric server(typically Prometheus). Cadence also needs ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). And Cadence also depends on a blob store like S3 if you need to enable [archival feature](docs/concepts/archival/).
+Also, you need understand Cadence’s dependency --- a database(Cassandra or SQL based like MySQL/Postgres) and a metric server(typically Prometheus). Cadence also needs ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). And Cadence also depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
 
-## Cadence server configuration
-
-### Static configs
+## Static configs
 
 There are lots of configs in Cadence. Usually the default values or the recommended values in development.yaml should be good to go. Here are the most basic configuration that you should understand.
 
@@ -36,7 +34,7 @@ There are lots of configs in Cadence. Usually the default values or the recommen
 | persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> See [persistence documentation](https://github.com/uber/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
 
 
-### Dynamic configuration overview
+## Dynamic configuration 
 
 There are more dynamic configurations than static configurations. Dynamic configs can be changed at the run time without restarting any server instances. The format of dynamic configuration is defined [here](https://github.com/uber/cadence/tree/master/config/dynamicconfig).
 
