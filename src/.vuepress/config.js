@@ -32,7 +32,7 @@ module.exports = {
       {
         text: 'Docs',
         items: [
-          { text: 'Cadence', link: '/docs/cadence/' },
+          { text: 'Get Started', link: '/docs/get-started/' },
           { text: 'Use cases', link: '/docs/use-cases/' },
           { text: 'Concepts', link: '/docs/concepts/' },
           { text: 'Tutorials', link: '/docs/tutorials/' },
@@ -84,8 +84,15 @@ module.exports = {
     sidebar: {
       '/docs/': [
         {
-          title: 'Cadence',
-          path: '/docs/cadence',
+          title: 'Get Started',
+          path: '/docs/00-get-started',
+          children:[
+            '00-get-started/',
+            '00-get-started/01-server-installation',
+            '00-get-started/02-java-hello-world',
+            '00-get-started/03-golang-hello-world',
+            '00-get-started/04-video-tutorials',
+          ]
         },
         // Uncomment block to add test pages to navigation.
         /**
@@ -135,14 +142,6 @@ module.exports = {
           ],
         },
         {
-          title: 'Tutorials',
-          path: '/docs/03-video-tutorials',
-          children: [
-            '03-video-tutorials/',
-            '03-video-tutorials/01-java-hello-world',
-          ],
-        },
-        {
           title: 'Java client',
           path: '/docs/04-java-client',
           children: [
@@ -186,7 +185,7 @@ module.exports = {
           path: '/docs/06-cli/',
         },
         {
-          title: 'Operation Guide',
+          title: 'Production Operation',
           path: '/docs/07-operation-guide/',
           children: [
             '07-operation-guide/',
