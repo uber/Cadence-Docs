@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Worker service
-permalink: /docs/go-client/workers
+permalink: /docs/java-client/workers
 ---
 
 # Worker service
@@ -29,3 +29,7 @@ Worker.Factory factory = new Worker.Factory(DOMAIN,
     // Start listening to the workflow and activity task lists.
     factory.start();
 ```
+
+The [WorkerFactoryOptions](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/worker/WorkerFactoryOptions.html) includes those that need to be shared across workers on the hosts like thread pool, sticky cache.
+
+In [WorkerOptions](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/worker/WorkerOptions.Builder.html) you can customize things like pollerOptions, activities per second. 

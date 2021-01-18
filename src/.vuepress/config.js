@@ -146,7 +146,7 @@ module.exports = {
           path: '/docs/04-java-client',
           children: [
             '04-java-client/',
-            '04-java-client/01-quick-start',
+            '04-java-client/01-client-overview',
             '04-java-client/02-workflow-interface',
             '04-java-client/03-implementing-workflows',
             '04-java-client/04-starting-workflow-executions',
@@ -154,6 +154,11 @@ module.exports = {
             '04-java-client/06-implementing-activities',
             '04-java-client/07-versioning',
             '04-java-client/08-distributed-cron',
+            '04-java-client/09-workers',
+            '04-java-client/10-signals',
+            '04-java-client/11-queries',
+            '04-java-client/12-retries',
+            '04-java-client/13-child-workflows',
           ],
         },
         {

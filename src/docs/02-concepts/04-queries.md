@@ -12,7 +12,7 @@ To execute a :query: an external client calls a synchronous Cadence API providin
 
 :query:Query: callbacks must be read-only not mutating the :workflow: state in any way. The other limitation is that the :query: callback cannot contain any blocking code. Both above limitations rule out ability to invoke :activity:activities: from the :query: handlers.
 
-Cadence team is currently working on implementing _update_ feature that would be similar to :query: in the way it is invoked, but would support :workflow: state mutation and :local_activity: invocations.
+Cadence team is currently working on implementing _update_ feature that would be similar to :query: in the way it is invoked, but would support :workflow: state mutation and :local_activity: invocations. From user's point of view, _update_ is similar to signal + strong consistent query, but implemented in a much less expensive way in Cadence.
 
 ## Stack Trace Query
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Signals
-permalink: /docs/go-client/signals
+permalink: /docs/java-client/signals
 ---
 
 # Signals
@@ -25,6 +25,8 @@ a running :workflow:. When a :signal: is received for a running :workflow:, Cade
 and the payload in the :workflow: history. The :workflow: can then process the :signal: at any time
 afterwards without the risk of losing the information. The :workflow: also has the option to stop
 execution by blocking on a :signal: channel.
+
+## Implement Signal Handler in Workflow
 
 See the below example from [sample](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloSignal.java).
 
@@ -65,6 +67,7 @@ one @WorkflowMethod which is a _main_ function of the :workflow: and as many :si
 The updated :workflow: implementation demonstrates a few important Cadence concepts. The first is that :workflow: is stateful and can
 have fields of any complex type. Another is that the `Workflow.await` function that blocks until the function it receives as a parameter evaluates to true. The condition is going to be evaluated only on :workflow: state changes, so it is not a busy wait in traditional sense.
 
+## Signal From Command Line
 ```bash
 cadence: docker run --network=host --rm ubercadence/cli:master --do test-domain workflow start  --workflow_id "HelloSignal" --tasklist HelloWorldTaskList --workflow_type HelloWorld::sayHello --execution_timeout 3600 --input \"World\"
 Started Workflow Id: HelloSignal, run Id: 6fa204cb-f478-469a-9432-78060b83b6cd
@@ -131,10 +134,35 @@ Also note that while a single :worker: instance is used for this
 walkthrough, any real production deployment has multiple :worker: instances running. So any :worker: failure or restart does not delay any
 :workflow_execution: because it is just migrated to any other available :worker:.
 
-## SignalWithStart
-
-You may not know if a :workflow: is running and can accept a :signal:. The
-[client.SignalWithStartWorkflow](https://www.javadoc.io/doc/com.uber.cadence/cadence-client/latest/com/uber/cadence/client/WorkflowClient.html) API
-allows you to send a :signal: to the current :workflow: instance if one exists or to create a new
+## SignalWithStart From Command Line
+You may not know if a :workflow: is running and can accept a :signal:.
+The signalWithStart feature allows you to send a :signal: to the current :workflow: instance if one exists or to create a new
 run and then send the :signal:. `SignalWithStartWorkflow` therefore doesn't take a :run_ID: as a
 parameter.
+
+Learn more from the `--help` manual:
+```bash
+docker run --network=host --rm ubercadence/cli:master --do test-domain workflow signalwithstart -h
+NAME:
+   cadence workflow signalwithstart - signal the current open workflow if exists, or attempt to start a new run based on IDResuePolicy and signals it
+
+USAGE:
+   cadence workflow signalwithstart [command options] [arguments...]
+...
+...
+...
+```
+
+## Signal from user/applicaiton code
+
+You may want to signal workflows without running the command line.
+
+The
+[WorkflowClient](https://www.javadoc.io/doc/com.uber.cadence/cadence-client/latest/com/uber/cadence/client/WorkflowClient.html) API allows you to send signal (or SignalWithStartWorkflow) from outside of the workflow
+to send a :signal: to the current :workflow:.
+
+Note that when using `newWorkflowStub` to signal a workflow, you MUST NOT passing WorkflowOptions.
+
+The [WorkflowStub](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/client/WorkflowClient.html#newWorkflowStub-java.lang.Class-com.uber.cadence.client.WorkflowOptions-) with WorkflowOptions is only for starting workflows.
+
+The [WorkflowStub](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/client/WorkflowClient.html#newWorkflowStub-java.lang.Class-java.lang.String-) without WorkflowOptions is for signal or [query](/docs/java-client/queries)
