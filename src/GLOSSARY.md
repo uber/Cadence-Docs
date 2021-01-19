@@ -21,11 +21,9 @@ query, or signal the corresponding workflow.
 
 The Go client doesn't use this."
     decision: "Any action taken by the workflow durable function is called a decision. For example:
-scheduling an activity, canceling a child workflow, or starting a timer. A decision task contains an optional list of decisions. Every decision is recorded in the event history as an event."
-    decision task: "Every time a new external event that might affect a workflow state is recorded, a decision task that contains it is added to a decision task list and then picked up by a workflow worker. After the new event is handled, the decision task is completed with a list of decision.
-Note that handling of a decision task is usually very fast and is not related to duration
-of operations that the workflow invokes."
-    decision task list: "Task list that is used to deliver decision task to workflow worker"
+scheduling an activity, canceling a child workflow, or starting a timer. A decision task contains an optional list of decisions. Every decision is recorded in the event history as an event. See also [1] for more explanation"
+    decision task: "Every time a new external event that might affect a workflow state is recorded, a decision task that contains it is added to a decision task list and then picked up by a workflow worker. After the new event is handled, the decision task is completed with a list of decision. Note that handling of a decision task is usually very fast and is not related to duration of operations that the workflow invokes. See also [1] for more explanation"
+    decision task list: "Task list that is used to deliver decision task to workflow worker. From user's point of view, it can be viewed as a worker pool. It defines a pool of worker executing workflow or activity tasks."  
     domain: "Cadence is backed by a multitenant service. The unit of isolation is called a domain. Each domain acts as a namespace for task list names as well as workflow IDs. For example, when a workflow is started, it is started in a
 specific domain. Cadence guarantees a unique workflow ID within a domain, and
 supports running workflow executions to use the same workflow ID if they are in
@@ -78,3 +76,5 @@ duplicate ID results in an already started error."
 # Glossary
 
 <Glossary :terms="$frontmatter.terms" />
+
+[1 What exactly is a Cadence decision task?](https://stackoverflow.com/questions/62904129/what-exactly-is-a-cadence-decision-task/63964726#63964726)

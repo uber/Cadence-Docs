@@ -159,6 +159,10 @@ module.exports = {
             '04-java-client/11-queries',
             '04-java-client/12-retries',
             '04-java-client/13-child-workflows',
+            '04-java-client/14-exception-handling',
+            '04-java-client/15-continue-as-new',
+            '04-java-client/16-side-effect',
+            '04-java-client/17-testing',
           ],
         },
         {
