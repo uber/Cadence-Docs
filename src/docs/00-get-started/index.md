@@ -2,7 +2,7 @@
 layout: default
 title: Overview
 description: A large number of use cases span beyond a single request-reply, require tracking of a complex state, respond to asynchronous events, and communicate to external unreliable dependencies.
-permalink: /docs/cadence/
+permalink: /docs/get-started/
 ---
 # Overview
 
