@@ -125,3 +125,6 @@ Some :workflow:workflows: require a guarantee that they keep running even in pre
 - `MaximumAttempts` specifies how many times to attempt to execute a :workflow: in the presence of failures. If this limit is exceeded, the :workflow: fails without retry. Not required if `ExpirationInterval` is specified.
 - `ExpirationInterval` specifies for how long to attempt executing a :workflow: in the presence of failures. If this interval is exceeded, the :workflow: fails without retry. Not required if `MaximumAttempts` is specified.
 - `NonRetryableErrorReasons` allows to specify errors that shouldn't be retried. For example, retrying invalid arguments error doesn't make sense in some scenarios.
+
+## How does workflow run 
+You may wonder how it works. Behind the scene, workflow decision is driving the whole workflow running. It's the internal entities for client and server to run your workflows. If interesting to you, read this [stack Overflow QA](https://stackoverflow.com/questions/62904129/what-exactly-is-a-cadence-decision-task/63964726#63964726).

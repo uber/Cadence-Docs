@@ -23,6 +23,8 @@ Cadence does not impose any system limit on :activity: duration. It is up to the
 
 Either `ScheduleToClose` or both `ScheduleToStart` and `StartToClose` timeouts are required.
 
+Timeouts are the key to manage activities. For more tips of how to set proper timeout, read this [stack Overflow QA](https://stackoverflow.com/questions/65139178/how-to-set-proper-timeout-values-for-cadence-activitieslocal-and-regular-activi/65139179#65139179).
+
 ## Retries
 
 As Cadence doesn't recover an :activity:'s state and they can communicate to any external system, failures are expected. Therefore, Cadence supports automatic :activity: retries. Any :activity: when invoked can have an associated retry policy. Here are the retry policy parameters:
@@ -83,5 +85,3 @@ Some of the :activity:activities: are very short lived and do not need the quein
 * can be implemented in the same binary as the :workflow: that invokes them
 
 The main benefit of :local_activity:local_activities: is that they are much more efficient in utilizing Cadence service resources and have much lower latency overhead comparing to the usual :activity: invocation.
-
-
