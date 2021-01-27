@@ -195,7 +195,9 @@ Note that you will only see :workflow:workflows: from one domain when :query:que
 
 ### Default Attributes
 
-These can be found by using the :CLI: get-search-attr command or the GetSearchAttributes API. The names and types are as follows:
+More and more default attributes are added in newer versions.
+Please get the  by using the :CLI: get-search-attr command or the GetSearchAttributes API. 
+Some names and types are as follows:
 
 | KEY                 | VALUE TYPE |
 | ------------------- | ---------- |
@@ -215,6 +217,8 @@ These can be found by using the :CLI: get-search-attr command or the GetSearchAt
 | StartTime           | INT        |
 | WorkflowID          | KEYWORD    |
 | WorkflowType        | KEYWORD    |
+| Tasklist            | KEYWORD    |
+
 
 There are some special considerations for these attributes:
 
