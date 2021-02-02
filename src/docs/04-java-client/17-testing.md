@@ -61,7 +61,7 @@ public void testSignal() throws ExecutionException, InterruptedException {
  // Creates a worker that polls tasks from the service owned by the testEnvironment.
  Worker worker = testEnvironment.newWorker(TASK_LIST);
  worker.registerWorkflowImplementationTypes(SignaledWorkflowImpl.class);
- worker.start();
+ testEnvironment.start();
 
  // Creates a WorkflowClient that interacts with the server owned by the testEnvironment.
  WorkflowClient client = testEnvironment.newWorkflowClient();
