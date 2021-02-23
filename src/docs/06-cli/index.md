@@ -54,10 +54,15 @@ Run `./cadence tasklist` for help on tasklist operations
 ### Domain operation examples
 - Register a new :domain: named "samples-domain":
 ```bash
-./cadence --domain samples-domain domain register --global_domain false
+./cadence --domain samples-domain domain register
 # OR using short alias
-./cadence --do samples-domain d re --gd false
+./cadence --do samples-domain d re 
 ```
+If your Cadence cluster has enable [global domain(XDC replication)](https://cadenceworkflow.io/docs/concepts/cross-dc-replication/), then you have to specify the replicaiton settings when registering a domain:
+```bash
+./cadence --domains amples-domain domain register --active_cluster clusterNameA --clusters clusterNameA clusterNameB
+```
+
 - View "samples-domain" details:
 ```bash
 ./cadence --domain samples-domain domain describe
