@@ -68,7 +68,7 @@ Domain test-domain successfully registered.
 ```
 Check that the domain is indeed registered:
 ```bash
-> docker run --network=host --rm ubercadence/cli:master --do samples-domain domain describe
+> docker run --network=host --rm ubercadence/cli:master --do test-domain domain describe
 Name: test-domain
 Description:
 OwnerEmail:
