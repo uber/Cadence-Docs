@@ -34,15 +34,17 @@ There are lots of configs in Cadence. Usually the default values or the recommen
 | persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> See [persistence documentation](https://github.com/uber/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
 
 
-## Dynamic Configuration Overall
+## Dynamic Configuration Overview
 
 There are more dynamic configurations than static configurations. Dynamic configs can be changed at the run time without restarting any server instances. The format of dynamic configuration is defined [here](https://github.com/uber/cadence/tree/master/config/dynamicconfig).
 
->NOTE#1: the size related configuration numbers are based on byte.
+>NOTE 0: As an example, if using Helm Chart to deploy Cadence, you update dynamic config [here](https://github.com/banzaicloud/banzai-charts/blob/be57e81c107fd2ccdfc6cf95dccf6cbab226920c/cadence/templates/server-configmap.yaml#L170)
 
->NOTE#2: current default dynamic configuration is implemented as file based configuration. This [feature](https://github.com/uber/cadence/issues/3602) will make it better to use as a real "dynamic" configuration.
+>NOTE 1: the size related configuration numbers are based on byte.
 
->  NOTE#3: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
+>NOTE 2: current default dynamic configuration is implemented as file based configuration. This [feature](https://github.com/uber/cadence/issues/3602) will make it better to use as a real "dynamic" configuration.
+
+>NOTE 3: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
 
 
 
