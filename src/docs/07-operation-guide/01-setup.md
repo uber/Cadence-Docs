@@ -107,8 +107,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 | frontend.searchAttributesSizeOfValueLimit | the size limit of each value | 2*1024|
 | frontend.searchAttributesTotalSizeLimit | the size limit of the whole map | 40*1024|
 | frontend.visibilityArchivalQueryMaxPageSize | the maximum page size for a visibility archival query | 10000|
-| frontend.visibilityArchivalQueryMaxRangeInDays | the maximum number of days for a visibility archival query | #N/A|
-| frontend.visibilityArchivalQueryMaxQPS | the timeout for a visibility archival query | #N/A|
 | frontend.domainFailoverRefreshInterval | the domain failover refresh timer | 10*time.Second|
 | frontend.domainFailoverRefreshTimerJitterCoefficient | the jitter for domain failover refresh timer jitter | 0.1|
 |	admin.errorInjectionRate	|	rate for injecting random error in admin client	|	0	|
@@ -275,17 +273,14 @@ There are more dynamic configurations than static configurations. Dynamic config
 | ---------- | ----------- | -------------- |
 | worker.persistenceMaxQPS | the max qps worker host can query DB | 500|
 | worker.persistenceGlobalMaxQPS | the max qps worker cluster can query DB | 0|
-| worker.replicationTaskMaxRetryDuration | the max retry duration for any task | #N/A|
+| worker.replicationTaskMaxRetryDuration | the max retry duration for any task | 10*time.Minute|
 | worker.indexerConcurrency | the max concurrent messages to be processed at any given time | 1000|
 | worker.ESProcessorNumOfWorkers | num of workers for esProcessor | 1|
 | worker.ESProcessorBulkActions | max number of requests in bulk for esProcessor | 1000|
 | worker.ESProcessorBulkSize | max total size of bulk in bytes for esProcessor | 2<<24 // 16MB|
 | worker.ESProcessorFlushInterval | flush interval for esProcessor | 1*time.Second|
-| worker.EnableArchivalCompression | indicates whether blobs are compressed before they are archived | #N/A|
 | worker.ArchiverConcurrency | controls the number of coroutines handling archival work per archival workflow | 50|
 | worker.ArchivalsPerIteration | controls the number of archivals handled in each iteration of archival workflow | 1000|
-| worker.DeterministicConstructionCheckProbability | controls the probability of running a deterministic construction check for any given archival | #N/A|
-| worker.BlobIntegrityCheckProbability | controls the probability of running an integrity check for any given archival | #N/A|
 | worker.TimeLimitPerArchivalIteration | controls the time limit of each iteration of archival workflow | archiver.MaxArchivalIterationTimeout()|
 | worker.throttledLogRPS | the rate limit on number of log messages emitted per second for throttled logger | 20|
 | worker.scannerPersistenceMaxQPS | the maximum rate of persistence calls from worker.Scanner | 100|
@@ -354,6 +349,7 @@ There are more dynamic configurations than static configurations. Dynamic config
 
 
 ## Deprecated Dynamic Configuration
+Note that some of them are never used in open source repo. See reasons: TODO https://github.com/uber/cadence/issues/3861
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
@@ -375,3 +371,10 @@ There are more dynamic configurations than static configurations. Dynamic config
 | worker.enableReplication | the feature flag for kafka replication | #N/A|
 | worker.WorkerHistoryPageSize | indicates the page size of history fetched from persistence for archival | #N/A|
 | worker.WorkerTargetArchivalBlobSize | indicates the target blob size in bytes for archival, actual blob size may vary | #N/A|
+| worker.DeterministicConstructionCheckProbability | controls the probability of running a deterministic construction check for any given archival | #N/A|
+| worker.BlobIntegrityCheckProbability | controls the probability of running an integrity check for any given archival | #N/A|
+| system.enableAuthorization | the key to enable authorization for a doma
+in | #N/A|
+| worker.EnableArchivalCompression | indicates whether blobs are compressed before they are archived | #N/A|
+| frontend.visibilityArchivalQueryMaxRangeInDays | the maximum number of days for a visibility archival query | #N/A|
+| frontend.visibilityArchivalQueryMaxQPS | the timeout for a visibility archival query | #N/A|
