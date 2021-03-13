@@ -44,7 +44,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 
 >  NOTE#3: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
 
-**TODO**: some default values are ***_N/A_*** here because the default value is determined during the run time. For now you may look at Cadence from the [code](https://github.com/uber/cadence/blob/f952fd381ca9ffdc7211d1bc4bc77ae763a7b5e4/common/service/dynamicconfig/constants.go#L346) to understand the behavior. Or raise the question on Stack/GitHub/Slack if it's important for you.  
 
 
 ## Shared Dynamic Configuration
