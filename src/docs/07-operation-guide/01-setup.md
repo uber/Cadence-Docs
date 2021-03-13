@@ -174,7 +174,7 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.taskSchedulerQueueSize | the size of task channel for host level task scheduler | 10000|
 | history.taskSchedulerShardQueueSize | the size of task channel for shard level task scheduler | 200|
 | history.taskSchedulerDispatcherCount | the number of task dispatcher in task scheduler (only applies to host level task scheduler) | 1|
-| history.taskSchedulerRoundRobinWeight | the priority weight for weighted round robin task scheduler | common.ConvertIntMapToDynamicConfigMapProperty(DefaultTaskPriorityWeight)|
+| history.taskSchedulerRoundRobinWeight | the priority weight for weighted round robin task scheduler | common.ConvertIntMapToDynamicConfigMapProperty( DefaultTaskPriorityWeight)|
 | history.activeTaskRedispatchInterval | the active task redispatch interval | 5*time.Second|
 | history.standbyTaskRedispatchInterval | the standby task redispatch interval | 30*time.Second|
 | history.taskRedispatchIntervalJitterCoefficient | the task redispatch interval jitter coefficient | 0.15|
@@ -184,9 +184,9 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.queueProcessorEnableRandomSplitByDomainID | indicates whether random queue split policy should be enabled for a domain | FALSE|
 | history.queueProcessorRandomSplitProbability | the probability for a domain to be split to a new processing queue | 0.01|
 | history.queueProcessorEnablePendingTaskSplitByDomainID | indicates whether pending task split policy should be enabled | FALSE|
-| history.queueProcessorPendingTaskSplitThreshold | the threshold for the number of pending tasks per domain | common.ConvertIntMapToDynamicConfigMapProperty(DefaultPendingTaskSplitThreshold)|
+| history.queueProcessorPendingTaskSplitThreshold | the threshold for the number of pending tasks per domain | common.ConvertIntMapToDynamicConfigMapProperty( DefaultPendingTaskSplitThreshold)|
 | history.queueProcessorEnableStuckTaskSplitByDomainID | indicates whether stuck task split policy should be enabled | FALSE|
-| history.queueProcessorStuckTaskSplitThreshold | the threshold for the number of attempts of a task | common.ConvertIntMapToDynamicConfigMapProperty(DefaultStuckTaskSplitThreshold)|
+| history.queueProcessorStuckTaskSplitThreshold | the threshold for the number of attempts of a task | common.ConvertIntMapToDynamicConfigMapProperty( DefaultStuckTaskSplitThreshold)|
 | history.queueProcessorSplitLookAheadDurationByDomainID | the look ahead duration when spliting a domain to a new processing queue | 20*time.Minute|
 | history.queueProcessorPollBackoffInterval | the backoff duration when queue processor is throttled | 5*time.Second|
 | history.queueProcessorPollBackoffIntervalJitterCoefficient | backoff interval jitter coefficient | 0.15|
