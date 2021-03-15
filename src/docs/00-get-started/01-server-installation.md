@@ -53,7 +53,7 @@ cadence_1      | {"level":"info","ts":"2019-06-06T15:27:24.905Z","msg":"Get dyna
 ## Register a Domain Using the CLI
 From a different console window:
 ```bash
-> docker run --network=host --rm ubercadence/cli:master --do test-domain domain register -rd 1
+> docker run --network=host --rm ubercadence/cli:master --do samples-domain domain register -rd 1
 Unable to find image 'ubercadence/cli:master' locally
 master: Pulling from ubercadence/cli
 22dc81ace0ea: Pull complete
