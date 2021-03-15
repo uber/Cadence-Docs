@@ -199,6 +199,7 @@ module.exports = {
           children: [
             '07-operation-guide/',
             '07-operation-guide/01-setup',
+            '07-operation-guide/02-maintain',
           ],
         },
         {
