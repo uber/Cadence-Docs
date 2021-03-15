@@ -34,43 +34,42 @@ There are lots of configs in Cadence. Usually the default values or the recommen
 | persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> See [persistence documentation](https://github.com/uber/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
 
 
-## Dynamic configuration 
+## Dynamic Configuration Overview
 
 There are more dynamic configurations than static configurations. Dynamic configs can be changed at the run time without restarting any server instances. The format of dynamic configuration is defined [here](https://github.com/uber/cadence/tree/master/config/dynamicconfig).
 
->NOTE#1: the size related configuration numbers are based on byte.
+>NOTE 0: As an example, if using Helm Chart to deploy Cadence, you update dynamic config [here](https://github.com/banzaicloud/banzai-charts/blob/be57e81c107fd2ccdfc6cf95dccf6cbab226920c/cadence/templates/server-configmap.yaml#L170)
 
->NOTE#2: current default dynamic configuration is implemented as file based configuration. This [feature](https://github.com/uber/cadence/issues/3602) will make it better to use as a real "dynamic" configuration.
+>NOTE 1: the size related configuration numbers are based on byte.
 
->  NOTE#3: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
+>NOTE 2: current default dynamic configuration is implemented as file based configuration. This [feature](https://github.com/uber/cadence/issues/3602) will make it better to use as a real "dynamic" configuration.
 
-**TODO**: some default values are ***_N/A_*** here because the default value is determined during the run time. For now you may look at Cadence from the [code](https://github.com/uber/cadence/blob/f952fd381ca9ffdc7211d1bc4bc77ae763a7b5e4/common/service/dynamicconfig/constants.go#L346) to understand the behavior. Or raise the question on Stack/GitHub/Slack if it's important for you.  
+>NOTE 3: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
 
 
-### Dynamic Configuration shared for all four services: Frontend/Matching/History/Worker
+
+## Shared Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
 | system.enableGlobalDomain | key for enable global domain | based on static config value: clusterMetadata.EnableGlobalDomain|
-| system.enableNewKafkaClient | key for using New Kafka client | #N/A|
 | system.enableVisibilitySampling | key for enable visibility sampling | TRUE|
 | system.enableReadFromClosedExecutionV2 | key for enable read from cadence_visibility.closed_executions_v2 | FALSE|
-| system.advancedVisibilityWritingMode | key for how to write to advanced visibility | common.GetDefaultAdvancedVisibilityWritingMode(isAdvancedVisConfigExist)|
+| system.advancedVisibilityWritingMode | key for how to write to advanced visibility | common.GetDefaultAdvancedVisibilityWritingMode ( isAdvancedVisConfigExist)|
 | history.emitShardDiffLog | whether emit the shard diff log | FALSE|
 | system.enableReadVisibilityFromES | key for enable read from elastic search | based on static config value: PersistenceConfig.AdvancedVisibilityStore|
 | frontend.disableListVisibilityByFilter | config to disable list open/close workflow using filter | FALSE|
-| system.historyArchivalStatus | key for the status of history archival | #N/A|
-| system.enableReadFromHistoryArchival | key for enabling reading history from archival store | #N/A|
-| system.visibilityArchivalStatus | key for the status of visibility archival | #N/A|
-| system.enableReadFromVisibilityArchival | key for enabling reading visibility from archival store | #N/A|
+| system.historyArchivalStatus | key for the status of history archival | value from static config|
+| system.enableReadFromHistoryArchival | key for enabling reading history from archival store | value from static config |
+| system.visibilityArchivalStatus | key for the status of visibility archival | value from static config |
+| system.enableReadFromVisibilityArchival | key for enabling reading visibility from archival store | value from static config |
 | system.enableDomainNotActiveAutoForwarding | whether enabling DC auto forwarding to active cluster for signal / start / signal with start API if domain is not active | TRUE|
 | system.enableGracefulFailover | whether enabling graceful failover | FALSE|
 | system.transactionSizeLimit | the largest allowed transaction size to persistence | #N/A|
 | system.minRetentionDays | the minimal allowed retention days for domain | 1|
+| system.maxRetentionDays | the maximum allowed retention days for domain | 1|
 | system.maxDecisionStartToCloseSeconds | the minimal allowed decision start to close timeout in seconds | 240|
 | system.disallowQuery | the key to disallow query for a domain | FALSE|
-| system.enablePriorityTaskProcessor | the key for enabling priority task processor | TRUE|
-| system.enableAuthorization | the key to enable authorization for a domain | #N/A|
 | limit.blobSize.error | the per event blob size limit, exceeding this will reject requests | 2*1024*1024|
 | limit.blobSize.warn | the per event blob size limit for warning | 256*1024|
 | limit.historySize.error | the per workflow execution history size limit, exceeding this will kill workflows | 200*1024*1024|
@@ -79,9 +78,12 @@ There are more dynamic configurations than static configurations. Dynamic config
 | limit.historyCount.warn | the per workflow execution history event count limit for warning | 50*1024|
 | limit.maxIDLength | the length limit for various IDs, including: Domain, TaskList, WorkflowID, ActivityID, TimerID,WorkflowType, ActivityType, SignalName, MarkerName, ErrorReason/FailureReason/CancelCause, Identity, RequestID | 1000|
 | limit.maxIDWarnLength | the warn length limit for various IDs, including: Domain, TaskList, WorkflowID, ActivityID, TimerID, WorkflowType, ActivityType, SignalName, MarkerName, ErrorReason/FailureReason/CancelCause, Identity, RequestID | 150|
+|	system.persistenceErrorInjectionRate	|	rate for injecting random error in persistence	|	0	|
+|	system.enableFailoverManager	|	indicates if failover manager is enabled	|	FALSE	|
+|	system.enableDebugMode	|	for enabling debugging components, logs and metrics	|	FALSE	|
+|	limit.maxRawTaskListNameLength	|	max length of user provided task list name (non-sticky and non-scalable)	|	1000	|
 
-
-### Dynamic Configuration for Frontend Service
+## Frontend Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
@@ -106,13 +108,13 @@ There are more dynamic configurations than static configurations. Dynamic config
 | frontend.searchAttributesSizeOfValueLimit | the size limit of each value | 2*1024|
 | frontend.searchAttributesTotalSizeLimit | the size limit of the whole map | 40*1024|
 | frontend.visibilityArchivalQueryMaxPageSize | the maximum page size for a visibility archival query | 10000|
-| frontend.visibilityArchivalQueryMaxRangeInDays | the maximum number of days for a visibility archival query | #N/A|
-| frontend.visibilityArchivalQueryMaxQPS | the timeout for a visibility archival query | #N/A|
 | frontend.domainFailoverRefreshInterval | the domain failover refresh timer | 10*time.Second|
 | frontend.domainFailoverRefreshTimerJitterCoefficient | the jitter for domain failover refresh timer jitter | 0.1|
+|	admin.errorInjectionRate	|	rate for injecting random error in admin client	|	0	|
+|	frontend.failoverCoolDown	|	duration between two domain failvoers	|	1 Minute	|
+|	frontend.errorInjectionRate	|	rate for injecting random error in frontend client	|	0	|
 
-
-### Dynamic Configuration for Matching Service
+## Matching Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
@@ -137,9 +139,10 @@ There are more dynamic configurations than static configurations. Dynamic config
 | matching.forwarderMaxRatePerSecond | the max rate at which add/query can be forwarded | 10|
 | matching.forwarderMaxChildrenPerNode | the max number of children per node in the task list partition tree | 20|
 | matching.shutdownDrainDuration | the duration of traffic drain during shutdown | 0|
+|	matching.errorInjectionRate	|	rate for injecting random error in matching client	|	0	|
+|	matching.enableTaskInfoLogByDomainID	|	enables info level logs for decision/activity task based on the request domainID	|	FALSE	|
 
-
-### Dynamic Configuration for History Service
+## History Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
@@ -172,7 +175,7 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.taskSchedulerQueueSize | the size of task channel for host level task scheduler | 10000|
 | history.taskSchedulerShardQueueSize | the size of task channel for shard level task scheduler | 200|
 | history.taskSchedulerDispatcherCount | the number of task dispatcher in task scheduler (only applies to host level task scheduler) | 1|
-| history.taskSchedulerRoundRobinWeight | the priority weight for weighted round robin task scheduler | common.ConvertIntMapToDynamicConfigMapProperty(DefaultTaskPriorityWeight)|
+| history.taskSchedulerRoundRobinWeight | the priority weight for weighted round robin task scheduler | common.ConvertIntMapToDynamicConfigMapProperty( DefaultTaskPriorityWeight)|
 | history.activeTaskRedispatchInterval | the active task redispatch interval | 5*time.Second|
 | history.standbyTaskRedispatchInterval | the standby task redispatch interval | 30*time.Second|
 | history.taskRedispatchIntervalJitterCoefficient | the task redispatch interval jitter coefficient | 0.15|
@@ -182,9 +185,9 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.queueProcessorEnableRandomSplitByDomainID | indicates whether random queue split policy should be enabled for a domain | FALSE|
 | history.queueProcessorRandomSplitProbability | the probability for a domain to be split to a new processing queue | 0.01|
 | history.queueProcessorEnablePendingTaskSplitByDomainID | indicates whether pending task split policy should be enabled | FALSE|
-| history.queueProcessorPendingTaskSplitThreshold | the threshold for the number of pending tasks per domain | common.ConvertIntMapToDynamicConfigMapProperty(DefaultPendingTaskSplitThreshold)|
+| history.queueProcessorPendingTaskSplitThreshold | the threshold for the number of pending tasks per domain | common.ConvertIntMapToDynamicConfigMapProperty( DefaultPendingTaskSplitThreshold)|
 | history.queueProcessorEnableStuckTaskSplitByDomainID | indicates whether stuck task split policy should be enabled | FALSE|
-| history.queueProcessorStuckTaskSplitThreshold | the threshold for the number of attempts of a task | common.ConvertIntMapToDynamicConfigMapProperty(DefaultStuckTaskSplitThreshold)|
+| history.queueProcessorStuckTaskSplitThreshold | the threshold for the number of attempts of a task | common.ConvertIntMapToDynamicConfigMapProperty( DefaultStuckTaskSplitThreshold)|
 | history.queueProcessorSplitLookAheadDurationByDomainID | the look ahead duration when spliting a domain to a new processing queue | 20*time.Minute|
 | history.queueProcessorPollBackoffInterval | the backoff duration when queue processor is throttled | 5*time.Second|
 | history.queueProcessorPollBackoffIntervalJitterCoefficient | backoff interval jitter coefficient | 0.15|
@@ -195,7 +198,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.timerTaskMaxRetryCount | max retry count for timer processor | 100|
 | history.timerProcessorGetFailureRetryCount | retry count for timer processor get failure operation | 5|
 | history.timerProcessorCompleteTimerFailureRetryCount | retry count for timer processor complete timer operation | 10|
-| history.timerProcessorUpdateShardTaskCount | update shard count for timer processor | #N/A|
 | history.timerProcessorUpdateAckInterval | update interval for timer processor | 30*time.Second|
 | history.timerProcessorUpdateAckIntervalJitterCoefficient | the update interval jitter coefficient | 0.15|
 | history.timerProcessorCompleteTimerInterval | complete timer interval for timer processor | 60*time.Second|
@@ -207,7 +209,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.timerProcessorSplitQueueIntervalJitterCoefficient | the split processing queue interval jitter coefficient | 0.15|
 | history.timerProcessorMaxRedispatchQueueSize | the threshold of the number of tasks in the redispatch queue for timer processor | 10000|
 | history.timerProcessorEnablePriorityTaskProcessor | indicates whether priority task processor should be used for timer processor | TRUE|
-| history.timerProcessorEnableMultiCursorProcessor | indicates whether multi-cursor queue processor should be used for timer processor | FALSE|
 | history.timerProcessorMaxTimeShift | the max shift timer processor can have | 1*time.Second|
 | history.timerProcessorHistoryArchivalSizeLimit | the max history size for inline archival | 500*1024|
 | history.timerProcessorArchivalTimeLimit | the upper time limit for inline history archival | 1*time.Second|
@@ -217,7 +218,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.transferTaskWorkerCount | number of worker for transferQueueProcessor | 10|
 | history.transferTaskMaxRetryCount | max times of retry for transferQueueProcessor | 100|
 | history.transferProcessorCompleteTransferFailureRetryCount | times of retry for failure | 10|
-| history.transferProcessorUpdateShardTaskCount | update shard count for transferQueueProcessor | #N/A|
 | history.transferProcessorMaxPollInterval | max poll interval for transferQueueProcessor | 1*time.Minute|
 | history.transferProcessorMaxPollIntervalJitterCoefficient | the max poll interval jitter coefficient | 0.15|
 | history.transferProcessorSplitQueueInterval | the split processing queue interval for transferQueueProcessor | 1*time.Minute|
@@ -226,15 +226,12 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.transferProcessorUpdateAckIntervalJitterCoefficient | the update interval jitter coefficient | 0.15|
 | history.transferProcessorCompleteTransferInterval | complete timer interval for transferQueueProcessor | 60*time.Second|
 | history.transferProcessorMaxRedispatchQueueSize | the threshold of the number of tasks in the redispatch queue for transferQueueProcessor | 10000|
-| history.transferProcessorEnablePriorityTaskProcessor | indicates whether priority task processor should be used for transferQueueProcessor | TRUE|
-| history.transferProcessorEnableMultiCursorProcessor | indicates whether multi-cursor queue processor should be used for transferQueueProcessor | FALSE|
 | history.transferProcessorVisibilityArchivalTimeLimit | the upper time limit for archiving visibility records | 200*time.Millisecond|
 | history.replicatorTaskBatchSize | batch size for ReplicatorProcessor | 100|
 | history.replicatorTaskWorkerCount | number of worker for ReplicatorProcessor | 10|
 | history.replicatorReadTaskMaxRetryCount | the number of read replication task retry time | 3|
 | history.replicatorTaskMaxRetryCount | max times of retry for ReplicatorProcessor | 100|
 | history.replicatorProcessorMaxPollRPS | max poll rate per second for ReplicatorProcessor | 20|
-| history.replicatorProcessorUpdateShardTaskCount | update shard count for ReplicatorProcessor | #N/A|
 | history.replicatorProcessorMaxPollInterval | max poll interval for ReplicatorProcessor | 1*time.Minute|
 | history.replicatorProcessorMaxPollIntervalJitterCoefficient | the max poll interval jitter coefficient | 0.15|
 | history.replicatorProcessorUpdateAckInterval | update interval for ReplicatorProcessor | 5*time.Second|
@@ -247,7 +244,6 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.maximumSignalsPerExecution | max number of signals supported by single execution | 10000|
 | history.shardUpdateMinInterval | the minimal time interval which the shard info can be updated | 5*time.Minute|
 | history.shardSyncMinInterval | the minimal time interval which the shard info should be sync to remote | 5*time.Minute|
-| history.shardSyncMinInterval | the sync shard jitter coefficient | #N/A|
 | history.defaultEventEncoding | the encoding type for history events | string(common.EncodingTypeThriftRW)|
 | history.numArchiveSystemWorkflows | key for number of archive system workflows running in total | 1000|
 | history.archiveRequestRPS | the rate limit on the number of archive request per second | 300 // should be much smaller than frontend RPS|
@@ -261,36 +257,31 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.stickyTTL | to expire a sticky tasklist if no update more than this duration | time.Hour*24*365|
 | history.decisionHeartbeatTimeout | for decision heartbeat | time.Minute*30|
 | history.DropStuckTaskByDomain | whether stuck timer/transfer task should be dropped for a domain | FALSE|
+|	history.transferProcessorEnableValidator	|	whether validator should be enabled for transferQueueProcessor	|	FALSE	|
+|	history.transferProcessorValidationInterval	|	interval for performing transfer queue validation	|	30*time.Second	|
+|	history.decisionRetryCriticalAttempts	|	decision attempt threshold for logging and emiting metrics	|	10	|
+|	history.ReplicationTaskProcessorErrorSecondRetryWait	|	initial retry wait for the second phase retry	|	5*time.Second	|
+|	history.ReplicationTaskProcessorErrorSecondRetryMaxWait	|	max wait time for the second phase retry	|	30*time.Second	|
+|	history.ReplicationTaskProcessorErrorSecondRetryExpiration	|	expiration duration for the second phase retry	|	5*time.Minute	|
+|	history.enableActivityLocalDispatchByDomain	|	allows worker to dispatch activity tasks through local tunnel after decisions are made. This is an performance optimization to skip activity scheduling efforts	|	FALSE	|
+|	history.errorInjectionRate	|	rate for injecting random error in history client	|	0	|
+|	history.enableTaskInfoLogByDomainID	|	enables info level logs for decision/activity task based on the request domainID	|	FALSE	|
+|	history.activityMaxScheduleToStartTimeoutForRetry	|	maximum value allowed when overwritting the schedule to start timeout for activities with retry policy	|	30*time.Minute	|
 
-
-### Dynamic Configuration for System Worker Service
+## SysWorker Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
 | worker.persistenceMaxQPS | the max qps worker host can query DB | 500|
 | worker.persistenceGlobalMaxQPS | the max qps worker cluster can query DB | 0|
-| worker.replicatorMetaTaskConcurrency | the number of coroutine handling metadata related tasks | #N/A|
-| worker.replicatorTaskConcurrency | the number of coroutine handling non metadata related tasks | #N/A|
-| worker.replicatorMessageConcurrency | the max concurrent tasks provided by messaging client | #N/A|
-| worker.replicatorActivityBufferRetryCount | the retry attempt when encounter retry error on activity | #N/A|
-| worker.replicatorHistoryBufferRetryCount | the retry attempt when encounter retry error on history | #N/A|
-| worker.replicationTaskMaxRetryCount | the max retry count for any task | #N/A|
-| worker.replicationTaskMaxRetryDuration | the max retry duration for any task | #N/A|
-| worker.replicationTaskContextDuration | the context timeout for apply replication tasks | #N/A|
-| worker.workerReReplicationContextTimeout | the context timeout for end to end re-replication process | #N/A|
-| worker.enableReplication | the feature flag for kafka replication | #N/A|
+| worker.replicationTaskMaxRetryDuration | the max retry duration for any task | 10*time.Minute|
 | worker.indexerConcurrency | the max concurrent messages to be processed at any given time | 1000|
 | worker.ESProcessorNumOfWorkers | num of workers for esProcessor | 1|
 | worker.ESProcessorBulkActions | max number of requests in bulk for esProcessor | 1000|
 | worker.ESProcessorBulkSize | max total size of bulk in bytes for esProcessor | 2<<24 // 16MB|
 | worker.ESProcessorFlushInterval | flush interval for esProcessor | 1*time.Second|
-| worker.EnableArchivalCompression | indicates whether blobs are compressed before they are archived | #N/A|
-| worker.WorkerHistoryPageSize | indicates the page size of history fetched from persistence for archival | #N/A|
-| worker.WorkerTargetArchivalBlobSize | indicates the target blob size in bytes for archival, actual blob size may vary | #N/A|
 | worker.ArchiverConcurrency | controls the number of coroutines handling archival work per archival workflow | 50|
 | worker.ArchivalsPerIteration | controls the number of archivals handled in each iteration of archival workflow | 1000|
-| worker.DeterministicConstructionCheckProbability | controls the probability of running a deterministic construction check for any given archival | #N/A|
-| worker.BlobIntegrityCheckProbability | controls the probability of running an integrity check for any given archival | #N/A|
 | worker.TimeLimitPerArchivalIteration | controls the time limit of each iteration of archival workflow | archiver.MaxArchivalIterationTimeout()|
 | worker.throttledLogRPS | the rate limit on number of log messages emitted per second for throttled logger | 20|
 | worker.scannerPersistenceMaxQPS | the maximum rate of persistence calls from worker.Scanner | 100|
@@ -313,9 +304,21 @@ There are more dynamic configurations than static configurations. Dynamic config
 | worker.enableBatcher | decides whether start batcher in our worker | FALSE|
 | system.enableParentClosePolicyWorker | decides whether or not enable system workers for processing parent close policy task | TRUE|
 | system.enableStickyQuery | indicates if sticky query should be enabled per domain | TRUE|
+|	worker.concreteExecutionFixerDomainAllow	|	which domains are allowed to be fixed by concrete fixer workflow	|	FALSE	|
+|	worker.currentExecutionFixerDomainAllow	|	which domains are allowed to be fixed by current fixer workflow	|	FALSE	|
+|	worker.concreteExecutionFixerEnabled	|	if concrete execution fixer workflow is enabled	|	FALSE	|
+|	worker.currentExecutionFixerEnabled	|	if current execution fixer workflow is enabled	|	FALSE	|
+|	worker.timersScannerEnabled	|	if timers scanner should be started as part of worker.Scanner	|	FALSE	|
+|	worker.timersFixerEnabled	|	if timers fixer should be started as part of worker.Scanner	|	FALSE	|
+|	worker.timersScannerConcurrency	|	the concurrency of timers scanner	|	5	|
+|	worker.timersScannerPersistencePageSize	|	the page size of timers persistence fetches in timers scanner	|	1000	|
+|	TimersScannerBlobstoreFlushThreshold	|	TimersScannerBlobstoreFlushThreshold	|	100	|
+|	worker.timersScannerActivityBatchSize	|	TimersScannerActivityBatchSize	|	25	|
+|	worker.timersScannerPeriodStart	|	interval start for fetching scheduled timers	|	24	|
+|	worker.timersScannerPeriodEnd	|	interval end for fetching scheduled timers	|	3	|
+|	worker.timersFixerDomainAllow	|	which domains are allowed to be fixed by timer fixer workflow	|	FALSE	|
 
-
-### Dynamic Configuration for Cross DC replication feature
+## XDC Dynamic Configuration
 
 | Config Key | Explanation | Default Values |
 | ---------- | ----------- | -------------- |
@@ -344,3 +347,35 @@ There are more dynamic configurations than static configurations. Dynamic config
 | history.ReplicationEventsFromCurrentCluster | a feature flag to allow cross DC replicate events that generated from the current cluster | FALSE|
 | history.NotifyFailoverMarkerInterval | determines the frequency to notify failover marker | 5*time.Second|
 | history.NotifyFailoverMarkerTimerJitterCoefficient | the jitter for failover marker notifier timer | 0.15|
+
+
+## Deprecated Dynamic Configuration
+Note that some of them are never used in open source repo. See reasons: TODO https://github.com/uber/cadence/issues/3861
+
+| Config Key | Explanation | Default Values |
+| ---------- | ----------- | -------------- |
+| system.enableNewKafkaClient | key for using New Kafka client | #N/A|
+| system.enablePriorityTaskProcessor | the key for enabling priority task processor | TRUE|
+| history.transferProcessorUpdateShardTaskCount | update shard count for transferQueueProcessor | #N/A|
+| history.transferProcessorEnablePriorityTaskProcessor | indicates whether priority task processor should be used for transferQueueProcessor | TRUE|
+| history.timerProcessorEnableMultiCursorProcessor | indicates whether multi-cursor queue processor should be used for timer processor | FALSE|
+| history.timerProcessorUpdateShardTaskCount | update shard count for timer processor | #N/A|
+| history.replicatorProcessorUpdateShardTaskCount | update shard count for ReplicatorProcessor | #N/A|
+| worker.replicatorMetaTaskConcurrency | the number of coroutine handling metadata related tasks | #N/A|
+| worker.replicatorTaskConcurrency | the number of coroutine handling non metadata related tasks | #N/A|
+| worker.replicatorMessageConcurrency | the max concurrent tasks provided by messaging client | #N/A|
+| worker.replicatorActivityBufferRetryCount | the retry attempt when encounter retry error on activity | #N/A|
+| worker.replicatorHistoryBufferRetryCount | the retry attempt when encounter retry error on history | #N/A|
+| worker.replicationTaskMaxRetryCount | the max retry count for any task | #N/A|
+| worker.replicationTaskContextDuration | the context timeout for apply replication tasks | #N/A|
+| worker.workerReReplicationContextTimeout | the context timeout for end to end re-replication process | #N/A|
+| worker.enableReplication | the feature flag for kafka replication | #N/A|
+| worker.WorkerHistoryPageSize | indicates the page size of history fetched from persistence for archival | #N/A|
+| worker.WorkerTargetArchivalBlobSize | indicates the target blob size in bytes for archival, actual blob size may vary | #N/A|
+| worker.DeterministicConstructionCheckProbability | controls the probability of running a deterministic construction check for any given archival | #N/A|
+| worker.BlobIntegrityCheckProbability | controls the probability of running an integrity check for any given archival | #N/A|
+| system.enableAuthorization | the key to enable authorization for a doma
+in | #N/A|
+| worker.EnableArchivalCompression | indicates whether blobs are compressed before they are archived | #N/A|
+| frontend.visibilityArchivalQueryMaxRangeInDays | the maximum number of days for a visibility archival query | #N/A|
+| frontend.visibilityArchivalQueryMaxQPS | the timeout for a visibility archival query | #N/A|
