@@ -81,5 +81,5 @@ And start a workflow:
 ./bin/helloworld
 ```
 
-# What is Next
+## What is Next
 Now you have completed the tutorials. You can continue to explore the key [concepts](/docs/concepts) in Cadence, and also how to use them with [Go Client](/docs/go-client)

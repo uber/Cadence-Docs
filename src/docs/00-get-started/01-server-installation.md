@@ -87,5 +87,5 @@ Bad binaries to reset:
 >
 ```
 
-# What's Next
+## What's Next
 Go to [Java HelloWorld](/docs/get-started/java-hello-world) or [Golang HelloWorld](/docs/get-started/golang-hello-world).
