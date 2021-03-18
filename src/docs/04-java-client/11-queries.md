@@ -109,7 +109,7 @@ cadence: docker run --network=host --rm ubercadence/cli:master --do test-domain 
 The :query:Query: method can accept parameters. This might be useful if only part of the :workflow: state should be returned.
 
 ## Run Query from external application code
-The [WorkflowStub](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/client/WorkflowClient.html#newWorkflowStub-java.lang.Class-java.lang.String-) without WorkflowOptions is for signal or [query](/docs/java-client/queries
+The [WorkflowStub](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/client/WorkflowClient.html#newWorkflowStub-java.lang.Class-java.lang.String-) without WorkflowOptions is for signal or [query](/docs/java-client/queries)
 
 
 ## Consistent Query
