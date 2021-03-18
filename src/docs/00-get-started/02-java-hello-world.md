@@ -165,5 +165,5 @@ Now let's look at the :workflow_execution: history:
 ```
 Even for such a trivial :workflow:, the history gives a lot of useful information. For complex :workflow:workflows: this is a really useful tool for production and development troubleshooting. History can be automatically archived to a long-term blob store (for example Amazon S3) upon :workflow: completion for compliance, analytical, and troubleshooting purposes.
 
-# What is Next 
+## What is Next
 Now you have completed the tutorials. You can continue to explore the key [concepts](/docs/concepts) in Cadence, and also how to use them with [Java Client](/docs/java-client)

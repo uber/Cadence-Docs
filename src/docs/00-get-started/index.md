@@ -29,7 +29,7 @@ that are shared by hundreds of applications. See service [topology](/docs/concep
 image for the Cadence server is available on Docker Hub at
 [ubercadence/server](https://hub.docker.com/r/ubercadence/server).
 
-# What's Next
+## What's Next
 Let's try with some sample workflows.
 To start with, go to [server installation](/docs/get-started/installation) to install cadence locally, and run a HelloWorld sample with [Java](/docs/get-started/java-hello-world) or [Golang](/docs/get-started/golang-hello-world).
 
