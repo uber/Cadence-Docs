@@ -4,7 +4,7 @@ title: Side Effect
 permalink: /docs/java-client/side-effect
 ---
 
-## Side Effect
+# Side Effect
 
 Side Effect allow workflow executes the provided function once, records its result into the workflow history.
 The recorded result on history will be returned without executing the provided function during replay. This

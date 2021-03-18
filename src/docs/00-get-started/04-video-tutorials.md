@@ -17,7 +17,7 @@ An Introduction to the Cadence programming model and value proposition.
 </figure>
 
 
-# HelloWorld
+## HelloWorld
 A step-by-step video tutorial about how to install and run HellowWorld(Java).
 <figure class="video-container">
   <iframe
