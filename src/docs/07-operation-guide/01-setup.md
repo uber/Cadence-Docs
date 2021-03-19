@@ -285,6 +285,9 @@ There are more dynamic configurations than static configurations. Dynamic config
 | worker.TimeLimitPerArchivalIteration | controls the time limit of each iteration of archival workflow | archiver.MaxArchivalIterationTimeout()|
 | worker.throttledLogRPS | the rate limit on number of log messages emitted per second for throttled logger | 20|
 | worker.scannerPersistenceMaxQPS | the maximum rate of persistence calls from worker.Scanner | 100|
+| worker.scannerMaxOrphanTasks | when cleaning the database of lingering tasks from deleted task lists, this is the maximum number returned from a single query | 1000 |
+| worker.scannerTaskBatchSize | when cleaning the database of expired tasks for valid task lists, this is the maximum number of tasks returned from a single query | 16 |
+| worker.scannerMaxTasksPerJob | when cleaning the database of expired tasks for valid task lists, this is the maximum number processed for a single task list before giving other tasks lists a turn | 256 |
 | worker.taskListScannerEnabled | indicates if task list scanner should be started as part of worker.Scanner | TRUE|
 | worker.historyScannerEnabled | indicates if history scanner should be started as part of worker.Scanner | TRUE|
 | worker.executionsScannerEnabled | indicates if executions scanner should be started as part of worker.Scanner | FALSE|
