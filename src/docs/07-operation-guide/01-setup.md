@@ -16,6 +16,8 @@ Also, you need understand Cadence’s dependency --- a database(Cassandra or SQL
 
 There are lots of configs in Cadence. Usually the default values or the recommended values in development.yaml should be good to go. Here are the most basic configuration that you should understand.
 
+The complete configuration can be found in [this go-docs](https://pkg.go.dev/github.com/uber/cadence@v0.19.1/common/service/config#Service). 
+
 
 |Config name|Explanation|Recommended value|
 | --------- | --------- | ----------------- |
