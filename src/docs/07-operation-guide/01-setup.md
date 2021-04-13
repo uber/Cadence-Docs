@@ -82,6 +82,7 @@ There are more dynamic configurations than static configurations. Dynamic config
 |	system.enableFailoverManager	|	indicates if failover manager is enabled	|	FALSE	|
 |	system.enableDebugMode	|	for enabling debugging components, logs and metrics	|	FALSE	|
 |	limit.maxRawTaskListNameLength	|	max length of user provided task list name (non-sticky and non-scalable)	|	1000	|
+| system.requiredDomainDataKeys   | the map of data keys required in domain registration | nil (map[string]interface{}) | 
 
 ## Frontend Dynamic Configuration
 
