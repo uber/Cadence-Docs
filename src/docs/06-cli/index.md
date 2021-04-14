@@ -12,6 +12,17 @@ The Cadence :CLI: is a command-line tool you can use to perform various :task:ta
 
 ## Using the CLI
 
+### Homebrew
+```
+brew install cadence-workflow
+```
+
+After the installation is done, you can use CLI:
+```
+cadence --help
+```
+
+### Docker
 The Cadence :CLI: can be used directly from the Docker Hub image *ubercadence/cli* or by building the :CLI: tool
 locally.
 
@@ -26,14 +37,17 @@ On Docker versions 18.03 and later, you may get a "connection refused" error. Yo
 docker run --rm ubercadence/cli:master --address host.docker.internal:7933 --domain samples-domain domain describe
 ```
 
+NOTE: Be sure to update your image when you want to try new features: `docker pull ubercadence/cli:master `
+
+### Build it yourself 
 To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence) and run
 `make bins`. This produces an executable called `cadence`. With a local build, the same command to
 describe a :domain: would look like this:
 ```bash
-./cadence --domain samples-domain domain describe
+cadence --domain samples-domain domain describe
 ```
 
-The example commands below will use `./cadence` for brevity.
+The example commands below will use `cadence` for brevity.
 
 ## Environment variables
 
@@ -43,29 +57,29 @@ Setting environment variables for repeated parameters can shorten the :CLI: comm
 - **CADENCE_CLI_DOMAIN** - default :workflow: :domain:, so you don't need to specify `--domain`
 
 ## Quick Start
-Run `./cadence` for help on top level commands and global options
-Run `./cadence domain` for help on :domain: operations
-Run `./cadence workflow` for help on :workflow: operations
-Run `./cadence tasklist` for help on tasklist operations
-(`./cadence help`, `./cadence help [domain|workflow]` will also print help messages)
+Run `cadence` for help on top level commands and global options
+Run `cadence domain` for help on :domain: operations
+Run `cadence workflow` for help on :workflow: operations
+Run `cadence tasklist` for help on tasklist operations
+(`cadence help`, `cadence help [domain|workflow]` will also print help messages)
 
 **Note:** make sure you have a Cadence server running before using :CLI:
 
 ### Domain operation examples
 - Register a new :domain: named "samples-domain":
 ```bash
-./cadence --domain samples-domain domain register
+cadence --domain samples-domain domain register
 # OR using short alias
-./cadence --do samples-domain d re 
+cadence --do samples-domain d re 
 ```
 If your Cadence cluster has enable [global domain(XDC replication)](https://cadenceworkflow.io/docs/concepts/cross-dc-replication/), then you have to specify the replicaiton settings when registering a domain:
 ```bash
-./cadence --domains amples-domain domain register --active_cluster clusterNameA --clusters clusterNameA clusterNameB
+cadence --domains amples-domain domain register --active_cluster clusterNameA --clusters clusterNameA clusterNameB
 ```
 
 - View "samples-domain" details:
 ```bash
-./cadence --domain samples-domain domain describe
+cadence --domain samples-domain domain describe
 ```
 
 ### Workflow operation examples
@@ -74,10 +88,10 @@ The following examples assume the CADENCE_CLI_DOMAIN environment variable is set
 #### Run workflow
 Start a :workflow: and see its progress. This command doesn't finish until :workflow: completes.
 ```bash
-./cadence workflow run --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"'
+cadence workflow run --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"'
 
 # view help messages for workflow run
-./cadence workflow run -h
+cadence workflow run -h
 ```
 Brief explanation:
 To run a :workflow:, the user must specify the following:
@@ -94,18 +108,18 @@ and takes a string as input with the `-i '"cadence"'` parameter. Single quotes (
 
 #### Show running workers of a tasklist
 ```bash
-./cadence tasklist desc --tl helloWorldGroup
+cadence tasklist desc --tl helloWorldGroup
 ```
 
 #### Start workflow
 ```bash
-./cadence workflow start --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"'
+cadence workflow start --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"'
 
 # view help messages for workflow start
-./cadence workflow start -h
+cadence workflow start -h
 
 # for a workflow with multiple inputs, separate each json with space/newline like
-./cadence workflow start --tl helloWorldGroup --wt main.WorkflowWith3Args --et 60 -i '"your_input_string" 123 {"Name":"my-string", "Age":12345}'
+cadence workflow start --tl helloWorldGroup --wt main.WorkflowWith3Args --et 60 -i '"your_input_string" 123 {"Name":"my-string", "Age":12345}'
 ```
 The :workflow: `start` command is similar to the `run` command, but immediately returns the workflow_id and
 run_id after starting the :workflow:. Use the `show` command to view the :workflow:'s history/progress.
@@ -118,10 +132,10 @@ Use option `--workflowidreusepolicy` or `--wrp` to configure the :workflow_ID: r
 **Option 2 RejectDuplicate:** Do not allow starting a :workflow_execution: using the same :workflow_ID: as a previous :workflow:.
 ```bash
 # use AllowDuplicateFailedOnly option to start a workflow
-./cadence workflow start --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"' --wid "<duplicated workflow id>" --wrp 0
+cadence workflow start --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"' --wid "<duplicated workflow id>" --wrp 0
 
 # use AllowDuplicate option to run a workflow
-./cadence workflow run --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"' --wid "<duplicated workflow id>" --wrp 1
+cadence workflow run --tl helloWorldGroup --wt main.Workflow --et 60 -i '"cadence"' --wid "<duplicated workflow id>" --wrp 1
 ```
 
 ##### Start a workflow with a memo
@@ -134,40 +148,40 @@ cadence wf start -tl helloWorldGroup -wt main.Workflow -et 60 -i '"cadence"' -me
 
 #### Show workflow history
 ```bash
-./cadence workflow show -w 3ea6b242-b23c-4279-bb13-f215661b4717 -r 866ae14c-88cf-4f1e-980f-571e031d71b0
+cadence workflow show -w 3ea6b242-b23c-4279-bb13-f215661b4717 -r 866ae14c-88cf-4f1e-980f-571e031d71b0
 # a shortcut of this is (without -w -r flag)
-./cadence workflow showid 3ea6b242-b23c-4279-bb13-f215661b4717 866ae14c-88cf-4f1e-980f-571e031d71b0
+cadence workflow showid 3ea6b242-b23c-4279-bb13-f215661b4717 866ae14c-88cf-4f1e-980f-571e031d71b0
 
 # if run_id is not provided, it will show the latest run history of that workflow_id
-./cadence workflow show -w 3ea6b242-b23c-4279-bb13-f215661b4717
+cadence workflow show -w 3ea6b242-b23c-4279-bb13-f215661b4717
 # a shortcut of this is
-./cadence workflow showid 3ea6b242-b23c-4279-bb13-f215661b4717
+cadence workflow showid 3ea6b242-b23c-4279-bb13-f215661b4717
 ```
 
 #### Show workflow execution information
 ```bash
-./cadence workflow describe -w 3ea6b242-b23c-4279-bb13-f215661b4717 -r 866ae14c-88cf-4f1e-980f-571e031d71b0
+cadence workflow describe -w 3ea6b242-b23c-4279-bb13-f215661b4717 -r 866ae14c-88cf-4f1e-980f-571e031d71b0
 # a shortcut of this is (without -w -r flag)
-./cadence workflow describeid 3ea6b242-b23c-4279-bb13-f215661b4717 866ae14c-88cf-4f1e-980f-571e031d71b0
+cadence workflow describeid 3ea6b242-b23c-4279-bb13-f215661b4717 866ae14c-88cf-4f1e-980f-571e031d71b0
 
 # if run_id is not provided, it will show the latest workflow execution of that workflow_id
-./cadence workflow describe -w 3ea6b242-b23c-4279-bb13-f215661b4717
+cadence workflow describe -w 3ea6b242-b23c-4279-bb13-f215661b4717
 # a shortcut of this is
-./cadence workflow describeid 3ea6b242-b23c-4279-bb13-f215661b4717
+cadence workflow describeid 3ea6b242-b23c-4279-bb13-f215661b4717
 ```
 
 #### List closed or open workflow executions
 ```bash
-./cadence workflow list
+cadence workflow list
 
 # default will only show one page, to view more items, use --more flag
-./cadence workflow list -m
+cadence workflow list -m
 ```
 
 Use **--query** to list :workflow:workflows: with SQL like :query::
 
 ```bash
-./cadence workflow list --query "WorkflowType='main.SampleParentWorkflow' AND CloseTime = missing "
+cadence workflow list --query "WorkflowType='main.SampleParentWorkflow' AND CloseTime = missing "
 ```
 
 This will return all open :workflow:workflows: with workflowType as "main.SampleParentWorkflow".
@@ -175,24 +189,24 @@ This will return all open :workflow:workflows: with workflowType as "main.Sample
 #### Query workflow execution
 ```bash
 # use custom query type
-./cadence workflow query -w <wid> -r <rid> --qt <query-type>
+cadence workflow query -w <wid> -r <rid> --qt <query-type>
 
 # use build-in query type "__stack_trace" which is supported by Cadence client library
-./cadence workflow query -w <wid> -r <rid> --qt __stack_trace
+cadence workflow query -w <wid> -r <rid> --qt __stack_trace
 # a shortcut to query using __stack_trace is (without --qt flag)
-./cadence workflow stack -w <wid> -r <rid>
+cadence workflow stack -w <wid> -r <rid>
 ```
 
 #### Signal, cancel, terminate workflow
 ```bash
 # signal
-./cadence workflow signal -w <wid> -r <rid> -n <signal-name> -i '"signal-value"'
+cadence workflow signal -w <wid> -r <rid> -n <signal-name> -i '"signal-value"'
 
 # cancel
-./cadence workflow cancel -w <wid> -r <rid>
+cadence workflow cancel -w <wid> -r <rid>
 
 # terminate
-./cadence workflow terminate -w <wid> -r <rid> --reason
+cadence workflow terminate -w <wid> -r <rid> --reason
 ```
 Terminating a running :workflow_execution: will record a WorkflowExecutionTerminated :event: as the closing :event: in the history. No more :decision_task:decision_tasks: will be scheduled for a terminated :workflow_execution:.
 Canceling a running :workflow_execution: will record a WorkflowExecutionCancelRequested :event: in the history, and a new :decision_task: will be scheduled. The :workflow: has a chance to do some clean up work after cancellation.
@@ -236,7 +250,7 @@ There are a lot of use cases:
 
 You can reset to some predefined :event: types:
 ```bash
-./cadence workflow reset -w <wid> -r <rid> --reset_type <reset_type> --reason "some_reason"
+cadence workflow reset -w <wid> -r <rid> --reset_type <reset_type> --reason "some_reason"
 ```
 
 - FirstDecisionCompleted: reset to the beginning of the history.
@@ -245,7 +259,7 @@ You can reset to some predefined :event: types:
 
 If you are familiar with the Cadence history :event:, You can also reset to any :decision: finish :event: by using:
 ```bash
-./cadence workflow reset -w <wid> -r <rid> --event_id <decision_finish_event_id> --reason "some_reason"
+cadence workflow reset -w <wid> -r <rid> --event_id <decision_finish_event_id> --reason "some_reason"
 ```
 Some things to note:
 - When reset, a new run will be kicked off with the same workflowID. But if there is a running execution for the workflow(workflowID), the current run will be terminated.
@@ -254,7 +268,7 @@ Some things to note:
 
 To reset multiple :workflow:workflows:, you can use batch reset command:
 ```bash
-./cadence workflow reset-batch --input_file <file_of_workflows_to_reset> --reset_type <reset_type> --reason "some_reason"
+cadence workflow reset-batch --input_file <file_of_workflows_to_reset> --reset_type <reset_type> --reason "some_reason"
 ```
 #### Recovery from bad deployment -- auto-reset workflow
 If a bad deployment lets a :workflow: run into a wrong state, you might want to reset the :workflow: to the point that the bad deployment started to run. But usually it is not easy to find out all the :workflow:workflows: impacted, and every reset point for each :workflow:. In this case, auto-reset will automatically reset all the :workflow:workflows: given a bad deployment identifier.
@@ -263,7 +277,7 @@ Let's get familiar with some concepts. Each deployment will have an identifier, 
 
 To find out which **binary checksum** of the bad deployment to reset, you should be aware of at least one :workflow: running into a bad state. Use the describe command with **--reset_points_only** option to show all the reset points:
 ```bash
-./cadence wf desc -w <WorkflowID>  --reset_points_only
+cadence wf desc -w <WorkflowID>  --reset_points_only
 +----------------------------------+--------------------------------+--------------------------------------+---------+
 |         BINARY CHECKSUM          |          CREATE TIME           |                RUNID                 | EVENTID |
 +----------------------------------+--------------------------------+--------------------------------------+---------+
@@ -275,7 +289,7 @@ To find out which **binary checksum** of the bad deployment to reset, you should
 
 Then use this command to tell Cadence to auto-reset all :workflow:workflows: impacted by the bad deployment. The command will store the bad binary checksum into :domain: info and trigger a process to reset all your :workflow:workflows:.
 ```bash
-./cadence --do <YourDomainName> domain update --add_bad_binary aae748fdc557a3f873adbe1dd066713f  --reason "rollback bad deployment"
+cadence --do <YourDomainName> domain update --add_bad_binary aae748fdc557a3f873adbe1dd066713f  --reason "rollback bad deployment"
 ```
 
 As you add the bad binary checksum to your :domain:, Cadence will not dispatch any :decision_task:decision_tasks: to the bad binary. So make sure that you have rolled back to a good deployment(or roll out new bits with bug fixes). Otherwise your :workflow: can't make any progress after auto-reset.
