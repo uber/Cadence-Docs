@@ -6,7 +6,7 @@ permalink: /docs/go-client/workflow-replay-shadowing
 
 # Workflow Replay and Shadowing
 
-In the Versioning section, we mentioned that incompatible changes to workflow definition code could cause non-deterministic issues when processing workflow tasks if versioning is not done correctly. However, it's may be hard for you to tell if a particular change is incompatible or not and whether versioning logic is needed. To help you identify incompatible changes and catch them before production traffic is impacted, we implemented Workflow Replayer and Workflow Shadower.
+In the Versioning section, we mentioned that incompatible changes to workflow definition code could cause non-deterministic issues when processing workflow tasks if versioning is not done correctly. However, it may be hard for you to tell if a particular change is incompatible or not and whether versioning logic is needed. To help you identify incompatible changes and catch them before production traffic is impacted, we implemented Workflow Replayer and Workflow Shadower.
 
 ## Workflow Replayer
 
@@ -39,7 +39,7 @@ replayer := worker.NewWorkflowReplayWithOptions(options)
 
 #### Step 2: Register workflow definition
 
-Next, register your workflow definitions as your normally do. Make sure workflows are registered the same way as they were when running and generating histories; otherwise the replay will not able to find the corresponding definition.
+Next, register your workflow definitions as you normally do. Make sure workflows are registered the same way as they were when running and generating histories; otherwise the replay will not be able to find the corresponding definition.
 
 ```go
 replayer.RegisterWorkflow(myWorkflowFunc1)
@@ -83,7 +83,7 @@ err = replayer.ReplayWorkflowExecution(ctx, cadenceServiceClient, logger, domain
 
 If an error is returned from the replay method, it means there's a incompatible change in the workflow definition and the error message will contain more information regarding where the non-deterministic error happens.
 
-Note: currently an error will be returned if there're less than 3 events in the history. It is because first 3 events in the history has nothing to do with the workflow code, so Replayer can't tell if there's a incompatible change or not.
+Note: currently an error will be returned if there are less than 3 events in the history. It is because the first 3 events in the history has nothing to do with the workflow code, so Replayer can't tell if there's a incompatible change or not.
 
 ### Sample Replay Test
 
@@ -163,7 +163,7 @@ NOTE:
 - **All shadow workflows are running in one Cadence system domain, and right now, every user domain can only have one shadow workflow at a time.**
 - **The Cadence server used for scanning and getting workflow history will also be the Cadence server for running your shadow workflow.** Currently, there's no way to specify different Cadence servers for hosting the shadowing workflow and scanning/fetching workflow.
 
-Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode worker. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
+Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode workers. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
 
 When running in shadow mode, the normal decision, activity and session worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows. 
 
