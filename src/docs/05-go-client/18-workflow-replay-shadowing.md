@@ -70,7 +70,8 @@ err := replayer.ReplayWorkflowHistory(logger, history)
 err = replayer.ReplayWorkflowHistoryFromJSONFile(logger, jsonFileName)
 
 // if workflow history is stored in a json file and you only want to replay part of it
-// NOTE: TODO explain last event ID
+// NOTE: lastEventID can't be set arbitrarily. It must be the end of of a history events batch
+// when in doubt, set to the eventID of decisionTaskStarted events.
 err = replayer.ReplayPartialWorkflowHistoryFromJSONFile(logger, jsonFileName, lastEventID)
 
 // if you want to fetch workflow history directly from cadence server
@@ -133,7 +134,7 @@ Complete documentation on shadow options which includes default values, accepted
 
 Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that need to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found. 
 
-Here's a simple example. The example is also available [TODO: add the link after sample repo updated]()
+Here's a simple example. The example is also available [here](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/shadow_test.go).
 
 ```go
 func TestShadowWorkflow(t *testing.T) {
@@ -172,4 +173,4 @@ To enable the shadow mode, the only change needed is setting the `EnableShadowWo
 
 Registered workflows will be forwarded to the underlying WorkflowReplayer. DataConverter, WorkflowInterceptorChainFactories, ContextPropagators, and Tracer specified in the `worker.Options` will also be used as ReplayOptions. Since all shadow workflows are running in one system domain, to avoid conflict, **the actual task list name used will be `domain-tasklist`.**
 
-A sample setup can be found [TODO: add link after sample repo is updated]()
+A sample setup can be found [here](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/main.go#L24).
