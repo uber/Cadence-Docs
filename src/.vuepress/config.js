@@ -186,6 +186,7 @@ module.exports = {
             '05-go-client/15-sessions',
             '05-go-client/16-distributed-cron',
             '05-go-client/17-tracing',
+            '05-go-client/18-workflow-replay-shadowing',
           ],
         },
         {
