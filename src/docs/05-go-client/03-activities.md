@@ -87,6 +87,8 @@ above sample) is returned from the `cadence.ExecuteActivity` function as the det
 with `TimeoutType_HEARTBEAT`.
 
 New **auto heartbeat** option in [Cadence Go Client 0.16.0 release](https://github.com/uber-go/cadence-client/releases/tag/v0.16.0):
+In case you don't need to report progress, but still want to report liveness of your worker through heartbeating for your long running activities, there's a new auto-heartbeat option that you can enable when you register your activity. When this option is enabled Cadence library will do the heartbeat for you in the background.
+
 ```go
 	RegisterActivityOptions struct {
 		...
@@ -96,7 +98,6 @@ New **auto heartbeat** option in [Cadence Go Client 0.16.0 release](https://gith
 		EnableAutoHeartbeat bool
 	}
 ```
-Not that auto-heartbeat will not carry progress information and is merely used to report liveness of Cadence worker.
 
 You can also heartbeat an :activity: from an external source:
 
