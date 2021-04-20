@@ -86,6 +86,18 @@ When an :activity: times out due to a missed heartbeat, the last value of the de
 above sample) is returned from the `cadence.ExecuteActivity` function as the details field of `TimeoutError`
 with `TimeoutType_HEARTBEAT`.
 
+New **auto heartbeat** option in [Cadence Go Client 0.16.0 release](https://github.com/uber-go/cadence-client/releases/tag/v0.16.0):
+```go
+	RegisterActivityOptions struct {
+		...
+		// Automatically send heartbeats for this activity at an interval that is less than the HeartbeatTimeout.
+		// This option has no effect if the activity is executed with a HeartbeatTimeout of 0.
+		// Default: false
+		EnableAutoHeartbeat bool
+	}
+```
+Not that auto-heartbeat will not carry progress information and is merely used to report liveness of Cadence worker.
+
 You can also heartbeat an :activity: from an external source:
 
 ```go
