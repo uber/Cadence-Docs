@@ -288,7 +288,7 @@ cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" StartTime
 
 ### TLS Support for connecting to Elasticsearch
 
-If your elasticsearch deployment requires TLS to conenct to it, you can add the following to your config template.
+If your elasticsearch deployment requires TLS to connect to it, you can add the following to your config template.
 The TLS config is optional and when not provided it defaults to tls.enabled to **false**
 ```yaml
 elasticsearch:
