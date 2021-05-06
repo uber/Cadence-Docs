@@ -8,9 +8,15 @@ permalink: /docs/operation-guide/setup
 
 This section will help to understand what you need for setting up a Cadence cluster.
 
-You need to understand some key config options in Cadence server. There are two main types of configs in Cadence server, static config and dynamic config.
+You should understand some basic static configuration of Cadence cluster.
 
-Also, you need understand Cadence’s dependency --- a database(Cassandra or SQL based like MySQL/Postgres) and a metric server(typically Prometheus). Cadence also needs ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). And Cadence also depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
+There are also many other configuration called "Dynamic Configuration" for fine tuning the cluster. The default values are good to go for small clusters. 
+
+Cadence’s minimum dependency is a database(Cassandra or SQL based like MySQL/Postgres). Cadence uses it for persistence. All instances of Cadence clusters are stateless.
+
+For production you also need a metric server(Prometheus/Statsd/M3/etc).
+
+For [advanced features](/docs/operation-guide/setup/#other-advanced-features) Cadence depends on others like ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). Cadence will depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
 
 ## Static configuration
 
@@ -52,7 +58,7 @@ For earlier versions, you can find all the configurations similarly:
 | v0.17.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/config#Config) |
 | ... | ...Just replace the version in the URL |
 
-## Dynamic Configuration 
+## Dynamic Configuration
 
 Dynamic configuration is for fine tuning a Cadence cluster.
 
