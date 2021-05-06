@@ -146,11 +146,11 @@ clusterMetadata:
 After the configuration is deployed:
 
 1. Register a global domain
-`./cadence --do <domain_name> domain register --global_domain true  --clusters clusterDCA clusterDCB --active_cluster clusterDCA`
+`cadence --do <domain_name> domain register --global_domain true  --clusters clusterDCA clusterDCB --active_cluster clusterDCA`
 
 
 2. Run some workflow and failover domain from one to another
-`./cadence --do <domain_name> domain update  --active_cluster clusterDCB`
+`cadence --do <domain_name> domain update  --active_cluster clusterDCB`
 
 Then the domain should be failed over to clusterDCB. Now worklfows are read-only in clusterDCA. So your workers polling tasks from clusterDCA will become idle.  
 

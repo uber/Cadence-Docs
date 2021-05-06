@@ -84,21 +84,21 @@ The below steps require to enable the [cross dc replication feature](/docs/conce
 
 1. Create your domain with the global domain feature(XDC). Since you only have one cluster, there is no replication happening. But you still need to tell the replication topology when creating your domain.
 
-`./cadence --do <domain_name> domain register --global_domain true  --clusters <initialClustersName> --active_cluster <initialClusterName>`
+`cadence --do <domain_name> domain register --global_domain true  --clusters <initialClustersName> --active_cluster <initialClusterName>`
 
 2. Later on, after you setting up a new cluster, you can add the cluster to domain replication config
 
-`./cadence --do <domain_name> domain update  --clusters <initialClusterName> <newClusterName>`
+`cadence --do <domain_name> domain update  --clusters <initialClusterName> <newClusterName>`
 
 It will start replication right after for all the active workflows.
 
 3. After you are sure the new cluster is healthy, you then switch the active cluster to the new cluster.
 
-`./cadence --do <domain_name> domain update  --active_cluster <newClusterName>`
+`cadence --do <domain_name> domain update  --active_cluster <newClusterName>`
 
 4. After some time, you make sure the new cluster is running fine, then remove the old cluster from replication:
 
-`./cadence --do <domain_name> domain update  --clusters <newClusterName>`
+`cadence --do <domain_name> domain update  --clusters <newClusterName>`
 
 NOTE 1: It’s better to enable the XDC feature from the beginning for all domains. Because a local domain cannot be converted to a global one.
 
