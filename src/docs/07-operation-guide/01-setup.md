@@ -12,7 +12,7 @@ You need to understand some key config options in Cadence server. There are two 
 
 Also, you need understand Cadence’s dependency --- a database(Cassandra or SQL based like MySQL/Postgres) and a metric server(typically Prometheus). Cadence also needs ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). And Cadence also depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
 
-## Static configs
+## Static configuration
 
 ### Understand the basic static configuration
 
@@ -52,7 +52,7 @@ For earlier versions, you can find all the configurations similarly:
 | v0.17.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/config#Config) |
 | ... | ...Just replace the version in the URL |
 
-## Dynamic Configuration Overview
+## Dynamic Configuration 
 
 Dynamic configuration is for fine tuning a Cadence cluster.
 
@@ -83,7 +83,7 @@ NOTE 2: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,histo
 ### How to update Dynamic Configuration
 As an example of using Helm Chart to deploy Cadence, you can update dynamic config from [here](https://github.com/banzaicloud/banzai-charts/blob/be57e81c107fd2ccdfc6cf95dccf6cbab226920c/cadence/templates/server-configmap.yaml#L170)
 
-## Configure Other Advanced Features of Cadence cluster
+## Other Advanced Features
 * Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for how to configure advanced visibility in production.
 
 * Go to [workflow archival](/docs/concepts/archival/#running-in-production) for how to configure archival in production.
