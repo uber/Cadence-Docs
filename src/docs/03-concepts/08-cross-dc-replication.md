@@ -87,6 +87,79 @@ The following command can be used to failover Global :domain:Domain: *my-domain-
 $ cadence --do my-domain-global d up --ac dc2
 ```
 
+## Running Locally
+
+The best way is to use Cadence [docker-compose](https://github.com/uber/cadence/tree/master/docker):
+`docker-compose -f docker-compose-multiclusters.yml up`
+
+
+## Running in Production
+
+Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configs).  
+
+Here we use clusterDCA and clusterDCB as an example. We pick clusterDCA as the master cluster.
+The only difference of being a master cluster” is that it is responsible for domain registration. Master can be changed later but it needs to be the same across all clusters.
+
+The ClusterMeta config of clusterDCA should be
+
+```yaml
+clusterMetadata:
+  enableGlobalDomain: true
+  failoverVersionIncrement: 10
+  masterClusterName: "clusterDCA"
+  currentClusterName: "clusterDCA"
+  clusterInformation:
+    clusterDCA:
+      enabled: true
+      initialFailoverVersion: 1
+      rpcName: "cadence-frontend"
+      rpcAddress: "<>:<>"
+    clusterDCB:
+      enabled: true
+      initialFailoverVersion: 0
+      rpcName: "cadence-frontend"
+      rpcAddress: "<>:<>"
+```
+
+And ClusterMeta config of clusterDCB should be
+
+```yaml
+clusterMetadata:
+  enableGlobalDomain: true
+  failoverVersionIncrement: 10
+  masterClusterName: "clusterDCA"
+  currentClusterName: "clusterDCB"
+  clusterInformation:
+    clusterDCA:
+      enabled: true
+      initialFailoverVersion: 1
+      rpcName: "cadence-frontend"
+      rpcAddress: "<>:<>"
+    clusterDCB:
+      enabled: true
+      initialFailoverVersion: 0
+
+      rpcName: "cadence-frontend"
+      rpcAddress: "<>:<>"
+```
+
+After the configuration is deployed:
+
+1. Register a global domain
+`./cadence --do <domain_name> domain register --global_domain true  --clusters clusterDCA clusterDCB --active_cluster clusterDCA`
+
+
+2. Run some workflow and failover domain from one to another
+`./cadence --do <domain_name> domain update  --active_cluster clusterDCB`
+
+Then the domain should be failed over to clusterDCB. Now worklfows are read-only in clusterDCA. So your workers polling tasks from clusterDCA will become idle.  
+
+Note 1: that even though clusterDCA is standy/read-only for this domain, it can be active for another domain. So being active/standy is per domain basis not per clusters. In other words, for example if you use XDC in case of DC failure of clusterDCA, you need to failover all domains from clusterDCA to clusterDCB.
+
+
+Note 2: even though a domain is standy/read-only in a cluster, say clusterDCA, sending write requests(startWF, signalWF, etc) could still work because there is a forwarding component in the Frontend service. It will try to re-route the requests to an active cluster for the domain.
+
+
 ## FAQ
 
 ### What happens to outstanding activities after failover?
