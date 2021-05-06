@@ -46,10 +46,10 @@ Starting from v0.21.0, all the static configuration are defined by GoDocs in det
 For earlier versions, you can find all the configurations similarly:
 |Version|GoDocs Link|
 | --------- | --------- |
-| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.20.0/common/service/config#Config) |
-| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.19.0/common/service/config#Config) |
-| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.18.0/common/service/config#Config) |
-| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/config#Config) |
+| v0.20.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.20.0/common/service/config#Config) |
+| v0.19.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.19.0/common/service/config#Config) |
+| v0.18.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.18.0/common/service/config#Config) |
+| v0.17.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/config#Config) |
 | ... | ...Just replace the version in the URL |
 
 ## Dynamic Configuration Overview
