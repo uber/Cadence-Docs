@@ -97,8 +97,8 @@ The best way is to use Cadence [docker-compose](https://github.com/uber/cadence/
 
 Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configs).  
 
-Here we use clusterDCA and clusterDCB as an example. We pick clusterDCA as the master cluster.
-The only difference of being a master cluster” is that it is responsible for domain registration. Master can be changed later but it needs to be the same across all clusters.
+Here we use clusterDCA and clusterDCB as an example. We pick clusterDCA as the primary(used to called "master") cluster.
+The only difference of being a primary cluster is that it is responsible for domain registration. Primary can be changed later but it needs to be the same across all clusters.
 
 The ClusterMeta config of clusterDCA should be
 

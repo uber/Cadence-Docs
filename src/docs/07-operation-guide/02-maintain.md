@@ -73,9 +73,9 @@ and [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schem
 ## Migrate Cadence cluster
 Migrating a Cadence cluster is rare, but could happen.
 There could be some reasons like:
-* Scale up -- move to a bigger cluster, with larger number of shards
 * Migrate to different storage, for example from Postgres/MySQL to Cassandra
 * Split traffic
+* [TODO](https://github.com/uber/cadence/issues/4179): Scale up -- move to a bigger cluster, with larger number of shards. 
 
 
 The below steps require to enable the [cross dc replication feature](/docs/concepts/cross-dc-replication/#running-in-production):
