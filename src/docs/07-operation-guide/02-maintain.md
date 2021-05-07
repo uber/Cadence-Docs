@@ -120,3 +120,7 @@ It will start replication right after for all the active workflows.
 NOTE 1: It’s better to enable the XDC feature from the beginning for all domains. Because a local domain cannot be converted to a global one.
 
 If your current domain is NOT a global domain, you cannot use the XDC feature to migrate. The only way is to create a new global domain, and start to use the new domains for new workflows, and drain the old workflows to finish. After all old workflows are finish, you then use the above instruction to migrate.
+
+## Stress/Bench Test a cluster
+
+It's recommended to run bench test on your cluster following this [package](https://github.com/uber/cadence/tree/master/bench) to see the maximum throughput that it can take, whenever you change some setup.

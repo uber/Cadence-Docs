@@ -77,3 +77,7 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prom
 * `Cadence-Server-Basic` is the the basic server dashboard to monitor/navigate the health/status of a Cadence cluster.
 
 * Apart from the basic server dashboard, it's recommended to set up dashboards on different components for Cadence server: Frontend, History, Matching, Worker, Persistence, Archival, etc. Any [contribution](https://github.com/uber/cadence-docs) is always welcome to enrich the existing templates or new templates!
+
+## Periodic tests(Canary) for health check
+
+It's recommended to run periodical test every hour on your cluster following this [package](https://github.com/uber/cadence/tree/master/canary) to make sure a cluster is healthy.
