@@ -56,7 +56,7 @@ NOTE: the value must be integer without double quotes.
 ## Restarting Cluster
 Make sure rolling restart to keep high availability.
 
-## SQL Database Connection Best Practice
+## Optimize SQL Persistence
 * Connection is shared within a Cadence server host
 * For each host, The max number of connections it will consume is maxConn of defaultStore + maxConn of visibilityStore.
 * The total max number of connections your Cadence cluster will consume is the summary from all hosts(from Frontend/Matching/History/SysWorker services)
