@@ -296,8 +296,19 @@ cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" StartTime
 
 ## Running in Production
 
+To enable this feature in a Cadence cluster:
+* Register index schema on ElasticSearch. Run two CURL commands following this [script](https://github.com/uber/cadence/blob/a05ce6b0328b89aa516ae09d5ff601e35df2cc4f/docker/start.sh#L59).  
+  * Create a index template by using the schema , choose v6/v7 based on your ElasticSearch version
+  * Create an index follow the index template, remember the name
+* Register topic on Kafka, and  remember the name
+  * Set up the right number of partitions based on your expected throughput(can be scaled up later)
+* [Configure Cadence for ElasticSearch + Kafka like this documentation](https://github.com/uber/cadence/blob/master/docs/visibility-on-elasticsearch.md#configuration)
+Based on the full [static config](/docs/operation-guide/setup/#static-configuration), you may add some other fields like AuthN.
+Similarly for Kafka.
+
+To add new search attributes:
+
 1. Add the key to ElasticSearch  `cadence --do domain adm cl asa --search_attr_key NewKey --search_attr_type 1`
 2. Update the [dynamic configuration](https://cadenceworkflow.io/docs/operation-guide/setup/#dynamic-configuration-overview) to allowlist the new attribute
 
-:warning:
-Note: starting a :workflow: with search attributes but without Elasticsearch will succeed as normal, but will not be searchable and will not be shown in list results.
+Note: starting a :workflow: with search attributes but without advanced visibility feature will succeed as normal, but will not be searchable and will not be shown in list results.

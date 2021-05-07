@@ -7,10 +7,15 @@ permalink: /docs/operation-guide/maintain
 # Cluster Maintenance
 This includes how to use and maintain a Cadence cluster for both clients and server clusters.
 
-## Client worker overview
-Java and Go clients should have almost the same guidance for setup, except that the Java client has a few more configurations about threading. That’s because Java language doesn’t have native support for lightweight threading like Golang goroutines.
+## Scale up & down Cluster
+* When CPU/Memory is getting bottleneck on Cadence instances, you may scale up or add more instances.
+* Watch [Cadence metrics](/docs/operation-guide/monitor/)
+  * See if the external traffic to frontend is normal
+  * If the slowness is due to too many tasks on a tasklist, you may need to [scale up the tasklist](/docs/operation-guide/maintain/#scale-up-a-tasklist-using-scalable-tasklist-feature)
+  * If persistence latency is getting too high, try scale up your DB instance
+* Never change the [`numOfShards` of a cluster](/docs/operation-guide/setup/#static-configuration). If you need that because the current one is too small, follow the instructions to [migrate your cluster to a new one](/docs/operation-guide/maintain/#migrate-cadence-cluster).  
 
-## Scalable tasklist
+## Scale up a tasklist using `Scalable tasklist` feature
 By default a tasklist is not scalable enough to support hundreds of tasks per second. That’s mainly because each tasklist is assigned to a Matching service node, and dispatching tasks in a tasklist is in sequence.
 
 In the past, Cadence recommended using multiple tasklists to start workflow/activity. You need to make a list of tasklists and randomly pick one when starting workflows. And then when starting workers, let them listen to all the tasklists.
@@ -48,8 +53,20 @@ matching.numTasklistReadPartitions:
 
 NOTE: the value must be integer without double quotes.
 
-## Restarting Server
-You may want to do rolling restart to keep high availability.
+## Restarting Cluster
+Make sure rolling restart to keep high availability.
+
+## SQL Database Connection Best Practice
+* Connection is shared within a Cadence server host
+* For each host, The max number of connections it will consume is maxConn of defaultStore + maxConn of visibilityStore.
+* The total max number of connections your Cadence cluster will consume is the summary from all hosts(from Frontend/Matching/History/SysWorker services)
+* Frontend and history nodes need both default and visibility Stores, but matching and sys workers only need default Stores, they don't need to talk to visibility DBs.
+* For default Stores, history service will take the most connection, then Frontend/Matching. SysWorker will use much less than others
+* Default Stores is for Cadence’ core data model, which requires strong consistency. So it cannot use replicas.  VisibilityStore is not for core data models. It’s recommended to use a separate DB for visibility store if using DB based visibility.
+* Visibility Stores usually take much less connection as the workload is much lightweight(less QPS and no explicit transactions).
+* Visibility Stores require eventual consistency for read. So it can use replicas.
+* MaxIdelConns should be less than MaxConns, so that the connections can be distributed better across hosts.
+
 
 ## Upgrading Server  
 Things need to keep in mind before upgrading a cluster:
@@ -75,7 +92,7 @@ Migrating a Cadence cluster is rare, but could happen.
 There could be some reasons like:
 * Migrate to different storage, for example from Postgres/MySQL to Cassandra
 * Split traffic
-* [TODO](https://github.com/uber/cadence/issues/4179): Scale up -- move to a bigger cluster, with larger number of shards. 
+* [TODO](https://github.com/uber/cadence/issues/4179): Scale up -- move to a bigger cluster, with larger number of shards.
 
 
 The below steps require to enable the [cross dc replication feature](/docs/concepts/cross-dc-replication/#running-in-production):
