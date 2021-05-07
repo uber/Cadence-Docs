@@ -14,14 +14,16 @@ Cadence is emitting metrics in both Server and client:
 
 * Follow this example to emit the [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you at least upgrade to 3.0.0.
 
-* For production, follow this example to emit [server side metrics](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
+* For production, follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
 
 ```yaml
 metrics:
   prometheus:
     timerType: "histogram"
-    listenAddress: "127.0.0.1:8001"
+    listenAddress: "0.0.0.0:8001"
 ```
+
+The rest of the instructions are using local environment as an example.
 
 For local server emitting metrics to Promethues, easies way is to use [docker-compose](https://github.com/uber/cadence/blob/master/docker/) to start a local Cadence.
 
@@ -44,8 +46,6 @@ scrape_configs:
 ```
 
 Note: `host.docker.internal` [may not work for some docker versions](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds)
-
-The rest of the instructions are using local environment as an example.
 
 * After updating the prometheus_config.yaml as above, run `docker-compose up` to start the local Cadence
 
