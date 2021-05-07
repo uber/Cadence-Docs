@@ -196,7 +196,7 @@ Note that you will only see :workflow:workflows: from one domain when :query:que
 ### Default Attributes
 
 More and more default attributes are added in newer versions.
-Please get the  by using the :CLI: get-search-attr command or the GetSearchAttributes API. 
+Please get the  by using the :CLI: get-search-attr command or the GetSearchAttributes API.
 Some names and types are as follows:
 
 | KEY                 | VALUE TYPE |
@@ -286,13 +286,29 @@ cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" StartTime
 
 :query:Queries: are supported in [Cadence Web](https://github.com/uber/cadence-web) as of release 3.4.0. Use the "Basic/Advanced" button to switch to "Advanced" mode and type the :query: in the search box.
 
-## Local Testing
-
+## Running Locally
 1. Increase Docker memory to higher than 6GB. Navigate to Docker -> Preferences -> Advanced -> Memory
 2. Get the Cadence Docker compose file. Run `curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose-es.yml`
 3. Start Cadence Docker (which contains Apache Kafka, Apache Zookeeper, and Elasticsearch) using `docker-compose -f docker-compose-es.yml up`
 4. From the Docker output log, make sure Elasticsearch and Cadence started correctly. If you encounter an insufficient disk space error, try `docker system prune -a --volumes`
 5. Register a local domain and start using it. `cadence --do samples-domain d re`
-6. Allowlist search attributes. `cadence --do domain adm cl asa --search_attr_key NewKey --search_attr_type 1`
+6. Add the key to ElasticSearch And also allowlist search attributes. `cadence --do domain adm cl asa --search_attr_key NewKey --search_attr_type 1`
 
-Note: starting a :workflow: with search attributes but without Elasticsearch will succeed as normal, but will not be searchable and will not be shown in list results.
+## Running in Production
+
+To enable this feature in a Cadence cluster:
+* Register index schema on ElasticSearch. Run two CURL commands following this [script](https://github.com/uber/cadence/blob/a05ce6b0328b89aa516ae09d5ff601e35df2cc4f/docker/start.sh#L59).  
+  * Create a index template by using the schema , choose v6/v7 based on your ElasticSearch version
+  * Create an index follow the index template, remember the name
+* Register topic on Kafka, and  remember the name
+  * Set up the right number of partitions based on your expected throughput(can be scaled up later)
+* [Configure Cadence for ElasticSearch + Kafka like this documentation](https://github.com/uber/cadence/blob/master/docs/visibility-on-elasticsearch.md#configuration)
+Based on the full [static config](/docs/operation-guide/setup/#static-configuration), you may add some other fields like AuthN.
+Similarly for Kafka.
+
+To add new search attributes:
+
+1. Add the key to ElasticSearch  `cadence --do domain adm cl asa --search_attr_key NewKey --search_attr_type 1`
+2. Update the [dynamic configuration](https://cadenceworkflow.io/docs/operation-guide/setup/#dynamic-configuration-overview) to allowlist the new attribute
+
+Note: starting a :workflow: with search attributes but without advanced visibility feature will succeed as normal, but will not be searchable and will not be shown in list results.

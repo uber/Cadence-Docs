@@ -53,6 +53,35 @@ In order to run locally do the following:
 
 In step 2, we registered a new :domain: and enabled history :archival: feature for that :domain:. Since we didn't provide an :archival: URI when registering the new :domain:, the default URI specified in `config/development.yaml` is used. The default URI is `file:///tmp/cadence_archival/development`, so you can find the archived :workflow: history under the `/tmp/cadence_archival/development` directory.
 
+## Running in Production
+In production, Google Cloud and S3 is supported for archival.
+Check documentation in [GCloud archival component](https://github.com/uber/cadence/tree/master/common/archiver/gcloud) and [S3 archival component](https://github.com/uber/cadence/tree/master/common/archiver/s3store).
+
+Below is an example of S3 archival configuration:
+```yaml 
+archival:
+  history:
+    status: "enabled"
+    enableRead: true
+    provider:
+      s3store:
+        region: "us-east-2"
+  visibility:
+    status: "enabled"
+    enableRead: true
+    provider:
+      s3store:
+        region: "us-east-2"
+domainDefaults:
+  archival:
+    history:
+      status: "enabled"
+      URI: "s3://dev-cad"
+    visibility:
+      status: "enabled"
+      URI: "s3://dev-cad"
+```
+
 ## FAQ
 
 ### How does archival interact with global domains?
