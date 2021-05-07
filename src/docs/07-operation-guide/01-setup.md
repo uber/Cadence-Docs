@@ -10,7 +10,7 @@ This section will help to understand what you need for setting up a Cadence clus
 
 You should understand some basic static configuration of Cadence cluster.
 
-There are also many other configuration called "Dynamic Configuration" for fine tuning the cluster. The default values are good to go for small clusters. 
+There are also many other configuration called "Dynamic Configuration" for fine tuning the cluster. The default values are good to go for small clusters.
 
 Cadence’s minimum dependency is a database(Cassandra or SQL based like MySQL/Postgres). Cadence uses it for persistence. All instances of Cadence clusters are stateless.
 
@@ -64,7 +64,7 @@ Dynamic configuration is for fine tuning a Cadence cluster.
 
 There are a lot more dynamic configurations than static configurations. Most of the default values are good for small clusters. As a cluster is scaled up, you may look for tuning it for the optimal performance.
 
-Starting from v0.21.0, all the dynamic configuration are well defined by GoDocs.
+Starting from v0.21.0 with this [change](https://github.com/uber/cadence/pull/4156/files), all the dynamic configuration are well defined by GoDocs.
 |Version|GoDocs Link|
 | --------- | --------- |
 | v0.21.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/dynamicconfig#Key) |
@@ -80,14 +80,83 @@ For earlier versions, you can find all the configurations similarly:
 | ... | ...Just replace the version in the URL |
 
 However, the GoDocs in earlier versions don't contain detailed information. You need to look it up the newer version of GoDocs.  
-For example, search for "EnableGlobalDomain" in [Dynamic Configuration Docs of v0.21.0](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/dynamicconfig#Key), as the usage of DynamicConfiguration never changes.
+For example, search for "EnableGlobalDomain" in Dynamic Configuration [Comments in v0.21.0](https://github.com/uber/cadence/blob/667b7c68e67682a8d23f4b8f93e91a791313d8d6/common/dynamicconfig/constants.go) or [Docs of v0.21.0](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/dynamicconfig#Key), as the usage of DynamicConfiguration never changes.
+
+
+* **KeyName** is the key that you will use in the dynamicconfig yaml content
+* **Default value** is the default value
+* **Value type** indicates the type that you should change the yaml value of:
+  * Int should be integer like 123
+  * Float should be number like 123.4
+  * Duration should be Golang duration like: 10s, 2m, 5h for 10 seconds, 2 minutes and 5 hours.
+  * Bool should be true or false
+  * Map should be map of yaml
+* **Allowed filters** indicates what kinds of filters you can set as constraints with the dynamic configuration.
+  * `DomainName` can be used with `domainName`
+  * `N/A` means no filters can be set. The config will be global.
+
+For example, if you want to change the ratelimiting for List API, below is the config:
+```
+// FrontendVisibilityListMaxQPS is max qps frontend can list open/close workflows
+// KeyName: frontend.visibilityListMaxQPS
+// Value type: Int
+// Default value: 10
+// Allowed filters: DomainName
+FrontendVisibilityListMaxQPS
+```
+
+Then you can add the config like:
+```yaml
+frontend.visibilityListMaxQPS:
+  - value: 1000
+  constraints:
+    domainName: "domainA"
+    frontend.visibilityListMaxQPS:
+      - value: 2000
+      constraints:
+        domainName: "domainB"      
+```
+You will expect to see `domainA` will be able to perform 1K List operation per second, while `domainB` can perform 2K per second.
+
 
 NOTE 1: the size related configuration numbers are based on byte.
 
 NOTE 2: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,history,matching>.persistenceGlobalMaxQPS ---  persistenceMaxQPS is local for single node while persistenceGlobalMaxQPS is global for all node. persistenceGlobalMaxQPS is preferred if set as greater than zero. But by default it is zero so persistenceMaxQPS is being used.  
 
 ### How to update Dynamic Configuration
-As an example of using Helm Chart to deploy Cadence, you can update dynamic config from [here](https://github.com/banzaicloud/banzai-charts/blob/be57e81c107fd2ccdfc6cf95dccf6cbab226920c/cadence/templates/server-configmap.yaml#L170)
+
+* Local docker-compose by mounting volume: update the `cadence` section in the docker compose file, and mount `config` folder to host machine like the following:
+```yaml
+cadence:
+  image: ubercadence/server:master-auto-setup
+  ports:
+    ...(don't change anything here)
+  environment:
+    ...(don't change anything here)
+    - "DYNAMIC_CONFIG_FILE_PATH=/etc/custom-dynamicconfig/development.yaml"
+  volumes:
+    - "/Users/<?>/cadence/config/dynamicconfig:/etc/custom-dynamicconfig"
+```
+
+* Local docker-compose by logging into the container: run `docker exec -it docker_cadence_1 /bin/bash` to login your container. Then `vi config/dynamicconfig/development.yaml` to make any change. After you changed the config, use `docker restart docker_cadence_1` to restart the cadence instance. Note that you can also use this approach to change static config, but it must be changed through `config/config_template.yaml` instead of `config/docker.yaml` because `config/docker.yaml` is generated on startup.
+
+
+* In production cluster: Follow this example of Helm Chart to deploy Cadence, update dynamic config [here](https://github.com/banzaicloud/banzai-charts/blob/be57e81c107fd2ccdfc6cf95dccf6cbab226920c/cadence/templates/server-configmap.yaml#L170) and restart the cluster.
+
+
+* DEBUG: How to make sure your updates on dynamicconfig is loaded? for example, if you added the following to `development.yaml`
+```yaml
+frontend.visibilityListMaxQPS:
+  - value: 10000
+```
+After restarting Cadence instances, execute a command like this to let Cadence load the config(it's lazy loading when using it).
+`cadence --domain <> workflow list`
+
+Then you should see the logs like below
+```
+cadence_1        | {"level":"info","ts":"2021-05-07T18:43:07.869Z","msg":"First loading dynamic config","service":"cadence-frontend","key":"frontend.visibilityListMaxQPS,domainName:sample,clusterName:primary","value":"10000","default-value":"10","logging-call-at":"config.go:93"}
+```
+
 
 ## Other Advanced Features
 * Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for how to configure advanced visibility in production.

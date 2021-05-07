@@ -12,7 +12,7 @@ Cadence is emitting metrics in both Server and client:
 
 * Follow this example to emit the [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36).
 
-* Follow this example to emit the [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f).
+* Follow this example to emit the [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you at least upgrade to 3.0.0.
 
 * For production, follow this example to emit [server side metrics](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
 
@@ -70,7 +70,7 @@ And server basic dashboard:
 
 ## Grafana dashboard templates
 
-This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana) contains examples of Cadence dashboards with Prometheus.
+This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
 * `Cadence-Client` is the dashboard of client metrics, and a few server side metrics that belong to client side but have to be emitted by server(for example, workflow timeout).
 
