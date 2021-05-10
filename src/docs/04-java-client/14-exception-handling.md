@@ -119,30 +119,68 @@ public class HelloException {
   }
 
   public static void main(String[] args) {
-    Worker.Factory factory = new Worker.Factory(DOMAIN);
-    Worker worker = factory.newWorker(TASK_LIST);
-    worker.registerWorkflowImplementationTypes(GreetingWorkflowImpl.class, GreetingChildImpl.class);
-    worker.registerActivitiesImplementations(new GreetingActivitiesImpl());
-    factory.start();
+     // Get a new client
+     // NOTE: to set a different options, you can do like this:
+     // ClientOptions.newBuilder().setRpcTimeout(5 * 1000).build();
+     WorkflowClient workflowClient =
+         WorkflowClient.newInstance(
+             new WorkflowServiceTChannel(ClientOptions.defaultInstance()),
+             WorkflowClientOptions.newBuilder().setDomain(DOMAIN).build());
+     // Get worker to poll the task list.
+     WorkerFactory factory = WorkerFactory.newInstance(workflowClient);
+     Worker worker = factory.newWorker(TASK_LIST);
+     worker.registerWorkflowImplementationTypes(GreetingWorkflowImpl.class, GreetingChildImpl.class);
+     worker.registerActivitiesImplementations(new GreetingActivitiesImpl());
+     factory.start();
 
-    WorkflowClient workflowClient = WorkflowClient.newInstance(DOMAIN);
-    WorkflowOptions workflowOptions =
-        new WorkflowOptions.Builder()
-            .setTaskList(TASK_LIST)
-            .setExecutionStartToCloseTimeout(Duration.ofSeconds(30))
-            .build();
-    GreetingWorkflow workflow =
-        workflowClient.newWorkflowStub(GreetingWorkflow.class, workflowOptions);
-    try {
-      workflow.getGreeting("World");
-      throw new IllegalStateException("unreachable");
-    } catch (WorkflowException e) {
-      Throwable cause = Throwables.getRootCause(e);
-      // prints "Hello World!"
-      System.out.println(cause.getMessage());
-      System.out.println("\nStack Trace:\n" + Throwables.getStackTraceAsString(e));
-    }
-    System.exit(0);
+     WorkflowOptions workflowOptions =
+         new WorkflowOptions.Builder()
+             .setTaskList(TASK_LIST)
+             .setExecutionStartToCloseTimeout(Duration.ofSeconds(30))
+             .build();
+     GreetingWorkflow workflow =
+         workflowClient.newWorkflowStub(GreetingWorkflow.class, workflowOptions);
+     try {
+       workflow.getGreeting("World");
+       throw new IllegalStateException("unreachable");
+     } catch (WorkflowException e) {
+       Throwable cause = Throwables.getRootCause(e);
+       // prints "Hello World!"
+       System.out.println(cause.getMessage());
+       System.out.println("\nStack Trace:\n" + Throwables.getStackTraceAsString(e));
+     }
+     System.exit(0);
+   }
+   
+}
+```
+
+The code is slightly different if you are using client version prior to 3.0.0:
+```java
+public static void main(String[] args) {
+  Worker.Factory factory = new Worker.Factory(DOMAIN);
+  Worker worker = factory.newWorker(TASK_LIST);
+  worker.registerWorkflowImplementationTypes(GreetingWorkflowImpl.class, GreetingChildImpl.class);
+  worker.registerActivitiesImplementations(new GreetingActivitiesImpl());
+  factory.start();
+
+  WorkflowClient workflowClient = WorkflowClient.newInstance(DOMAIN);
+  WorkflowOptions workflowOptions =
+      new WorkflowOptions.Builder()
+          .setTaskList(TASK_LIST)
+          .setExecutionStartToCloseTimeout(Duration.ofSeconds(30))
+          .build();
+  GreetingWorkflow workflow =
+      workflowClient.newWorkflowStub(GreetingWorkflow.class, workflowOptions);
+  try {
+    workflow.getGreeting("World");
+    throw new IllegalStateException("unreachable");
+  } catch (WorkflowException e) {
+    Throwable cause = Throwables.getRootCause(e);
+    // prints "Hello World!"
+    System.out.println(cause.getMessage());
+    System.out.println("\nStack Trace:\n" + Throwables.getStackTraceAsString(e));
   }
+  System.exit(0);
 }
 ```

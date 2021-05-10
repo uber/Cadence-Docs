@@ -87,6 +87,23 @@ public class GettingStarted {
 ```
 To link the :workflow: implementation to the Cadence framework, it should be registered with a :worker: that connects to
 a Cadence Service. By default the :worker: connects to the locally running Cadence service.
+
+```java
+public static void main(String[] args) {
+  WorkflowClient workflowClient =
+      WorkflowClient.newInstance(
+          new WorkflowServiceTChannel(ClientOptions.defaultInstance()),
+          WorkflowClientOptions.newBuilder().setDomain(DOMAIN).build());
+  // Get worker to poll the task list.
+  WorkerFactory factory = WorkerFactory.newInstance(workflowClient);
+  Worker worker = factory.newWorker(TASK_LIST);
+  worker.registerWorkflowImplementationTypes(HelloWorldImpl.class);
+  factory.start();
+}
+```
+
+The code is slightly different if you are using client version prior to 3.0.0:
+
 ```java
 public static void main(String[] args) {
     Worker.Factory factory = new Worker.Factory("test-domain");
