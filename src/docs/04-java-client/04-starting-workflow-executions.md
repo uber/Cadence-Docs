@@ -10,6 +10,17 @@ A :workflow: interface that executes a :workflow: requires initializing a `Workf
 a client side stub to the :workflow:, and then calling a method annotated with @WorkflowMethod.
 
 ```java
+WorkflowClient workflowClient =
+        WorkflowClient.newInstance(
+            new WorkflowServiceTChannel(
+                ClientOptions.newBuilder().setHost(cadenceServiceHost).setPort(cadenceServicePort).build()),
+            WorkflowClientOptions.newBuilder().setDomain(domain).build());
+// Create a workflow stub.
+FileProcessingWorkflow workflow = workflowClient.newWorkflowStub(FileProcessingWorkflow.class);
+```
+
+If you are using version prior to 3.0.0
+```java
 WorkflowClient workflowClient = WorkflowClient.newClient(cadenceServiceHost, cadenceServicePort, domain);
 // Create a workflow stub.
 FileProcessingWorkflow workflow = workflowClient.newWorkflowStub(FileProcessingWorkflow.class);
