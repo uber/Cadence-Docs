@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Search and filtering workflows
+title: Search workflows(Advanced visibility)
 permalink: /docs/concepts/search-workflows
 ---
 
-# Searching/Filtering Workflows
+# Searching Workflows(Advanced visibility)
 
 ## Introduction
 
@@ -15,6 +15,8 @@ Also note that normal :workflow: properties like start time and :workflow: type 
 ```sql
 WorkflowType = "main.Workflow" and CloseStatus != 0 and (StartTime > "2019-06-07T16:46:34-08:00" or CloseTime > "2019-06-07T16:46:34-08:00" order by StartTime desc)
 ```
+
+In other places, this is also called as `advanced visibility`. While `basic visibility` is referred to basic listing without being able to search. 
 
 ## Memo vs Search Attributes
 
