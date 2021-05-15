@@ -76,6 +76,7 @@ Other requirements for upgrading should be found in the release notes. It may co
 * It's recommended to upgrade one minor version at a time. E.g, if you are at 0.10, you should upgrade to 0.11, stabilize it with running some normal workload to make sure that the upgraded server is happy with the schema changes. After ~1 hour, then upgrade to 0.12. then 0.13. etc.
 * The reason above is that for each minor upgrade, you should be able to follow the release notes about what you should do for upgrading. The release notes may require you to run some commands. This will also help to narrow down the cause when something goes wrong.
 * Do not use “auto-setup” images to upgrade your schema. It's mainly for development. At most for initial setup only.
+* Please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release". 
 
 
 For how to upgrade database schema, refer to this doc: [SQL tool README](https://github.com/uber/cadence/tree/master/tools/sql)
