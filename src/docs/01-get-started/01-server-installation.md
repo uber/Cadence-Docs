@@ -87,5 +87,15 @@ Bad binaries to reset:
 >
 ```
 
+## Troubleshooting 
+There can be various reasons that `docker-compose up` cannot succeed:
+* In case of the image being too old, update the docker image by `docker pull ubercadence/server:master-auto-setup` and retry
+* In case of the local docker env is messed up: `docker system prune --all` and retry (see [details about it](https://docs.docker.com/config/pruning/) )
+* See logs of different container:
+  * If Cassandra is not able to get up: `docker logs -f docker_cassandra_1` 
+  * If Cadence is not able to get up: `docker logs -f docker_cadence_1`
+  * If Cadence Web is not able to get up: `docker logs -f docker_cadence-web_1`
+
+If the above is still not working, [open an issue in Server(main) repo](https://github.com/uber/cadence/issues/new/choose ). 
 ## What's Next
 Go to [Java HelloWorld](/docs/get-started/java-hello-world) or [Golang HelloWorld](/docs/get-started/golang-hello-world).
