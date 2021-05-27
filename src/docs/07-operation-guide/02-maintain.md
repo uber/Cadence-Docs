@@ -93,8 +93,20 @@ Migrating a Cadence cluster is rare, but could happen.
 There could be some reasons like:
 * Migrate to different storage, for example from Postgres/MySQL to Cassandra
 * Split traffic
-* [TODO](https://github.com/uber/cadence/issues/4179): Scale up -- move to a bigger cluster, with larger number of shards.
+* Datacenter migration 
+* Scale up -- move to a bigger cluster, with larger number of shards.
 
+Below is two different approaches for migrating a cluster.
+
+### Migrate in a naive approach 
+1. Set up a new Cadence cluster
+2. Connect client workers to both old and new clusters
+3. Change workflow code to start new workflows only in the new cluster 
+4. Wait for all old workflows to finish in the old cluster
+5. Shutdown the old cluster
+
+### Migrate with XDC feature
+NOTE: For now XDC feature requires to [use the same numOfShards between different clusters](https://github.com/uber/cadence/issues/4179).
 
 The below steps require to enable the [cross dc replication feature](/docs/concepts/cross-dc-replication/#running-in-production):
 
