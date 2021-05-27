@@ -99,6 +99,8 @@ There could be some reasons like:
 Below is two different approaches for migrating a cluster.
 
 ### Migrate in a naive approach 
+NOTE: This is the only way to migrate a local domain, because a local domain cannot be converted to a global domain, even after a cluster enables XDC feature. 
+
 1. Set up a new Cadence cluster
 2. Connect client workers to both old and new clusters
 3. Change workflow code to start new workflows only in the new cluster 
