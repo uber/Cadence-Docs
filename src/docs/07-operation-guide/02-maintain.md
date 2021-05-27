@@ -105,7 +105,7 @@ NOTE: This is the only way to migrate a local domain, because a local domain can
 2. Connect client workers to both old and new clusters
 3. Change workflow code to start new workflows only in the new cluster 
 4. Wait for all old workflows to finish in the old cluster
-5. Shutdown the old cluster
+5. Shutdown the old Cadence cluster and stop the client workers from connecting to it. 
 
 ### Migrate with XDC feature
 NOTE: For now XDC feature requires to [use the same numOfShards between different clusters](https://github.com/uber/cadence/issues/4179).
