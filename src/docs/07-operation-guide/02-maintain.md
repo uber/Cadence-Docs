@@ -132,9 +132,9 @@ It will start replication right after for all the active workflows.
 
 `cadence --do <domain_name> domain update  --clusters <newClusterName>`
 
-NOTE 1: It’s better to enable the XDC feature from the beginning for all domains. Because a local domain cannot be converted to a global one.
+NOTE: It’s better to enable the XDC feature from the beginning for all domains. Because a local domain cannot be converted to a global one.
 
-If your current domain is NOT a global domain, you cannot use the XDC feature to migrate. The only way is to create a new global domain, and start to use the new domains for new workflows, and drain the old workflows to finish. After all old workflows are finish, you then use the above instruction to migrate.
+If your current domain is NOT a global domain, you cannot use the XDC feature to migrate. The only way is to migrate in a [naive approach](/docs/operation-guide/maintain/#migrate-cadence-cluster)
 
 ## Stress/Bench Test a cluster
 
