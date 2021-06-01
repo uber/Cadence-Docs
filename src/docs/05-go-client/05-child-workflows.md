@@ -30,7 +30,7 @@ Let's take a look at each component of this call.
 Before calling `workflow.ExecuteChildworkflow()`, you must configure `ChildWorkflowOptions` for the
 invocation. These options customize various execution timeouts, and are passed in by creating a child
 context from the initial context and overwriting the desired values. The child context is then passed
-into the `workflow.ExecuteChildWorkflow()` call. If multiple :activity:activities: are sharing the same option
+into the `workflow.ExecuteChildWorkflow()` call. If multiple child :workflow:workflows: are sharing the same option
 values, then the same context instance can be used when calling `workflow.ExecuteChildworkflow()`.
 
 The first parameter in the call is the required `cadence.Context` object. This type is a copy of
