@@ -39,6 +39,13 @@ docker run --rm ubercadence/cli:master --address host.docker.internal:7933 --dom
 
 NOTE: Be sure to update your image when you want to try new features: `docker pull ubercadence/cli:master `
 
+NOTE: If you are running docker-compose Cadence server, you can also logon to the container to execute CLI:
+```
+docker exec -it docker_cadence_1 /bin/bash
+
+# cadence --do samples-domain domain create
+```
+
 ### Build it yourself 
 To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence) and run
 `make bins`. This produces an executable called `cadence`. With a local build, the same command to
