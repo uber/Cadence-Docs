@@ -43,7 +43,7 @@ NOTE: If you are running docker-compose Cadence server, you can also logon to th
 ```
 docker exec -it docker_cadence_1 /bin/bash
 
-# cadence --do samples-domain domain create
+# cadence --address $(hostname -i):7933 --do samples domain register
 ```
 
 ### Build it yourself 
