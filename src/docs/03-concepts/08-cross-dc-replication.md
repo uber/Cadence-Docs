@@ -169,10 +169,5 @@ again to a :worker: after the failover to the new DC. Handling this is pretty mu
 a :worker: restart even without Global :domain:Domains:.
 
 ### What happens when a start or signal API call is made to a standby cluster?
-Cadence will reject the call and return **DomainNotActiveError**. It is the responsibility of the application to forward
-the failed call to active cluster based on information provided in the error.
-
-### What is the recommended pattern to send external events to an active cluster?
-The recommendation at this point is to publish :event:events: to a Kafka topic if they can be generated in any DC.
-Then, have a consumer that consumes from the aggregated Kafka topic in the same DC and sends them to Cadence. Both the
-Kafka consumer and Global :domain:Domain: need to be failed over together.
+Cadence will to forward the API calls to active cluster if possible(some APIs are not forwardable, for example PollForDecisionTask).
+General APIs like StartWorkflow/SignalWorkflow can be forwarded.
