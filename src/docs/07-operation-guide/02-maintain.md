@@ -108,7 +108,7 @@ NOTE: This is the only way to migrate a local domain, because a local domain can
 5. Shutdown the old Cadence cluster and stop the client workers from connecting to it. 
 
 ### Migrate with XDC feature
-NOTE: For now XDC feature requires to [use the same numOfShards between different clusters](https://github.com/uber/cadence/issues/4179).
+NOTE: For now XDC feature requires to [use the same numOfShards between different clusters](https://github.com/uber/cadence/issues/4179) until this [PR](https://github.com/uber/cadence/pull/4239) is released to fix the bug. 
 
 The below steps require to enable the [cross dc replication feature](/docs/concepts/cross-dc-replication/#running-in-production):
 
