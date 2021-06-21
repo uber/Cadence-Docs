@@ -149,7 +149,7 @@ This design puts the following constraints on the :workflow: implementation:
 - Do not use any mutable global variables because multiple instances of :workflow:workflows: are executed in parallel.
 - Do not call any non-deterministic functions like non seeded random or UUID.randomUUID() directly from the :workflow: code.
 
-Always do the following in :activity:activities::
+Always do the following in :workflow:workflows::
 - Don’t perform any IO or service calls as they are not usually deterministic. Use :activity:activities: for this.
 - Only use `Workflow.currentTimeMillis()` to get the current time inside a :workflow:.
 - Do not use native Java `Thread` or any other multi-threaded classes like `ThreadPoolExecutor`. Use `Async.function` or `Async.procedure`
