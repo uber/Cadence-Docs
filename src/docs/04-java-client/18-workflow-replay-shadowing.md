@@ -39,7 +39,7 @@ WorkflowReplayer.replayWorkflowExecutionFromResource("workflowHistory.json", MyW
 WorkflowReplayer.replayWorkflowExecution(historyFileObject, MyWorkflowImpl.class);
 ```
 
-#### Step 5: Catch returned exception
+#### Step 3: Catch returned exception
 
 If an exception is returned from the replay method, it means there's a incompatible change in the workflow definition and the error message will contain more information regarding where the non-deterministic error happens.
 
@@ -126,7 +126,7 @@ When running in shadow mode, the normal decision worker will be disabled so that
 
 [Replay succeed, skipped and failed metrics](https://github.com/uber/cadence-java-client/blob/master/src/main/java/com/uber/cadence/internal/metrics/MetricsType.java#L169-L172) will be emitted by your worker when executing the shadow workflow and you can monitor those metrics to see if there's any incompatible changes. 
 
-To enable the shadow mode, the only change needed is setting the `EnableShadowWorker` field in `worker.Options` to `true`, and then specify the `ShadowOptions`. 
+To enable the shadow mode, you can initialize a shadowing worker and pass in the shadowing options.
 
 To enable the shadowing worker, here is a example. The example is also available [here](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/shadowing/ShadowTraffic.java):
 
