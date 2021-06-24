@@ -59,9 +59,9 @@ public class HelloActivityReplayTest {
 
 ## Workflow Shadower
 
-Workflow Replayer works well when verifying the compatibility against a small number of workflow histories. If there are lots of workflows in production need to be verified, dumping all histories manually clearly won't work. Directly fetching histories from cadence server might be a solution, but the time to replay all workflow histories might be too long for a test.
+Workflow Replayer works well when verifying the compatibility against a small number of workflows histories. If there are lots of workflows in production that need to be verified, dumping all histories manually clearly won't work. Directly fetching histories from cadence server might be a solution, but the time to replay all workflow histories might be too long for a test.
 
-Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each of workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows. 
+Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows. 
 
 ### Shadow Options
 
@@ -78,7 +78,7 @@ Complete documentation on shadow options which includes default values, accepted
 #### Shadow Exit Condition
 
 - ExpirationInterval: Shadowing will exit when the specified interval has passed.
-- ShadowCount: Shadowing will exit after this number of workflow has been replayed. Note: replay maybe skipped due to errors like can't fetch history, history too short, etc. Skipped workflows won't be taken account into ShadowCount.
+- ShadowCount: Shadowing will exit after this number of workflow has been replayed. Note: replay maybe skipped due to errors like can't fetch history, history too short, etc. Skipped workflows won't be taken into account for ShadowCount.
 
 #### Shadow Mode
 
@@ -87,11 +87,11 @@ Complete documentation on shadow options which includes default values, accepted
 
 #### Shadow Concurrency
 
-- Concurrency: workflow replay concurrency. If not specified, will be default to 1. For local shadowing, an error will be returned if a value higher than 1 is specified.
+- Concurrency: workflow replay concurrency. If not specified, it will default to 1. For local shadowing, an error will be returned if a value higher than 1 is specified.
 
 ### Local Shadowing Test
 
-Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that need to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found. 
+Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that needs to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found. 
 
 Here's a simple example. The example is also available [here](https://github.com/uber/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloWorkflowShadowingTest.java).
 
@@ -120,7 +120,7 @@ NOTE:
 - **All shadow workflows are running in one Cadence system domain, and right now, every user domain can only have one shadow workflow at a time.**
 - **The Cadence server used for scanning and getting workflow history will also be the Cadence server for running your shadow workflow.** Currently, there's no way to specify different Cadence servers for hosting the shadowing workflow and scanning/fetching workflow.
 
-Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode workers. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
+Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows that need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode workers. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
 
 When running in shadow mode, the normal decision worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows. 
 
@@ -151,7 +151,6 @@ WorkflowClient workflowClient =
           options);
   shadowingWorker.registerWorkflowImplementationTypes(HelloActivity.GreetingWorkflowImpl.class);
 	shadowingWorker.start();
-				
 ```
 
-Registered workflows will be forwarded to the underlying WorkflowReplayer. DataConverter, WorkflowInterceptorChainFactories, ContextPropagators, and Tracer specified in the `worker.Options` will also be used as ReplayOptions. Since all shadow workflows are running in one system domain, to avoid conflict, **the actual task list name used will be <your domain name> + `-tasklist`.**
+Registered workflows will be forwarded to the underlying WorkflowReplayer. DataConverter, WorkflowInterceptorChainFactories, ContextPropagators, and Tracer specified in the `worker.Options` will also be used as ReplayOptions. Since all shadow workflows are running in one system domain, to avoid conflict, **the actual task list name used will be `domain-tasklist`.**
