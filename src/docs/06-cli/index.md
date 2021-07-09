@@ -54,7 +54,7 @@ docker exec -it docker_cadence_1 /bin/bash
 ```
 
 ### Build it yourself 
-To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence), check out the version tag (e.g. `git checkout `v0.21.3`) and run
+To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence), check out the version tag (e.g. `git checkout v0.21.3`) and run
 `make tools`. This produces an executable called `cadence`. With a local build, the same command to
 describe a :domain: would look like this:
 ```bash
