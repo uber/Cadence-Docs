@@ -31,7 +31,14 @@ Example of using the docker image to describe a :domain::
 docker run --rm ubercadence/cli:master --domain samples-domain domain describe
 ```
 
-On Docker versions 18.03 and later, you may get a "connection refused" error. You can work around this by setting the host to "host.docker.internal" (see [here](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds) for more info).
+`master` will be the latest CLI binary from the project. But you can specify a version to best match your server version:
+```bash
+docker run --rm ubercadence/cli:<version> --domain samples-domain domain describe
+```
+For example `docker run --rm ubercadence/cli:0.21.3 --domain samples-domain domain describe` will be the CLI that is released as part of the [v0.21.3 release](https://github.com/uber/cadence/releases/tag/v0.21.3). 
+See [docker hub page](https://hub.docker.com/r/ubercadence/cli/tags?page=1&ordering=last_updated) for all the CLI image tags. 
+
+NOTE: On Docker versions 18.03 and later, you may get a "connection refused" error. You can work around this by setting the host to "host.docker.internal" (see [here](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds) for more info).
 
 ```bash
 docker run --rm ubercadence/cli:master --address host.docker.internal:7933 --domain samples-domain domain describe
@@ -47,12 +54,80 @@ docker exec -it docker_cadence_1 /bin/bash
 ```
 
 ### Build it yourself 
-To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence) and run
-`make bins`. This produces an executable called `cadence`. With a local build, the same command to
+To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence), check out the version tag (e.g. `git checkout `v0.21.3`) and run
+`make tools`. This produces an executable called `cadence`. With a local build, the same command to
 describe a :domain: would look like this:
 ```bash
 cadence --domain samples-domain domain describe
 ```
+
+## Documentation 
+CLI are documented by `--help` or `-h` in all tabs:
+
+```
+$cadence --help
+NAME:
+   cadence - A command-line tool for cadence users
+
+USAGE:
+   cadence [global options] command [command options] [arguments...]
+
+VERSION:
+   0.18.4
+
+COMMANDS:
+   domain, d     Operate cadence domain
+   workflow, wf  Operate cadence workflow
+   tasklist, tl  Operate cadence tasklist
+   admin, adm    Run admin operation
+   cluster, cl   Operate cadence cluster
+   help, h       Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --address value, --ad value          host:port for cadence frontend service [$CADENCE_CLI_ADDRESS]
+   --domain value, --do value           cadence workflow domain [$CADENCE_CLI_DOMAIN]
+   --context_timeout value, --ct value  optional timeout for context of RPC call in seconds (default: 5) [$CADENCE_CONTEXT_TIMEOUT]
+   --help, -h                           show help
+   --version, -v                        print the version
+```
+And 
+```
+$cadence workflow -h
+NAME:
+   cadence workflow - Operate cadence workflow
+
+USAGE:
+   cadence workflow command [command options] [arguments...]
+
+COMMANDS:
+   activity, act       operate activities of workflow
+   show                show workflow history
+   showid              show workflow history with given workflow_id and run_id (a shortcut of `show -w <wid> -r <rid>`). run_id is only required for archived history
+   start               start a new workflow execution
+   run                 start a new workflow execution and get workflow progress
+   cancel, c           cancel a workflow execution
+   signal, s           signal a workflow execution
+   signalwithstart     signal the current open workflow if exists, or attempt to start a new run based on IDResuePolicy and signals it
+   terminate, term     terminate a new workflow execution
+   list, l             list open or closed workflow executions
+   listall, la         list all open or closed workflow executions
+   listarchived        list archived workflow executions
+   scan, sc, scanall   scan workflow executions (need to enable Cadence server on ElasticSearch). It will be faster than listall, but result are not sorted.
+   count, cnt          count number of workflow executions (need to enable Cadence server on ElasticSearch)
+   query               query workflow execution
+   stack               query workflow execution with __stack_trace as query type
+   describe, desc      show information of workflow execution
+   describeid, descid  show information of workflow execution with given workflow_id and optional run_id (a shortcut of `describe -w <wid> -r <rid>`)
+   observe, ob         show the progress of workflow history
+   observeid, obid     show the progress of workflow history with given workflow_id and optional run_id (a shortcut of `observe -w <wid> -r <rid>`)
+   reset, rs           reset the workflow, by either eventID or resetType.
+   reset-batch         reset workflow in batch by resetType: LastDecisionCompleted,LastContinuedAsNew,BadBinary,DecisionCompletedTime,FirstDecisionScheduled,LastDecisionScheduled,FirstDecisionCompletedTo get base workflowIDs/runIDs to reset, source is from input file or visibility query.
+   batch               batch operation on a list of workflows from query.
+
+OPTIONS:
+   --help, -h  show help
+```
+And etc.
 
 The example commands below will use `cadence` for brevity.
 
