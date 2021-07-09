@@ -61,8 +61,10 @@ describe a :domain: would look like this:
 cadence --domain samples-domain domain describe
 ```
 
+Alternatively, you can build the CLI image, see [instructions](docker/README.md#diy-building-an-image-for-any-tag-or-branch) 
+
 ## Documentation 
-CLI are documented by `--help` or `-h` in all tabs:
+CLI are documented by `--help` or `-h` in ANY tab of all levels:
 
 ```
 $cadence --help
@@ -126,6 +128,23 @@ COMMANDS:
 
 OPTIONS:
    --help, -h  show help
+```
+
+```
+$cadence wf signal -h
+NAME:
+   cadence workflow signal - signal a workflow execution
+
+USAGE:
+   cadence workflow signal [command options] [arguments...]
+
+OPTIONS:
+   --workflow_id value, --wid value, -w value  WorkflowID
+   --run_id value, --rid value, -r value       RunID
+   --name value, -n value                      SignalName
+   --input value, -i value                     Input for the signal, in JSON format.
+   --input_file value, --if value              Input for the signal from JSON file.
+
 ```
 And etc.
 
