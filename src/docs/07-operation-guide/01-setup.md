@@ -111,7 +111,6 @@ frontend.visibilityListMaxQPS:
   - value: 1000
   constraints:
     domainName: "domainA"
-frontend.visibilityListMaxQPS:
   - value: 2000
   constraints:
     domainName: "domainB"      
