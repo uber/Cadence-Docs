@@ -28,21 +28,21 @@ locally.
 
 Example of using the docker image to describe a :domain::
 ```bash
-docker run --rm ubercadence/cli:master --domain samples-domain domain describe
+docker run -it --rm ubercadence/cli:master --address <frontendAddress> --domain samples-domain domain describe
 ```
 
 `master` will be the latest CLI binary from the project. But you can specify a version to best match your server version:
 ```bash
-docker run --rm ubercadence/cli:<version> --domain samples-domain domain describe
+docker run -it --rm ubercadence/cli:<version> --address <frontendAddress> --domain samples-domain domain describe
 ```
 For example `docker run --rm ubercadence/cli:0.21.3 --domain samples-domain domain describe` will be the CLI that is released as part of the [v0.21.3 release](https://github.com/uber/cadence/releases/tag/v0.21.3). 
 See [docker hub page](https://hub.docker.com/r/ubercadence/cli/tags?page=1&ordering=last_updated) for all the CLI image tags. 
 Note that CLI versions of 0.20.0 works for all server versions of 0.12 to 0.19 as well. That's because [the CLI version doesn't change in those versions](https://stackoverflow.com/questions/68217385/what-is-clientversionnotsupportederror-and-how-to-resolve-it). 
 
-NOTE: On Docker versions 18.03 and later, you may get a "connection refused" error. You can work around this by setting the host to "host.docker.internal" (see [here](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds) for more info).
+NOTE: On Docker versions 18.03 and later, you may get a "connection refused" error when connecting to local server. You can work around this by setting the host to "host.docker.internal" (see [here](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds) for more info).
 
 ```bash
-docker run --rm ubercadence/cli:master --address host.docker.internal:7933 --domain samples-domain domain describe
+docker run -it --rm ubercadence/cli:master --address host.docker.internal:7933 --domain samples-domain domain describe
 ```
 
 NOTE: Be sure to update your image when you want to try new features: `docker pull ubercadence/cli:master `
