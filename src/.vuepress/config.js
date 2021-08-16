@@ -55,8 +55,10 @@ module.exports = {
       {
         text: 'Community',
         items: [
-          { text: 'Slack', link: slackUrl },
+          { text: 'Github Discussion', link: 'https://github.com/uber/cadence/discussions' },
           { text: 'StackOverflow', link: 'https://stackoverflow.com/questions/tagged/cadence-workflow' },
+          { text: 'Github Issues', link: 'https://github.com/uber/cadence/issues' },
+          { text: 'Slack', link: slackUrl },
         ],
       },
       {
