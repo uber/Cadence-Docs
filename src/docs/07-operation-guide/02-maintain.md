@@ -88,6 +88,10 @@ Also, the schema tool by default will upgrade schema to the latest, so no manual
 Database schema changes are versioned in the folders: [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/cadence/versioned) for Default Store
 and [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/visibility/versioned) for Visibility Store if you use database for basic visibility instead of ElasticSearch.
 
+If you use homebrew, the schema files are located at `/usr/local/etc/cadence/schema/`. 
+
+Alternatively, you can checkout the [repo](https://github.com/uber/cadence) and the release tag. E.g. `git checkout v0.21.0` and then the schema files is at `./schema/` 
+
 ## Migrate Cadence cluster
 Migrating a Cadence cluster is rare, but could happen.
 There could be some reasons like:
