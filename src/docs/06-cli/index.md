@@ -21,6 +21,7 @@ After the installation is done, you can use CLI:
 ```
 cadence --help
 ```
+This will always install the latest version. Follow [this instructions](https://github.com/uber/cadence/discussions/4457) if you need to install older versions of Cadence CLI. 
 
 ### Docker
 The Cadence :CLI: can be used directly from the Docker Hub image *ubercadence/cli* or by building the :CLI: tool
