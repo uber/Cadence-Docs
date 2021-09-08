@@ -31,7 +31,7 @@ public class GettingStarted {
 
     private static Logger logger = Workflow.getLogger(GettingStarted.class);
 
-    interface HelloWorld {
+    public interface HelloWorld {
         @WorkflowMethod
         void sayHello(String name);
     }
