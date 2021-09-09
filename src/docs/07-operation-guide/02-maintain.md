@@ -69,17 +69,36 @@ Make sure rolling restart to keep high availability.
 
 
 ## Upgrading Server  
-Things need to keep in mind before upgrading a cluster:
-* Database schema changes need to apply first.
+
+To get notified about release, please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release". 
+
+It's recommended to upgrade one minor version at a time. E.g, if you are at 0.10, you should upgrade to 0.11, stabilize it with running some normal workload to make sure that the upgraded server is happy with the schema changes. After ~1 hour, then upgrade to 0.12. then 0.13. etc.
+
+The reason is that for each minor upgrade, you should be able to follow the release notes about what you should do for upgrading. The release notes may require you to run some commands. This will also help to narrow down the cause when something goes wrong.
+
+
+### How to upgrade:
+Things that you may need to do for upgrading a minor version(patch version upgrades should not need it):
+* Schema(DB/ElasticSearch) changes
+* Configuration format/layout changes 
+* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migraiton](https://github.com/uber/cadence/releases/tag/v0.16.0). 
+
+You should read through the release instruction for each minor release to understand what needs to be done.
+
+* Schema changes need to be applied before upgrading server
+  * Upgrade MySQL/Postgres schema if applicable 
+  * Upgrade Cassandra schema if applicable 
+  * Upgrade ElasticSearch schema if applicable 
 * Usually schema change is backward compatible. So rolling back usually is not a problem. It also means that Cadence allows running a mixed version of schema, as long as they are all greater than or equal to the required version of the server.
 Other requirements for upgrading should be found in the release notes. It may contain information about config changes, or special rollback instructions if normal rollback may cause problems.
-* It's recommended to upgrade one minor version at a time. E.g, if you are at 0.10, you should upgrade to 0.11, stabilize it with running some normal workload to make sure that the upgraded server is happy with the schema changes. After ~1 hour, then upgrade to 0.12. then 0.13. etc.
-* The reason above is that for each minor upgrade, you should be able to follow the release notes about what you should do for upgrading. The release notes may require you to run some commands. This will also help to narrow down the cause when something goes wrong.
-* Do not use “auto-setup” images to upgrade your schema. It's mainly for development. At most for initial setup only.
-* Please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release". 
+* Similarly, data migration should be done before upgrading the server binary. 
 
 
-For how to upgrade database schema, refer to this doc: [SQL tool README](https://github.com/uber/cadence/tree/master/tools/sql)
+NOTE: Do not use “auto-setup” images to upgrade your schema. It's mainly for development. At most for initial setup only.
+
+
+### How to apply DB schema changes
+For how to apply database schema, refer to this doc: [SQL tool README](https://github.com/uber/cadence/tree/master/tools/sql)
 [Cassandra tool README](https://github.com/uber/cadence/tree/master/tools/cassandra)
 
 The tool makes use of a table called “schema_versions” to keep track of upgrading History. But there is no transaction guarantee for cross table operations. So in case of some error, you may need to fix or apply schema change manually.
