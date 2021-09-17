@@ -8,6 +8,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "start": "vuepress dev src",
+    "start:local": "http-server ./dist",
     "test": "npm run cypress:run"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "vuepress-plugin-reading-progress": "^1.0.9"
   },
   "devDependencies": {
-    "cypress": "^6.1.0"
+    "cypress": "^6.1.0",
+    "http-server": "^13.0.2"
   }
 }
