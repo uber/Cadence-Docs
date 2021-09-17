@@ -28,6 +28,8 @@ RetryPolicy struct {
 
     // Maximum time to retry. Either ExpirationInterval or MaximumAttempts is required.
     // When exceeded the retries stop even if maximum retries is not reached yet.
+    // First (non-retry) attempt is unaffected by this field and is guaranteed to run 
+    // for the entirety of the workflow timeout duration (ExecutionStartToCloseTimeoutSeconds).
     ExpirationInterval time.Duration
 
     // Maximum number of attempts. When exceeded the retries stop even if not expired yet.
