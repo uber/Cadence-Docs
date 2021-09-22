@@ -153,7 +153,7 @@ USAGE:
 ...
 ```
 
-## Signal from user/applicaiton code
+## Signal from user/applicaition code
 
 You may want to signal workflows without running the command line.
 
