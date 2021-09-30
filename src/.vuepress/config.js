@@ -44,6 +44,9 @@ module.exports = {
         ],
       },
       {
+        text: 'Blog', link: '/blog',
+      },
+      {
         text: 'Client',
         items: [
           { text: 'Java Docs', link: 'https://www.javadoc.io/doc/com.uber.cadence/cadence-client' },
