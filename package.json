@@ -9,6 +9,7 @@
     "build": "npm run build:blog && npm run build:site",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "start:blog": "vuepress dev src/blog",
     "start": "vuepress dev src",
     "start:local": "http-server ./dist",
     "test": "npm run cypress:run"
