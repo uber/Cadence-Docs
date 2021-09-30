@@ -7,6 +7,7 @@ module.exports = {
   patterns: [
     '**/*.md',
     '**/*.vue',
+    '!blog/**/*.md',
 
     // comment line to enable test pages
     '!**/test-pages/*.md'
@@ -44,7 +45,7 @@ module.exports = {
         ],
       },
       {
-        text: 'Blog', link: '/blog',
+        text: 'Blog', link: '/blog/',
       },
       {
         text: 'Client',

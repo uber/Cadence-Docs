@@ -4,6 +4,7 @@ cypress/plugins
 cypress/support
 cypress/videos
 dist
+dist-blog
 node_modules
 npm-debug.log
 # package-lock file is required for cypress github action to work.

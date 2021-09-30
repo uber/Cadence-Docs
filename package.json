@@ -6,7 +6,8 @@
   "scripts": {
     "build:blog": "vuepress build src/blog",
     "build:site": "vuepress build src",
-    "build": "npm run build:blog && npm run build:site",
+    "build": "npm run build:blog && npm run build:site && npm run copy:blog",
+    "copy:blog": "cp -a dist-blog/. dist",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "start:blog": "vuepress dev src/blog",

@@ -1,5 +1,6 @@
 // modal configuration
 module.exports = {
+  dest: 'dist-blog',
   title: '',
   description: '',
   theme: '@vuepress/theme-blog', // OR shortcut: @vuepress/blog
