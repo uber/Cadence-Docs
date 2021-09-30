@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "vuepress build src",
+    "build:blog": "vuepress build src/blog",
+    "build:site": "vuepress build src",
+    "build": "npm run build:blog && npm run build:site",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "start": "vuepress dev src",
