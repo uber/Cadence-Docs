@@ -24,7 +24,6 @@ module.exports = {
     ['link', { rel: 'icon', href: `/img/favicon.ico` }],
   ],
   themeConfig: {
-    docsDir: '/docs',
     logo: '/img/logo-white.svg',
     docsRepo: 'uber/cadence-docs',
     docsDir: 'src',

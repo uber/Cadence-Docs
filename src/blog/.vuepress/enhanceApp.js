@@ -10,5 +10,12 @@ export default ({
   router, // the router instance for the app
   siteData // site metadata
 }) => {
-  // ...apply enhancements for the site.
+  router.beforeResolve((to, _from, next) => {
+    const browserWindow = typeof window !== "undefined" ? window : null;
+    if (browserWindow && to.path === '/') {
+      browserWindow.location.href = to.fullPath;
+    } else {
+      next();
+    }
+  });
 }

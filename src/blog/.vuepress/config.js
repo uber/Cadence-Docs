@@ -5,6 +5,7 @@ module.exports = {
   description: '',
   theme: '@vuepress/theme-blog', // OR shortcut: @vuepress/blog
   themeConfig: {
+    logo: '/img/logo-black.svg',
     directories: [
       {
         dirname: '_posts',
@@ -22,7 +23,12 @@ module.exports = {
     /**
      * Ref: https://vuepress-theme-blog.ulivz.com/#nav
      */
-    nav: [],
+    nav: [
+      {
+        text: 'Cadence',
+        link: '/',
+      },
+    ],
     feed: {
       canonical_base: '/',
       count: 5,
