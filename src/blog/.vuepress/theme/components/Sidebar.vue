@@ -1,14 +1,6 @@
 <template>
-  <aside class="sidebar">
+  <aside id="mobile-header" class="sidebar" :class="{ open: isOpen }">
     <NavLinks />
-
-    <slot name="top" />
-
-    <SidebarLinks
-      :depth="0"
-      :items="items"
-    />
-    <slot name="bottom" />
   </aside>
 </template>
 
@@ -21,12 +13,16 @@ export default {
 
   components: { SidebarLinks, NavLinks },
 
-  props: ['items']
+  props: ['items', 'isOpen']
 }
 </script>
 
 <style lang="stylus">
 .sidebar
+  max-height: 0;
+  transition 0.3s ease;
+  overflow: hidden;
+
   ul
     padding 0
     margin 0
@@ -52,6 +48,9 @@ export default {
       font-weight bold
     & > li:not(:first-child)
       margin-top .75rem
+
+.sidebar.open
+  max-height 450px
 
 @media (max-width: $MQMobile)
   .sidebar
