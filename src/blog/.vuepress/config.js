@@ -34,7 +34,11 @@ module.exports = {
     /**
      * Ref: https://vuepress-theme-blog.ulivz.com/#footer
      */
-    footer: false,
+    footer: {
+      copyright: [
+        { text: '© 2021 Uber Technologies, Inc.' },
+      ]
+    },
     summaryLength: 1000,
   },
 }
