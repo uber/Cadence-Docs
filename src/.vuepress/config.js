@@ -7,6 +7,7 @@ module.exports = {
   patterns: [
     '**/*.md',
     '**/*.vue',
+    '!blog/**/*.md',
 
     // comment line to enable test pages
     '!**/test-pages/*.md'
@@ -23,7 +24,6 @@ module.exports = {
     ['link', { rel: 'icon', href: `/img/favicon.ico` }],
   ],
   themeConfig: {
-    docsDir: '/docs',
     logo: '/img/logo-white.svg',
     docsRepo: 'uber/cadence-docs',
     docsDir: 'src',
@@ -42,6 +42,9 @@ module.exports = {
           { text: 'Glossary', link: '/GLOSSARY' },
           { text: 'About', link: '/docs/about/' },
         ],
+      },
+      {
+        text: 'Blog', link: '/blog/',
       },
       {
         text: 'Client',
