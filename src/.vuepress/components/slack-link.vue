@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { slackUrl } from '../constants';
+import { slackUrl } from '../../shared/constants';
 export default {
   name: 'slack-link',
   data() {

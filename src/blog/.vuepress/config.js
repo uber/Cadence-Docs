@@ -1,3 +1,5 @@
+const { themeConfig } = require('../../shared/config');
+
 // modal configuration
 module.exports = {
   dest: 'dist-blog',
@@ -5,7 +7,7 @@ module.exports = {
   description: '',
   theme: '@vuepress/theme-blog', // OR shortcut: @vuepress/blog
   themeConfig: {
-    logo: '/img/logo-black.svg',
+    ...themeConfig,
     directories: [
       {
         dirname: '_posts',
@@ -23,12 +25,6 @@ module.exports = {
     /**
      * Ref: https://vuepress-theme-blog.ulivz.com/#nav
      */
-    nav: [
-      {
-        text: 'Cadence',
-        link: '/',
-      },
-    ],
     feed: {
       canonical_base: '/',
       count: 5,
@@ -38,7 +34,11 @@ module.exports = {
     /**
      * Ref: https://vuepress-theme-blog.ulivz.com/#footer
      */
-    footer: false,
+    footer: {
+      copyright: [
+        { text: '© 2021 Uber Technologies, Inc.' },
+      ]
+    },
     summaryLength: 1000,
   },
 }

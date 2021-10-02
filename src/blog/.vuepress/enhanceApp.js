@@ -12,10 +12,10 @@ export default ({
 }) => {
   router.beforeResolve((to, _from, next) => {
     const browserWindow = typeof window !== "undefined" ? window : null;
-    if (browserWindow && to.path === '/') {
-      browserWindow.location.href = to.fullPath;
-    } else {
+    if (!browserWindow || to.path.startsWith('/blog')) {
       next();
+    } else {
+      browserWindow.location.href = to.fullPath;
     }
   });
 }

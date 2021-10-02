@@ -1,30 +1,26 @@
-/**
- * Custom Styles here.
- *
- * ref：https://v1.vuepress.vuejs.org/config/#index-styl
- */
+@require '../../../shared/styles';
 
 #vuepress-theme-blog__global-layout {
-  .header-wrapper .header-right-wrap {
-    justify-content: flex-start;
-  }
-
-  .search-box {
-    display: none;
-  }
-
-  .feed {
-    display: none;
+  .content-wrapper {
+    padding-top: 100px;
   }
 
   .footer {
-    display: none;
-  }
+    background-color: #191d2e;
+    padding: 1.5rem;
 
-  .nav-link:before {
-    content: "";
-    background-image: url(/img/logo-black.svg);
-    width: 200px;
-    height: 200px;
+    .footer-left-wrap {
+      display: none;
+    }
+
+    .footer-right-wrap {
+      justify-content: center;
+
+      .copyright .copyright-item {
+        color: #fff;
+        font-size: 16px;
+        line-height: 18px;
+      }
+    }
   }
 }
