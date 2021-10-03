@@ -70,7 +70,7 @@ Make sure rolling restart to keep high availability.
 
 ## Upgrading Server  
 
-To get notified about release, please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release". 
+To get notified about release, please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release".
 
 It's recommended to upgrade one minor version at a time. E.g, if you are at 0.10, you should upgrade to 0.11, stabilize it with running some normal workload to make sure that the upgraded server is happy with the schema changes. After ~1 hour, then upgrade to 0.12. then 0.13. etc.
 
@@ -80,18 +80,18 @@ The reason is that for each minor upgrade, you should be able to follow the rele
 ### How to upgrade:
 Things that you may need to do for upgrading a minor version(patch version upgrades should not need it):
 * Schema(DB/ElasticSearch) changes
-* Configuration format/layout changes 
-* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migraiton](https://github.com/uber/cadence/releases/tag/v0.16.0). 
+* Configuration format/layout changes
+* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migraiton](https://github.com/uber/cadence/releases/tag/v0.16.0).
 
 You should read through the release instruction for each minor release to understand what needs to be done.
 
 * Schema changes need to be applied before upgrading server
-  * Upgrade MySQL/Postgres schema if applicable 
-  * Upgrade Cassandra schema if applicable 
-  * Upgrade ElasticSearch schema if applicable 
+  * Upgrade MySQL/Postgres schema if applicable
+  * Upgrade Cassandra schema if applicable
+  * Upgrade ElasticSearch schema if applicable
 * Usually schema change is backward compatible. So rolling back usually is not a problem. It also means that Cadence allows running a mixed version of schema, as long as they are all greater than or equal to the required version of the server.
 Other requirements for upgrading should be found in the release notes. It may contain information about config changes, or special rollback instructions if normal rollback may cause problems.
-* Similarly, data migration should be done before upgrading the server binary. 
+* Similarly, data migration should be done before upgrading the server binary.
 
 
 NOTE: Do not use “auto-setup” images to upgrade your schema. It's mainly for development. At most for initial setup only.
@@ -107,58 +107,6 @@ Also, the schema tool by default will upgrade schema to the latest, so no manual
 Database schema changes are versioned in the folders: [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/cadence/versioned) for Default Store
 and [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/visibility/versioned) for Visibility Store if you use database for basic visibility instead of ElasticSearch.
 
-If you use homebrew, the schema files are located at `/usr/local/etc/cadence/schema/`. 
+If you use homebrew, the schema files are located at `/usr/local/etc/cadence/schema/`.
 
-Alternatively, you can checkout the [repo](https://github.com/uber/cadence) and the release tag. E.g. `git checkout v0.21.0` and then the schema files is at `./schema/` 
-
-## Migrate Cadence cluster
-Migrating a Cadence cluster is rare, but could happen.
-There could be some reasons like:
-* Migrate to different storage, for example from Postgres/MySQL to Cassandra
-* Split traffic
-* Datacenter migration 
-* Scale up -- move to a bigger cluster, with larger number of shards.
-
-Below is two different approaches for migrating a cluster.
-
-### Migrate in a naive approach 
-NOTE: This is the only way to migrate a local domain, because a local domain cannot be converted to a global domain, even after a cluster enables XDC feature. 
-
-1. Set up a new Cadence cluster
-2. Connect client workers to both old and new clusters
-3. Change workflow code to start new workflows only in the new cluster 
-4. Wait for all old workflows to finish in the old cluster
-5. Shutdown the old Cadence cluster and stop the client workers from connecting to it. 
-
-### Migrate with XDC feature
-NOTE: For now XDC feature requires to [use the same numOfShards between different clusters](https://github.com/uber/cadence/issues/4179) until this [PR](https://github.com/uber/cadence/pull/4239) is released to fix the bug. 
-
-The below steps require to enable the [cross dc replication feature](/docs/concepts/cross-dc-replication/#running-in-production):
-
-0. Assuming at the beginning, you have only one cluster.
-
-1. Create your domain with the global domain feature(XDC). Since you only have one cluster, there is no replication happening. But you still need to tell the replication topology when creating your domain.
-
-`cadence --do <domain_name> domain register --global_domain true  --clusters <initialClustersName> --active_cluster <initialClusterName>`
-
-2. Later on, after you setting up a new cluster, you can add the cluster to domain replication config
-
-`cadence --do <domain_name> domain update  --clusters <initialClusterName> <newClusterName>`
-
-It will start replication right after for all the active workflows.
-
-3. After you are sure the new cluster is healthy, you then switch the active cluster to the new cluster.
-
-`cadence --do <domain_name> domain update  --active_cluster <newClusterName>`
-
-4. After some time, you make sure the new cluster is running fine, then remove the old cluster from replication:
-
-`cadence --do <domain_name> domain update  --clusters <newClusterName>`
-
-NOTE: It’s better to enable the XDC feature from the beginning for all domains. Because a local domain cannot be converted to a global one.
-
-If your current domain is NOT a global domain, you cannot use the XDC feature to migrate. The only way is to migrate in a [naive approach](/docs/operation-guide/maintain/#migrate-cadence-cluster)
-
-## Stress/Bench Test a cluster
-
-It's recommended to run bench test on your cluster following this [package](https://github.com/uber/cadence/tree/master/bench) to see the maximum throughput that it can take, whenever you change some setup.
+Alternatively, you can checkout the [repo](https://github.com/uber/cadence) and the release tag. E.g. `git checkout v0.21.0` and then the schema files is at `./schema/`
