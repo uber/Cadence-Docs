@@ -23,7 +23,7 @@ Cadence does not impose any system limit on :activity: duration. It is up to the
 
 Either `ScheduleToClose` or both `ScheduleToStart` and `StartToClose` timeouts are required.
 
-Timeouts are the key to manage activities. For more tips of how to set proper timeout, read this [stack Overflow QA](https://stackoverflow.com/questions/65139178/how-to-set-proper-timeout-values-for-cadence-activitieslocal-and-regular-activi/65139179#65139179).
+Timeouts are the key to manage activities. For more tips of how to set proper timeout, read this [Stack Overflow QA](https://stackoverflow.com/questions/65139178/how-to-set-proper-timeout-values-for-cadence-activitieslocal-and-regular-activi/65139179#65139179).
 
 ## Retries
 
