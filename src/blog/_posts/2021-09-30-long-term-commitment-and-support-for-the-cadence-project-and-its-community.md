@@ -2,6 +2,7 @@
 title: Long-term commitment and support for the Cadence project, and its community
 date: 2021-09-30
 author: Liang Mei
+authorlink: mailto:liangmei@hotmail.com
 ---
 
 Dear valued Cadence users and developers,
