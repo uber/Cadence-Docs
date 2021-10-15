@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
+            "url": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
+            "title": "Announcing Cadence OSS office hours and community sync up",
+            "summary": "Are you a current Cadence user, do you operate Cadence services, or are you interested in learning about workflow technologies and wonder what problems Cadence could solve for you? We would like to talk to you!\n\nOur team has spent a significant amount of time working with users and partner teams at Uber to design, scale and operate their workflows. This helps our users understand the technology better, smooth their learning curve and ramp up experience, and at the same time allows us to get fast and direct feedback so we can improve the developer experience and close feature gaps. As our product and community grows, we would like to expand this practice to our users in the OSS community. For the first time ever, members of the Cadence team along with core contributors from the community will host bi-weekly office hours to answer any questions you have about Cadence, or workflow technology in general. We can also dedicate future sessions to specific topics that have a common intere ...",
+            "date_modified": "2021-10-13T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2021/09/30/long-term-commitment-and-support-for-the-cadence-project-and-its-community/",
             "url": "/blog/2021/09/30/long-term-commitment-and-support-for-the-cadence-project-and-its-community/",
             "title": "Long-term commitment and support for the Cadence project, and its community",

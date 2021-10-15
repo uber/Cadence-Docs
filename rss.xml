@@ -4,9 +4,18 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Thu, 14 Oct 2021 00:23:37 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 15 Oct 2021 05:54:48 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[Announcing Cadence OSS office hours and community sync up]]></title>
+            <link>/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/</link>
+            <guid>/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/</guid>
+            <pubDate>Wed, 13 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Are you a current Cadence user, do you operate Cadence services, or are you interested in learning about workflow technologies and wonder what problems Cadence could solve for you? We would like to talk to you!
+
+Our team has spent a significant amount of time working with users and partner teams at Uber to design, scale and operate their workflows. This helps our users understand the technology better, smooth their learning curve and ramp up experience, and at the same time allows us to get fast and direct feedback so we can improve the developer experience and close feature gaps. As our product and community grows, we would like to expand this practice to our users in the OSS community. For the first time ever, members of the Cadence team along with core contributors from the community will host bi-weekly office hours to answer any questions you have about Cadence, or workflow technology in general. We can also dedicate future sessions to specific topics that have a common intere ...]]></description>
+        </item>
         <item>
             <title><![CDATA[Long-term commitment and support for the Cadence project, and its community]]></title>
             <link>/blog/2021/09/30/long-term-commitment-and-support-for-the-cadence-project-and-its-community/</link>
