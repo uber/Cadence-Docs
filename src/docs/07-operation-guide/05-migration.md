@@ -34,13 +34,13 @@ NOTE 2: Starting from [version 0.22.0](https://github.com/uber/cadence/releases/
 * Make sure the new cluster doesn’t already have the domain names that needs to be migrated (otherwise domain replication would fail).
 
 To get all the domains from current cluster:
-```
+```bash
 cadence --address <currentClusterAddress> admin domain list
 ```
 
 Then
 For each global domain.
-```
+```bash
 cadence --address <newClusterAddress> --do <domain_name> domain describe
 ```
 to make sure it doesn't exist in the new cluster.
@@ -52,47 +52,115 @@ to make sure it doesn't exist in the new cluster.
   * Check the dynamic configuration to see if they have the same list of `frontend.validSearchAttributes`. If any is missing in the new cluster, update the dynamic config for the new cluster.
 
   * Check results of the below command to make sure that the ES fields matched with the dynamic configuration
-```
+```bash
 curl -u <UNAME>:<PW> -X GET https://<ES_HOST_OF_NEW_CLUSTER>/cadence-visibility-index  -H 'Content-Type: application/json'| jq .
 ```
 If any search attribute is missing, add the missing search attributes to target cluster.
-```
+```bash
 cadence --address <newClusterAddress> adm cluster add-search-attr --search_attr_key <> --search_attr_type <>
 ```
 
 ### Step 1 - Connect the two clusters using global domain(replication) feature
 Include the Cluster Information for both the old and new clusters in the ClusterMetadata config of both clusters.
 Example config for currentCluster
-```
-      masterClusterName: "<newClusterName>"
-      currentClusterName: "<currentClusterName>"
-      clusterInformation:
-        <currentClusterName>:
-          enabled: true
-          initialFailoverVersion: 1
-          rpcName: "cadence-frontend"
-          rpcAddress: "<currentClusterAddress>"
-        <newClusterName>:
-          enabled: true
-          initialFailoverVersion: 0
-          rpcName: "cadence-frontend"
-          rpcAddress: "<newClusterAddress>"
+```yaml
+dcRedirectionPolicy:
+  policy: "all-domain-apis-forwarding" # use selected-apis-forwarding if using older versions don't support this policy
+
+clusterMetadata:
+  enableGlobalDomain: true
+  failoverVersionIncrement: 10
+  masterClusterName: "<newClusterName>"
+  currentClusterName: "<currentClusterName>"
+  clusterInformation:
+    <currentClusterName>:
+      enabled: true
+      initialFailoverVersion: 1
+      rpcName: "cadence-frontend"
+      rpcAddress: "<currentClusterAddress>"
+    <newClusterName>:
+      enabled: true
+      initialFailoverVersion: 0
+      rpcName: "cadence-frontend"
+      rpcAddress: "<newClusterAddress>"
 ```          
 for newClusterName:
-```
-      masterClusterName: "<newClusterName>"
-      currentClusterName: "<newClusterName>"
-      clusterInformation:
-        <currentClusterName>:
-          enabled: true
-          initialFailoverVersion: 1
-          rpcName: "cadence-frontend"
-          rpcAddress: "<currentClusterAddress>"
-        <newClusterName>:
-          enabled: true
-          initialFailoverVersion: 0
-          rpcName: "cadence-frontend"
-          rpcAddress: "<newClusterAddress>"
+```yaml
+dcRedirectionPolicy:
+  policy: "all-domain-apis-forwarding"
+
+clusterMetadata:
+  enableGlobalDomain: true
+  failoverVersionIncrement: 10
+  masterClusterName: "<newClusterName>"
+  currentClusterName: "<newClusterName>"
+  clusterInformation:
+    <currentClusterName>:
+      enabled: true
+      initialFailoverVersion: 1
+      rpcName: "cadence-frontend"
+      rpcAddress: "<currentClusterAddress>"
+    <newClusterName>:
+      enabled: true
+      initialFailoverVersion: 0
+      rpcName: "cadence-frontend"
+      rpcAddress: "<newClusterAddress>"
 ```   
 
 Deploy the config.
+In older versions, only `selected-apis-forwarding` is supported. This would require you to deploy a different set of workflow/activity connected to the new Cadence cluster during migration, if high availability/seamless migration is required. Because `selected-apis-forwarding` only forwarding the non-worker APIs.
+
+With `all-domain-apis-forwarding` policy, all worker + non-worker APIs are forwarded by Cadence cluster. You don't need to make any deployment change to your workflow/activity workers during migration. Once migration, let all workers connect to the new Cadence cluster before removing/shutdown the old cluster.
+
+Therefore, it's recommended to upgrade your Cadence cluster to a higher version with `all-domain-apis-forwarding` policy supported. The below steps assuming you are using this policy.
+
+
+### Step 2 - Test Replicating one domain
+
+First of all, try replicating a single domain to make sure everything work. Here uses `domain update` to failover, you can also use `managed failover` feature to failover.
+
+* 2.1 Assuming the domain only contain `currentCluster` in the cluster list, let's add the new cluster to the domain.
+```bash
+cadence --address <currentClusterAddress> --do <domain_name> domain update --clusters <currentClusterName> <newClusterName>
+```
+
+NOTE: you may need run the command to mitigate a [bug](https://github.com/uber/cadence/issues/4340) in Cadence domain cache that occurs after adding a new cluster to the cluster list; we need to update the active_cluster to the same value that it appears to be.
+
+```
+cadence --address <currentClusterAddress> --do <domain_name> domain update --active_cluster <currentClusterName>
+```
+
+
+* 2.2 failover the domain to be active in new cluster
+```
+cadence --address <currentClusterAddress> --do workflow-prototype domain update --active_cluster <newClusterName>
+```
+
+Use the domain describe command to verify the entire domain is replicated to the new cluster.
+
+```
+cadence --address <newClusterAddress> --do <domain_name> domain describe
+```
+Find an open workflowID that we want to replicate (you can get it from the UI). Use this command to describe it to make sure it’s open and running:
+
+```
+cadence --address <initialClusterAddress> --do <domain_name> workflow describe --workflow_id <wfID>
+```
+Run a signal command against any workflow and check that it was replicated to the new cluster. Example:
+
+```
+cadence --address <initialClusterAddress> --do <domain_name> workflow signal --workflow_id <wfID> --name <anything, e.g. xdcTest>
+```
+
+Verify the workflow is replicated in the new cluster
+```
+cadence --address <newClusterAddress> --st <adminOperationToken> --do <domain_name> workflow describe --workflow_id <wfID>
+```
+Also compare the history between the two clusters:
+```
+cadence --address <newClusterAddress> --do <domain_name> workflow show --workflow_id <wfID>
+```
+
+```
+cadence --address <initialClusterAddress> --do <domain_name> workflow show --workflow_id <wfID>
+```
