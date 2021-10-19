@@ -117,14 +117,14 @@ Therefore, it's recommended to upgrade your Cadence cluster to a higher version 
 
 ### Step 2 - Test Replicating one domain
 
-First of all, try replicating a single domain to make sure everything work. Here uses `domain update` to failover, you can also use `managed failover` feature to failover.
+First of all, try replicating a single domain to make sure everything work. Here uses `domain update` to failover, you can also use `managed failover` feature to failover. You may use some testing domains for this like `cadence-canary`.
 
 * 2.1 Assuming the domain only contain `currentCluster` in the cluster list, let's add the new cluster to the domain.
 ```bash
 cadence --address <currentClusterAddress> --do <domain_name> domain update --clusters <currentClusterName> <newClusterName>
 ```
 
-NOTE: you may need run the command to mitigate a [bug](https://github.com/uber/cadence/issues/4340) in Cadence domain cache that occurs after adding a new cluster to the cluster list; we need to update the active_cluster to the same value that it appears to be.
+Run the command below to refresh the domain after adding a new cluster to the cluster list; we need to update the active_cluster to the same value that it appears to be.
 
 ```
 cadence --address <currentClusterAddress> --do <domain_name> domain update --active_cluster <currentClusterName>
@@ -164,3 +164,33 @@ cadence --address <newClusterAddress> --do <domain_name> workflow show --workflo
 ```
 cadence --address <initialClusterAddress> --do <domain_name> workflow show --workflow_id <wfID>
 ```
+
+
+### Step 3 - Start to replicate all domains
+
+You can repeat Step 2 for all the domains. Or you can use the managed failover feature to failover all the domains in the cluster with a single command. See more details in the [global domain documentation](/docs/concepts/cross-dc-replication).
+
+Because replication cannot be triggered without a decision. Again best way is to send a garbage signal to all the workflows.
+
+If advanced visibility is enabled, then use batch signal command to start a batch job to trigger replication for all open workflows:
+```
+cadence --address <initialClusterAddress> --do <domain_name> workflow batch start --batch_type signal --query “CloseTime = missing” --signal_name <anything, e.g. xdcTest> --reason <anything> --input <anything> --yes
+```
+
+Watch metrics & dashboard while this is happening. Also observe the signal batch job to make sure it's completed.
+
+### Step 4 - Complete the migration
+
+After a few days, make sure everything is stable on the new cluster. The old cluster should only be forwarding requests to new cluster.
+
+A few things need to do in order to shutdown the old cluster.
+
+* Migrate all applications to connect to the frontend of new cluster instead of relying on the forwarding
+* Watch metric dashboard to make sure no any traffic is happening on the old cluster
+* Delete the old cluster from domain cluster list. This needs to be done for every domain.
+```
+cadence --address <newHostAddress> --do <domain_name> domain update --clusters <newClusterName>
+```
+* Delete the old cluster from the configuration of the new cluster.
+
+Once above is done, you can shutdown the old cluster safely.
