@@ -5,6 +5,14 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2021/10/19/moving-to-grpc/",
+            "url": "/blog/2021/10/19/moving-to-grpc/",
+            "title": "Moving to gRPC",
+            "summary": "Cadence historically has been using TChannel transport with Thrift encoding for both internal RPC calls and communication with client SDKs. gRPC is becoming a de-facto industry standard with much better adoption and community support. It offers features such as authentication and streaming that are very relevant for Cadence. Moreover, TChannel is being deprecated within Uber itself, pushing an effort for this migration. During the last year we’ve implemented multiple changes in server and SDK that allows users to use gRPC in Cadence, as well as to upgrade their existing Cadence cluster in a backward compatible way. This post tracks the completed work items and our future plans.\n\nOur Approach\nWith ~500 services using Cadence at Uber and many more open source customers around the world, we had to think about the gRPC transition in a backwards compatible way. We couldn’t simply flip transport and encoding everywhere. Instead we needed to support both protocols as an intermediate step ...",
+            "image": "/img/grpc-migration.svg",
+            "date_modified": "2021-10-19T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
             "url": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
             "title": "Announcing Cadence OSS office hours and community sync up",
