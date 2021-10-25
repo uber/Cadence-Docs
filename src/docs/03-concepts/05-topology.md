@@ -17,9 +17,9 @@ Note that both types of :worker:workers: as well as external clients are roles a
 
 ![Cadence Service](/img/overview.png)
 
-At the core of Cadence is a highly scalable multitentant service. The service exposes all its functionality through a strongly typed [Thrift API](https://github.com/uber/cadence/blob/11448bb7729857022b9f382b356b61e8a9aa77f1/idl/github.com/uber/cadence/cadence.thrift#L33).
+At the core of Cadence is a highly scalable multitentant service. The service exposes all of its functionality through a strongly typed [gRPC API](https://github.com/uber/cadence-idl/tree/master/proto/uber/cadence/api/v1).
 
-Internally it depends on a persistent store. Currently, Apache Cassandra and MySQL stores are supported out of the box. For listing :workflow:workflows: using complex predicates, Elasticsearch cluster can be used.
+Internally it depends on a persistent store. Currently, Apache Cassandra, MySQL, PostgreSQL, CockroachDB ([PostgreSQL compatible](https://www.cockroachlabs.com/docs/stable/postgresql-compatibility.html)) and TiDB ([MySQL compatible](https://docs.pingcap.com/tidb/dev/mysql-compatibility)) stores are supported out of the box. For listing :workflow:workflows: using complex predicates, ElasticSearch and OpenSearch cluster can be used.
 
 Cadence service is responsible for keeping :workflow: state and associated durable timers. It maintains internal queues (called :task_list:task_lists:) which are used to dispatch :task:tasks: to external :worker:workers:.
 
