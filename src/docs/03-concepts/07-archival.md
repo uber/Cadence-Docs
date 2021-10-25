@@ -90,7 +90,7 @@ The `listArchived` CLI command and API accept a SQL-like query for retrieving ar
 ### How does archival interact with global domains?
 If you have a global domain, when :archival: occurs it will first run on the active cluster and some time later it will run on the standby cluster when replication happens.
 For history archival, Cadence will check if upload operation has been performed and skip duplicate efforts. 
-For visibility archival, there's no such check and duplicated visibility record will be uploaded. Depending on the Archiver implementation, those duplicated upload may result in or may not be returned. 
+For visibility archival, there's no such check and duplicated visibility records will be uploaded. Depending on the Archiver implementation, those duplicated upload may consume more space in the underlying storage and duplicated entries may be returned. 
 
 ### Can I specify multiple archival URIs?
 Each :domain: can only have one URI for history :archival: and one URI for visibility :archival:. Different :domain:domains:, however, can have different URIs (with different schemes).
