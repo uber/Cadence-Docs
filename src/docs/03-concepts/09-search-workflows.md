@@ -288,6 +288,27 @@ cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" StartTime
 
 :query:Queries: are supported in [Cadence Web](https://github.com/uber/cadence-web) as of release 3.4.0. Use the "Basic/Advanced" button to switch to "Advanced" mode and type the :query: in the search box.
 
+### TLS Support for connecting to Elasticsearch
+
+If your elasticsearch deployment requires TLS to connect to it, you can add the following to your config template.
+The TLS config is optional and when not provided it defaults to tls.enabled to **false**
+```yaml
+elasticsearch:
+  url:
+    scheme: "https"
+    host: "127.0.0.1:9200"
+  indices:
+    visibility: cadence-visibility-dev
+  tls:
+    enabled: true
+    caFile: /secrets/cadence/elasticsearch_cert.pem
+    enableHostVerification: true
+    serverName: myServerName
+    certFile: /secrets/cadence/certfile.crt
+    keyFile: /secrets/cadence/keyfile.key
+    sslmode: false
+```
+
 ## Running Locally
 1. Increase Docker memory to higher than 6GB. Navigate to Docker -> Preferences -> Advanced -> Memory
 2. Get the Cadence Docker compose file. Run `curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose-es.yml`
@@ -314,3 +335,5 @@ To add new search attributes:
 2. Update the [dynamic configuration](https://cadenceworkflow.io/docs/operation-guide/setup/#dynamic-configuration-overview) to allowlist the new attribute
 
 Note: starting a :workflow: with search attributes but without advanced visibility feature will succeed as normal, but will not be searchable and will not be shown in list results.
+
+
