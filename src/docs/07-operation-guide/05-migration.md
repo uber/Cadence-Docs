@@ -13,7 +13,6 @@ There could be some reasons that you need to migrate Cadence clusters:
 Below is two different approaches for migrating a cluster.
 
 ## Migrate with naive approach
-NOTE: This is the only way to migrate a local domain, because a local domain cannot be converted to a global domain, even after a cluster enables XDC feature.
 
 1. Set up a new Cadence cluster
 2. Connect client workers to both old and new clusters
@@ -21,7 +20,11 @@ NOTE: This is the only way to migrate a local domain, because a local domain can
 4. Wait for all old workflows to finish in the old cluster
 5. Shutdown the old Cadence cluster and stop the client workers from connecting to it.
 
-NOTE : Starting from [version 0.22.0](https://github.com/uber/cadence/releases/tag/v0.22.0), global domain is preferred/recommended. Please ensure you create and use global domains only.
+NOTE 1: With this approach, workflow history/visibility will not be migrated to new cluster.
+
+NOTE 2: This is the only way to migrate a local domain, because a local domain cannot be converted to a global domain, even after a cluster enables XDC feature.
+
+NOTE 3: Starting from [version 0.22.0](https://github.com/uber/cadence/releases/tag/v0.22.0), global domain is preferred/recommended. Please ensure you create and use global domains only.
 If you are using local domains, an easy way is to create a global domain and migrate to the new global domain using the above steps.
 
 ## Migrate with [Global Domain Replication](/docs/concepts/cross-dc-replication/#running-in-production) feature
@@ -108,7 +111,7 @@ clusterMetadata:
 ```   
 
 Deploy the config.
-In older versions, only `selected-apis-forwarding` is supported. This would require you to deploy a different set of workflow/activity connected to the new Cadence cluster during migration, if high availability/seamless migration is required. Because `selected-apis-forwarding` only forwarding the non-worker APIs.
+In older versions(<= v0.22), only `selected-apis-forwarding` is supported. This would require you to deploy a different set of workflow/activity connected to the new Cadence cluster during migration, if high availability/seamless migration is required. Because `selected-apis-forwarding` only forwarding the non-worker APIs.
 
 With `all-domain-apis-forwarding` policy, all worker + non-worker APIs are forwarded by Cadence cluster. You don't need to make any deployment change to your workflow/activity workers during migration. Once migration, let all workers connect to the new Cadence cluster before removing/shutdown the old cluster.
 
@@ -149,8 +152,10 @@ cadence --address <initialClusterAddress> --do <domain_name> workflow describe -
 Run a signal command against any workflow and check that it was replicated to the new cluster. Example:
 
 ```
-cadence --address <initialClusterAddress> --do <domain_name> workflow signal --workflow_id <wfID> --name <anything, e.g. xdcTest>
+cadence --address <initialClusterAddress> --do <domain_name> workflow signal --workflow_id <wfID> --name <anything not functional, e.g. replicationTriggeringSignal>
 ```
+This command will send a noop signal to workflows to trigger a decision, which will trigger history replication if needed.
+
 
 Verify the workflow is replicated in the new cluster
 ```
