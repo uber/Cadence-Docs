@@ -81,7 +81,7 @@ The reason is that for each minor upgrade, you should be able to follow the rele
 Things that you may need to do for upgrading a minor version(patch version upgrades should not need it):
 * Schema(DB/ElasticSearch) changes
 * Configuration format/layout changes
-* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migraiton](https://github.com/uber/cadence/releases/tag/v0.16.0).
+* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migration](https://github.com/uber/cadence/releases/tag/v0.16.0).
 
 You should read through the release instruction for each minor release to understand what needs to be done.
 
