@@ -42,7 +42,7 @@ In the Java client, the *WorkflowOptions.Builder* has similar methods for [memo]
 
 Some important distinctions between memo and search attributes:
 
-- Memo can support all data types because it is not indexed. Search attributes only support basic data types (including String, Int, Float, Bool, Datetime) because it is indexed by Elasticsearch.
+- Memo can support all data types because it is not indexed. Search attributes only support basic data types (including String(aka Text), Int, Float, Bool, Datetime) because it is indexed by Elasticsearch.
 - Memo does not restrict on key names. Search attributes require that keys are allowlisted before using them because Elasticsearch has a limit on indexed keys.
 - Memo doesn't require Cadence clusters to depend on Elasticsearch while search attributes only works with Elasticsearch.
 
@@ -88,23 +88,25 @@ cadence --domain samples-domain adm cl asa --search_attr_key NewKey --search_att
 
 The numbers for the attribute types map as follows:
 
-- 0 = String
+- 0 = String(Text)
 - 1 = Keyword
 - 2 = Int
 - 3 = Double
 - 4 = Bool
 - 5 = DateTime
 
-#### Keyword vs String
+#### Keyword vs String(Text)
 
-Note that **Keyword** and **String** are concepts taken from Elasticsearch. Each word in a **String** is considered a searchable keyword. For a UUID, that can be problematic as Elasticsearch will index each portion of the UUID separately. To have the whole string considered as a searchable keyword, use the **Keyword** type.
+Note 1: **String** has been renamed to **Text** in [ElasticSearch](https://www.elastic.co/blog/strings-are-dead-long-live-strings). Cadence is also [planning](https://github.com/uber/cadence/issues/4604) to rename it. 
+
+Note 2: **Keyword** and **String(Text)** are concepts taken from Elasticsearch. Each word in a **String(Text)** is considered a searchable keyword. For a UUID, that can be problematic as Elasticsearch will index each portion of the UUID separately. To have the whole string considered as a searchable keyword, use the **Keyword** type.
 
 For example, key RunID with value "2dd29ab7-2dd8-4668-83e0-89cae261cfb1"
 
 - as a **Keyword** will only be matched by RunID = "2dd29ab7-2dd8-4668-83e0-89cae261cfb1" (or in the future with [regular expressions](https://github.com/uber/cadence/issues/1137))
-- as a **String** will be matched by RunID =  "2dd8", which may cause unwanted matches
+- as a **String(Text)** will be matched by RunID =  "2dd8", which may cause unwanted matches
 
-**Note:** String type can not be used in Order By :query:.
+**Note:** String(Text) type can not be used in Order By :query:.
 
 There are some pre-allowlisted search attributes that are handy for testing:
 
