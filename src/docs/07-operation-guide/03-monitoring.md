@@ -8,13 +8,13 @@ permalink: /docs/operation-guide/monitor
 
 ## Instructions
 
-Cadence is emitting metrics in both Server and client:
+Cadence emits metrics for both Server and client libraries:
 
-* Follow this example to emit the [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36).
+* Follow this example to emit [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36).
 
-* Follow this example to emit the [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you at least upgrade to 3.0.0.
+* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you use v3.0.0 and above.
 
-* For production, follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
+* For running Cadence services in production, please follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
 
 ```yaml
 metrics:
@@ -23,9 +23,9 @@ metrics:
     listenAddress: "0.0.0.0:8001"
 ```
 
-The rest of the instructions are using local environment as an example.
+The rest of the instruction uses local environment as an example.
 
-For local server emitting metrics to Promethues, easies way is to use [docker-compose](https://github.com/uber/cadence/blob/master/docker/) to start a local Cadence.
+For testing local server emitting metrics to Promethues, the easiest way is to use [docker-compose](https://github.com/uber/cadence/blob/master/docker/) to start a local Cadence instance.
 
 Make sure to update the `prometheus_config.yml` to add "host.docker.internal:9098" to the scrape list before starting the docker-compose:
 ```yaml
@@ -47,11 +47,11 @@ scrape_configs:
 
 Note: `host.docker.internal` [may not work for some docker versions](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds)
 
-* After updating the prometheus_config.yaml as above, run `docker-compose up` to start the local Cadence
+* After updating the prometheus_config.yaml as above, run `docker-compose up` to start the local Cadence instance
 
 * Go the the sample repo, build the helloworld sample `make helloworld` and run the worker `./bin/helloworld -m worker`, and then in another Shell start a workflow `./bin/helloworld`
 
-* Go to [local Prometheus server](http://localhost:9090/) , you should be able to check the metrics handler from client/frontend/matching/history/sysWorker are all healthy as [targets](http://localhost:9090/targets)
+* Go to your [local Prometheus dashboard](http://localhost:9090/), you should be able to check the metrics emitted by handler from client/frontend/matching/history/sysWorker and confirm your services are healthy through [targets](http://localhost:9090/targets)
 <img width="1192" alt="Screen Shot 2021-02-20 at 11 31 11 AM" src="https://user-images.githubusercontent.com/4523955/108606555-8d0dfb80-736f-11eb-968d-7678df37455c.png">
 
 
@@ -73,11 +73,11 @@ And server basic dashboard:
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) contains examples of Cadence dashboards with DataDog.
 
-* `Cadence-Client` is the dashboard of client metrics, and a few server side metrics that belong to client side but have to be emitted by server(for example, workflow timeout).
+* `Cadence-Client` is the dashboard that includes all the metrics to help you understand Cadence client behavior. Most of these metrics are emitted by the client SDKs, with a few exceptions from server side (for example, workflow timeout).
 
-* `Cadence-Server` is the the server dashboard to monitor/navigate the health/status of a Cadence cluster.
+* `Cadence-Server` is the the server dashboard that you can use to monitor and undertand the health and status of your Cadence cluster.
 
-To use DataDog with Cadence, follow [this instruction to collect Prometheus metrics using DataDog agent](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/).
+To use DataDog with Cadence, follow [this instruction](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/) to collect Prometheus metrics using DataDog agent.
 
 ## Grafana+Prometheus dashboard templates
 
@@ -92,10 +92,10 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prom
 
 ## Periodic tests(Canary) for health check
 
-It's recommended to run periodical test every hour on your cluster following this [package](https://github.com/uber/cadence/tree/master/canary) to make sure a cluster is healthy.
+It's recommended that you run periodical test to get signals on the healthness of your cluster. Please following instructions in [our canary package](https://github.com/uber/cadence/tree/master/canary) to set these tests up.
 
 ## Server monitoring details
-This section describe some recommended dashboards to have for monitoring a server cluster. For now, the structure is mostly following the DataDog dashboard template.
+This section describes recommended dashboards for monitoring Cadence services in your cluster. The structure mostly follows the DataDog dashboard template listed above.
 
 ### Service Availability(server metrics)
 * Meaning: the availability of Cadence server using server metrics.  
