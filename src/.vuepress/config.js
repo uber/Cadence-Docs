@@ -151,6 +151,7 @@ module.exports = {
             '07-operation-guide/02-maintain',
             '07-operation-guide/03-monitoring',
             '07-operation-guide/04-troubleshooting',
+            '07-operation-guide/05-migration',
           ],
         },
         {

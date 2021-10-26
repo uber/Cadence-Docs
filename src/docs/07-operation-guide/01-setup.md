@@ -44,7 +44,7 @@ There are quite many configs in Cadence. Here are the most basic configuration t
 
 Starting from v0.21.0, all the static configuration are defined by GoDocs in details.
 |Version|GoDocs Link| Github Link |
-| --------- | --------- | --------- | 
+| --------- | --------- | --------- |
 | v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.21.0/common/config/config.go#L37)|
 | ...[other higher versions](https://pkg.go.dev/github.com/uber/cadence@v0.21.0?tab=versions) | ...Replace the version in the URL of v0.21.0| ...Replace the version in the URL of v0.21.0|
 
@@ -165,15 +165,18 @@ cadence_1        | {"level":"info","ts":"2021-05-07T18:43:07.869Z","msg":"First 
 * Go to [cross dc replication](/docs/concepts/cross-dc-replication/#running-in-production) for how to configure replication in production.
 
 ## Deployment & Release
-Kubernetes is the most popular way to deploy Cadence cluster. And easiest way is to use [Cadence Helm Charts](https://github.com/banzaicloud/banzai-charts/tree/master/cadence) that maintained by a community project. 
+Kubernetes is the most popular way to deploy Cadence cluster. And easiest way is to use [Cadence Helm Charts](https://github.com/banzaicloud/banzai-charts/tree/master/cadence) that maintained by a community project.
 
-If you are looking for deploying Cadence using other technologies, then it's reccomended to use Cadence docker images. You can use offical ones, or you may customize it based on what you need. See [Cadence docker package](https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production) for how to run the images. 
+If you are looking for deploying Cadence using other technologies, then it's reccomended to use Cadence docker images. You can use offical ones, or you may customize it based on what you need. See [Cadence docker package](https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production) for how to run the images.
 
-It's always recommended to use the latest release. See [Cadence release pages](https://github.com/uber/cadence/releases). 
+It's always recommended to use the latest release. See [Cadence release pages](https://github.com/uber/cadence/releases).
 
-Please subscribe the release of project by : 
+Please subscribe the release of project by :
 
-Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release". 
+Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release".
 
 And see [how to upgrade a Cadence cluster](/docs/operation-guide/maintain/#upgrading-server)  
 
+## Stress/Bench Test a cluster
+
+It's recommended to run bench test on your cluster following this [package](https://github.com/uber/cadence/tree/master/bench) to see the maximum throughput that it can take, whenever you change some setup.
