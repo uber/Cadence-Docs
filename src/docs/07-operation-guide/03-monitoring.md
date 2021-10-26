@@ -68,7 +68,18 @@ And server basic dashboard:
 
 <img width="1519" alt="Screen Shot 2021-02-20 at 11 06 54 AM" src="https://user-images.githubusercontent.com/4523955/108606577-b169d800-736f-11eb-8fcb-88801f23b656.png">
 
-## Grafana dashboard templates
+
+## DataDog dashboard templates
+
+This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) contains examples of Cadence dashboards with DataDog.
+
+* `Cadence-Client` is the dashboard of client metrics, and a few server side metrics that belong to client side but have to be emitted by server(for example, workflow timeout).
+
+* `Cadence-Server` is the the server dashboard to monitor/navigate the health/status of a Cadence cluster.
+
+To use DataDog with Cadence, follow [this instruction to collect Prometheus metrics using DataDog agent](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/).
+
+## Grafana+Prometheus dashboard templates
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
@@ -78,6 +89,124 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prom
 
 * Apart from the basic server dashboard, it's recommended to set up dashboards on different components for Cadence server: Frontend, History, Matching, Worker, Persistence, Archival, etc. Any [contribution](https://github.com/uber/cadence-docs) is always welcome to enrich the existing templates or new templates!
 
+
 ## Periodic tests(Canary) for health check
 
 It's recommended to run periodical test every hour on your cluster following this [package](https://github.com/uber/cadence/tree/master/canary) to make sure a cluster is healthy.
+
+## Server monitoring details
+This section describe some recommended dashboards to have for monitoring a server cluster. For now, the structure is mostly following the DataDog dashboard template.
+
+### Service Availability(server metrics)
+* Meaning: the availability of Cadence server using server metrics.  
+* Monitor Required: below 95% > 5 min then alert, below 99% for > 5 min triggers a warning
+* Monitor action: When fired, check if it’s due to some persistence errors.  If so then investigate the database(may need to restart or scale up) [Mostly]. If not then look at logs about the errors
+* Datadog query example
+```
+sum:cadence_frontend.cadence_errors{$env,$Availability_Zone}
+sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}
+(1 - a / b) * 100
+```
+
+### StartWorkflow Per Second
+* Meaning: how many workflows are started per second. Helps determine if the server is overloaded.
+* No monitor required.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{$env AND $Availability_Zone AND (operation IN (startworkflowexecution,signalwithstartworkflowexecution))} by {operation}.as_rate()
+```
+
+### Activities Started Per Second
+* Meaning: How many activities are started per second. Helps determine if the server is overloaded.
+* No monitor required.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollforactivitytask} by {operation}.as_rate()
+```
+
+### Decisions Started Per Second
+* Meaning: How many workflow decisions are started per second. Helps determine if the server is overloaded.
+* No monitor required.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollforactivitytask} by {operation}.as_rate()
+```
+
+### Periodical Test Suite Success(aka Canary)
+* Meaning: The success counter of canary test suite
+* Monitor needed. If fired, look at the failed canary test case and investigate why.
+* Datadog query example
+```
+sum:cadence_history.workflow_success{workflowtype:workflow_sanity,$env} by {workflowtype}.as_count()
+```
+
+### Frontend all API per second
+* Meaning: all API on frontend per second. Information only.
+* No monitor needed.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}.as_rate()
+```
+
+### Frontend API per second (breakdown per operation)
+* Meaning: API on frontend per second. Information only.
+* No monitor needed.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{$env,$Availability_Zone} by {operation}.as_rate()
+```
+
+### Frontend API errors per second(breakdown per operation)
+* Meaning: API error on frontend per second. Information only.
+* No monitor needed.  
+* Datadog query example
+```
+sum:cadence_frontend.cadence_errors{$env,$Availability_Zone} by {operation}.as_rate()  : internal service errors
+sum:cadence_frontend.cadence_errors_*{$env,$Availability_Zone} by {operation}.as_rate()  : client side errors
+```
+* [TODO](https://github.com/uber/cadence/issues/4572)
+
+### Frontend Regular API Latency
+* Meaning: The latency of regular core API -- excluding long-poll/queryWorkflow/getHistory/ListWorkflow/CountWorkflow API.
+* Monitor: 95% of all apis and of all operations that take over 1.5 seconds triggers a warning,  over 2 seconds triggers an alert
+* Monitor if fired, investigate the database read/write latency. May need to throttle some spiky traffic from certain domains, or scale up the database
+* Datadog query example
+```
+avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecisiontask,pollforactivitytask,getworkflowexecutionhistory,queryworkflow,listworkflowexecutions,listclosedworkflowexecutions,listopenworkflowexecutions)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+```
+
+### Frontend ListWorkflow API Latency
+* Meaning: The latency of ListWorkflow API.
+* Monitor: 95% of all apis and of all operations that take over 2 seconds triggers a warning,  over 3 seconds triggers an alert
+* Monitor if fired, investigate the ElasticSearch read latency. May need to throttle some spiky traffic from certain domains, or scale up ElasticSearch cluster
+* Datadog query example
+```
+avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowexecutions,listopenworkflowexecutions,listworkflowexecutions,countworkflowexecutions)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+```
+
+### Frontend Long Poll API Latency
+* Meaning: Long poll means that the worker is waiting for a task. The latency is an Indicator for how busy the worker is. Poll for activity task and poll for decision task are the types of long poll requests.The api call times out at 50 seconds if no task can be picked up.A very low latency could mean that more workers need to be added.
+* No monitor needed as long latency is expected.
+* Datadog query example
+```
+avg:cadence_frontend.cadence_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:pollforactivitytask} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:pollfordecisiontask} by {operation}
+```
+
+### Frontend Get History/Query Workflow API Latency
+* Meaning: GetHistory API acts like a long poll api, but there’s no explicit timeout. Long-poll of GetHistory is being used when WorkflowClient is waiting for the result of the workflow(essentially, WorkflowExecutionCompletedEvent).
+This latency depends on the time it takes for the workflow to complete. QueryWorkflow API latency is also unpredictable as it depends on the availability and performance of workflow workers, which are owned by the application and workflow implementation(may require replaying history).
+* No monitor needed
+* Datadog query example
+```
+avg:cadence_frontend.cadence_latency.quantile{(operation IN (getworkflowexecutionhistory,queryworkflow)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+```
+
+### Frontend WorkflowClient API per seconds by domain
+* Meaning: Shows which domains are making the most requests using WorkflowClient(excluding worker API like PollForDecisionTask and RespondDecisionTaskCompleted). Used for troubleshooting.
+In the future it can be used to set some rate limiting per domain.
+* No monitor needed.
+* Datadog query example
+```
+sum:cadence_frontend.cadence_requests{(operation IN (signalwithstartworkflowexecution,signalworkflowexecution,startworkflowexecution,terminateworkflowexecution,resetworkflowexecution,requestcancelworkflowexecution,listworkflowexecutions)) AND $env AND $Availability_Zone} by {domain,operation}.as_rate()
+```
