@@ -33,6 +33,7 @@ We plan to support TChannel for a few more releases and then eventually drop it 
 
 ## Migration steps
 ### Upgrading Cadence server
+In order to start using gRPC please upgrade Cadence server to **[v0.22.0](https://github.com/uber/cadence/releases/tag/v0.22.0) or later**.
 1. If you are using an older version (before v0.21.0), make sure to disable internal gRPC communication at first. Needed to ensure that all nodes in the cluster are ready to accept gRPC traffic, before switching it on. This is controlled by the [system.enableGRPCOutbound](https://github.com/uber/cadence/blob/v0.21.0/config/dynamicconfig/development.yaml#L10) flag in dynamic config.
 2. Once deployed, flip system.enableGRPCOutbound to true. It will require a cluster restart for setting to take effect.
 3. If you are operating in more than one DC - recommended server version to upgrade to is v0.23.0 or newer. Once individual clusters with gRPC support are deployed, please update [config](https://github.com/uber/cadence/blob/0.23.x/config/development_active.yaml#L82) to switch cross DC traffic to gRPC. Don’t forget to update ports as well. We also recommend increasing [grpcMaxMsgSize](https://github.com/uber/cadence/blob/0.23.x/config/development.yaml#L29) to 32MB which is needed to ensure smooth replication. After config change you will need a restart for setting to take effect.
