@@ -637,3 +637,76 @@ sum:cadence_matching.syncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$
 ```
 sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency} by {operation,tasklist,domain}
 ```
+
+## Cadence Default Persistence Monitoring
+Cadence default persistence is for the core data models. But can also be used for basic visibility if configured.
+
+### Persistence Availability
+* The availability of Cadence server using database
+* Monitor required: Below 95% > 5min then alert, below 99% triggers a slack warning
+* When fired, check if it’s due to some persistence issue.
+If so then investigate the database(may need to scale up) [Mostly]
+If not then see if need to scale up Cadence deployment(K8s instance)
+* Datadog query example
+```
+sum:cadence_frontend.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
+(1 - a / b) * 100
+(1 - c / d) * 100
+(1 - e / f) * 100
+(1 - g / h) * 100
+```
+
+### Persistence By Service TPS
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.persistence_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_history.persistence_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_worker.persistence_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_matching.persistence_requests{$Availability_Zone,$env}.as_rate()
+
+```
+
+### Persistence By Operation TPS
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_history.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_worker.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_matching.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+
+```
+
+### Persistence By Operation Latency
+* Monitor required, alert if 95% of all operation latency is greater than 1 second for 5mins, warning if greater than 0.5 seconds
+* When fired, investigate the database(may need to scale up) [Mostly]
+If there’s a high latency, then there could be errors or something wrong with the db
+* Datadog query example
+```
+avg:cadence_matching.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_worker.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_frontend.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_history.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+```
+
+### Persistence Error By Operation Count
+* It's to help investigate availability issue
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
+
+```
