@@ -10,9 +10,13 @@ permalink: /docs/operation-guide/monitor
 
 Cadence emits metrics for both Server and client libraries:
 
-* Follow this example to emit [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36).
+* Follow this example to emit [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36)
+  * You can use other metrics emitter like [M3](https://github.com/uber-go/tally/tree/master/m3)
+  * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-go/tally/blob/master/reporter.go)
 
 * Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you use v3.0.0 and above.
+  * You can use other metrics emitter like [M3](https://github.com/uber-java/tally/tree/master/m3)
+  * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-java/tally/blob/master/core/src/main/java/com/uber/m3/tally/Scope.java)
 
 * For running Cadence services in production, please follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
 
@@ -586,3 +590,50 @@ Similarly, the history length of the workflow cannot be too large otherwise it w
 * The size of each event(e.g. Decided by input/output of workflow/activity/signal/chidlWorkflow/etc) cannot be too large otherwise it will also cause performance issue. The soft limit is 2MB. If exceeding, the requests will be rejected by server, meaning that workflow won’t be able to make any progress.
 * No monitor needed
 * Datadog query is same as the client section
+
+
+## Cadence Matching Service Monitoring
+Matching service is to match/assign tasks from cadence service to workers. Matching got the tasks from history service. If workers are active the task will be matched immediately , It’s called “sync match”. If workers are not available, matching will persist into database and then reload the tasks when workers are back(called “async match”)
+
+### Matching APIs per Second
+* API processed by matching service per second
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_matching.cadence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+```
+
+### Matching API Errors per Second
+* API errors by matching service per second
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_matching.cadence_errors_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}.as_rate()
+sum:cadence_matching.cadence_errors_query_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+```
+
+
+### Matching Regular API Latency
+* Regular APIs are the APIs excluding long polls
+* No monitor needed
+* Datadog query example
+```
+avg:cadence_matching.cadence_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency,!operation:pollfor*,!operation:queryworkflow} by {operation,tasklist}
+```
+
+### Sync Match Latency:
+* If the latency is too high, probably the tasklist is overloaded. Consider using multiple tasklist, or enable scalable tasklist feature by adding more partition to the tasklist(default is one)
+To confirm if there are too many tasks being added to the tasklist, use “AddTasks per second - domain, tasklist breakdown”
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_matching.syncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency} by {operation,tasklist,domain}
+```
+
+### Async match Latency
+* If a match is done asynchronously it writes a match to the db to use later. Measures the time when the worker is not actively looking for tasks. If this is high, more workers are needed.
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency} by {operation,tasklist,domain}
+```
