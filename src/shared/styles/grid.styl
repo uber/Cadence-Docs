@@ -11,6 +11,14 @@
   flex-direction: row-reverse;
 }
 
+.grid-justify-evenly {
+  justify-content: space-evenly;
+}
+
+.grid-wrap {
+  flex-wrap: wrap;
+}
+
 .grid-col-4 {
   flex: 4;
   padding: 0 20px;
@@ -29,5 +37,9 @@
 @media (max-width: 719px) {
   .grid {
     display: block;
+  }
+
+  .grid-always {
+    display: flex !important;
   }
 }

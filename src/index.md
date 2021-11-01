@@ -7,12 +7,6 @@ actionLink: /docs/get-started/
 footer: © 2021 Uber Technologies, Inc.
 ---
 
-<div class="section">
-  <div class="content">
-    <company-logo />
-  </div>
-</div>
-
 <div class="section alt">
   <div class="content content-wide">
     <div class="grid grid-flex-start">
@@ -34,6 +28,62 @@ footer: © 2021 Uber Technologies, Inc.
         <p>Cadence is designed to scale out horizontally to handle millions of concurrent workflows.</p>
         <p>Cadence provides out-of-the-box asynchronous history event replication that can help you recover from zone failures.</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="content">
+    <h2>Cadence powering these companies</h2>
+    <div class="grid grid-always grid-justify-evenly grid-wrap">
+      <logo
+        href="https://www.grupomasmovil.com/en"
+        img="img/company-logo/1_masmovil.jpeg"
+        label="Masmovil"
+        width="160px"
+      />
+      <logo
+        href="https://www.aftership.com"
+        img="img/company-logo/2_aftership.svg"
+        label="Aftership"
+        width="163px"
+      />
+      <logo
+        href="https://www.linkedin.com"
+        label="Linkedin"
+      />
+      <logo
+        href="https://www.doordash.com"
+        label="Doordash"
+      />
+      <logo
+        href="https://www.cruxinformatics.com"
+        label="Crux Informatics"
+      />
+      <logo
+        href="https://www.didiglobal.com"
+        label="Didi"
+      />
+      <logo
+        href="https://banzaicloud.com"
+        label="Banzai Cloud"
+      />
+      <logo
+        href="https://www.grab.com"
+        label="Grab"
+      />
+      <logo
+        href="https://www.momenta.cn"
+        label="Momenta"
+      />
+      <logo
+        href="https://mirato.com"
+        label="Mirato"
+      />
+      <logo
+        href="https://www.axon.com"
+        label="Axon"
+      />
     </div>
   </div>
 </div>
