@@ -710,3 +710,122 @@ sum:cadence_matching.persistence_errors_condition_failed{$Availability_Zone,$env
 sum:cadence_history.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
 
 ```
+
+
+## Cadence Advanced Visibility Persistence Monitoring(if applicable)
+Kafka & ElasticSearch are only for visibility. Only applicable ​​if using advanced visibility.
+For writing visibility records, Cadence history service will write down the records into Kafka, and then Cadence worker service will read from Kafka and write into ElasticSearch(in batch, for performance optimization)
+For reading visibility records, Frontend service will query ElasticSearch directly.
+
+### Persistence Availability
+* The availability of Cadence server using database
+* Monitor can be set
+* Datadog query example
+```
+sum:cadence_frontend.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_count()
+(1 - a / b) * 100
+(1 - c / d) * 100
+```
+
+### Persistence By Service TPS
+* The error of persistence API call by service
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env}.as_rate()
+```
+
+### Persistence By Operation TPS(read: ES, write: Kafka)
+* The rate of persistence API call by API
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_rate()
+```
+
+
+### Persistence By Operation Latency(in seconds) (read: ES, write: Kafka)
+* The latency of persistence API call
+* No monitor needed
+* Datadog query example
+```
+avg:cadence_frontend.elasticsearch_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_history.elasticsearch_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+```
+
+### Persistence Error By Operation Count (read: ES, write: Kafka)
+* The error of persistence API call
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_frontend.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
+```
+
+### Kafka->ES processor counter
+* This is the metrics of a background processing: consuming Kafka messages and then populate to ElasticSearch in batch
+* Monitor on the running of the background processing(counter metrics is > 0)
+* When fired, restart Cadence service first to mitigate. Then look at logs to see why the process is stopped(process panic/error/etc).
+May consider add more pods (replicaCount) to sys-worker service for higher availability
+* Datadog query example
+```
+sum:cadence_worker.es_processor_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.es_processor_retries{$Availability_Zone,$env} by {operation}.as_count()
+```
+
+### Kafka->ES processor error
+* This is the error metrics of the above processing logic
+Almost all errors are retryable errors so it’s not a problem.
+* Need to monitor error
+* When fired, Go to Kibana to find logs about the error details.
+The most common error is missing the ElasticSearch index field -- an index field is added in dynamicconfig but not in ElasticSearch, or vice versa . If so, follow the runbook to add the field to ElasticSearch or dynamic config.
+* Datadog query example
+```
+sum:cadence_worker.es_processor_error{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.es_processor_corrupted_data{$Availability_Zone,$env} by {operation}.as_count()
+```
+
+### Kafka->ES processor latency
+* The latency of the processing logic
+* No monitor needed
+* Datadog query example
+```
+sum:cadence_worker.es_processor_process_msg_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}.as_count()
+```
+
+## Cadence Dependency Metrics Monitor suggestion
+
+
+### Computing platform metrics for Cadence deployment
+Cadence server being deployed on any computing platform(e.g. Kubernetese) should be monitored on the blow metrics:
+* CPU
+* Memory
+
+### Database
+Depends on which database, you should at least monitor on the below metrics
+* Disk Usage
+* CPU
+* Memory
+* Read API latency
+* Write API Latency
+
+### Kafka (if applicable)
+* Disk Usage
+* CPU
+* Memory
+
+### ElasticSearch (if applicable)
+* Disk Usage
+* CPU
+* Memory
+
+
+## Cadence Service SLO Recommendation
+* Core API availability: 99.9%
+* Core API latency: <1s
+* Overall task dispatch latency: <2s (queue_latency for transfer task and timer task)
