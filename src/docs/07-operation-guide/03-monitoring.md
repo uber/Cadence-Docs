@@ -166,10 +166,41 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone} by {operation}.as
 * Suggested monitor: This is to facilitate investigation. No monitoring required.  
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_errors{$env,$Availability_Zone} by {operation}.as_rate()  : internal service errors
-sum:cadence_frontend.cadence_errors_*{$env,$Availability_Zone} by {operation}.as_rate()  : client side errors
+sum:cadence_frontend.cadence_errors{$env,$Availability_Zone} by {operation}.as_rate()  
+sum:cadence_frontend.cadence_errors_bad_request{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_not_active{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_service_busy{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_entity_not_exists{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_execution_already_completed{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_execution_already_started{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_already_exists{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_cancellation_already_requested{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_query_failed{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_limit_exceeded{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_context_timeout{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_retry_task{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_bad_binary{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_client_version_not_supported{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_incomplete_history{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_nondeterministic{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_unauthorized{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_authorize_failed{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_remote_syncmatch_failed{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_identity_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_signal_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_type_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_request_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_task_list_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_activity_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_activity_type_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_marker_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_timer_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
 ```
-* [TODO](https://github.com/uber/cadence/issues/4572)
+  * `cadence_errors` is internal service errors.
+  * any `cadence_errors_*` is client side error
+
 
 ### Frontend Regular API Latency
 * Meaning: The latency of regular core API -- excluding long-poll/queryWorkflow/getHistory/ListWorkflow/CountWorkflow API.
@@ -572,10 +603,41 @@ sum:cadence_history.cadence_requests{$Availability_Zone,$env} by {operation}.as_
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_history.cadence_errors{$Availability_Zone,$env} by {operation}.as_rate() :internal service error
-sum:cadence_history.cadence_errors_*{$Availability_Zone,$env} by {operation}.as_rate() : client side error like entityNotExists
+sum:cadence_history.cadence_errors{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_history.cadence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_not_active{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_service_busy{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_execution_already_completed{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_cancellation_already_requested{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_query_failed{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_limit_exceeded{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_context_timeout{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_retry_task{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_bad_binary{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_client_version_not_supported{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_incomplete_history{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_nondeterministic{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_unauthorized{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_authorize_failed{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_remote_syncmatch_failed{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_identity_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_signal_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_type_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_request_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_task_list_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_activity_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_activity_type_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_marker_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_timer_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
 ```
-
+  * `cadence_errors` is internal service errors.
+  * any `cadence_errors_*` is client side error
+  
 ### Max History Size
 The history size of the workflow cannot be too large otherwise it will cause performance issue during replay. The soft limit is 200MB. If exceeding workflow will be terminated by server.
 * No monitor needed
@@ -609,9 +671,47 @@ sum:cadence_matching.cadence_requests{$Availability_Zone,$env} by {operation}.as
 * Datadog query example
 ```
 sum:cadence_matching.cadence_errors_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}.as_rate()
+sum:cadence_matching.cadence_errors_bad_request_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_request{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_not_active_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_not_active{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_service_busy_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_service_busy{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_entity_not_exists_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_entity_not_exists{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_execution_already_started_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_execution_already_started{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_already_exists_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_already_exists{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_cancellation_already_requested_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_cancellation_already_requested{$Availability_Zone,$env} by {operation,domain,tasklist}
 sum:cadence_matching.cadence_errors_query_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_query_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_limit_exceeded_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_limit_exceeded{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_context_timeout_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_context_timeout{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_retry_task_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_retry_task{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_binary_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_binary{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_client_version_not_supported_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_client_version_not_supported{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_incomplete_history_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_incomplete_history{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_nondeterministic_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_nondeterministic{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_unauthorized_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_unauthorized{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_authorize_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_authorize_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_remote_syncmatch_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_remote_syncmatch_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_event_already_started{$Availability_Zone,$env} by {operation,domain,tasklist}
 ```
-
+  * `cadence_errors` is internal service errors.
+  * any `cadence_errors_*` is client side error
 
 ### Matching Regular API Latency
 * Regular APIs are the APIs excluding long polls
@@ -706,11 +806,54 @@ sum:cadence_frontend.persistence_errors{$Availability_Zone,$env} by {operation}.
 sum:cadence_history.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
 sum:cadence_worker.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
 sum:cadence_matching.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+
+sum:cadence_frontend.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+
+sum:cadence_history.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
 sum:cadence_history.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+
+sum:cadence_matching.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+
+sum:cadence_worker.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
 
 ```
-
+  * `cadence_errors` is internal service errors.
+  * any `cadence_errors_*` is client side error
 
 ## Cadence Advanced Visibility Persistence Monitoring(if applicable)
 Kafka & ElasticSearch are only for visibility. Only applicable ​​if using advanced visibility.
