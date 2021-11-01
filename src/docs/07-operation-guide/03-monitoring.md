@@ -217,10 +217,10 @@ sum:cadence_frontend.cadence_requests{(operation IN (signalwithstartworkflowexec
 ```
 
 ## Cadence Application Monitoring
-This section describes recommended dashboards for monitoring Cadence application using SDK metrics. See the `setup` section about how to collect those metrics.
+This section describes the recommended dashboards for monitoring Cadence application using metrics emitted by SDK. See the `setup` section about how to collect those metrics.
 
-### Workflow Start/Success
-* Workflow is successfully started/signalWithStart and completed/canceled/continuedAsNew
+### Workflow Start and Successful completion
+* Workflow successfully started/signalWithStart and completed/canceled/continuedAsNew
 * Monitor: not recommended
 * Datadog query example
 ```
@@ -232,10 +232,10 @@ sum:cadence_client.cadence_workflow_signal_with_start{$App,$Env,$Domain,$Tasklis
 ```
 
 ### Workflow Failure
-* All failures ncludes workflow failures(throw uncaught exceptions), workflow timeout and termination.
+* Metrics for all types of failures, including workflow failures(throw uncaught exceptions), workflow timeout and termination.
 * For timeout and termination, workflow worker doesn’t have a chance to emit metrics when it’s terminate, so the metric comes from the history service
 * Monitor: application should set monitor on timeout and failure to make sure workflow are not failing. Cancel/terminate are usually triggered by human intentionally.
-* When fires, go to webUI to find the failed workflows , investigate the workflow history to see why error/timeout happened
+* When the metrics fire, go to Cadence UI to find the failed workflows and investigate the workflow history to understand the type of failure
 * Datadog query example
 ```
 sum:cadence_client.cadence_workflow_failed{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env}.as_count()
@@ -245,10 +245,10 @@ sum:cadence_history.workflow_timeout{$Env,$Domain,$WorkflowType} by {domain,env,
 ```
 
 ### Decision Poll Counters
-* Indicates the workflow worker is available and is polling tasks. If the worker is not available no counters will show.
+* Indicates if the workflow worker is available and is polling tasks. If the worker is not available no counters will show.
 Can also check if the worker is using the right task list.
 “No task” poll type means that the worker exists and is idle.
-The timeout for this long poll api is 50 seconds. If within that 50 seconds, no task is received then the api will stop and send another long poll request.
+The timeout for this long poll api is 50 seconds. If no task is received within 50 seconds, then an empty response will be returned and another long poll request will be sent.
 * Monitor: application can should monitor on it to make sure workers are available
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
@@ -271,8 +271,8 @@ sum:cadence_matching.cadence_requests_per_tl{*,$Env,operation:adddecisiontask,$T
 * If this latency is too high then either:
 The worker is not available or too busy after the task has been scheduled.
 The task list is overloaded(confirmed by DecisionTaskScheduled per second widget). By default a task list only has one partition and a partition can only be owned by one host and so the throughput of a task list is limited. More task lists can be added to scale or a scalable task list can be used to add more partitions.
-* Monitor: application can set monitor on it to make sure latency is not too high
-* When fired, check if workers are enough, then check if tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
+* Monitor: application can set monitor on it to make sure latency is tolerable
+* When fired, check if worker capacity is enough, then check if tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
 ```
 avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist}
@@ -282,9 +282,9 @@ max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$App
 
 ### Workflow End to End Latency
 * This is for the client application to track their SLOs
-For example, if you know a workflow should only take x time to complete you can use this latency to set a monitor.
-* Monitor: application can set monitor on it if expecting workflow to complete within a certain time.
-* When fired, investigate the workflow history to see why the latency is high
+For example, if you expect a workflow to take duration d to complete, you can use this latency to set a monitor.
+* Monitor: application can monitor this metrics if expecting workflow to complete within a certain duration.
+* When fired, investigate the workflow history to see the workflow takes longer than expected to complete
 * Datadog query example
 ```
 avg:cadence_client.cadence_workflow_endtoend_latency.median{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {app,env,domain,tasklist,workflowtype}
@@ -294,7 +294,7 @@ avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$App,$Env,$Dom
 ### Workflow Panic and NonDeterministicError
 * These errors mean that there is a bug in the code and the deploy should be rolled back.
 * A monitor should be set on this metric
-* When fired, you may rollback the deployment to mitigate first. Usually this caused by the back code change. After rollback, look at error logs to see where the bug is.
+* When fired, you may rollback the deployment to mitigate your issue. Usually this caused by bad (non-backward compatible) code change. After rollback, look at your worker error logs to see where the bug is.
 * Datadog query example
 ```
 sum:cadence_client.cadence_worker_panic{$App,$Env,$Domain} by {app,env,domain}.as_rate()
@@ -345,7 +345,7 @@ max:cadence_client.cadence_activity_execution_latency.max{$App,$Env,$Domain,$Tas
 * Indicates the activity worker is available and is polling tasks. If the worker is not available no counters will show.
 Can also check if the worker is using the right task list.
 “No task” poll type means that the worker exists and is idle.
-The timeout for this long poll api is 50 seconds. If within that 50 seconds, no task is received then the api will stop and send another long poll request.
+The timeout for this long poll api is 50 seconds. If within that 50 seconds, no task is received then an empty response will be returned and another long poll request will be sent.
 * Monitor: application can set monitor on it to make sure activity workers are available
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
@@ -367,7 +367,7 @@ sum:cadence_matching.cadence_requests_per_tl{*,$Env,operation:addactivitytask,$T
 ### Activity Scheduled To Start Latency
 * If the latency is too high either:
 The worker is not available or too busy
-There are too many activities scheduled into the same tasklist and the tasklist is not scalable.Same as Decision Scheduled To Start Latency
+There are too many activities scheduled into the same tasklist and the tasklist is not scalable. Same as Decision Scheduled To Start Latency
 * Monitor: application Should set monitor on it
 * When fired, check if workers are enough, then check if the tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
@@ -451,8 +451,8 @@ It should never be greater than 2MB.
 
 ### Max History Size
 * Workflow history cannot grow indefinitely. It will cause replay issues.
-If the workflow exceeds the history’s max size the workflow will terminate. The max size by default is 200 megabytes.
-It should never be greater than 50MB.
+If the workflow exceeds the history’s max size the workflow will be terminate automatically. The max size by default is 200 megabytes.
+As a suggestion for workflow design, workflow history should never grow greater than 50MB. Use continueAsNew to break long workflows into multiple runs.
 * A monitor should be set on this metric.
 * When fired, please review the design/code ASAP to reduce the history size. Reducing the input/output of workflow/activity/signal will help. Also you may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
@@ -464,7 +464,7 @@ It should never be greater than 50MB.
 
 ### Max History Length
 * The number of events of workflow history.
-It should never be greater than 50K(workflow exceeding 200K events will be terminated by server)
+It should never be greater than 50K(workflow exceeding 200K events will be terminated by server). Use continueAsNew to break long workflows into multiple runs.
 * A monitor should be set on this metric.
 * When fired, please review the design/code ASAP to reduce the history length. You may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
@@ -497,7 +497,7 @@ sum:cadence_history.task_requests{operation:transferactivetask*,$env,$Availabili
 ```
 
 ### Timer Tasks Per Second
-* Timer tasks are tasks that are scheduled by time. For example, workflow.sleep() will wait an x amount of time then the task will be pushed somewhere for a worker to pick it up.
+* Timer tasks are tasks that are scheduled to be triggered at a given time in future. For example, workflow.sleep() will wait an x amount of time then the task will be pushed somewhere for a worker to pick up.
 * Datadog query example
 ```
 sum:cadence_history.task_requests{operation:timeractivetask*,$env,$Availability_Zone} by {operation}.as_rate()
@@ -639,10 +639,10 @@ sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$Availability_Zone,$env,
 ```
 
 ## Cadence Default Persistence Monitoring
-Cadence default persistence is for the core data models. But can also be used for basic visibility if configured.
+The following monotors should be set up for Cadence persistence.
 
 ### Persistence Availability
-* The availability of Cadence server using database
+* The availability of the primary database for your Cadence server
 * Monitor required: Below 95% > 5min then alert, below 99% triggers a slack warning
 * When fired, check if it’s due to some persistence issue.
 If so then investigate the database(may need to scale up) [Mostly]
