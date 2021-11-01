@@ -21,7 +21,7 @@ module.exports = {
     'vuepress-plugin-glossary',
   ],
   head: [
-    ['link', { rel: 'icon', href: `/img/favicon.ico` }],
+    ['link', { rel: 'icon', href: `/img/icon/favicon.ico` }],
   ],
   themeConfig: {
     ...themeConfig,

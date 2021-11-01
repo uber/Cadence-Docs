@@ -2,7 +2,7 @@ const { slackUrl } = require('./constants');
 
 module.exports = {
   themeConfig: {
-    logo: '/img/logo-white.svg',
+    logo: '/img/icon/logo-white.svg',
     nav: [
       {
         text: 'Docs',
