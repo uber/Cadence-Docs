@@ -22,7 +22,7 @@ At the core of Cadence is a highly scalable multitentant service. The service ex
 - History Service (HS): where the core logic of orchestrating workflow steps and activities is implemented
 - Matching Service (MS): matches workflow/activity tasks that need to be executed to workflow/activity workers that are able to execute them. Matching is assigned task for execution by the history service
 - Worker Service (WS - not shown on diagram): implements Cadence workflows and activities for internal requirements such as archiving
-- Workers: are effectively the client apps for Cadence this is where user create workflow and activity logic is executed
+- Workers: are effectively the client apps for Cadence. This is where user created workflow and activity logic is executed
 
 Internally it depends on a persistent store. Currently, Apache Cassandra, MySQL, PostgreSQL, CockroachDB ([PostgreSQL compatible](https://www.cockroachlabs.com/docs/stable/postgresql-compatibility.html)) and TiDB ([MySQL compatible](https://docs.pingcap.com/tidb/dev/mysql-compatibility)) stores are supported out of the box. For listing :workflow:workflows: using complex predicates, ElasticSearch and OpenSearch cluster can be used.
 
