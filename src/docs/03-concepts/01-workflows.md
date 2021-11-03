@@ -29,36 +29,106 @@ Here is an example :workflow: that implements the subscription management use ca
 public interface SubscriptionWorkflow {
     @WorkflowMethod
     void execute(String customerId);
+    @SignalMethod
+    void cancelSubscription()
+    @SignalMethod    
+    void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount)
+    @QueryMethod    
+    String queryCustomerId()
+    @QueryMethod        
+    int queryBillingPeriodNumber()
+    @QueryMethod        
+    int queryBillingPeriodChargeAmount()
 }
+
 
 public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
 
+    private int billingPeriodNum;
+    private boolean subscriptionCancelled;
+    private Customer customer;
+    
     private final SubscriptionActivities activities =
-        Workflow.newActivityStub(SubscriptionActivities.class);
+            Workflow.newActivityStub(SubscriptionActivities.class);
 
     @Override
-    public void execute(String customerId) {
-        activities.sendWelcomeEmail(customerId);
-        try {
-            boolean trialPeriod = true;
-            while (true) {
-                Workflow.sleep(Duration.ofDays(30));
-                activities.chargeMonthlyFee(customerId);
-                if (trialPeriod) {
-                    activities.sendEndOfTrialEmail(customerId);
-                    trialPeriod = false;
-                } else {
-                    activities.sendMonthlyChargeEmail(customerId);
-                }
+    public void startSubscription(Customer customer) {
+        // Set the Workflow customer
+        this.customer = customer;
+
+        // Send welcome email to customer
+        activities.sendWelcomeEmail(customer);
+
+        // Start the free trial period. User can still cancel subscription during this time
+        Workflow.await(customer.getSubscription().getTrialPeriod(), () -> subscriptionCancelled);
+
+        // If customer cancelled their subscription during trial period, send notification email
+        if (subscriptionCancelled) {
+            activities.sendCancellationEmailDuringTrialPeriod(customer);
+            // We have completed subscription for this customer.
+            // Finishing Workflow Execution
+            return;
+        }
+
+        // Trial period is over, start billing until
+        // we reach the max billing periods for the subscription
+        // or sub has been cancelled
+        while (billingPeriodNum < customer.getSubscription().getMaxBillingPeriods()) {
+
+            // Charge customer for the billing period
+            activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
+
+            // Wait 1 billing period to charge customer or if they cancel subscription
+            // whichever comes first
+            Workflow.await(customer.getSubscription().getBillingPeriod(), () -> subscriptionCancelled);
+
+            // If customer cancelled their subscription send notification email
+            if (subscriptionCancelled) {
+                activities.sendCancellationEmailDuringActiveSubscription(customer);
+
+                // We have completed subscription for this customer.
+                // Finishing Workflow Execution
+                break;
             }
-        } catch (CancellationException e) {
-            activities.processSubscriptionCancellation(customerId);
-            activities.sendSorryToSeeYouGoEmail(customerId);
+
+            billingPeriodNum++;
+        }
+
+        // if we get here the subscription period is over
+        // notify the customer to buy a new subscription
+        if (!subscriptionCancelled) {
+            activities.sendSubscriptionOverEmail(customer);
         }
     }
+
+    @Override
+    public void cancelSubscription() {
+        subscriptionCancelled = true;
+    }
+
+    @Override
+    public void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount) {
+        customer.getSubscription().setBillingPeriodCharge(billingPeriodChargeAmount);
+    }
+
+    @Override
+    public String queryCustomerId() {
+        return customer.getId();
+    }
+
+    @Override
+    public int queryBillingPeriodNumber() {
+        return billingPeriodNum;
+    }
+
+    @Override
+    public int queryBillingPeriodChargeAmount() {
+        return customer.getSubscription().getBillingPeriodCharge();
+    }
 }
+
 ```
-Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeMonthlyFee` for a day if the downstream processing service is down that long. The same way that blocking sleep for 30 days is a normal operation inside the :workflow: code.
+Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeMonthlyFee` for a day if the downstream processing service is down that long. The same way that blocking sleep for a billing period like 30 days is a normal operation inside the :workflow: code.
 
 Cadence has practically no scalability limits on the number of open :workflow: instances. So even if your site has hundreds of millions of consumers, the above code is not going to change.
 
