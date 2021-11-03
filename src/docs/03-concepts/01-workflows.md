@@ -53,49 +53,36 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
 
     @Override
     public void startSubscription(Customer customer) {
-        // Set the Workflow customer
+        // Set the Workflow customer to class properties so that it can be used by other methods like Query/Signal
         this.customer = customer;
 
-        // Send welcome email to customer
+        // sendWelcomeEmail is an activity in Cadence. It is implemented in user code and Cadence executes this activity on a worker node when needed.
         activities.sendWelcomeEmail(customer);
 
-        // Start the free trial period. User can still cancel subscription during this time
+        // Cadence can pause the workflow at this stage (saving it's state to the database) and will restart it when the 30 day time expires or the subscriptionCancelled event is received
+        // Workflow.await will be blocked until the timeout, or the condition is met, whichever comes first
         Workflow.await(customer.getSubscription().getTrialPeriod(), () -> subscriptionCancelled);
 
-        // If customer cancelled their subscription during trial period, send notification email
         if (subscriptionCancelled) {
             activities.sendCancellationEmailDuringTrialPeriod(customer);
-            // We have completed subscription for this customer.
-            // Finishing Workflow Execution
+            // Returning the method will finish Workflow Execution
             return;
         }
 
-        // Trial period is over, start billing until
-        // we reach the max billing periods for the subscription
-        // or sub has been cancelled
         while (billingPeriodNum < customer.getSubscription().getMaxBillingPeriods()) {
 
-            // Charge customer for the billing period
             activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
 
-            // Wait 1 billing period to charge customer or if they cancel subscription
-            // whichever comes first
             Workflow.await(customer.getSubscription().getBillingPeriod(), () -> subscriptionCancelled);
 
-            // If customer cancelled their subscription send notification email
             if (subscriptionCancelled) {
                 activities.sendCancellationEmailDuringActiveSubscription(customer);
-
-                // We have completed subscription for this customer.
-                // Finishing Workflow Execution
                 break;
             }
 
             billingPeriodNum++;
         }
 
-        // if we get here the subscription period is over
-        // notify the customer to buy a new subscription
         if (!subscriptionCancelled) {
             activities.sendSubscriptionOverEmail(customer);
         }
