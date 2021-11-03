@@ -38,15 +38,21 @@ footer: © 2021 Uber Technologies, Inc.
     <div class="grid grid-always grid-justify-evenly grid-wrap">
       <logo
         href="https://www.grupomasmovil.com/en"
-        img="img/company-logo/1_masmovil.jpeg"
+        img="img/company-logo/masmovil.jpeg"
         label="Masmovil"
         width="160px"
       />
       <logo
         href="https://www.aftership.com"
-        img="img/company-logo/2_aftership.svg"
+        img="img/company-logo/aftership.svg"
         label="Aftership"
         width="163px"
+      />
+      <logo
+        href="https://www.cruxinformatics.com"
+        img="img/company-logo/crux.png"
+        label="Crux Informatics"
+        width="120px"
       />
       <logo
         href="https://www.linkedin.com"
@@ -55,10 +61,6 @@ footer: © 2021 Uber Technologies, Inc.
       <logo
         href="https://www.doordash.com"
         label="Doordash"
-      />
-      <logo
-        href="https://www.cruxinformatics.com"
-        label="Crux Informatics"
       />
       <logo
         href="https://www.didiglobal.com"

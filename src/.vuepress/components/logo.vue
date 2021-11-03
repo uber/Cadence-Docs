@@ -38,3 +38,27 @@ export default {
   v-else
 >{{label}}</a>
 </template>
+
+<style lang="stylus">
+.logo {
+  display: flex;
+  margin: auto 15px;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.logo-text {
+  display: flex;
+  font-weight: 1000;
+  font-size: 30px;
+  line-height: 100px;
+  margin: 0 15px;
+
+  &:hover {
+    opacity: 0.6;
+    text-decoration: underline;
+  }
+}
+</style>
