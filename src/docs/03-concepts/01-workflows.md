@@ -26,39 +26,97 @@ With Cadence, the entire logic can be encapsulated in a simple durable function 
 Here is an example :workflow: that implements the subscription management use case. It is in Java, but Go is also supported. The Python and .NET libraries are under active development.
 
 ```java
+// This SubscriptionWorkflow interface is an example of defining a workflow in Cadence
 public interface SubscriptionWorkflow {
     @WorkflowMethod
     void execute(String customerId);
+    @SignalMethod
+    void cancelSubscription();
+    @SignalMethod    
+    void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount);
+    @QueryMethod    
+    String queryCustomerId();
+    @QueryMethod        
+    int queryBillingPeriodNumber();
+    @QueryMethod        
+    int queryBillingPeriodChargeAmount();
 }
 
+// Workflow implementation is independent from interface. That way, application that start/signal/query workflows only need to know the interface
 public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
 
+    private int billingPeriodNum;
+    private boolean subscriptionCancelled;
+    private Customer customer;
+    
     private final SubscriptionActivities activities =
-        Workflow.newActivityStub(SubscriptionActivities.class);
+            Workflow.newActivityStub(SubscriptionActivities.class);
+
+    // This manageSubscription function is an example of a workflow using Cadence
+    @Override
+    public void manageSubscription(Customer customer) {
+        // Set the Workflow customer to class properties so that it can be used by other methods like Query/Signal
+        this.customer = customer;
+
+        // sendWelcomeEmail is an activity in Cadence. It is implemented in user code and Cadence executes this activity on a worker node when needed.
+        activities.sendWelcomeEmail(customer);
+
+        // for this example, there are a fixed number of periods in the subscription
+        // Cadence supports indefinitely running workflow but some advanced techniques are needed
+        while (billingPeriodNum < customer.getSubscription().getPeriodsInSubcription()) {
+
+            // Workflow.await tells Cadence to pause the workflow at this stage (saving it's state to the database)
+            // Execution restarts when the billing period time has passed or the subscriptionCancelled event is received , whichever comes first
+            Workflow.await(customer.getSubscription().getBillingPeriod(), () -> subscriptionCancelled);
+
+            if (subscriptionCancelled) {
+                activities.sendCancellationEmailDuringActiveSubscription(customer);
+                break;
+            }
+            
+            // chargeCustomerForBillingPeriod is another activity
+            // Cadence will automatically handle issues such as your billing service being unavailable at the time
+            // this activity invoked
+            activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
+
+            billingPeriodNum++;
+        }
+
+        if (!subscriptionCancelled) {
+            activities.sendSubscriptionOverEmail(customer);
+        }
+        
+        // the workflow is finished once this function returns
+    }
 
     @Override
-    public void execute(String customerId) {
-        activities.sendWelcomeEmail(customerId);
-        try {
-            boolean trialPeriod = true;
-            while (true) {
-                Workflow.sleep(Duration.ofDays(30));
-                activities.chargeMonthlyFee(customerId);
-                if (trialPeriod) {
-                    activities.sendEndOfTrialEmail(customerId);
-                    trialPeriod = false;
-                } else {
-                    activities.sendMonthlyChargeEmail(customerId);
-                }
-            }
-        } catch (CancellationException e) {
-            activities.processSubscriptionCancellation(customerId);
-            activities.sendSorryToSeeYouGoEmail(customerId);
-        }
+    public void cancelSubscription() {
+        subscriptionCancelled = true;
+    }
+
+    @Override
+    public void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount) {
+        customer.getSubscription().setBillingPeriodCharge(billingPeriodChargeAmount);
+    }
+
+    @Override
+    public String queryCustomerId() {
+        return customer.getId();
+    }
+
+    @Override
+    public int queryBillingPeriodNumber() {
+        return billingPeriodNum;
+    }
+
+    @Override
+    public int queryBillingPeriodChargeAmount() {
+        return customer.getSubscription().getBillingPeriodCharge();
     }
 }
+
 ```
-Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeMonthlyFee` for a day if the downstream processing service is down that long. The same way that blocking sleep for 30 days is a normal operation inside the :workflow: code.
+Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeMonthlyFee` for a day if the downstream processing service is down that long. The same way that blocking sleep for a billing period like 30 days is a normal operation inside the :workflow: code.
 
 Cadence has practically no scalability limits on the number of open :workflow: instances. So even if your site has hundreds of millions of consumers, the above code is not going to change.
 
