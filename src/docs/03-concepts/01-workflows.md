@@ -29,7 +29,7 @@ Here is an example :workflow: that implements the subscription management use ca
 // This SubscriptionWorkflow interface is an example of defining a workflow in Cadence
 public interface SubscriptionWorkflow {
     @WorkflowMethod
-    void execute(String customerId);
+    void manageSubscription(String customerId);
     @SignalMethod
     void cancelSubscription();
     @SignalMethod    
