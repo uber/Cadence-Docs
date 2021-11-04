@@ -26,22 +26,23 @@ With Cadence, the entire logic can be encapsulated in a simple durable function 
 Here is an example :workflow: that implements the subscription management use case. It is in Java, but Go is also supported. The Python and .NET libraries are under active development.
 
 ```java
+// This SubscriptionWorkflow interface is an example of defining a workflow in Cadence
 public interface SubscriptionWorkflow {
     @WorkflowMethod
     void execute(String customerId);
     @SignalMethod
-    void cancelSubscription()
+    void cancelSubscription();
     @SignalMethod    
-    void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount)
+    void updateBillingPeriodChargeAmount(int billingPeriodChargeAmount);
     @QueryMethod    
-    String queryCustomerId()
+    String queryCustomerId();
     @QueryMethod        
-    int queryBillingPeriodNumber()
+    int queryBillingPeriodNumber();
     @QueryMethod        
-    int queryBillingPeriodChargeAmount()
+    int queryBillingPeriodChargeAmount();
 }
 
-
+// Workflow implementation is independent from interface. That way, application that start/signal/query workflows only need to know the interface
 public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
 
     private int billingPeriodNum;
@@ -51,34 +52,32 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
     private final SubscriptionActivities activities =
             Workflow.newActivityStub(SubscriptionActivities.class);
 
+    // This manageSubscription function is an example of a workflow using Cadence
     @Override
-    public void startSubscription(Customer customer) {
+    public void manageSubscription(Customer customer) {
         // Set the Workflow customer to class properties so that it can be used by other methods like Query/Signal
         this.customer = customer;
 
         // sendWelcomeEmail is an activity in Cadence. It is implemented in user code and Cadence executes this activity on a worker node when needed.
         activities.sendWelcomeEmail(customer);
 
-        // Cadence can pause the workflow at this stage (saving it's state to the database) and will restart it when the 30 day time expires or the subscriptionCancelled event is received
-        // Workflow.await will be blocked until the timeout, or the condition is met, whichever comes first
-        Workflow.await(customer.getSubscription().getTrialPeriod(), () -> subscriptionCancelled);
+        // for this example, there are a fixed number of periods in the subscription
+        // Cadence supports indefinitely running workflow but some advanced techniques are needed
+        while (billingPeriodNum < customer.getSubscription().getPeriodsInSubcription()) {
 
-        if (subscriptionCancelled) {
-            activities.sendCancellationEmailDuringTrialPeriod(customer);
-            // Returning the method will finish Workflow Execution
-            return;
-        }
-
-        while (billingPeriodNum < customer.getSubscription().getMaxBillingPeriods()) {
-
-            activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
-
+            // Workflow.await tells Cadence to pause the workflow at this stage (saving it's state to the database)
+            // Execution restarts when the billing period time has passed or the subscriptionCancelled event is received , whichever comes first
             Workflow.await(customer.getSubscription().getBillingPeriod(), () -> subscriptionCancelled);
 
             if (subscriptionCancelled) {
                 activities.sendCancellationEmailDuringActiveSubscription(customer);
                 break;
             }
+            
+            // chargeCustomerForBillingPeriod is another activity
+            // Cadence will automatically handle issues such as your billing service being unavailable at the time
+            // this activity invoked
+            activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
 
             billingPeriodNum++;
         }
@@ -86,6 +85,8 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
         if (!subscriptionCancelled) {
             activities.sendSubscriptionOverEmail(customer);
         }
+        
+        // the workflow is finished once this function returns
     }
 
     @Override
