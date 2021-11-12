@@ -440,8 +440,8 @@ sum:cadence_history.schedule_to_close_timeout{$Domain} by {domain,env}.as_count(
 * When fired, check application logs to see if the error is Cadence server error or client side error. Error like EntityNotExists/ExecutionAlreadyStarted/QueryWorkflowFailed/etc are client side error, meaning that the application is misusing the APIs. If most errors are server side errors(internalServiceError), you can contact Cadence admin.
 * Datadog query example
 ```
-sum:cadence_client.cadence_error{*} by {app}.as_count()
-sum:cadence_client.cadence_request{*} by {app}.as_count()
+sum:cadence_client.cadence_error{*} by {domain}.as_count()
+sum:cadence_client.cadence_request{*} by {domain}.as_count()
 (1 - a / b) * 100
 ```
 
