@@ -83,8 +83,10 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) con
 
 To use DataDog with Cadence, follow [this instruction](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/) to collect Prometheus metrics using DataDog agent.
 
-NOTE: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
+NOTE1: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
 ## Grafana+Prometheus dashboard templates
+
+NOTE2: the template contains templating variables `$App` and `$Availability_Zone`. Feel free to remove them if you don't have them in your setup. 
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
