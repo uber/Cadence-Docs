@@ -83,8 +83,10 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) con
 
 To use DataDog with Cadence, follow [this instruction](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/) to collect Prometheus metrics using DataDog agent.
 
-NOTE: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
+NOTE1: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
 ## Grafana+Prometheus dashboard templates
+
+NOTE2: the template contains templating variables `$App` and `$Availability_Zone`. Feel free to remove them if you don't have them in your setup. 
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
@@ -108,8 +110,8 @@ This section describes recommended dashboards for monitoring Cadence services in
 * Monitor action: When fired, check if there is any persistence errors.  If so then check the healthness of the database(may need to restart or scale up). If not then check the error logs.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_errors{$env,$Availability_Zone}
-sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}
+sum:cadence_frontend.cadence_errors{*}
+sum:cadence_frontend.cadence_requests{*}
 (1 - a / b) * 100
 ```
 
@@ -118,7 +120,7 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{$env AND $Availability_Zone AND (operation IN (startworkflowexecution,signalwithstartworkflowexecution))} by {operation}.as_rate()
+sum:cadence_frontend.cadence_requests{(operation IN (startworkflowexecution,signalwithstartworkflowexecution))} by {operation}.as_rate()
 ```
 
 ### Activities Started Per Second
@@ -126,7 +128,7 @@ sum:cadence_frontend.cadence_requests{$env AND $Availability_Zone AND (operation
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollforactivitytask} by {operation}.as_rate()
+sum:cadence_frontend.cadence_requests{operation:pollforactivitytask} by {operation}.as_rate()
 ```
 
 ### Decisions Started Per Second
@@ -134,7 +136,7 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollfora
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollforactivitytask} by {operation}.as_rate()
+sum:cadence_frontend.cadence_requests{operation:pollfordecisiontask} by {operation}.as_rate()
 ```
 
 ### Periodical Test Suite Success(aka Canary)
@@ -142,7 +144,7 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone,operation:pollfora
 * Suggested monitor: Monitor needed. If fired, look at the failed canary test case and investigate the reason of failure.
 * Datadog query example
 ```
-sum:cadence_history.workflow_success{workflowtype:workflow_sanity,$env} by {workflowtype}.as_count()
+sum:cadence_history.workflow_success{workflowtype:workflow_sanity} by {workflowtype}.as_count()
 ```
 
 ### Frontend all API per second
@@ -150,7 +152,7 @@ sum:cadence_history.workflow_success{workflowtype:workflow_sanity,$env} by {work
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}.as_rate()
+sum:cadence_frontend.cadence_requests{*}.as_rate()
 ```
 
 ### Frontend API per second (breakdown per operation)
@@ -158,7 +160,7 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone}.as_rate()
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{$env,$Availability_Zone} by {operation}.as_rate()
+sum:cadence_frontend.cadence_requests{*} by {operation}.as_rate()
 ```
 
 ### Frontend API errors per second(breakdown per operation)
@@ -166,37 +168,37 @@ sum:cadence_frontend.cadence_requests{$env,$Availability_Zone} by {operation}.as
 * Suggested monitor: This is to facilitate investigation. No monitoring required.  
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_errors{$env,$Availability_Zone} by {operation}.as_rate()  
-sum:cadence_frontend.cadence_errors_bad_request{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_domain_not_active{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_service_busy{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_entity_not_exists{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_workflow_execution_already_completed{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_execution_already_started{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_domain_already_exists{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_cancellation_already_requested{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_query_failed{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_limit_exceeded{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_context_timeout{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_retry_task{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_bad_binary{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_client_version_not_supported{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_incomplete_history{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_nondeterministic{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_unauthorized{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_authorize_failed{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_remote_syncmatch_failed{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_domain_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_identity_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_workflow_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_signal_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_workflow_type_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_request_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_task_list_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_activity_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_activity_type_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_marker_name_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
-sum:cadence_frontend.cadence_errors_timer_id_exceeded_warn_limit{$env,$Availability_Zone} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors{*} by {operation}.as_rate()  
+sum:cadence_frontend.cadence_errors_bad_request{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_not_active{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_service_busy{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_entity_not_exists{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_execution_already_completed{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_execution_already_started{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_already_exists{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_cancellation_already_requested{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_query_failed{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_limit_exceeded{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_context_timeout{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_retry_task{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_bad_binary{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_client_version_not_supported{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_incomplete_history{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_nondeterministic{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_unauthorized{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_authorize_failed{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_remote_syncmatch_failed{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_domain_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_identity_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_signal_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_workflow_type_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_request_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_task_list_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_activity_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_activity_type_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_marker_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_frontend.cadence_errors_timer_id_exceeded_warn_limit{*} by {operation}.as_rate() 
 ```
   * `cadence_errors` is internal service errors.
   * any `cadence_errors_*` is client side error
@@ -208,7 +210,7 @@ sum:cadence_frontend.cadence_errors_timer_id_exceeded_warn_limit{$env,$Availabil
 * Monitor action: If fired, investigate the database read/write latency. May need to throttle some spiky traffic from certain domains, or scale up the database
 * Datadog query example
 ```
-avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecisiontask,pollforactivitytask,getworkflowexecutionhistory,queryworkflow,listworkflowexecutions,listclosedworkflowexecutions,listopenworkflowexecutions)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecisiontask,pollforactivitytask,getworkflowexecutionhistory,queryworkflow,listworkflowexecutions,listclosedworkflowexecutions,listopenworkflowexecutions)) AND $pXXLatency} by {operation}
 ```
 
 ### Frontend ListWorkflow API Latency
@@ -217,7 +219,7 @@ avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecision
 * Monitor action: If fired, investigate the ElasticSearch read latency. May need to throttle some spiky traffic from certain domains, or scale up ElasticSearch cluster.
 * Datadog query example
 ```
-avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowexecutions,listopenworkflowexecutions,listworkflowexecutions,countworkflowexecutions)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowexecutions,listopenworkflowexecutions,listworkflowexecutions,countworkflowexecutions)) AND $pXXLatency} by {operation}
 ```
 
 ### Frontend Long Poll API Latency
@@ -225,8 +227,8 @@ avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowe
 * Suggested monitor: No monitor needed as long latency is expected.
 * Datadog query example
 ```
-avg:cadence_frontend.cadence_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:pollforactivitytask} by {operation}
-avg:cadence_frontend.cadence_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:pollfordecisiontask} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{$pXXLatency,operation:pollforactivitytask} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{$pXXLatency,operation:pollfordecisiontask} by {operation}
 ```
 
 ### Frontend Get History/Query Workflow API Latency
@@ -235,7 +237,7 @@ This latency depends on the time it takes for the workflow to complete. QueryWor
 * Suggested monitor: No monitor needed
 * Datadog query example
 ```
-avg:cadence_frontend.cadence_latency.quantile{(operation IN (getworkflowexecutionhistory,queryworkflow)) AND $env AND $Availability_Zone AND $pXXLatency} by {operation}
+avg:cadence_frontend.cadence_latency.quantile{(operation IN (getworkflowexecutionhistory,queryworkflow)) AND $pXXLatency} by {operation}
 ```
 
 ### Frontend WorkflowClient API per seconds by domain
@@ -244,7 +246,7 @@ In the future it can be used to set some rate limiting per domain.
 * Suggested monitor: No monitor needed.
 * Datadog query example
 ```
-sum:cadence_frontend.cadence_requests{(operation IN (signalwithstartworkflowexecution,signalworkflowexecution,startworkflowexecution,terminateworkflowexecution,resetworkflowexecution,requestcancelworkflowexecution,listworkflowexecutions)) AND $env AND $Availability_Zone} by {domain,operation}.as_rate()
+sum:cadence_frontend.cadence_requests{(operation IN (signalwithstartworkflowexecution,signalworkflowexecution,startworkflowexecution,terminateworkflowexecution,resetworkflowexecution,requestcancelworkflowexecution,listworkflowexecutions))} by {domain,operation}.as_rate()
 ```
 
 ## Cadence Application Monitoring
@@ -255,11 +257,11 @@ This section describes the recommended dashboards for monitoring Cadence applica
 * Monitor: not recommended
 * Datadog query example
 ```
-sum:cadence_client.cadence_workflow_start{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,env,domain,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_completed{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,env,domain,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_canceled{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_continue_as_new{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_signal_with_start{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_completed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_canceled{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_continue_as_new{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_signal_with_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
 ```
 
 ### Workflow Failure
@@ -269,10 +271,10 @@ sum:cadence_client.cadence_workflow_signal_with_start{$App,$Env,$Domain,$Tasklis
 * When the metrics fire, go to Cadence UI to find the failed workflows and investigate the workflow history to understand the type of failure
 * Datadog query example
 ```
-sum:cadence_client.cadence_workflow_failed{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env}.as_count()
-sum:cadence_history.workflow_failed{$Env,$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
-sum:cadence_history.workflow_terminate{$Env,$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
-sum:cadence_history.workflow_timeout{$Env,$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
+sum:cadence_client.cadence_workflow_failed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env}.as_count()
+sum:cadence_history.workflow_failed{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
+sum:cadence_history.workflow_terminate{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
+sum:cadence_history.workflow_timeout{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
 ```
 
 ### Decision Poll Counters
@@ -284,10 +286,10 @@ The timeout for this long poll api is 50 seconds. If no task is received within 
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
 ```
-sum:cadence_client.cadence_decision_poll_total{$App,$Env,$Domain,$Tasklist}.as_count()
-sum:cadence_client.cadence_decision_poll_failed{$App,$Env,$Domain,$Tasklist}.as_count()
-sum:cadence_client.cadence_decision_poll_no_task{$App,$Env,$Domain,$Tasklist}.as_count()
-sum:cadence_client.cadence_decision_poll_succeed{$App,$Env,$Domain,$Tasklist}.as_count()
+sum:cadence_client.cadence_decision_poll_total{$Domain,$Tasklist}.as_count()
+sum:cadence_client.cadence_decision_poll_failed{$Domain,$Tasklist}.as_count()
+sum:cadence_client.cadence_decision_poll_no_task{$Domain,$Tasklist}.as_count()
+sum:cadence_client.cadence_decision_poll_succeed{$Domain,$Tasklist}.as_count()
 ```
 
 ### DecisionTasks Scheduled per second
@@ -295,7 +297,7 @@ sum:cadence_client.cadence_decision_poll_succeed{$App,$Env,$Domain,$Tasklist}.as
 * Monitor: not recommended -- Information only to know whether or not a tasklist is overloaded
 * Datadog query example
 ```
-sum:cadence_matching.cadence_requests_per_tl{*,$Env,operation:adddecisiontask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
+sum:cadence_matching.cadence_requests_per_tl{*,operation:adddecisiontask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
 ```
 
 ### Decision Scheduled To Start Latency
@@ -306,9 +308,9 @@ The task list is overloaded(confirmed by DecisionTaskScheduled per second widget
 * When fired, check if worker capacity is enough, then check if tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
 ```
-avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist}
-max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist}
-max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist}
+avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist}
+max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist}
+max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist}
 ```
 
 ### Workflow End to End Latency
@@ -318,8 +320,8 @@ For example, if you expect a workflow to take duration d to complete, you can us
 * When fired, investigate the workflow history to see the workflow takes longer than expected to complete
 * Datadog query example
 ```
-avg:cadence_client.cadence_workflow_endtoend_latency.median{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {app,env,domain,tasklist,workflowtype}
-avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$App,$Env,$Domain,$Tasklist,$WorkflowType} by {app,env,domain,tasklist,workflowtype}
+avg:cadence_client.cadence_workflow_endtoend_latency.median{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
+avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
 ```
 
 ### Workflow Panic and NonDeterministicError
@@ -328,8 +330,8 @@ avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$App,$Env,$Dom
 * When fired, you may rollback the deployment to mitigate your issue. Usually this caused by bad (non-backward compatible) code change. After rollback, look at your worker error logs to see where the bug is.
 * Datadog query example
 ```
-sum:cadence_client.cadence_worker_panic{$App,$Env,$Domain} by {app,env,domain}.as_rate()
-sum:cadence_client.cadence_non_deterministic_error{$App,$Env,$Domain} by {app,env,domain}.as_rate()
+sum:cadence_client.cadence_worker_panic{$Domain} by {env,domain}.as_rate()
+sum:cadence_client.cadence_non_deterministic_error{$Domain} by {env,domain}.as_rate()
 ```
 
 ### Workflow Sticky Cache Hit Rate and Miss Count
@@ -347,8 +349,8 @@ CacheHitRate too low means workers will have to replay history to rebuild the wo
 * When fired, adjust the stickyCacheSize in the WorkerFactoryOption, or add more workers
 * Datadog query example
 ```
-sum:cadence_client.cadence_sticky_cache_miss{$App,$Env,$Domain} by {app,env,domain}.as_count()
-sum:cadence_client.cadence_sticky_cache_hit{$App,$Env,$Domain} by {app,env,domain}.as_count()
+sum:cadence_client.cadence_sticky_cache_miss{$Domain} by {env,domain}.as_count()
+sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 (b / (a+b)) * 100
 ```
 
@@ -357,9 +359,9 @@ sum:cadence_client.cadence_sticky_cache_hit{$App,$Env,$Domain} by {app,env,domai
 * Monitor: not recommended  
 * Datadog query example
 ```
-sum:cadence_client.cadence_activity_task_failed{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_rate()
-sum:cadence_client.cadence_activity_task_completed{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_rate()
-sum:cadence_client.cadence_activity_task_timeouted{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_rate()
+sum:cadence_client.cadence_activity_task_failed{$Domain,$Tasklist} by {activitytype}.as_rate()
+sum:cadence_client.cadence_activity_task_completed{$Domain,$Tasklist} by {activitytype}.as_rate()
+sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activitytype}.as_rate()
 ```
 
 ### Activity Execution Latency
@@ -368,8 +370,8 @@ sum:cadence_client.cadence_activity_task_timeouted{$App,$Env,$Domain,$Tasklist} 
 * When fired, investigate the activity code and its dependencies
 * Datadog query example
 ```
-avg:cadence_client.cadence_activity_execution_latency.avg{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_execution_latency.max{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
+avg:cadence_client.cadence_activity_execution_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_execution_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 ```
 
 ### Activity Poll Counters
@@ -381,10 +383,10 @@ The timeout for this long poll api is 50 seconds. If within that 50 seconds, no 
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
 ```
-sum:cadence_client.cadence_activity_poll_total{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_count()
-sum:cadence_client.cadence_activity_poll_failed{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_count()
-sum:cadence_client.cadence_activity_poll_succeed{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_count()
-sum:cadence_client.cadence_activity_poll_no_task{$App,$Env,$Domain,$Tasklist} by {activitytype}.as_count()
+sum:cadence_client.cadence_activity_poll_total{$Domain,$Tasklist} by {activitytype}.as_count()
+sum:cadence_client.cadence_activity_poll_failed{$Domain,$Tasklist} by {activitytype}.as_count()
+sum:cadence_client.cadence_activity_poll_succeed{$Domain,$Tasklist} by {activitytype}.as_count()
+sum:cadence_client.cadence_activity_poll_no_task{$Domain,$Tasklist} by {activitytype}.as_count()
 ```
 
 ### ActivityTasks Scheduled per second
@@ -392,7 +394,7 @@ sum:cadence_client.cadence_activity_poll_no_task{$App,$Env,$Domain,$Tasklist} by
 * Monitor: not recommended -- Information only to know whether or not a tasklist is overloaded
 * Datadog query example
 ```
-sum:cadence_matching.cadence_requests_per_tl{*,$Env,operation:addactivitytask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
+sum:cadence_matching.cadence_requests_per_tl{*,operation:addactivitytask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
 ```
 
 ### Activity Scheduled To Start Latency
@@ -403,9 +405,9 @@ There are too many activities scheduled into the same tasklist and the tasklist 
 * When fired, check if workers are enough, then check if the tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
 ```
-avg:cadence_client.cadence_activity_scheduled_to_start_latency.avg{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_scheduled_to_start_latency.max{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_scheduled_to_start_latency.95percentile{$App,$Env,$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
+avg:cadence_client.cadence_activity_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 ```
 
 ### Activity Failure
@@ -420,14 +422,14 @@ cadence_activity_execution_failed counter increase when activity fails after all
 * should only monitor on cadence_activity_execution_failed
 * Datadog query example
 ```
-sum:cadence_client.cadence_activity_execution_failed{$App,$Env,$Domain} by {app,domain,env}.as_rate()
-sum:cadence_client.cadence_activity_task_panic{$Env,$Domain} by {domain,env}.as_count()
-sum:cadence_client.cadence_activity_task_failed{$Env,$Domain} by {domain,env}.as_rate()
-sum:cadence_client.cadence_activity_task_canceled{$Env,$Domain} by {domain,env}.as_count()
-sum:cadence_history.heartbeat_timeout{$Env,$Domain} by {domain,env}.as_count()
-sum:cadence_history.schedule_to_start_timeout{$Env,$Domain} by {domain,env}.as_rate()
-sum:cadence_history.start_to_close_timeout{$Env,$Domain} by {domain,env}.as_rate()
-sum:cadence_history.schedule_to_close_timeout{$Env,$Domain} by {domain,env}.as_count()
+sum:cadence_client.cadence_activity_execution_failed{$Domain} by {domain,env}.as_rate()
+sum:cadence_client.cadence_activity_task_panic{$Domain} by {domain,env}.as_count()
+sum:cadence_client.cadence_activity_task_failed{$Domain} by {domain,env}.as_rate()
+sum:cadence_client.cadence_activity_task_canceled{$Domain} by {domain,env}.as_count()
+sum:cadence_history.heartbeat_timeout{$Domain} by {domain,env}.as_count()
+sum:cadence_history.schedule_to_start_timeout{$Domain} by {domain,env}.as_rate()
+sum:cadence_history.start_to_close_timeout{$Domain} by {domain,env}.as_rate()
+sum:cadence_history.schedule_to_close_timeout{$Domain} by {domain,env}.as_count()
 ```
 
 ### Service API success rate
@@ -440,8 +442,8 @@ sum:cadence_history.schedule_to_close_timeout{$Env,$Domain} by {domain,env}.as_c
 * When fired, check application logs to see if the error is Cadence server error or client side error. Error like EntityNotExists/ExecutionAlreadyStarted/QueryWorkflowFailed/etc are client side error, meaning that the application is misusing the APIs. If most errors are server side errors(internalServiceError), you can contact Cadence admin.
 * Datadog query example
 ```
-sum:cadence_client.cadence_error{$App,$Env} by {app}.as_count()
-sum:cadence_client.cadence_request{$App,$Env} by {app}.as_count()
+sum:cadence_client.cadence_error{*} by {domain}.as_count()
+sum:cadence_client.cadence_request{*} by {domain}.as_count()
 (1 - a / b) * 100
 ```
 
@@ -450,7 +452,7 @@ sum:cadence_client.cadence_request{$App,$Env} by {app}.as_count()
 * Application can set monitor on certain APIs, if necessary.
 * Datadog query example
 ```
-avg:cadence_client.cadence_latency.95percentile{$App,$Env,$Domain,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}
+avg:cadence_client.cadence_latency.95percentile{$Domain,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}
 ```
 
 ### Service API Breakdown
@@ -458,7 +460,7 @@ avg:cadence_client.cadence_latency.95percentile{$App,$Env,$Domain,!cadence_metri
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_client.cadence_request{$Env,$Domain,$App,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}.as_count()
+sum:cadence_client.cadence_request{$Domain,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}.as_count()
 ```
 
 ### Service API Error Breakdown
@@ -466,7 +468,7 @@ sum:cadence_client.cadence_request{$Env,$Domain,$App,!cadence_metric_scope:caden
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_client.cadence_error{$Env,$Domain,$App} by {cadence_metric_scope}.as_count()
+sum:cadence_client.cadence_error{$Domain} by {cadence_metric_scope}.as_count()
 ```
 
 ### Max Event Blob size
@@ -477,7 +479,7 @@ It should never be greater than 2MB.
 * When fired, please review the design/code ASAP to reduce the blob size. Reducing the input/output of workflow/activity/signal will help.
 * Datadog query example
 ```
-​​max:cadence_history.event_blob_size.quantile{$Env,!domain:all,$Domain} by {domain}
+​​max:cadence_history.event_blob_size.quantile{!domain:all,$Domain} by {domain}
 ```
 
 ### Max History Size
@@ -488,7 +490,7 @@ As a suggestion for workflow design, workflow history should never grow greater 
 * When fired, please review the design/code ASAP to reduce the history size. Reducing the input/output of workflow/activity/signal will help. Also you may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
 ```
-​​max:cadence_history.history_size.quantile{$Env,!domain:all,$Domain} by {domain}
+​​max:cadence_history.history_size.quantile{!domain:all,$Domain} by {domain}
 ```
 
 
@@ -500,7 +502,7 @@ It should never be greater than 50K(workflow exceeding 200K events will be termi
 * When fired, please review the design/code ASAP to reduce the history length. You may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
 ```
-​​max:cadence_history.history_count.quantile{$Env,!domain:all,$Domain} by {domain}
+​​max:cadence_history.history_count.quantile{!domain:all,$Domain} by {domain}
 ```
 
 
@@ -513,10 +515,10 @@ If there’s shard movement without deployments then that’s unexpected and the
 * A monitor can be set to be alerted on shard movements without deployment.
 * Datadog query example
 ```
-sum:cadence_history.membership_changed_count{$env,$Availability_Zone,operation:shardcontroller}
-sum:cadence_history.shard_closed_count{$env,$Availability_Zone,operation:shardcontroller}
-sum:cadence_history.sharditem_created_count{$env,$Availability_Zone,operation:shardcontroller}
-sum:cadence_history.sharditem_removed_count{$env,$Availability_Zone,operation:shardcontroller}
+sum:cadence_history.membership_changed_count{operation:shardcontroller}
+sum:cadence_history.shard_closed_count{operation:shardcontroller}
+sum:cadence_history.sharditem_created_count{operation:shardcontroller}
+sum:cadence_history.sharditem_removed_count{operation:shardcontroller}
 ```
 
 ### Transfer Tasks Per Second
@@ -524,28 +526,28 @@ sum:cadence_history.sharditem_removed_count{$env,$Availability_Zone,operation:sh
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_history.task_requests{operation:transferactivetask*,$env,$Availability_Zone} by {operation}.as_rate()
+sum:cadence_history.task_requests{operation:transferactivetask*} by {operation}.as_rate()
 ```
 
 ### Timer Tasks Per Second
 * Timer tasks are tasks that are scheduled to be triggered at a given time in future. For example, workflow.sleep() will wait an x amount of time then the task will be pushed somewhere for a worker to pick up.
 * Datadog query example
 ```
-sum:cadence_history.task_requests{operation:timeractivetask*,$env,$Availability_Zone} by {operation}.as_rate()
+sum:cadence_history.task_requests{operation:timeractivetask*} by {operation}.as_rate()
 ```
 
 ### Transfer Tasks Per Domain
 * Count breakdown by domain
 * Datadog query example
 ```
-sum:cadence_history.task_requests_per_domain{$env,$Availability_Zone,operation:transferactive*} by {domain}.as_count()
+sum:cadence_history.task_requests_per_domain{operation:transferactive*} by {domain}.as_count()
 ```
 
 ### Timer Tasks Per Domain
 * Count breakdown by domain
 * Datadog query example
 ```
-sum:cadence_history.task_requests_per_domain{$env,$Availability_Zone,operation:timeractive*} by {domain}.as_count()
+sum:cadence_history.task_requests_per_domain{operation:timeractive*} by {domain}.as_count()
 ```
 
 ### Transfer Latency by Type
@@ -556,9 +558,9 @@ If so then investigate the database(may need to scale up)
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
 ```
-avg:cadence_history.task_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:transfer*} by {operation}
-avg:cadence_history.task_latency_processing.quantile{$env,$Availability_Zone,$pXXLatency,operation:transfer*} by {operation}
-avg:cadence_history.task_latency_queue.quantile{$env,$Availability_Zone,$pXXLatency,operation:transfer*} by {operation}
+avg:cadence_history.task_latency.quantile{$pXXLatency,operation:transfer*} by {operation}
+avg:cadence_history.task_latency_processing.quantile{$pXXLatency,operation:transfer*} by {operation}
+avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:transfer*} by {operation}
 ```
 
 ### Timer Task Latency by type
@@ -569,9 +571,9 @@ If so then investigate the database(may need to scale up) [Mostly]
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
 ```
-avg:cadence_history.task_latency.quantile{$env,$Availability_Zone,$pXXLatency,operation:timer*} by {operation}
-avg:cadence_history.task_latency_processing.quantile{$env,$Availability_Zone,$pXXLatency,operation:timer*} by {operation}
-avg:cadence_history.task_latency_queue.quantile{$env,$Availability_Zone,$pXXLatency,operation:timer*} by {operation}
+avg:cadence_history.task_latency.quantile{$pXXLatency,operation:timer*} by {operation}
+avg:cadence_history.task_latency_processing.quantile{$pXXLatency,operation:timer*} by {operation}
+avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:timer*} by {operation}
 ```
 
 ### NOTE: Task Queue Latency vs Executing Latency vs Processing Latency In Transfer & Timer Task Latency Metrics
@@ -594,7 +596,7 @@ avg:cadence_history.task_latency_queue.quantile{$env,$Availability_Zone,$pXXLate
 Information about history API
 Datadog query example
 ```
-sum:cadence_history.cadence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_history.cadence_requests{*} by {operation}.as_rate()
 ```
 
 
@@ -603,37 +605,37 @@ sum:cadence_history.cadence_requests{$Availability_Zone,$env} by {operation}.as_
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_history.cadence_errors{$Availability_Zone,$env} by {operation}.as_rate()
-sum:cadence_history.cadence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_domain_not_active{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_service_busy{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_workflow_execution_already_completed{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_cancellation_already_requested{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_query_failed{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_limit_exceeded{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_context_timeout{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_retry_task{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_bad_binary{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_client_version_not_supported{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_incomplete_history{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_nondeterministic{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_unauthorized{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_authorize_failed{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_remote_syncmatch_failed{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_domain_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_identity_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_workflow_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_signal_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_workflow_type_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_request_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_task_list_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_activity_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_activity_type_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_marker_name_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
-sum:cadence_history.cadence_errors_timer_id_exceeded_warn_limit{$Availability_Zone,$env} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors{*} by {operation}.as_rate()
+sum:cadence_history.cadence_errors_bad_request{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_not_active{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_service_busy{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_entity_not_exists{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_execution_already_completed{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_execution_already_started{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_already_exists{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_cancellation_already_requested{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_query_failed{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_limit_exceeded{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_context_timeout{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_retry_task{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_bad_binary{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_client_version_not_supported{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_incomplete_history{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_nondeterministic{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_unauthorized{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_authorize_failed{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_remote_syncmatch_failed{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_domain_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_identity_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_signal_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_workflow_type_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_request_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_task_list_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_activity_id_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_activity_type_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_marker_name_exceeded_warn_limit{*} by {operation}.as_rate() 
+sum:cadence_history.cadence_errors_timer_id_exceeded_warn_limit{*} by {operation}.as_rate() 
 ```
   * `cadence_errors` is internal service errors.
   * any `cadence_errors_*` is client side error
@@ -662,7 +664,7 @@ Matching service is to match/assign tasks from cadence service to workers. Match
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_matching.cadence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_matching.cadence_requests{*} by {operation}.as_rate()
 ```
 
 ### Matching API Errors per Second
@@ -670,45 +672,45 @@ sum:cadence_matching.cadence_requests{$Availability_Zone,$env} by {operation}.as
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_matching.cadence_errors_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}.as_rate()
-sum:cadence_matching.cadence_errors_bad_request_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_bad_request{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_domain_not_active_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_domain_not_active{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_service_busy_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_service_busy{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_entity_not_exists_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_entity_not_exists{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_execution_already_started_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_execution_already_started{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_domain_already_exists_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_domain_already_exists{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_cancellation_already_requested_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_cancellation_already_requested{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_query_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_query_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_limit_exceeded_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_limit_exceeded{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_context_timeout_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_context_timeout{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_retry_task_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_retry_task{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_bad_binary_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_bad_binary{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_client_version_not_supported_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_client_version_not_supported{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_incomplete_history_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_incomplete_history{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_nondeterministic_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_nondeterministic{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_unauthorized_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_unauthorized{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_authorize_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_authorize_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_remote_syncmatch_failed_per_tl{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_remote_syncmatch_failed{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation,domain,tasklist}
-sum:cadence_matching.cadence_errors_event_already_started{$Availability_Zone,$env} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_per_tl{*} by {operation,domain,tasklist}.as_rate()
+sum:cadence_matching.cadence_errors_bad_request_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_request{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_not_active_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_not_active{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_service_busy_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_service_busy{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_entity_not_exists_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_entity_not_exists{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_execution_already_started_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_execution_already_started{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_already_exists_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_domain_already_exists{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_cancellation_already_requested_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_cancellation_already_requested{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_query_failed_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_query_failed{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_limit_exceeded_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_limit_exceeded{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_context_timeout_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_context_timeout{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_retry_task_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_retry_task{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_binary_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_bad_binary{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_client_version_not_supported_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_client_version_not_supported{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_incomplete_history_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_incomplete_history{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_nondeterministic_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_nondeterministic{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_unauthorized_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_unauthorized{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_authorize_failed_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_authorize_failed{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_remote_syncmatch_failed_per_tl{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_remote_syncmatch_failed{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_shard_ownership_lost{*} by {operation,domain,tasklist}
+sum:cadence_matching.cadence_errors_event_already_started{*} by {operation,domain,tasklist}
 ```
   * `cadence_errors` is internal service errors.
   * any `cadence_errors_*` is client side error
@@ -718,7 +720,7 @@ sum:cadence_matching.cadence_errors_event_already_started{$Availability_Zone,$en
 * No monitor needed
 * Datadog query example
 ```
-avg:cadence_matching.cadence_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency,!operation:pollfor*,!operation:queryworkflow} by {operation,tasklist}
+avg:cadence_matching.cadence_latency_per_tl.quantile{$pXXLatency,!operation:pollfor*,!operation:queryworkflow} by {operation,tasklist}
 ```
 
 ### Sync Match Latency:
@@ -727,7 +729,7 @@ To confirm if there are too many tasks being added to the tasklist, use “AddTa
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_matching.syncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency} by {operation,tasklist,domain}
+sum:cadence_matching.syncmatch_latency_per_tl.quantile{$pXXLatency} by {operation,tasklist,domain}
 ```
 
 ### Async match Latency
@@ -735,7 +737,7 @@ sum:cadence_matching.syncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$Availability_Zone,$env,$pXXLatency} by {operation,tasklist,domain}
+sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$pXXLatency} by {operation,tasklist,domain}
 ```
 
 ## Cadence Default Persistence Monitoring
@@ -749,14 +751,14 @@ If so then investigate the database(may need to scale up) [Mostly]
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
 ```
-sum:cadence_frontend.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_requests{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors{*} by {operation}.as_count()
+sum:cadence_matching.persistence_requests{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors{*} by {operation}.as_count()
+sum:cadence_history.persistence_requests{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors{*} by {operation}.as_count()
+sum:cadence_worker.persistence_requests{*} by {operation}.as_count()
 (1 - a / b) * 100
 (1 - c / d) * 100
 (1 - e / f) * 100
@@ -767,10 +769,10 @@ sum:cadence_worker.persistence_requests{$Availability_Zone,$env} by {operation}.
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.persistence_requests{$Availability_Zone,$env}.as_rate()
-sum:cadence_history.persistence_requests{$Availability_Zone,$env}.as_rate()
-sum:cadence_worker.persistence_requests{$Availability_Zone,$env}.as_rate()
-sum:cadence_matching.persistence_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_frontend.persistence_requests{*}.as_rate()
+sum:cadence_history.persistence_requests{*}.as_rate()
+sum:cadence_worker.persistence_requests{*}.as_rate()
+sum:cadence_matching.persistence_requests{*}.as_rate()
 
 ```
 
@@ -778,10 +780,10 @@ sum:cadence_matching.persistence_requests{$Availability_Zone,$env}.as_rate()
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
-sum:cadence_history.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
-sum:cadence_worker.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
-sum:cadence_matching.persistence_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_frontend.persistence_requests{*} by {operation}.as_rate()
+sum:cadence_history.persistence_requests{*} by {operation}.as_rate()
+sum:cadence_worker.persistence_requests{*} by {operation}.as_rate()
+sum:cadence_matching.persistence_requests{*} by {operation}.as_rate()
 
 ```
 
@@ -791,10 +793,10 @@ sum:cadence_matching.persistence_requests{$Availability_Zone,$env} by {operation
 If there’s a high latency, then there could be errors or something wrong with the db
 * Datadog query example
 ```
-avg:cadence_matching.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
-avg:cadence_worker.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
-avg:cadence_frontend.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
-avg:cadence_history.persistence_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_matching.persistence_latency.quantile{$pXXLatency} by {operation}
+avg:cadence_worker.persistence_latency.quantile{$pXXLatency} by {operation}
+avg:cadence_frontend.persistence_latency.quantile{$pXXLatency} by {operation}
+avg:cadence_history.persistence_latency.quantile{$pXXLatency} by {operation}
 ```
 
 ### Persistence Error By Operation Count
@@ -802,54 +804,54 @@ avg:cadence_history.persistence_latency.quantile{$Availability_Zone,$env,$pXXLat
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors{*} by {operation}.as_count()
 
-sum:cadence_frontend.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_shard_exists{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_shard_ownership_lost{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_condition_failed{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_current_workflow_condition_failed{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_timeout{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_busy{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_entity_not_exists{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_execution_already_started{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_domain_already_exists{*} by {operation}.as_count()
+sum:cadence_frontend.persistence_errors_bad_request{*} by {operation}.as_count()
 
-sum:cadence_history.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_history.persistence_errors_shard_exists{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_shard_ownership_lost{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_condition_failed{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_current_workflow_condition_failed{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_timeout{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_busy{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_entity_not_exists{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_execution_already_started{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_domain_already_exists{*} by {operation}.as_count()
+sum:cadence_history.persistence_errors_bad_request{*} by {operation}.as_count()
 
-sum:cadence_matching.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_matching.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_shard_exists{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_shard_ownership_lost{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_condition_failed{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_current_workflow_condition_failed{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_timeout{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_busy{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_entity_not_exists{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_execution_already_started{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_domain_already_exists{*} by {operation}.as_count()
+sum:cadence_matching.persistence_errors_bad_request{*} by {operation}.as_count()
 
-sum:cadence_worker.persistence_errors_shard_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_shard_ownership_lost{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_current_workflow_condition_failed{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_timeout{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_busy{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_entity_not_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_execution_already_started{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_domain_already_exists{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.persistence_errors_bad_request{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_shard_exists{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_shard_ownership_lost{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_condition_failed{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_current_workflow_condition_failed{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_timeout{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_busy{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_entity_not_exists{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_execution_already_started{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_domain_already_exists{*} by {operation}.as_count()
+sum:cadence_worker.persistence_errors_bad_request{*} by {operation}.as_count()
 
 ```
   * `cadence_errors` is internal service errors.
@@ -865,10 +867,10 @@ For reading visibility records, Frontend service will query ElasticSearch direct
 * Monitor can be set
 * Datadog query example
 ```
-sum:cadence_frontend.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.elasticsearch_errors{*} by {operation}.as_count()
+sum:cadence_frontend.elasticsearch_requests{*} by {operation}.as_count()
+sum:cadence_history.elasticsearch_errors{*} by {operation}.as_count()
+sum:cadence_history.elasticsearch_requests{*} by {operation}.as_count()
 (1 - a / b) * 100
 (1 - c / d) * 100
 ```
@@ -878,8 +880,8 @@ sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operatio
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env}.as_rate()
-sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env}.as_rate()
+sum:cadence_frontend.elasticsearch_requests{*}.as_rate()
+sum:cadence_history.elasticsearch_requests{*}.as_rate()
 ```
 
 ### Persistence By Operation TPS(read: ES, write: Kafka)
@@ -887,8 +889,8 @@ sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env}.as_rate()
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_rate()
-sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operation}.as_rate()
+sum:cadence_frontend.elasticsearch_requests{*} by {operation}.as_rate()
+sum:cadence_history.elasticsearch_requests{*} by {operation}.as_rate()
 ```
 
 
@@ -897,8 +899,8 @@ sum:cadence_history.elasticsearch_requests{$Availability_Zone,$env} by {operatio
 * No monitor needed
 * Datadog query example
 ```
-avg:cadence_frontend.elasticsearch_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
-avg:cadence_history.elasticsearch_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}
+avg:cadence_frontend.elasticsearch_latency.quantile{$pXXLatency} by {operation}
+avg:cadence_history.elasticsearch_latency.quantile{$pXXLatency} by {operation}
 ```
 
 ### Persistence Error By Operation Count (read: ES, write: Kafka)
@@ -906,8 +908,8 @@ avg:cadence_history.elasticsearch_latency.quantile{$Availability_Zone,$env,$pXXL
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_frontend.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_history.elasticsearch_errors{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_frontend.elasticsearch_errors{*} by {operation}.as_count()
+sum:cadence_history.elasticsearch_errors{*} by {operation}.as_count()
 ```
 
 ### Kafka->ES processor counter
@@ -917,8 +919,8 @@ sum:cadence_history.elasticsearch_errors{$Availability_Zone,$env} by {operation}
 May consider add more pods (replicaCount) to sys-worker service for higher availability
 * Datadog query example
 ```
-sum:cadence_worker.es_processor_requests{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.es_processor_retries{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.es_processor_requests{*} by {operation}.as_count()
+sum:cadence_worker.es_processor_retries{*} by {operation}.as_count()
 ```
 
 ### Kafka->ES processor error
@@ -929,8 +931,8 @@ Almost all errors are retryable errors so it’s not a problem.
 The most common error is missing the ElasticSearch index field -- an index field is added in dynamicconfig but not in ElasticSearch, or vice versa . If so, follow the runbook to add the field to ElasticSearch or dynamic config.
 * Datadog query example
 ```
-sum:cadence_worker.es_processor_error{$Availability_Zone,$env} by {operation}.as_count()
-sum:cadence_worker.es_processor_corrupted_data{$Availability_Zone,$env} by {operation}.as_count()
+sum:cadence_worker.es_processor_error{*} by {operation}.as_count()
+sum:cadence_worker.es_processor_corrupted_data{*} by {operation}.as_count()
 ```
 
 ### Kafka->ES processor latency
@@ -938,7 +940,7 @@ sum:cadence_worker.es_processor_corrupted_data{$Availability_Zone,$env} by {oper
 * No monitor needed
 * Datadog query example
 ```
-sum:cadence_worker.es_processor_process_msg_latency.quantile{$Availability_Zone,$env,$pXXLatency} by {operation}.as_count()
+sum:cadence_worker.es_processor_process_msg_latency.quantile{$pXXLatency} by {operation}.as_count()
 ```
 
 ## Cadence Dependency Metrics Monitor suggestion
@@ -972,3 +974,4 @@ Depends on which database, you should at least monitor on the below metrics
 * Core API availability: 99.9%
 * Core API latency: <1s
 * Overall task dispatch latency: <2s (queue_latency for transfer task and timer task)
+
