@@ -255,11 +255,11 @@ This section describes the recommended dashboards for monitoring Cadence applica
 * Monitor: not recommended
 * Datadog query example
 ```
-sum:cadence_client.cadence_workflow_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,env,domain,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_completed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,env,domain,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_canceled{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_continue_as_new{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
-sum:cadence_client.cadence_workflow_signal_with_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_completed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_canceled{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_continue_as_new{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
+sum:cadence_client.cadence_workflow_signal_with_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
 ```
 
 ### Workflow Failure
@@ -269,7 +269,7 @@ sum:cadence_client.cadence_workflow_signal_with_start{$Domain,$Tasklist,$Workflo
 * When the metrics fire, go to Cadence UI to find the failed workflows and investigate the workflow history to understand the type of failure
 * Datadog query example
 ```
-sum:cadence_client.cadence_workflow_failed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,app,domain,env}.as_count()
+sum:cadence_client.cadence_workflow_failed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env}.as_count()
 sum:cadence_history.workflow_failed{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
 sum:cadence_history.workflow_terminate{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
 sum:cadence_history.workflow_timeout{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
@@ -306,9 +306,9 @@ The task list is overloaded(confirmed by DecisionTaskScheduled per second widget
 * When fired, check if worker capacity is enough, then check if tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
 ```
-avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {app,env,domain,tasklist}
-max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Tasklist} by {app,env,domain,tasklist}
-max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {app,env,domain,tasklist}
+avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist}
+max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist}
+max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist}
 ```
 
 ### Workflow End to End Latency
@@ -318,8 +318,8 @@ For example, if you expect a workflow to take duration d to complete, you can us
 * When fired, investigate the workflow history to see the workflow takes longer than expected to complete
 * Datadog query example
 ```
-avg:cadence_client.cadence_workflow_endtoend_latency.median{$Domain,$Tasklist,$WorkflowType} by {app,env,domain,tasklist,workflowtype}
-avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Tasklist,$WorkflowType} by {app,env,domain,tasklist,workflowtype}
+avg:cadence_client.cadence_workflow_endtoend_latency.median{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
+avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
 ```
 
 ### Workflow Panic and NonDeterministicError
@@ -328,8 +328,8 @@ avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Taskl
 * When fired, you may rollback the deployment to mitigate your issue. Usually this caused by bad (non-backward compatible) code change. After rollback, look at your worker error logs to see where the bug is.
 * Datadog query example
 ```
-sum:cadence_client.cadence_worker_panic{$Domain} by {app,env,domain}.as_rate()
-sum:cadence_client.cadence_non_deterministic_error{$Domain} by {app,env,domain}.as_rate()
+sum:cadence_client.cadence_worker_panic{$Domain} by {env,domain}.as_rate()
+sum:cadence_client.cadence_non_deterministic_error{$Domain} by {env,domain}.as_rate()
 ```
 
 ### Workflow Sticky Cache Hit Rate and Miss Count
@@ -347,8 +347,8 @@ CacheHitRate too low means workers will have to replay history to rebuild the wo
 * When fired, adjust the stickyCacheSize in the WorkerFactoryOption, or add more workers
 * Datadog query example
 ```
-sum:cadence_client.cadence_sticky_cache_miss{$Domain} by {app,env,domain}.as_count()
-sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {app,env,domain}.as_count()
+sum:cadence_client.cadence_sticky_cache_miss{$Domain} by {env,domain}.as_count()
+sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 (b / (a+b)) * 100
 ```
 
@@ -368,8 +368,8 @@ sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activi
 * When fired, investigate the activity code and its dependencies
 * Datadog query example
 ```
-avg:cadence_client.cadence_activity_execution_latency.avg{$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_execution_latency.max{$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
+avg:cadence_client.cadence_activity_execution_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_execution_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 ```
 
 ### Activity Poll Counters
@@ -403,9 +403,9 @@ There are too many activities scheduled into the same tasklist and the tasklist 
 * When fired, check if workers are enough, then check if the tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
 ```
-avg:cadence_client.cadence_activity_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_scheduled_to_start_latency.max{$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
-max:cadence_client.cadence_activity_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {app,env,domain,tasklist,activitytype}
+avg:cadence_client.cadence_activity_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
+max:cadence_client.cadence_activity_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 ```
 
 ### Activity Failure
@@ -420,7 +420,7 @@ cadence_activity_execution_failed counter increase when activity fails after all
 * should only monitor on cadence_activity_execution_failed
 * Datadog query example
 ```
-sum:cadence_client.cadence_activity_execution_failed{$Domain} by {app,domain,env}.as_rate()
+sum:cadence_client.cadence_activity_execution_failed{$Domain} by {domain,env}.as_rate()
 sum:cadence_client.cadence_activity_task_panic{$Domain} by {domain,env}.as_count()
 sum:cadence_client.cadence_activity_task_failed{$Domain} by {domain,env}.as_rate()
 sum:cadence_client.cadence_activity_task_canceled{$Domain} by {domain,env}.as_count()
