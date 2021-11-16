@@ -5,7 +5,11 @@ permalink: /docs/get-started/java-hello-world
 ---
 
 # Java Hello World
-This section only describe how to write and run a HelloWorld with Java. Go to [Cadence-Java-Samples](https://github.com/uber/cadence-java-samples) for more examples, and [Java-Client](/docs/java-client) and [java-docs](https://www.javadoc.io/doc/com.uber.cadence/cadence-client/latest/index.html) for more documentation.
+This section provides step by step instructions on how to write and run a HelloWorld with Java. 
+
+For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Java-Samples](https://github.com/uber/cadence-java-samples).
+
+You can also review [Java-Client](/docs/java-client) and [java-docs](https://www.javadoc.io/doc/com.uber.cadence/cadence-client/latest/index.html) for more documentation.
 
 
 ## Include Cadence Java Client Dependency
