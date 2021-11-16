@@ -5,7 +5,11 @@ permalink: /docs/get-started/golang-hello-world
 ---
 
 # Golang Hello World
-This section only describe how to write and run a HelloWorld with Golang. Go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples, and [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
+This section provides step by step instructions on how to write and run a HelloWorld with Golang. 
+
+For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+
+You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
 
 ## Include Golang cadence-client dependency
 
