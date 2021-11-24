@@ -14,7 +14,7 @@ Cadence emits metrics for both Server and client libraries:
   * You can use other metrics emitter like [M3](https://github.com/uber-go/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-go/tally/blob/master/reporter.go)
 
-* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you use v3.0.0 and above.
+* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloMetric.java) if using 3.x client, or [this example](https://github.com/longquanzheng/cadence-java-samples-1/pull/1) if using 2.x client. 
   * You can use other metrics emitter like [M3](https://github.com/uber-java/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-java/tally/blob/master/core/src/main/java/com/uber/m3/tally/Scope.java)
 
