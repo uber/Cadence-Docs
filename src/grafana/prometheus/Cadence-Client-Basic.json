@@ -581,7 +581,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Decision Scheduled To Start Latency (ms)",
+          "title": "Decision Scheduled To Start Latency",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -993,7 +993,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Workflow End to End Latency (ms)",
+          "title": "Workflow End to End Latency",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1225,7 +1225,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Activity Execution Latency (ms)",
+          "title": "Activity Execution Latency",
           "tooltip": {
             "shared": true,
             "sort": 0,
