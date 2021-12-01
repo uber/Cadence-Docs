@@ -91,7 +91,7 @@ Consider using :local_activity:local_activities: for functions that are:
 * do not require global rate limiting
 * do not require routing to specific :worker:workers: or pools of :worker:workers:
 * can be implemented in the same binary as the :workflow: that invokes them
-* non busiess critical so that losing some debuggability is okay(e.g. logging, loading config)
+* non business critical so that losing some debuggability is okay(e.g. logging, loading config)
 * when you really need optimization. For example, if there are many timers firing at the same time which invoke activities, it could overloading Cadence server. So using local activities will help saving the server capacity. 
 
 The main benefit of :local_activity:local_activities: is that they are much more efficient in utilizing Cadence service resources and have much lower latency overhead comparing to the usual :activity: invocation.
