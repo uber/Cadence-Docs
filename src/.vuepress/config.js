@@ -19,6 +19,16 @@ module.exports = {
     'reading-progress',
     'vuepress-plugin-code-copy',
     'vuepress-plugin-glossary',
+    ['vuepress-plugin-redirect', {
+      redirectors: [
+        {
+          base: '/docs/',
+          alternative: [
+            'get-started'
+          ]
+        }
+      ]
+    }]
   ],
   head: [
     ['link', { rel: 'icon', href: `/img/favicon.ico` }],

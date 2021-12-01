@@ -1,8 +1,4 @@
 export default ({ router }) => {
-  router.addRoutes([
-    { path: '/docs/', redirect: '/docs/cadence' },
-  ]);
-
   router.beforeResolve((to, _from, next) => {
     const browserWindow = typeof window !== "undefined" ? window : null;
     if (browserWindow && to.matched.length && (to.matched[0].path !== '*' && to.redirectedFrom || to.path === '/blog/')) {

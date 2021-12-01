@@ -10,9 +10,9 @@ export default ({
   router, // the router instance for the app
   siteData // site metadata
 }) => {
-  router.beforeResolve((to, _from, next) => {
+  router.beforeResolve((to, from, next) => {
     const browserWindow = typeof window !== "undefined" ? window : null;
-    if (!browserWindow || to.path.startsWith('/blog')) {
+    if (!browserWindow || from.path === '/' || to.path.startsWith('/blog')) {
       next();
     } else {
       browserWindow.location.href = to.fullPath;
