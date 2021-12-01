@@ -77,11 +77,23 @@ To support such use cases, Cadence allows :activity: implementations that do not
 
 ## Local Activities
 
-Some of the :activity:activities: are very short lived and do not need the queing semantic, flow control, rate limiting and routing capabilities. For these Cadence supports so called _:local_activity:_ feature. :local_activity:Local_activities: are executed in the same :worker: process as the :workflow: that invoked them. Consider using :local_activity:local_activities: for functions that are:
+Some of the :activity:activities: are very short lived and do not need the queing semantic, flow control, rate limiting and routing capabilities. For these Cadence supports so called _:local_activity:_ feature. :local_activity:Local_activities: are executed in the same :worker: process as the :workflow: that invoked them. 
+
+What you will trade off by using local activities
+* Debuggability: There is no ActivityTaskScheduled and ActivityTaskStarted events. So you would not able to see the input. The worker is always the same as the decision worker.
+* More possibility of duplicated execution. Though regular activity could also execute multiple times, the technical guarantee doesn't change. But local activity has more chance of seeing this because the result is not recorded into history until DecisionTaskCompleted. This is also because when exeucting multiple local activities in a row, SDK(Java+Golang) would optmize recording in a way that only recording by interval. 
+* Long running capability with record heartbeat
+* Tasklist/worker ratelimiting 
+
+Consider using :local_activity:local_activities: for functions that are:
 
 * no longer than a few seconds
 * do not require global rate limiting
 * do not require routing to specific :worker:workers: or pools of :worker:workers:
 * can be implemented in the same binary as the :workflow: that invokes them
+* non busiess critical so that losing some debuggability is okay(e.g. logging, loading config)
+* when you really need optimization. For example, if there are many timers firing at the same time which invoke activities, it could overloading Cadence server. So using local activities will help saving the server capacity. 
 
 The main benefit of :local_activity:local_activities: is that they are much more efficient in utilizing Cadence service resources and have much lower latency overhead comparing to the usual :activity: invocation.
+
+
