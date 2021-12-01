@@ -81,7 +81,7 @@ Some of the :activity:activities: are very short lived and do not need the quein
 
 What you will trade off by using local activities
 * Debuggability: There is no ActivityTaskScheduled and ActivityTaskStarted events. So you would not able to see the input. The worker is always the same as the decision worker.
-* More possibility of duplicated execution. Though regular activity could also execute multiple times, the technical guarantee doesn't change. But local activity has more chance of seeing this because the result is not recorded into history until DecisionTaskCompleted. This is also because when exeucting multiple local activities in a row, SDK(Java+Golang) would optmize recording in a way that only recording by interval. 
+* More possibility of duplicated execution. Though regular activity could also execute multiple times, the technical guarantee doesn't change. But local activity has more chance of seeing this because the result is not recorded into history until DecisionTaskCompleted. This is also because when executing multiple local activities in a row, SDK(Java+Golang) would optimize recording in a way that only recording by interval. 
 * Long running capability with record heartbeat
 * Tasklist global ratelimiting 
 
