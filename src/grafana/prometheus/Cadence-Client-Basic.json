@@ -554,7 +554,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(avg_over_time(cadence_decision_scheduled_to_start_latency_seconds_count[1m])) by (Domain, TaskList)*1000",
+              "expr": "avg(cadence_decision_scheduled_to_start_latency_seconds_count) by (Domain, TaskList)",
               "hide": false,
               "interval": "",
               "legendFormat": "",
@@ -562,7 +562,7 @@
             },
             {
               "exemplar": true,
-              "expr": "count(cadence_decision_scheduled_to_start_latency_seconds_max) by (Domain, TaskList) *1000",
+              "expr": "max(cadence_decision_scheduled_to_start_latency_seconds_max) by (Domain, TaskList)",
               "hide": false,
               "interval": "",
               "legendFormat": "",
@@ -2405,5 +2405,5 @@
   "timezone": "",
   "title": "Cadence-Client-Basic",
   "uid": "1B0efRyGy2",
-  "version": 1
+  "version": 2
 }
