@@ -80,13 +80,15 @@ To support such use cases, Cadence allows :activity: implementations that do not
 Some of the :activity:activities: are very short lived and do not need the queing semantic, flow control, rate limiting and routing capabilities. For these Cadence supports so called _:local_activity:_ feature. :local_activity:Local_activities: are executed in the same :worker: process as the :workflow: that invoked them. 
 
 What you will trade off by using local activities
-* Debuggability: There is no ActivityTaskScheduled and ActivityTaskStarted events. So you would not able to see the input. The worker is always the same as the decision worker.
+* Less Debuggability: There is no ActivityTaskScheduled and ActivityTaskStarted events. So you would not able to see the input. 
+* No tasklist dispatching: The worker is always the same as the workflow decision worker. You don't have a choice of using activity workers.
 * More possibility of duplicated execution. Though regular activity could also execute multiple times, the technical guarantee doesn't change. But local activity has more chance of seeing this because the result is not recorded into history until DecisionTaskCompleted. This is also because when executing multiple local activities in a row, SDK(Java+Golang) would optimize recording in a way that only recording by interval. 
-* Long running capability with record heartbeat
-* Tasklist global ratelimiting 
+* No long running capability with record heartbeat
+* No Tasklist global ratelimiting 
 
 Consider using :local_activity:local_activities: for functions that are:
 
+* idempotent
 * no longer than a few seconds
 * do not require global rate limiting
 * do not require routing to specific :worker:workers: or pools of :worker:workers:
