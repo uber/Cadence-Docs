@@ -61,7 +61,7 @@ Note: `host.docker.internal` [may not work for some docker versions](https://doc
 
 * Go to [local Grafana](http://localhost:3000) , login as `admin/admin`.
 * Configure Prometheus as datasource: use `http://host.docker.internal:9090` as URL of prometheus.
-* Import the [Grafana dashboard tempalte](/docs/operation-guide/monitor/#grafana-dashboard-templates) as JSON files.
+* Import the [Grafana dashboard tempalte](/docs/operation-guide/monitor/#grafana-prometheus-dashboard-templates) as JSON files.
 
 Client side dashboard looks like this:
 <img width="1513" alt="Screen Shot 2021-02-20 at 12 32 23 PM" src="https://user-images.githubusercontent.com/4523955/108607838-b7fc4d80-7377-11eb-8fd9-edc0e58afaad.png">
@@ -84,9 +84,10 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) con
 To use DataDog with Cadence, follow [this instruction](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/) to collect Prometheus metrics using DataDog agent.
 
 NOTE1: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
-## Grafana+Prometheus dashboard templates
 
 NOTE2: the template contains templating variables `$App` and `$Availability_Zone`. Feel free to remove them if you don't have them in your setup. 
+
+## Grafana+Prometheus dashboard templates
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
