@@ -25,7 +25,8 @@
     "vuepress-plugin-code-switcher": "^1.0.3",
     "vuepress-plugin-fulltext-search": "^2.0.6",
     "vuepress-plugin-glossary": "^1.0.2",
-    "vuepress-plugin-reading-progress": "^1.0.9"
+    "vuepress-plugin-reading-progress": "^1.0.9",
+    "vuepress-plugin-redirect": "^1.2.5"
   },
   "devDependencies": {
     "cypress": "^6.1.0",
