@@ -13,7 +13,7 @@ Cadence supports creating :workflow:workflows: with customized key-value pairs, 
 Also note that normal :workflow: properties like start time and :workflow: type can be queried as well. For example, the following :query: could be specified when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)):
 
 ```sql
-WorkflowType = "main.Workflow" and CloseStatus != 0 and (StartTime > "2019-06-07T16:46:34-08:00" or CloseTime > "2019-06-07T16:46:34-08:00" order by StartTime desc)
+WorkflowType = "main.Workflow" and CloseStatus != "completed" and (StartTime > "2019-06-07T16:46:34-08:00" or CloseTime > "2019-06-07T16:46:34-08:00" order by StartTime desc)
 ```
 
 In other places, this is also called as `advanced visibility`. While `basic visibility` is referred to basic listing without being able to search. 
@@ -227,13 +227,13 @@ Some names and types are as follows:
 There are some special considerations for these attributes:
 
 - CloseStatus, CloseTime, DomainID, ExecutionTime, HistoryLength, RunID, StartTime, WorkflowID, WorkflowType are reserved by Cadence and are read-only
-- CloseStatus is a mapping of int to state:
-  - 0 = completed
-  - 1 = failed
-  - 2 = canceled
-  - 3 = terminated
-  - 4 = continuedasnew
-  - 5 = timedout
+- Starting from [v0.18.0](https://github.com/uber/cadence/commit/6e69fa1a6e9ae5d2f683759820f09d1286ba7797), Cadence automatically maps(case insensitive) string to CloseStatus so that you don't need to use integer in the query, to make it easier to use.
+  - 0 = "completed"
+  - 1 = "failed"
+  - 2 = "canceled"
+  - 3 = "terminated"
+  - 4 = "continued_as_new"
+  - 5 = "timed_out"
 - StartTime, CloseTime and ExecutionTime are stored as INT, but support :query:queries: using both EpochTime in nanoseconds, and string in RFC3339 format (ex. `"2006-01-02T15:04:05+07:00"`)
 - CloseTime, CloseStatus, HistoryLength are only present in closed :workflow:
 - ExecutionTime is for Retry/Cron user to :query: a :workflow: that will run in the future
