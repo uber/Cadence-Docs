@@ -16,7 +16,7 @@ Cadence’s minimum dependency is a database(Cassandra or SQL based like MySQL/P
 
 For production you also need a metric server(Prometheus/Statsd/M3/etc).
 
-For [advanced features](/docs/operation-guide/setup/#other-advanced-features) Cadence depends on others like ElastiCache+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). Cadence will depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
+For [advanced features](/docs/operation-guide/setup/#other-advanced-features) Cadence depends on others like Elastisearch/OpenSearch+Kafka if you need [Advanced visibility feature to search workflows](/docs/concepts/search-workflows/). Cadence will depends on a blob store like S3 if you need to enable [archival feature](/docs/concepts/archival/).
 
 ## Static configuration
 
