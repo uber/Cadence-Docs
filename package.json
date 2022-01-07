@@ -15,6 +15,9 @@
     "start:local": "http-server ./dist",
     "test": "npm run cypress:run"
   },
+  "engines": {
+    "node": ">=14 <15"
+  },
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.4.1",
     "@vuepress/plugin-search": "^1.6.0",
