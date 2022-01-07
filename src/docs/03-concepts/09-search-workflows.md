@@ -13,7 +13,9 @@ Cadence supports creating :workflow:workflows: with customized key-value pairs, 
 Also note that normal :workflow: properties like start time and :workflow: type can be queried as well. For example, the following :query: could be specified when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)):
 
 ```sql
-WorkflowType = "main.Workflow" and CloseStatus != "completed" and (StartTime > "2019-06-07T16:46:34-08:00" or CloseTime > "2019-06-07T16:46:34-08:00" order by StartTime desc)
+WorkflowType = "main.Workflow" AND CloseStatus != "completed" AND (StartTime > 
+   "2019-06-07T16:46:34-08:00" OR CloseTime > "2019-06-07T16:46:34-08:00") 
+   ORDER BY StartTime DESC 
 ```
 
 In other places, this is also called as `advanced visibility`. While `basic visibility` is referred to basic listing without being able to search. 
@@ -237,8 +239,7 @@ There are some special considerations for these attributes:
 - StartTime, CloseTime and ExecutionTime are stored as INT, but support :query:queries: using both EpochTime in nanoseconds, and string in RFC3339 format (ex. `"2006-01-02T15:04:05+07:00"`)
 - CloseTime, CloseStatus, HistoryLength are only present in closed :workflow:
 - ExecutionTime is for Retry/Cron user to :query: a :workflow: that will run in the future
-
-To list only open :workflow:workflows:, add `CloseTime = missing` to the end of the :query:.
+- To list only open :workflow:workflows:, add `CloseTime = missing` to the end of the :query:.
 
 If you use retry or the cron feature to :query: :workflow:workflows: that will start execution in a certain time range, you can add predicates on ExecutionTime. For example: `ExecutionTime > 2019-01-01T10:00:00-07:00`. Note that if predicates on ExecutionTime are included, only cron or a :workflow: that needs to retry will be returned.
 
@@ -264,7 +265,7 @@ Support for search attributes is available as of version 0.6.0 of the Cadence se
 cadence --do samples-domain workflow start --tl helloWorldGroup --wt main.Workflow --et 60 --dt 10 -i '"vancexu"' -search_attr_key 'CustomIntField | CustomKeywordField | CustomStringField |  CustomBoolField | CustomDatetimeField' -search_attr_value '5 | keyword1 | vancexu test | true | 2019-06-07T16:16:36-08:00'
 ```
 
-#### Search Workflows with List API
+#### Search Workflows with List API/Command
 
 ```bash
 cadence --do samples-domain wf list -q '(CustomKeywordField = "keyword1" and CustomIntField >= 5) or CustomKeywordField = "keyword2"' -psa
@@ -285,6 +286,23 @@ cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" and (Work
 ```bash
 cadence --do samples-domain wf list -q 'WorkflowType = "main.Workflow" StartTime > "2019-06-07T16:46:34-08:00" and CloseTime = missing'
 ```
+All above command can be done with ListWorkflowExecutions API. 
+
+#### Count Workflows with Count API/Command
+
+```bash
+cadence --do samples-domain wf count -q '(CustomKeywordField = "keyword1" and CustomIntField >= 5) or CustomKeywordField = "keyword2"'
+```
+
+```bash
+cadence --do samples-domain wf count -q 'CloseStatus="failed"'
+```
+
+```bash
+cadence --do samples-domain wf count -q 'CloseStatus!="completed"'
+```
+
+All above command can be done with CountWorkflowExecutions API. 
 
 ### Web UI Support
 
