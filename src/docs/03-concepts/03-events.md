@@ -12,7 +12,7 @@ There are multiple scenarios for which :signal:signals: are useful.
 
 ## Event Aggregation and Correlation
 
-Cadence is not a replacement for generic stream processing engines like Apache Flink or Apache Spark. But in certain scenarios it is a better fit. For example, when all :event:events: that should be aggregated and correlated are always applied to to some business entity with a clear ID. And then when a certain condition is met, actions should be executed.
+Cadence is not a replacement for generic stream processing engines like Apache Flink or Apache Spark. But in certain scenarios it is a better fit. For example, when all :event:events: that should be aggregated and correlated are always applied to some business entity with a clear ID. And then when a certain condition is met, actions should be executed.
 
 The main limitation is that a single Cadence :workflow: has a pretty limited throughput, while the number of :workflow:workflows: is practically unlimited. So if you need to aggregate :event:events: per customer, and your application has 100 million customers and each customer doesn't generate more than 20 :event:events: per second, then Cadence would work fine. But if you want to aggregate all :event:events: for US customers then the rate of these :event:events: would be beyond the single :workflow: capacity.
 
