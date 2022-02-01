@@ -8,7 +8,7 @@ authorlink: https://www.linkedin.com/in/sfoga/
 
 Welcome to our very first Cadence Community Spotlight update!
 
-This monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. Do you have an interesting project that uses Cadence? We want to hear from you. Also if you have any news items, blogs, articles, videos or events where Cadence has been mentioned then that is good too. We want to showcase that our community is active and is doing exciting and interesting things.
+This monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. Do you have an interesting project that uses Cadence? If so then we want to hear from you. Also if you have any news items, blogs, articles, videos or events where Cadence has been mentioned then that is good too. We want to showcase that our community is active and is doing exciting and interesting things.
 
 Please see below for a short round up of things that have happened recently in the community.
 
@@ -38,6 +38,6 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 ## Upcoming Events 
 
-- [Webinar : What is Cadence? And is it right for you?](https://info.instaclustr.com/webinar-emea-what-is-cadence.html?_ga=2.191041518.510582234.1643223308-2138855655.1638190316)</li>
+- [Webinar : What is Cadence? And is it right for you?](https://info.instaclustr.com/webinar-emea-what-is-cadence.html?_ga=2.191041518.510582234.1643223308-2138855655.1638190316)
 
 If you have any news or topics you'd like us to include in our next update then pleae join our [slack](http://t.uber.com/cadence-slack)#community channel. 
