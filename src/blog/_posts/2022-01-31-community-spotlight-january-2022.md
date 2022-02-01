@@ -8,7 +8,7 @@ authorlink: https://www.linkedin.com/in/sfoga/
 
 Welcome to our very first Cadence Community Spotlight update!
 
-This monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. We want to hear from you about any news items, blogs, articles, videos or events where Cadence has been mentioned so that we can showcase that our community is active and is doing exciting and interesting things.
+This monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. Do you have an interesting project that uses Cadence? We want to hear from you. Also if you have any news items, blogs, articles, videos or events where Cadence has been mentioned then that is good too. We want to showcase that our community is active and is doing exciting and interesting things.
 
 Please see below for a short round up of things that have happened recently in the community.
 
@@ -16,7 +16,7 @@ Please see below for a short round up of things that have happened recently in t
 
 On the 12th January 2022 we held our first Cadence Community Related Office Hours. This session was focused on discussing how we plan and organise things for the community. This includes things such as Code of Conduct, managing social media and making sure we regularly communicate project news and events.
 
-And you can see that this monthly update is the result of the feedback from that session. We are happy to get any feedback for comments that you may have. Please remember that this update is for you  so getting your feedback will help us improve it. 
+And you can see that this monthly update is the result of the feedback from that session! We are happy to get any feedback for comments you may have. Please remember that this update is for you  so getting your feedback will help us improve it. 
 
 We will be planning other Community Related Office Hour sessions so please watch out for updates.
 
