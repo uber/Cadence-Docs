@@ -4,9 +4,26 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Thu, 27 Jan 2022 21:37:51 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 02 Feb 2022 00:51:41 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[Cadence Community Spotlight Update - January 2022]]></title>
+            <link>/blog/2022/01/31/community-spotlight-january-2022/</link>
+            <guid>/blog/2022/01/31/community-spotlight-january-2022/</guid>
+            <pubDate>Mon, 31 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Welcome to our very first Cadence Community Spotlight update!
+
+This monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. Do you have an interesting project that uses Cadence? If so then we want to hear from you. Also if you have any news items, blogs, articles, videos or events where Cadence has been mentioned then that is good too. We want to showcase that our community is active and is doing exciting and interesting things.
+
+Please see below for a short round up of things that have happened recently in the community.
+
+Community Related Office Hours
+
+On the 12th January 2022 we held our first Cadence Community Related Office Hours. This session was focused on discussing how we plan and organise things for the community. This includes things such as Code of Conduct, managing social media and making sure we regularly communicate project news and events.
+
+And you can see that this monthly update is the result of the fe ...]]></description>
+        </item>
         <item>
             <title><![CDATA[Moving to gRPC]]></title>
             <link>/blog/2021/10/19/moving-to-grpc/</link>
