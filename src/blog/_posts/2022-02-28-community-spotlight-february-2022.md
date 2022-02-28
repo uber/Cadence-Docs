@@ -40,8 +40,12 @@ If you are new to Cadence or you’d like to try something simple then we have s
 
 ## Cadence Calendar
 
-We have created a public calendar where we can highlight events, meetings, webinars etc that are planned around Cadence. The calendar will be available on the [Cadence website](https://cadenceworkflow.io/) at the following link.[Cadence Calendar]()
-This means that you can easily find out if there is anything going on that you would like to attend.
+We have created a [Cadence public calendar](https://calendar.google.com/calendar/embed?src=e6r40gp3c2r01054id7e99dlac%40group.calendar.google.com&ctz=America%2FLos_Angeles) where we can highlight events, meetings, webinars etc that are planned around Cadence. The calendar will soon be available on the [Cadence website](https://cadenceworkflow.io/) so please make sure that you check it regularly.
+This means that you can easily find out if there are any Cadence events planned that you would like to attend.
+
+##Cadence Technical Office Hours
+
+Our second Technical Office Hours event is planned for February 28th, Monday at 9AM PST. If you have any questions about Cadence, want to share any knowledge that you have learned with other community members then please feel free to come along. We are looking forward to seeing you there!
 
 ## Cadence in the News!
 
