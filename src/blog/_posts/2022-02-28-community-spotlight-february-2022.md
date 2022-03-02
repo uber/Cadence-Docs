@@ -45,7 +45,7 @@ This means that you can easily find out if there are any Cadence events planned 
 
 ##Cadence Technical Office Hours
 
-Our second Technical Office Hours event is planned for February 28th, Monday at 9AM PST. If you have any questions about Cadence, want to share any knowledge that you have learned with other community members then please feel free to come along. We are looking forward to seeing you there!
+Our second Technical Office Hours event took place on February 28th, Monday at 9AM PST. The main objective was provide Cadence support, respond to any questions about and to share any knowledge that you have learned. We always encourage community members to come along - and thanks very much to everyone who participated.
 
 ## Cadence in the News!
 
