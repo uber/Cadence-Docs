@@ -76,7 +76,7 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
             
             // chargeCustomerForBillingPeriod is another activity
             // Cadence will automatically handle issues such as your billing service being unavailable at the time
-            // this activity invoked
+            // this activity is invoked
             activities.chargeCustomerForBillingPeriod(customer, billingPeriodNum);
 
             billingPeriodNum++;
@@ -116,7 +116,7 @@ public class SubscriptionWorkflowImpl implements SubscriptionWorkflow {
 }
 
 ```
-Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeMonthlyFee` for a day if the downstream processing service is down that long. The same way that blocking sleep for a billing period like 30 days is a normal operation inside the :workflow: code.
+Again, note that this code directly implements the business logic. If any of the invoked operations (aka :activity:activities:) takes a long time, the code is not going to change. It is okay to block on `chargeCustomerForBillingPeriod` for a day if the downstream processing service is down that long. The same way that blocking sleep for a billing period like 30 days is a normal operation inside the :workflow: code.
 
 Cadence has practically no scalability limits on the number of open :workflow: instances. So even if your site has hundreds of millions of consumers, the above code is not going to change.
 
@@ -186,4 +186,4 @@ Some :workflow:workflows: require a guarantee that they keep running even in pre
 - `NonRetryableErrorReasons` allows to specify errors that shouldn't be retried. For example, retrying invalid arguments error doesn't make sense in some scenarios.
 
 ## How does workflow run 
-You may wonder how it works. Behind the scene, workflow decision is driving the whole workflow running. It's the internal entities for client and server to run your workflows. If interesting to you, read this [stack Overflow QA](https://stackoverflow.com/questions/62904129/what-exactly-is-a-cadence-decision-task/63964726#63964726).
+You may wonder how it works. Behind the scenes, workflow decision is driving the whole workflow running. It's the internal entities for client and server to run your workflows. If this is interesting to you, read this [stack Overflow QA](https://stackoverflow.com/questions/62904129/what-exactly-is-a-cadence-decision-task/63964726#63964726).
