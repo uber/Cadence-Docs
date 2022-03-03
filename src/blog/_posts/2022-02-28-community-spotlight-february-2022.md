@@ -21,7 +21,7 @@ Thanks very much to everyone that worked on this!
 
 ## Community Supporting the Community
 
-During February 16 questions were posted in the Cadence #support [Slack](http://t.uber.com/cadence-slack) channel from new cadence users and existing community members looking for help and guidance. A very big thank you to the following community members who took the time to help others:  Ali, David, Tamas Weisz, Liang Mei, Quanzheng Long, peaceChoi, Emrah Seker, Ben Slater and Sathyaraju Sekaran.
+During February 16 questions were posted in the Cadence #support [Slack](http://t.uber.com/cadence-slack) channel from new Cadence users and existing community members looking for help and guidance. A very big thank you to the following community members who took the time to help others:  Ali, David, Tamas Weisz, Liang Mei, Quanzheng Long, peaceChoi, Emrah Seker, Ben Slater and Sathyaraju Sekaran.
 
 It’s great to see that we are supporting each other - and that is exactly what communities do!
 
@@ -43,7 +43,7 @@ If you are new to Cadence or you’d like to try something simple then we have s
 We have created a [Cadence public calendar](https://calendar.google.com/calendar/embed?src=e6r40gp3c2r01054id7e99dlac%40group.calendar.google.com&ctz=America%2FLos_Angeles) where we can highlight events, meetings, webinars etc that are planned around Cadence. The calendar will soon be available on the [Cadence website](https://cadenceworkflow.io/) so please make sure that you check it regularly.
 This means that you can easily find out if there are any Cadence events planned that you would like to attend.
 
-##Cadence Technical Office Hours
+## Cadence Technical Office Hours
 
 Our second Technical Office Hours event took place on February 28th, Monday at 9AM PST. The main objective was provide Cadence support, respond to any questions about and to share any knowledge that you have learned. We always encourage community members to come along - and thanks very much to everyone who participated.
 
