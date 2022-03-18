@@ -9,3 +9,7 @@ This will start a local server and can be accessed at http://localhost:8080/
 This will start a local server and can be accessed at http://localhost:8080/blog
 1. Run `npm install`
 2. Run `npm run start:blog`
+
+## License
+
+MIT License, please see [LICENSE](https://github.com/uber/Cadence-Docs/blob/master/LICENSE) for details.
