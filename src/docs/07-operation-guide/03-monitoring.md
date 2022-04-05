@@ -314,6 +314,24 @@ max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Task
 max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist}
 ```
 
+### Decision Execution Failure 
+* This means some critical bugs in workflow code causing decision task execution failure
+* Monitor: application should set monitor on it to make sure no consistent failure 
+* When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover 
+* Datadog query example
+```
+sum:cadence_client.cadence_decision_execution_failed{$Domain,$Tasklist} by {tasklist,workflowtype}.as_count()
+```
+
+### Decision Execution Timeout 
+* This means some critical bugs in workflow code causing decision task execution timeout
+* Monitor: application should set monitor on it to make sure no consistent timeout 
+* When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover 
+* Datadog query example
+```
+sum:cadence_history.start_to_close_timeout{operation:timeractivetaskdecision*,$Domain}.as_count()
+```
+
 ### Workflow End to End Latency
 * This is for the client application to track their SLOs
 For example, if you expect a workflow to take duration d to complete, you can use this latency to set a monitor.
@@ -363,6 +381,14 @@ sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 sum:cadence_client.cadence_activity_task_failed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_completed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activitytype}.as_rate()
+```
+
+### Local Activity Task Operations
+* Local Activity execution counters
+* Monitor: not recommended  
+* Datadog query example
+```
+sum:cadence_client.cadence_local_activity_total{$Domain,$Tasklist} by {activitytype}.as_count()
 ```
 
 ### Activity Execution Latency
