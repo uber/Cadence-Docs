@@ -44,8 +44,8 @@ It can be difficult searching the Slack #support channel for a specific problem 
 
 So if possible we would like you to start posting your Cadence questions on [StackOverflow](https://stackoverflow.com/).
 
-- Create you question in StackOverflow
-- Post the StackOverflow question link in the Cadence Slack support channel
+- Create your question in StackOverflow
+- Post the StackOverflow question link in the Cadence Slack #support channel
 - A response to your question will be posted to StackOverflow
 
 Other community members will be able to search StackOverflow for the details of the your question and see the response. We hope that this will make it easier for people to find answers to common questions.
@@ -61,6 +61,8 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 - [Instaclustr Announces General Availability of Managed Cadence](https://www.globenewswire.com/news-release/2022/04/04/2415472/0/en/Instaclustr-Announces-General-Availability-of-Instaclustr-Managed-Cadence.html)
 
 - [Introducing Managed Cadence on the Instaclustr Platform](https://www.youtube.com/watch?v=Vzc_LWmJ8lE&feature=youtu.be)
+
+- [Whitepaper: Understanding Cadence for Ops and SREs](https://info.instaclustr.com/rs/620-JHM-287/images/Understanding_Cadence_for%20Ops_and_SRE_WhitePaper.pdf)
 
 ## Upcoming Events
 
