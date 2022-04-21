@@ -5,8 +5,8 @@
     "feed_url": "/feed.json",
     "items": [
         {
-            "id": "/blog/2022/03/31/_31-community-spotlight-update-march-2022/",
-            "url": "/blog/2022/03/31/_31-community-spotlight-update-march-2022/",
+            "id": "/blog/2022/03/31/community-spotlight-update-march-2022/",
+            "url": "/blog/2022/03/31/community-spotlight-update-march-2022/",
             "title": "Cadence Community Spotlight Update - March 2022",
             "summary": "Welcome to our Cadence Community Spotlight update!\n\nThis is the latest in our series of monthly blog posts focused on the Cadence community and news about what you have been doing with Cadence.\n\nPlease see below for a short activity roundup of what has happened recently in the community.\n\nUpdated Cadence Topology Diagram\n\nDid you know that we have an updated Cadence Service diagram on the website? Well we do - and you can find it on our Deployment Topology page. We are always looking for information that helps makes it easier for people to understand how Cadence works.\n\nSpecial thanks to Ben Slater for updating the diagram and also to Ender, Emrah and Long for helping review it.\n\nMonthly Cadence Technical Office Hours\n\nEvery month we hold a Technical Office Hours session via Zoom where you can speak directly with some of our Cadence experts. If you have a question about Cadence or are facing a particular issue getting ...",
             "date_modified": "2022-03-31T00:00:00.000Z"
