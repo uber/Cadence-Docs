@@ -8,23 +8,23 @@ authorlink: https://www.linkedin.com/in/sfoga/
 
 Welcome to our Cadence Community Spotlight update!
 
-This is our monthly blog post series focused on news from in and aroubd the Cadence community.
+This is our monthly blog post series focused on news from in and around the Cadence community.
 
 Please see below for a short activity roundup of what has happened recently in the community.
 
 ## SD Times Names Cadence Open Source Project of the Week
 
-In April Cadence was named as open source project of the week by the SD Times. Being named gives the project some great publicity and means the project is getting noticed. You can find a link to the article in the Cadence in the News section below.
+In April Cadence was named as open source project of the week by the SD Times. Being named gives the project some great publicity and means the project is getting noticed. You can find a link to the article in the *Cadence in the News* section below.
 
 ## Follow Us on LinkedIn and Twitter!
 
-We have now set up Cadence accounts on LinkedIn[LinkedIn](https://www.linkedin.com/company/cadenceworkflow/) and [Twitter](https://twitter.com/cadenceworkflow) where you can keep up to date with what is happening in the community. We will be using these social media accounts to share news, articles, stories and links related to Cadence - so please follow us!
+We have now set up Cadence accounts on [LinkedIn](https://www.linkedin.com/company/cadenceworkflow/) and [Twitter](https://twitter.com/cadenceworkflow) where you can keep up to date with what is happening in the community. We will be using these social media accounts to share news, articles, stories and links related to Cadence - so please follow us!
 
-And don’t forget to share your news with us and are looking forward to receiving your feedback and comments. The more we interact - the more we build our community!
+And don’t forget to share your news with us. We are looking forward to receiving your feedback and comments. The more we interact - the more we build our community!
 
 ## Proposal to Change the Way We Write Workflows
 
-If you haven’t seen the proposal from community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) about creating a new way to write Cadence workflows then please take a look: https://github.com/uber/cadence/issues/4785. He has already received some initial feedback and is currently working on putting together a proof of concept demo to show the community. As soon as we have more news about it - we will let you know!
+If you haven’t seen the proposal from community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) about creating a new way to write Cadence workflows then please take a look:[https://github.com/uber/cadence/issues/4785](https://github.com/uber/cadence/issues/4785). He has already received some initial feedback and is currently working on putting together a proof of concept demo to show the community. As soon as we have more news about it - we will let you know!
 
 
 ## Help Us Improve Cadence
