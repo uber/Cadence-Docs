@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2022/04/30/community-spotlight-update-april-2022/",
+            "url": "/blog/2022/04/30/community-spotlight-update-april-2022/",
+            "title": "Cadence Community Spotlight Update - April 2022",
+            "summary": "Welcome to our Cadence Community Spotlight update!\n\nThis is our monthly blog post series focused on news from in and around the Cadence community.\n\nPlease see below for a short activity roundup of what has happened recently in the community.\n\nSD Times Names Cadence Open Source Project of the Week\n\nIn April Cadence was named as open source project of the week by the SD Times. Being named gives the project some great publicity and means the project is getting noticed. You can find a link to the article in the Cadence in the News section below.\n\nFollow Us on LinkedIn and Twitter!\n\nWe have now set up Cadence accounts on LinkedIn and Twitter where you can keep up to date with what is happening in the community. We will be using these social media accounts to share news, articles, stories and links related to Cadence - so please follow us!\n\nAnd don’t forget to share your news with us. We are l ...",
+            "date_modified": "2022-04-30T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2022/03/31/community-spotlight-update-march-2022/",
             "url": "/blog/2022/03/31/community-spotlight-update-march-2022/",
             "title": "Cadence Community Spotlight Update - March 2022",
@@ -32,13 +39,6 @@
             "summary": "Cadence historically has been using TChannel transport with Thrift encoding for both internal RPC calls and communication with client SDKs. gRPC is becoming a de-facto industry standard with much better adoption and community support. It offers features such as authentication and streaming that are very relevant for Cadence. Moreover, TChannel is being deprecated within Uber itself, pushing an effort for this migration. During the last year we’ve implemented multiple changes in server and SDK that allows users to use gRPC in Cadence, as well as to upgrade their existing Cadence cluster in a backward compatible way. This post tracks the completed work items and our future plans.\n\nOur Approach\nWith ~500 services using Cadence at Uber and many more open source customers around the world, we had to think about the gRPC transition in a backwards compatible way. We couldn’t simply flip transport and encoding everywhere. Instead we needed to support both protocols as an intermediate step ...",
             "image": "/img/grpc-migration.svg",
             "date_modified": "2021-10-19T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
-            "url": "/blog/2021/10/13/announcing-cadence-oss-office-hours-and-community-sync-up/",
-            "title": "Announcing Cadence OSS office hours and community sync up",
-            "summary": "Are you a current Cadence user, do you operate Cadence services, or are you interested in learning about workflow technologies and wonder what problems Cadence could solve for you? We would like to talk to you!\n\nOur team has spent a significant amount of time working with users and partner teams at Uber to design, scale and operate their workflows. This helps our users understand the technology better, smooth their learning curve and ramp up experience, and at the same time allows us to get fast and direct feedback so we can improve the developer experience and close feature gaps. As our product and community grows, we would like to expand this practice to our users in the OSS community. For the first time ever, members of the Cadence team along with core contributors from the community will host bi-weekly office hours to answer any questions you have about Cadence, or workflow technology in general. We can also dedicate future sessions to specific topics that have a common intere ...",
-            "date_modified": "2021-10-13T00:00:00.000Z"
         }
     ]
 }
