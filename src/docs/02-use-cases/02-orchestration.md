@@ -18,3 +18,4 @@ Following are some real-world examples of Cadence-based service orchestration sc
 
  * [Using Cadence workflows to spin up Kubernetes by Banzai Cloud](https://banzaicloud.com/blog/introduction-to-cadence/)
  * [Improving the User Experience with Uber’s Customer Obsession Ticket Routing Workflow and Orchestration Engine](https://eng.uber.com/customer-obsession-ticket-routing-workflow-and-orchestration-engine/)
+ * [Enabling Faster Financial Partnership Integrations Using Cadence](https://doordash.engineering/2022/05/18/enabling-faster-financial-partnership-integrations-using-cadence/)
