@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2022/05/31/community-spotlight-update-may-2022/",
+            "url": "/blog/2022/05/31/community-spotlight-update-may-2022/",
+            "title": "Cadence Community Spotlight Update - May 2022",
+            "summary": "Welcome to our regular Cadence Community Spotlight update!\n\nThis is our monthly blog post series focused on news from in and around the Cadence community.\n\nPlease see below for a short activity roundup of what has happened recently in the community.\n\nCadence Polling Cookbook\n\nDo you want to understand polling work and have an example of how to set it up in Cadence? Well a brand new Cadence Polling cookbook is now available that gives you all the details you need. The cookbook was created by several members of the Instaclustr team and they are keen to share it with the community. The pdf version of the cookbook can found on the Cadence website under  the Polling an external API for a specific resource to become available section of the Polling Use cases.\n\nA [Github repository](https://github.com/instaclustr/cadence-cookbook ...",
+            "date_modified": "2022-05-31T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2022/04/30/community-spotlight-update-april-2022/",
             "url": "/blog/2022/04/30/community-spotlight-update-april-2022/",
             "title": "Cadence Community Spotlight Update - April 2022",
@@ -31,14 +38,6 @@
             "title": "Cadence Community Spotlight Update - January 2022",
             "summary": "Welcome to our very first Cadence Community Spotlight update!\n\nThis monthly update focuses on news from the wider Cadence community and is all about what you have been doing with Cadence. Do you have an interesting project that uses Cadence? If so then we want to hear from you. Also if you have any news items, blogs, articles, videos or events where Cadence has been mentioned then that is good too. We want to showcase that our community is active and is doing exciting and interesting things.\n\nPlease see below for a short round up of things that have happened recently in the community.\n\nCommunity Related Office Hours\n\nOn the 12th January 2022 we held our first Cadence Community Related Office Hours. This session was focused on discussing how we plan and organise things for the community. This includes things such as Code of Conduct, managing social media and making sure we regularly communicate project news and events.\n\nAnd you can see that this monthly update is the result of the fe ...",
             "date_modified": "2022-01-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2021/10/19/moving-to-grpc/",
-            "url": "/blog/2021/10/19/moving-to-grpc/",
-            "title": "Moving to gRPC",
-            "summary": "Cadence historically has been using TChannel transport with Thrift encoding for both internal RPC calls and communication with client SDKs. gRPC is becoming a de-facto industry standard with much better adoption and community support. It offers features such as authentication and streaming that are very relevant for Cadence. Moreover, TChannel is being deprecated within Uber itself, pushing an effort for this migration. During the last year we’ve implemented multiple changes in server and SDK that allows users to use gRPC in Cadence, as well as to upgrade their existing Cadence cluster in a backward compatible way. This post tracks the completed work items and our future plans.\n\nOur Approach\nWith ~500 services using Cadence at Uber and many more open source customers around the world, we had to think about the gRPC transition in a backwards compatible way. We couldn’t simply flip transport and encoding everywhere. Instead we needed to support both protocols as an intermediate step ...",
-            "image": "/img/grpc-migration.svg",
-            "date_modified": "2021-10-19T00:00:00.000Z"
         }
     ]
 }
