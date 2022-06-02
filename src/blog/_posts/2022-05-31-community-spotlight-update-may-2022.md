@@ -22,11 +22,11 @@ So please go ahead and try out the cookbook and don’t forget to let us have yo
 
 ## Congratulations to a First Time Contributor
 
-We are always looking for ways to encourage project participation.  It doesn't matter how large the contribution is or whether it is coding or non coding related. This month one of our community members had their first PR merged - so congratulations!
+We are always looking for ways to encourage project participation.  It doesn't matter how large the contribution is or whether it is coding or non coding related. This month one of our community members had [their first PR merged](https://github.com/uber/Cadence-Docs/pull/107)- so congratulations and many thanks for the contribution [tonyxrandall](https://github.com/tonyxrandall)!
 
 ## Share Your News!
 
-Our #support [Slack](http://t.uber.com/cadence-slack) channel is always full of questions and activity so we know that there are are lot of people out there exploring, trying out and setting up Cadence. We are always interested in hearing about what the community are doing so if you have something to you want to share as a blog post or part of this montly update then please contact us in the #community Slack channel.
+Our #support [Slack](http://t.uber.com/cadence-slack) channel is always full of questions and activity so we know that there are are lot of people out there exploring, trying out and setting up Cadence. We are always interested in hearing about what the community are doing so if you have something to you want to share as a blog post or part of this montly update then please contact us in the #community [Slack](http://t.uber.com/cadence-slack) channel.
 
 ## Next Cadence Technical Office Hours: 3rd and  27th June 2022
 
