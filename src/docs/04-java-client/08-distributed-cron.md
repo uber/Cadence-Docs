@@ -46,6 +46,8 @@ Cadence supports the standard cron spec:
 CronSchedule string
 ```
 
+Cadence also supports more [advanced cron expressions](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format).
+
 The [crontab guru site](https://crontab.guru/) is useful for testing your cron expressions.
 
 ## Convert an existing cron workflow
