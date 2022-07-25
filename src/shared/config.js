@@ -1,4 +1,4 @@
-const { slackUrl } = require('./constants');
+const { slackUrl, officeHourUrl } = require('./constants');
 
 module.exports = {
   themeConfig: {
@@ -37,6 +37,7 @@ module.exports = {
           { text: 'StackOverflow', link: 'https://stackoverflow.com/questions/tagged/cadence-workflow' },
           { text: 'Github Issues', link: 'https://github.com/uber/cadence/issues' },
           { text: 'Slack', link: slackUrl },
+          { text: 'Office Hours Calendar', link: officeHourUrl },
         ],
       },
       {
