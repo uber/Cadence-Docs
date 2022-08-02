@@ -26,7 +26,7 @@ With Cadence, the entire logic can be encapsulated in a simple durable function 
 Here is an example :workflow: that implements the subscription management use case. It is in Java, but Go is also supported. The Python and .NET libraries are under active development.
 
 ```java
-// This SubscriptionWorkflow interface is an example of defining a workflow in Cadence
+// Hello world
 public interface SubscriptionWorkflow {
     @WorkflowMethod
     void manageSubscription(String customerId);
