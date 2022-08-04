@@ -4,9 +4,30 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Tue, 26 Jul 2022 17:33:09 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 04 Aug 2022 16:40:15 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[Cadence Community Spotlight Update - July 2022]]></title>
+            <link>/blog/2022/07/31/community-spotlight-update-july-2022/</link>
+            <guid>/blog/2022/07/31/community-spotlight-update-july-2022/</guid>
+            <pubDate>Sun, 31 Jul 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Here’s our monthly Community Spotlight update that gives you news from in and around the Cadence community!
+
+Please see below for a roundup of the highlights:
+
+Flying Drones with Cadence
+
+Community member Paul Brebner has released another blog in the series of using Cadence to manage a drone delivery service. You can see a simulated view of it in action
+
+Don’t forget to try out the code yourself and remember if you have used Cadence to do something interesting then please let us know so we can feature it in our next update.
+
+GitHub Statistics
+
+During July the main Cadence branch had 28 pull requests (PRs) merged. There were 214 files changed by 11 different authors. You can find more details here
+
+The Cadence documentati ...]]></description>
+        </item>
         <item>
             <title><![CDATA[Cadence Community Spotlight Update - June 2022]]></title>
             <link>/blog/2022/06/30/community-spotlight-update-june-2022/</link>
@@ -84,28 +105,6 @@ Special thanks to Ben Slater for updating the diagram and also to Ender, Emrah a
 Monthly Cadence Technical Office Hours
 
 Every month we hold a Technical Office Hours session via Zoom where you can speak directly with some of our Cadence experts. If you have a question about Cadence or are facing a particular issue getting ...]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Cadence Community Spotlight Update - February 2022]]></title>
-            <link>/blog/2022/02/28/community-spotlight-february-2022/</link>
-            <guid>/blog/2022/02/28/community-spotlight-february-2022/</guid>
-            <pubDate>Mon, 28 Feb 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Welcome to the Cadence Community Spotlight update!
-
-This is the second in our series of monthly updates focused on the Cadence community and news about what you have been doing with Cadence. We hope that you enjoyed last month's update and are keen to find out what has been happening.
-
-Please see below for a short activity roundup of what has happened recently in the community.
-
-Announcements
-
-Just in case you missed it the alpha version of the Cadence notification service has been released. Details can be found at the following link:
-Cadence Notification Service
-
-Thanks very much to everyone that worked on this!
-
-Community Supporting the Community
-
-During February 16 questions were posted in the Cadence #support Slack channel from new Cadence users and existing community members looking for help and guidance. A very big thank you to the following community members who to ...]]></description>
         </item>
     </channel>
 </rss>

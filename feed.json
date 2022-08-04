@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2022/07/31/community-spotlight-update-july-2022/",
+            "url": "/blog/2022/07/31/community-spotlight-update-july-2022/",
+            "title": "Cadence Community Spotlight Update - July 2022",
+            "summary": "Here’s our monthly Community Spotlight update that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nFlying Drones with Cadence\n\nCommunity member Paul Brebner has released another blog in the series of using Cadence to manage a drone delivery service. You can see a simulated view of it in action\n\nDon’t forget to try out the code yourself and remember if you have used Cadence to do something interesting then please let us know so we can feature it in our next update.\n\nGitHub Statistics\n\nDuring July the main Cadence branch had 28 pull requests (PRs) merged. There were 214 files changed by 11 different authors. You can find more details here\n\nThe Cadence documentati ...",
+            "date_modified": "2022-07-31T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2022/06/30/community-spotlight-update-june-2022/",
             "url": "/blog/2022/06/30/community-spotlight-update-june-2022/",
             "title": "Cadence Community Spotlight Update - June 2022",
@@ -31,13 +38,6 @@
             "title": "Cadence Community Spotlight Update - March 2022",
             "summary": "Welcome to our Cadence Community Spotlight update!\n\nThis is the latest in our series of monthly blog posts focused on the Cadence community and news about what you have been doing with Cadence.\n\nPlease see below for a short activity roundup of what has happened recently in the community.\n\nUpdated Cadence Topology Diagram\n\nDid you know that we have an updated Cadence Service diagram on the website? Well we do - and you can find it on our Deployment Topology page. We are always looking for information that helps makes it easier for people to understand how Cadence works.\n\nSpecial thanks to Ben Slater for updating the diagram and also to Ender, Emrah and Long for helping review it.\n\nMonthly Cadence Technical Office Hours\n\nEvery month we hold a Technical Office Hours session via Zoom where you can speak directly with some of our Cadence experts. If you have a question about Cadence or are facing a particular issue getting ...",
             "date_modified": "2022-03-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/02/28/community-spotlight-february-2022/",
-            "url": "/blog/2022/02/28/community-spotlight-february-2022/",
-            "title": "Cadence Community Spotlight Update - February 2022",
-            "summary": "Welcome to the Cadence Community Spotlight update!\n\nThis is the second in our series of monthly updates focused on the Cadence community and news about what you have been doing with Cadence. We hope that you enjoyed last month's update and are keen to find out what has been happening.\n\nPlease see below for a short activity roundup of what has happened recently in the community.\n\nAnnouncements\n\nJust in case you missed it the alpha version of the Cadence notification service has been released. Details can be found at the following link:\nCadence Notification Service\n\nThanks very much to everyone that worked on this!\n\nCommunity Supporting the Community\n\nDuring February 16 questions were posted in the Cadence #support Slack channel from new Cadence users and existing community members looking for help and guidance. A very big thank you to the following community members who to ...",
-            "date_modified": "2022-02-28T00:00:00.000Z"
         }
     ]
 }
