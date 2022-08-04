@@ -12,14 +12,15 @@ Please see below for a roundup of the highlights:
 
 ## Flying Drones with Cadence
 
-Community member Paul Brebner has released another blog in the series of using Cadence to manage a drone delivery service. You can see a [simulated view of it in action](https://www.youtube.com/watch?v=YgQeFSqzprk)
+Community member [Paul Brebner](https://www.linkedin.com/in/paul-brebner-0a547b4/) has released [another blog](https://www.instaclustr.com/blog/spinning-your-drones-with-cadence-and-apache-kafka-how-many-drones-can-we-fly/) in the series of using Cadence to manage a drone delivery service. You can see a [simulated view of it in action](https://www.youtube.com/watch?v=YgQeFSqzprk)
 
 Don’t forget to try out the code yourself and remember if you have used Cadence to do something interesting then please let us know so we can feature it in our next update.
 
 ## GitHub Statistics
 
-During July 28 pull requests (PRs) were merged into the Cadence repository. Commits were created by 11 different authors and 214 files were changed on the main branch.  
-You can find more details [here](https://github.com/uber/cadence/pulse)
+During July the main Cadence branch had 28 pull requests (PRs) merged. There were 214 files changed by 11 different authors. You can find more details [here](https://github.com/uber/cadence/pulse/monthly)
+
+The Cadence documentation repository was not as busy with only 2 PRs merged in July, 5 commits and 3 authors active. More details can be found [here](https://github.com/uber/Cadence-Docs/pulse/monthly )
 
 ## Cadence Roadmap
 
@@ -32,8 +33,6 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 - [Migrate to Cadence From Temporal](https://www.instaclustr.com/blog/migrate-to-cadence-from-temporal/)
 
 - [Spinning Your Drones With Cadence and Apache Kafka®: How Many Drones Can We Fly?](https://www.instaclustr.com/blog/spinning-your-drones-with-cadence-and-apache-kafka-how-many-drones-can-we-fly/)
-
-- [New Features for Instaclustr Managed Cadence®](https://www.instaclustr.com/blog/new-features-for-instaclustr-managed-cadence/)
 
 ## Upcoming Events
 
