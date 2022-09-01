@@ -33,11 +33,15 @@ Do you remember our GitHub Statistics from last month? Don't worry if you don't!
 
 If you are interested in contributing to Cadence then please take a look at our [Contribution Guidelines](https://github.com/uber/cadence/blob/86f645da952e15d7a7415cdf9fcd2726f28063a6/CONTRIBUTING.md) and also our list of [good first issues](https://github.com/uber/cadence/contribute) to work on.
 
+## Come Along to Our Next Cadence Meetup!
+
+It's been a while since we had a Cadence meetup so we have decided to organise another one. This time we are planning to do an in-person meetup in the San Francisco Bay area in early November. We are looking for any companies using Cadence to come along and speak about how they are using it. We'd also like to hear about any interesting use cases that you have used Cadence for.
+
+If you are interested in speaking at our next meetup then please contact [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya/)
+
 ## Looking for a Cadence Role?
 
-The Cadence teeam at Uber are recruiting....
-
-If you are interested in the role then please contact...
+The Cadence teeam at Uber are recruiting for a Fullstack Engineer. If you are interested then please contact [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya/) for more details.
 
 ## Cadence in the News!
 
