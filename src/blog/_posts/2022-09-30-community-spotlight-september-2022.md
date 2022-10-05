@@ -1,0 +1,57 @@
+---
+title: Cadence Community Spotlight Update - September 2022
+
+date: 2022-10-05
+author: Sharan Foga
+authorlink: https://www.linkedin.com/in/sfoga/
+---
+
+Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!
+
+Please see below for a roundup of the highlights:
+
+
+
+# Cadence at Developer Week
+
+A Cadence talk by Ender and Ben Slater has been accepted for Developer Week Enterprise.
+It is scheduled to for 16th November and needs to be a live presentation
+
+# Sharing Knowledge
+
+We have had a continual stream of questions coming into our Slack support channel or on  StackOverflow. As a result of the increased interest some members from the Cadence core team have decided to spend some time every day responding to your questions.
+
+If you have received a response that has solved your problem especially on StackOverflow then please don't forget to accept answer!
+
+# Cadence Version 1.0 is coming
+
+The community is working hard to finalise the release Version 1.0 of Cadence.
+
+This will be a huge milestone for the project and you can all see the amount of clean up and testing being done.
+
+Please watch out for the release!
+
+
+## Cadence in the News!
+
+Below are a selection of Cadence related articles, blogs and whitepapers. Please take a look and feel free to share via your own social media channels.
+
+- [Technical Showcase Event: DoorDash's Financial Products and Platforms
+](https://www.eventbrite.com/e/technical-showcase-event-doordashs-financial-products-and-platforms-tickets-404484523097?aff=priorattendee)
+
+- [Airflow vs Cadence: A Side by Side Comparison](https://www.instaclustr.com/blog/airflow-vs-cadence-a-side-to-side-comparison/)
+
+- [New Offering for Cadence Developers](New Instaclustr Offering for Cadence Developers)
+
+- [Open Source Cadence Is Built for the Developer Experience – Here’s How to Take Advantage](https://devm.io/open-source/open-source-cadence)
+
+## Upcoming Events
+
+- [Fitting Cadence in Your Corporate Architecture - 18th October 2022 @ 10am PT](https://info.instaclustr.com/webinar-fitting-cadence-in-corporate-architecture.html)
+
+- [Cadence Technical Office Hours - 31st October 2022 @ 9am PT](https://calendar.google.com/calendar/u/0/embed?src=e6r40gp3c2r01054id7e99dlac@group.calendar.google.com&ctz=America/Los_Angeles)
+
+
+If you have any news or topics you'd like us to include in our next update then please join our [Slack](http://t.uber.com/cadence-slack)#community channel.
+
+Please remember that this update is for you - so if you have any comments or feedback that could help us improve it then please share it with us in the #community [Slack](http://t.uber.com/cadence-slack) channel.
