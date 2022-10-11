@@ -1,7 +1,7 @@
 ---
 title: Cadence Community Spotlight Update - September 2022
 
-date: 2022-10-05
+date: 2022-10-11
 author: Sharan Foga
 authorlink: https://www.linkedin.com/in/sfoga/
 ---
@@ -10,24 +10,19 @@ Here’s the latest in our regular monthly Community Spotlight updates that give
 
 Please see below for a roundup of the highlights:
 
-
-
 # Cadence at Developer Week
 
-A Cadence talk by Ender and Ben Slater has been accepted for Developer Week Enterprise.
-It is scheduled to for 16th November and needs to be a live presentation
+A Cadence talk by [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya/) and [Ben Slater](https://www.linkedin.com/in/ben-slater-2720562/) has been accepted for [Developer Week Enterprise](https://www.developerweek.com/global/conference/enterprise/). The talk is scheduled to for 16th November so please make a note in your calendars.
 
 # Sharing Knowledge
 
-We have had a continual stream of questions coming into our Slack support channel or on  StackOverflow. As a result of the increased interest some members from the Cadence core team have decided to spend some time every day responding to your questions.
+Over the last few months we have had a continual stream of Cadence questions in our Slack support channel or on StackOverflow. As a result of the increased interest some members from the Cadence core team have decided to spend some time each day responding to your questions.
 
-If you have received a response that has solved your problem especially on StackOverflow then please don't forget to accept answer!
+Remember that if you have received a response that has solved your problem especially on StackOverflow then please don't forget to accept answer!
 
 # Cadence Version 1.0 is coming
 
-The community is working hard to finalise the release Version 1.0 of Cadence.
-
-This will be a huge milestone for the project and you can all see the amount of clean up and testing being done.
+The community is working hard to finalise the release Version 1.0 of Cadence. This will be a significant milestone for the project and we are sure that you have all seen the amount of clean up and testing being done.
 
 Please watch out for the release!
 
@@ -48,6 +43,8 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 ## Upcoming Events
 
 - [Fitting Cadence in Your Corporate Architecture - 18th October 2022 @ 10am PT](https://info.instaclustr.com/webinar-fitting-cadence-in-corporate-architecture.html)
+
+- [Migrating Your Workflow Solution from Temporal to Cadence - 25th October 2022 @ 10am PT](https://info.instaclustr.com/webinar-fitting-cadence-in-corporate-architecture.html)
 
 - [Cadence Technical Office Hours - 31st October 2022 @ 9am PT](https://calendar.google.com/calendar/u/0/embed?src=e6r40gp3c2r01054id7e99dlac@group.calendar.google.com&ctz=America/Los_Angeles)
 
