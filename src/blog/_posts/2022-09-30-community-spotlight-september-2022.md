@@ -22,13 +22,6 @@ Over the last few months we have had a continual stream of Cadence questions in 
 
 Remember that if you have received a response that has solved your problem especially on StackOverflow then please don't forget to accept answer!
 
-# Cadence Version 1.0 is coming
-
-The community is working hard to finalise the release Version 1.0 of Cadence. This will be a significant milestone for the project and we are sure that you have all seen the amount of clean up and testing being done.
-
-Please watch out for the release!
-
-
 ## Cadence in the News!
 
 Below are a selection of Cadence related articles, blogs and whitepapers. Please take a look and feel free to share via your own social media channels.
