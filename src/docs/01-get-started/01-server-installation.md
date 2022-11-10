@@ -14,12 +14,15 @@ Follow the Docker installation instructions found here: [https://docs.docker.com
 
 Download the Cadence docker-compose file:
 ```bash
-> curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose.yml && curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/prometheus_config.yml
+> curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose.yml && curl --create-dirs --output-dir prometheus -O https://raw.githubusercontent.com/uber/cadence/master/docker/prometheus/prometheus_config.yml
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100   675  100   675    0     0    958      0 --:--:-- --:--:-- --:--:--   958
+100  1264  100  1264    0     0   4461      0 --:--:-- --:--:-- --:--:--  4698
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    14  100    14    0     0     71      0 --:--:-- --:--:-- --:--:--    76
 > ls
-docker-compose.yml
+docker-compose.yml      prometheus
 ```
 Start Cadence Service:
 ```bash
