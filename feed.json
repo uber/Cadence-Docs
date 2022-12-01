@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2022/11/30/community-spotlight-november-2022/",
+            "url": "/blog/2022/11/30/community-spotlight-november-2022/",
+            "title": "Cadence Community Spotlight Update - November 2022",
+            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence @ Uber\n\nThis month Uber Engineering published a really nice article on one of the ways they are using Cadence. The article is called How Uber Optimizes the Timing of Push Notifications using ML and Linear Programming.\n\nThe Uber team take you through the details of the problem that they are looking to solve, so you can understand the scope limitations and depedencies - so please take a look.\n\nCadence @ DeveloperWeek Enterprise\n\nDevNetwork run a series of conferences and during November Cadence was featured in at DeveloperWeek Enterprise. Ender Demirkaya and [Ben Slater](https://www.linkedin.com/in/ ...",
+            "date_modified": "2022-11-30T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2022/10/31/community-spotlight-october-2022/",
             "url": "/blog/2022/10/31/community-spotlight-october-2022/",
             "title": "Cadence Community Spotlight Update - October 2022",
@@ -31,13 +38,6 @@
             "title": "Cadence Community Spotlight Update - July 2022",
             "summary": "Here’s our monthly Community Spotlight update that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nFlying Drones with Cadence\n\nCommunity member Paul Brebner has released another blog in the series of using Cadence to manage a drone delivery service. You can see a simulated view of it in action\n\nDon’t forget to try out the code yourself and remember if you have used Cadence to do something interesting then please let us know so we can feature it in our next update.\n\nGitHub Statistics\n\nDuring July the main Cadence branch had 28 pull requests (PRs) merged. There were 214 files changed by 11 different authors. You can find more details here\n\nThe Cadence documentati ...",
             "date_modified": "2022-07-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/06/30/community-spotlight-update-june-2022/",
-            "url": "/blog/2022/06/30/community-spotlight-update-june-2022/",
-            "title": "Cadence Community Spotlight Update - June 2022",
-            "summary": "It’s time for our monthly Cadence Community Spotlight update with news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nKnowledge Sharing and Support\n\nOur Slack #support channel has been busy this month with 13 questions asked this month by 12 different community members. Six community members took time to respond to those questions which clearly shows our community is growing, collaborating and keen to share knowledge.\n\nPlease don’t forget that we encourage everyone to post questions on StackOverflow using the cadence-workflow and uber-cadence tags so that others with similar questions or issues can easily search for and find an answer.\n\nImproving Technical Office Hours\n\nOver the last few months we have been holding regular monthly Office Hours meetings but they have not attracted as many participants as we would like. We would like to understand if there is something preventing people from attending (e.g perhaps the timing or ...",
-            "date_modified": "2022-06-30T00:00:00.000Z"
         }
     ]
 }
