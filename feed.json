@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/01/31/community-spotlight-january-2023/",
+            "url": "/blog/2023/01/31/community-spotlight-january-2023/",
+            "title": "Cadence Community Spotlight Update - January 2023",
+            "summary": "Happy New Year everyone! Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nClosing Down Cadence Office Hours\nWe have been running Office Hours sessions every month since May last year. The aim was to give the community an opportunity to speak directly with some of the Cadence core developers and experts to answer questions on particular issues you may be having. We have found that the most preferred method for community questions has been the support Slack channel so have decided to stop this monthly call.\n\nThanks very much to Ender Demirkayaand the Uber team for making themselves available for these sessions.\n\nPlease remember that if you have question about Cadence or are facing a specific issue then  you can post your question in our #support Slack channel. If you al ...",
+            "date_modified": "2023-01-31T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2022/12/23/community-spotlight-december-2022/",
             "url": "/blog/2022/12/23/community-spotlight-december-2022/",
             "title": "Cadence Community Spotlight Update - December 2022",
@@ -31,13 +38,6 @@
             "title": "Cadence Community Spotlight Update - September 2022",
             "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence at Developer Week\n\nA Cadence talk by Ender Demirkaya and Ben Slater has been accepted for Developer Week Enterprise.\n\nThe talk is scheduled to for 16th November so please make a note in your calendars.\n\nSharing Knowledge\n\nOver the last few months we have had a continual stream of Cadence questions in our Slack #support channel or on StackOverflow. As a result of the increased interest some members from the Cadence core team have decided to spend some time each day responding to your questions.\n\nRemember that if you have received a response ...",
             "date_modified": "2022-10-11T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/08/31/community-spotlight-august-2022/",
-            "url": "/blog/2022/08/31/community-spotlight-august-2022/",
-            "title": "Cadence Community Spotlight Update - August 2022",
-            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCommunity Survey\n\nWe are working on putting together our first community survey to find out a bit more about our community. We would like to get your feedback about on a few things such as:\n\nhow you are using Cadence\nany specific experiences you have had where you'd like to see new features\nany special use cases not yet covered\nand of course whatever other feedback you'd like to give us\n\nSo please watch out for the survey which will be coming out to you via the Slack channel soon!\n\nSupport Activity\n\nWe have noticed that community activity is increasing and that we are continuing to respond to questions in our Slack #support channel. Eight questions have been posted in the channel this month and another seven questions have been posted on StackOverflow. We encourage people to post their questi ...",
-            "date_modified": "2022-08-31T00:00:00.000Z"
         }
     ]
 }
