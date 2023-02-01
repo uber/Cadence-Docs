@@ -119,7 +119,7 @@ The Cadence client library provides a number of functions and types as alternati
 Go functions and types. Usage of these replacement functions/types is necessary in order to ensure
 that the :workflow: code execution is deterministic and repeatable within an execution context.
 
-Coroutine related constructs:
+Goroutine related constructs:
 
 * **workflow.Go** : This is a replacement for the the **go** statement.
 * **workflow.Channel** : This is a replacement for the native **chan** type. Cadence provides
