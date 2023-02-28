@@ -14,7 +14,7 @@ We've been talking about doing a community survey for a while and during Februar
 
 The survey takes 5 minutes and is your opportunity to provide feedback to the project and highlight areas you think we need to focus on.
 
-The survey link is [here](https://uber.surveymonkey.com/r/ZS83WJW)
+Use this [Survey Link](https://uber.surveymonkey.com/r/ZS83WJW)
 
 Please take a few minutes to give us your opinion.
 
@@ -22,9 +22,9 @@ Please take a few minutes to give us your opinion.
 We've had a few queries about whether Cadence and [Temporal](https://temporal.io/) are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different communities so are independent.
 
 ## Cadence at DoorDash ##
-Although published a few month's ago we missed including an article by DoorDash about how they are using Cadence to build real time event processing with Apache Flink and Apache Kafka.
+Although published a few month's ago we missed including an article by [DoorDash](https://doordash.engineering/) about how they are using Cadence to build real time event processing with [Apache Flink](https://flink.apache.org/) and [Apache Kafka](https://kafka.apache.org/).
 
-Here is the [link](https://doordash.engineering/2022/08/02/building-scalable-real-time-event-processing-with-kafka-and-flink/)
+Here is the link to the article: [Building Scalable Real Time Event Processing with Kafka and Flink](https://doordash.engineering/2022/08/02/building-scalable-real-time-event-processing-with-kafka-and-flink/)
 
 Remember to let us know if you have news, articles or blog posts about Cadence that you'd like us to include in these monthly updates.
 
@@ -36,11 +36,9 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 - [Meet Cadence: Workflow Engine for Taming Complex Processes](https://thenewstack.io/meet-cadence-workflow-engine-for-taming-complex-processes/)
 
-- [Cookbook: Cadence Child Workflows] (https://github.com/instaclustr/cadence-cookbooks-instafood/blob/main/cookbooks/child-workflows/child-workflows-megafood.md)
-
 ## Upcoming Events
 
-- [Webinar: Spinning Your Drones with Cadence and Apache Kafka](https://info.instaclustr.com/webinar-spinning-drones-cadence-kafka.html
+- [On Demand Webinar: Spinning Your Drones with Cadence and Apache Kafka](https://info.instaclustr.com/webinar-spinning-drones-cadence-kafka.html)
 
 If you have any news or topics you'd like us to include in our next update then please join our [Slack](http://t.uber.com/cadence-slack)#community channel.
 
