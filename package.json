@@ -6,11 +6,11 @@
   "scripts": {
     "build:blog": "vuepress build src/blog",
     "build:site": "vuepress build src",
-    "build": "npm run build:blog && npm run build:site && npm run copy:blog",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; npm run build:blog && npm run build:site && npm run copy:blog",
     "copy:blog": "cp -a dist-blog/. dist",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "start:blog": "export NODE_OPTIONS=--openssl-legacy-provider;vuepress dev src/blog",
+    "start:blog": "export NODE_OPTIONS=--openssl-legacy-provider; vuepress dev src/blog",
     "start": "export NODE_OPTIONS=--openssl-legacy-provider; vuepress dev src",
     "start:local": "http-server ./dist",
     "test": "npm run cypress:run"
