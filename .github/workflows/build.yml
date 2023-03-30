@@ -1,19 +1,28 @@
+# Based on the node.js template, modified because we don't need some of it for such a simple project.
+
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
 name: Build
 
 on: [push, pull_request]
 
 jobs:
   build:
-    # stable versions only please, otherwise it's unnecessarily flaky.
-    # see https://github.com/actions/runner-images for versions / when upgrading.
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
-        with:
-          persist-credentials: false
+    runs-on: ubuntu-latest
 
-      - name: Install and Build 🔧
-        run: |
-          npm install
-          npm run build
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: Use Node.js v16
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x # ideally: 18.x
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        cache: 'npm'
+    - name: Install and Build 🔧
+      run: |
+        npm install
+        npm run build
