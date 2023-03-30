@@ -4,7 +4,9 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # stable versions only please, otherwise it's unnecessarily flaky.
+    # see https://github.com/actions/runner-images for versions / when upgrading.
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
