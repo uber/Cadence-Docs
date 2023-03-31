@@ -21,9 +21,9 @@ jobs:
           # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
           cache: 'npm'
       - name: Install and Build 🔧
-          run: |
-            npm install
-            npm run build
+        run: |
+          npm install
+          npm run build
 
       # additional steps to deploy
       - name: Configure domain
