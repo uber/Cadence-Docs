@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/02/28/community-spotlight-february/",
+            "url": "/blog/2023/02/28/community-spotlight-february/",
+            "title": "Cadence Community Spotlight Update - February 2023",
+            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCommunity Survey\nWe've been talking about doing a community survey for a while and during February we sent it out. We are still collating the results so it's not too late to send in your response.\n\nThe survey takes 5 minutes and is your opportunity to provide feedback to the project and highlight areas you think we need to focus on.\n\nUse this Survey Link\n\nPlease take a few minutes to give us your opinion.\n\nCadence and Temporal\nDuring user surveys we've had a few queries about whether Cadence and Temporal are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different ...",
+            "date_modified": "2023-02-28T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/01/31/community-spotlight-january-2023/",
             "url": "/blog/2023/01/31/community-spotlight-january-2023/",
             "title": "Cadence Community Spotlight Update - January 2023",
@@ -31,13 +38,6 @@
             "title": "Cadence Community Spotlight Update - October 2022",
             "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence Meetup Postponed\n\nIt's always great to get the community together and we had planned to run another Cadence Meetup in early November. Unfortunately we didn't have enough time to get things organised so we've decided to postpone it. So please watch out for an announcement for the new Cadence meetup date.\n\nDoordash Technnical Showcase Featuring Cadence\n\nWe have had some great feedback from people who attended Technical Showcase that was run this month by Doordash. It featured their financial products but also highlighted some of the key technologies they use...and guess what Cadence is one of them!\n\nIf you missed the session then you will be happy to know that it was recorded and we've inlcuded a link to the the recording on Youtube.\n\nThanks to ...",
             "date_modified": "2022-10-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/10/11/community-spotlight-september-2022/",
-            "url": "/blog/2022/10/11/community-spotlight-september-2022/",
-            "title": "Cadence Community Spotlight Update - September 2022",
-            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence at Developer Week\n\nA Cadence talk by Ender Demirkaya and Ben Slater has been accepted for Developer Week Enterprise.\n\nThe talk is scheduled to for 16th November so please make a note in your calendars.\n\nSharing Knowledge\n\nOver the last few months we have had a continual stream of Cadence questions in our Slack #support channel or on StackOverflow. As a result of the increased interest some members from the Cadence core team have decided to spend some time each day responding to your questions.\n\nRemember that if you have received a response ...",
-            "date_modified": "2022-10-11T00:00:00.000Z"
         }
     ]
 }
