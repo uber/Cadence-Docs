@@ -10,10 +10,9 @@ Welcome to the latest of our regular monthly Community Spotlight updates that gi
 Please see below for a roundup of the highlights:
 
 ## Cadence at Open Source Summit, North America ##
-We are very pleased to let you know that a talk on Cadence has been accepted for the Linux Foundation's Open Source Summit, North America
+We are very pleased to let you know that a talk on Cadence has been accepted for the Linux Foundation's [Open Source Summit, North America](https://events.linuxfoundation.org/open-source-summit-north-america/) in Vancouver on 10th - 12th May 2023.
 
-The talk called ????? will be given by  [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya/). If you are planning to attend the Open Source Summit then please don't forget to attend the talk and catch up with Ender.
-
+The talk called [Cadence: The New Open Source Project for Building Complex Distributed Applications](https://ossna2023.sched.com/event/1K5B1) will be given by [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya/) and [Emrah Seker](https://www.linkedin.com/in/emrahseker/) If you are planning to attend the Open Source Summit then please don't forget to attend the talk and take time catch up with Ender and Emrah!
 
 ## Community Activity ##
 Our Slack #support channel has been very active over the last few months as we continue to get an continual stream of questions. Here are the stats:
