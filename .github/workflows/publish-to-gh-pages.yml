@@ -3,26 +3,34 @@ on:
   push:
     branches:
       - master
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
+      # same as build.yml
       - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
-
+      - name: Use Node.js v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x # ideally: 18.x
+          # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+          cache: 'npm'
       - name: Install and Build 🔧
         run: |
           npm install
           npm run build
 
+      # additional steps to deploy
       - name: Configure domain
         uses: finnp/create-file-action@1.0.0
         env:
           FILE_NAME: "dist/CNAME"
           FILE_DATA: ${{ secrets.CUSTOM_DOMAIN }}
-
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
