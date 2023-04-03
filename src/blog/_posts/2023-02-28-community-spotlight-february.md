@@ -22,7 +22,7 @@ Please take a few minutes to give us your opinion.
 During user surveys we've had a few queries about whether Cadence and [Temporal](https://temporal.io/) are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different communities so are independent.
 
 ## Cadence at DoorDash ##
-Although published a few month's ago we missed including an article by [DoorDash](https://doordash.engineering/) about how they are using Cadence to build real time event processing with [Apache Flink](https://flink.apache.org/) and [Apache Kafka](https://kafka.apache.org/).
+Although published a few months ago we missed including an article by [DoorDash](https://doordash.engineering/) about how they are using Cadence to build real time event processing with [Apache Flink](https://flink.apache.org/) and [Apache Kafka](https://kafka.apache.org/).
 
 Here is the link to the article: [Building Scalable Real Time Event Processing with Kafka and Flink](https://doordash.engineering/2022/08/02/building-scalable-real-time-event-processing-with-kafka-and-flink/)
 
