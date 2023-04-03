@@ -9,7 +9,7 @@ permalink: /docs/java-client/activity-interface
 An :activity: is a manifestation of a particular :task: in the business logic.
 
 :activity:Activities: are defined as methods of a plain Java interface. Each method defines a single :activity: type. A single
-:workflow: can use more than one :activity: interface and call more that one :activity: method from the same interface.
+:workflow: can use more than one :activity: interface and call more than one :activity: method from the same interface.
 The only requirement is that :activity: method arguments and return values are serializable to a byte array using the provided
 [DataConverter](https://static.javadoc.io/com.uber.cadence/cadence-client/2.4.1/index.html?com/uber/cadence/converter/DataConverter.html)
 interface. The default implementation uses a JSON serializer, but an alternative implementation can be easily configured.
