@@ -39,7 +39,7 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 ## Upcoming Events
 
-- [Webinar: Microservices - A Modern Orchestration Approach with Cadencemproving](https://netapp.zoom.us/webinar/register/WN__5fuwxmNQuWeZ6DiI5wUqg)
+- [Webinar: Microservices - A Modern Orchestration Approach with Cadence](https://netapp.zoom.us/webinar/register/WN__5fuwxmNQuWeZ6DiI5wUqg)
 
 If you have any news or topics you'd like us to include in our next update then please join our [Slack](http://t.uber.com/cadence-slack)#community channel.
 
