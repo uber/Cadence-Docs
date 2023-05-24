@@ -14,4 +14,4 @@ Some real-world use cases:
 
 * Network, host and service monitoring
 * Processing files uploaded to FTP or S3
-* [Cadence Polling Cookbook by Instaclustr: Polling an external API for a specific resource to become available: ](https://info.instaclustr.com/rs/620-JHM-287/images/Cadence_Cookbook.pdf)
+* [Cadence Polling Cookbook by Instaclustr: Polling an external API for a specific resource to become available: ](https://github.com/instaclustr/cadence-cookbooks-instafood/blob/main/cookbooks/polling/polling-megafood.md)
