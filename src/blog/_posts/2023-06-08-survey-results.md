@@ -6,7 +6,7 @@ author: Ender Demirkaya
 authorlink: https://www.linkedin.com/in/enderdemirkaya/
 ---
 
-We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.
+We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our [Slack workspace](https://uber-cadence.slack.com/), [cadenceworkflow.io](https://cadenceworkflow.io) Blog and [LinkedIn](https://www.linkedin.com/company/cadenceworkflow/). After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.
 
 
 Here are some highlights in text and you can check out the visuals to get more details:
@@ -23,7 +23,7 @@ The scale our users operating Cadence varies from thousands to billions of workf
 
 ![time_zone.png](../../shared/img/2023-survey-results/time_zone.png)
 
-Our user base is the biggest in Europe compared to any other place. This is inline with Cadence team growing its presence in Europe. Users from different places also contacted us to contribute to Cadence as a follow up to the survey. We will start putting up-for-grabs tasks on Github. Several of them wanted to meet with a Zoom call and to discuss their use cases and best practices. As the Cadence team has presence in both the EU and the US, we welcome all our users to contact us anytime. Slack is the fastest way to reach us.
+Most survey responders were from Europe compared to any other place. This is in-line with the Cadence team growing its presence in Europe. Users from different places also contacted us to contribute to Cadence as a follow up to the survey. We will start putting up-for-grabs and new-starter tasks on Github. Several of them wanted to meet with a Zoom call and to discuss their use cases and best practices. As the Cadence team has presence in both the EU and the US, we welcome all our users to contact us anytime. Slack is the fastest way to reach us.
 
 ![following.png](../../shared/img/2023-survey-results/following.png)
 
