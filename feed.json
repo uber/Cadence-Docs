@@ -5,6 +5,14 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/06/08/survey-results/",
+            "url": "/blog/2023/06/08/survey-results/",
+            "title": "2023 Cadence Community Survey Results",
+            "summary": "We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our Slack workspace, cadenceworkflow.io Blog and LinkedIn. After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.\n\nHere are some highlights in text and you can check out the visuals to get more details:\n\nusing.png\n\njob_role.png\n\nMost of the people who replied to our survey were engineers who were already using Cadence, actively evaluating, or migrating from a similar technology. This was exciting to hear! Some of you have contacted us to learn more about benchmarks, scale, and ideal ...",
+            "image": "/../../shared/img/2023-survey-results/using.png",
+            "date_modified": "2023-06-08T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/03/31/community-spotlight-march-2023/",
             "url": "/blog/2023/03/31/community-spotlight-march-2023/",
             "title": "Cadence Community Spotlight Update - March 2023",
@@ -31,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - December 2022",
             "summary": "I know we are a little early this month as many people will be taking some time out for holidays.\n\nHappy Holidays\n\nWe'd like to wish everyone happy holidays and to thank you for being part of the Cadence community. It's been a busy year for Cadence as we have continued to build a strong, active community that works together to solve issues and generally support each other.\n\nLet's keep going!...This is a great way to build a sustainable community.\n\nWe are sure that 2023 will be even more exciting as we continue to develop Cadence.\n\nCadence in the News!\n\nBelow are a selection of Cadence related articles, blogs and whitepapers. Please take a look and feel free to share via your own social media channels.\n\nCadence iWF\n\nChild Workflow Cookbook\n\n[Cadence Connection Examples Using TLS](https://www.instaclus ...",
             "date_modified": "2022-12-23T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/11/30/community-spotlight-november-2022/",
-            "url": "/blog/2022/11/30/community-spotlight-november-2022/",
-            "title": "Cadence Community Spotlight Update - November 2022",
-            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence @ Uber\n\nThis month Uber Engineering published a really nice article on one of the ways they are using Cadence. The article is called How Uber Optimizes the Timing of Push Notifications using ML and Linear Programming.\n\nThe Uber team take you through the details of the problem that they are looking to solve, so you can understand the scope limitations and depedencies - so please take a look.\n\nCadence @ DeveloperWeek Enterprise\n\nDevNetwork run a series of conferences and during November Cadence was featured in at DeveloperWeek Enterprise. Ender Demirkaya and [Ben Slater](https://www.linkedin.com/in/ ...",
-            "date_modified": "2022-11-30T00:00:00.000Z"
         }
     ]
 }

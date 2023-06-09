@@ -4,9 +4,26 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Wed, 24 May 2023 08:34:48 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 09 Jun 2023 17:27:10 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[2023 Cadence Community Survey Results]]></title>
+            <link>/blog/2023/06/08/survey-results/</link>
+            <guid>/blog/2023/06/08/survey-results/</guid>
+            <pubDate>Thu, 08 Jun 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our Slack workspace, cadenceworkflow.io Blog and LinkedIn. After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.
+
+Here are some highlights in text and you can check out the visuals to get more details:
+
+using.png
+
+job_role.png
+
+Most of the people who replied to our survey were engineers who were already using Cadence, actively evaluating, or migrating from a similar technology. This was exciting to hear! Some of you have contacted us to learn more about benchmarks, scale, and ideal ...]]></description>
+            <enclosure url="/../../shared/img/2023-survey-results/using.png">
+            </enclosure>
+        </item>
         <item>
             <title><![CDATA[Cadence Community Spotlight Update - March 2023]]></title>
             <link>/blog/2023/03/31/community-spotlight-march-2023/</link>
@@ -85,25 +102,6 @@ Cadence iWF
 Child Workflow Cookbook
 
 [Cadence Connection Examples Using TLS](https://www.instaclus ...]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Cadence Community Spotlight Update - November 2022]]></title>
-            <link>/blog/2022/11/30/community-spotlight-november-2022/</link>
-            <guid>/blog/2022/11/30/community-spotlight-november-2022/</guid>
-            <pubDate>Wed, 30 Nov 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!
-
-Please see below for a roundup of the highlights:
-
-Cadence @ Uber
-
-This month Uber Engineering published a really nice article on one of the ways they are using Cadence. The article is called How Uber Optimizes the Timing of Push Notifications using ML and Linear Programming.
-
-The Uber team take you through the details of the problem that they are looking to solve, so you can understand the scope limitations and depedencies - so please take a look.
-
-Cadence @ DeveloperWeek Enterprise
-
-DevNetwork run a series of conferences and during November Cadence was featured in at DeveloperWeek Enterprise. Ender Demirkaya and [Ben Slater](https://www.linkedin.com/in/ ...]]></description>
         </item>
     </channel>
 </rss>
