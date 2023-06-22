@@ -15,7 +15,7 @@ Follow the Docker installation instructions found here: [https://docs.docker.com
 Download the Cadence docker-compose file:
 ```bash
 
-> curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose.yml && curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/prometheus/prometheus.yml
+> curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose.yml && curl --create-dirs --output-dir prometheus -O https://raw.githubusercontent.com/uber/cadence/master/docker/prometheus/prometheus.yml
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
