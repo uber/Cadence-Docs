@@ -5,21 +5,23 @@ permalink: /docs/get-started/golang-hello-world
 ---
 
 # Golang Hello World
-This section provides step by step instructions on how to write and run a HelloWorld with Golang. 
+This section provides step-by-step instructions on how to write and run a HelloWorld workflow in Cadence with Golang. You will learn two critical building blocks of Cadence: activities and workflows. First, you will write an activity function that prints a "Hello World!" message in the log. Then, you will write a workflow function that executes this activity. 
 
-For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+## Prerequisite
+To successfully run this hello world sample, follow this checklist of setting up Cadence environment
+1. Your worker is running properly and you have registered the hello world activity and workflow to the worker
+2. Your Cadence server is running (check your background docker container process)
+3. You have successfully registered a domain for this workflow
 
-You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
+## Step 0. Include Golang cadence-client dependency
 
-## Include Golang cadence-client dependency
-
-Add cadence-client library to your project by running the command:
+To start with Cadence in your Go project, add cadence-client library to your project by running the command:
 
 ```bash
 go get go.uber.org/cadence
 ```
 
-## Implement HelloWorld Workflow
+## Step 1. Implement HelloWorld Actvity
 
 ```go
 package main
@@ -36,9 +38,6 @@ import (
 /**
  * This is the hello world workflow sample.
  */
-
-// ApplicationName is the task list for this sample
-const ApplicationName = "helloWorldGroup"
 
 // helloWorkflow workflow decider
 func helloWorldWorkflow(ctx workflow.Context, name string) error {
@@ -87,3 +86,7 @@ And start a workflow:
 
 ## What is Next
 Now you have completed the tutorials. You can continue to explore the key [concepts](/docs/concepts) in Cadence, and also how to use them with [Go Client](/docs/go-client)
+
+For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+
+You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
