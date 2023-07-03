@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/07/01/components-of-cadence-application-setup/",
+            "url": "/blog/2023/07/01/components-of-cadence-application-setup/",
+            "title": "Understanding components of Cadence application",
+            "summary": "Cadence is a powerful, scalable, and fault-tolerant workflow orchestration framework that helps developers implement and manage complex workflow tasks. In most cases, developers contribute activities and workflows directly to their codebases, and they may not have a full understanding of the components behind a running Cadence application. We receive numerous inquiries about setting up Cadence in a local environment from scratch for testing. Therefore, in this article, we will explore the components that power a Cadence cluster.\n\nThere are three critical components that are essential for any Cadence application:\nA running Cadence backend server.\nA registered Cadence domain.\nA running Cadence worker that registers all workflows and activities.\n\nLet's go over these components in more details.\n\nThe Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dep ...",
+            "date_modified": "2023-07-01T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/06/08/survey-results/",
             "url": "/blog/2023/06/08/survey-results/",
             "title": "2023 Cadence Community Survey Results",
@@ -32,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - January 2023",
             "summary": "Happy New Year everyone! Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nClosing Down Cadence Office Hours\nWe have been running Office Hours sessions every month since May last year. The aim was to give the community an opportunity to speak directly with some of the Cadence core developers and experts to answer questions on particular issues you may be having. We have found that the most preferred method for community questions has been the support Slack channel so have decided to stop this monthly call.\n\nThanks very much to Ender Demirkayaand the Uber team for making themselves available for these sessions.\n\nPlease remember that if you have question about Cadence or are facing a specific issue then  you can post your question in our #support Slack channel. If you al ...",
             "date_modified": "2023-01-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2022/12/23/community-spotlight-december-2022/",
-            "url": "/blog/2022/12/23/community-spotlight-december-2022/",
-            "title": "Cadence Community Spotlight Update - December 2022",
-            "summary": "I know we are a little early this month as many people will be taking some time out for holidays.\n\nHappy Holidays\n\nWe'd like to wish everyone happy holidays and to thank you for being part of the Cadence community. It's been a busy year for Cadence as we have continued to build a strong, active community that works together to solve issues and generally support each other.\n\nLet's keep going!...This is a great way to build a sustainable community.\n\nWe are sure that 2023 will be even more exciting as we continue to develop Cadence.\n\nCadence in the News!\n\nBelow are a selection of Cadence related articles, blogs and whitepapers. Please take a look and feel free to share via your own social media channels.\n\nCadence iWF\n\nChild Workflow Cookbook\n\n[Cadence Connection Examples Using TLS](https://www.instaclus ...",
-            "date_modified": "2022-12-23T00:00:00.000Z"
         }
     ]
 }
