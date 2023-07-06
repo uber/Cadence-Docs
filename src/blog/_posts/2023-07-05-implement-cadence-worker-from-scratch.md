@@ -12,7 +12,7 @@ To finish this tutorial, there are two prerequisites you need to finish first
 1. Register a Cadence domain for your worker. For this tutorial, I've already registered a domain named `test-domain`
 2. Start the Cadence backend server in background. You may find the instruction [here](../../docs/01-get-started/01-server-installation.md)
 
-To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000.
+To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port for your Cadence backend.
 
 ```Go
 package main
@@ -40,25 +40,28 @@ var CadenceService = "cadence-frontend"
 
 Note that the domain is what we've already registered in advance. We will need to use this domain to interact with Cadence CLI tool.
 
-Then let's write a simple function to build a Cadence client in your worker, which will communicate with the Cadecen backend continuously. Cadence provides multiple communication channel options, and in this tutorial, we will just use the `tchannel` to boost the client up.
+Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadecen backend continuously. 
 
 ```Go
 func buildCadenceClient() workflowserviceclient.Interface {
-    ch, err := tchannel.NewChannelTransport(tchannel.ServiceName(ClientName))
-    if err != nil {
-        panic("Failed to setup tchannel")
-    }
     dispatcher := yarpc.NewDispatcher(yarpc.Config{
-        Name: ClientName,
-        Outbounds: yarpc.Outbounds{
-            CadenceService: {Unary: ch.NewSingleOutbound(HostPort)},
-        },
-    })
-    if err := dispatcher.Start(); err != nil {
-        panic("Failed to start dispatcher")
-    }
-
-    return workflowserviceclient.New(dispatcher.ClientConfig(CadenceService))
+		Name: ClientName,
+		Outbounds: yarpc.Outbounds{
+		  CadenceService: {Unary: grpc.NewTransport().NewSingleOutbound(HostPort)},
+		},
+	  })
+	  if err := dispatcher.Start(); err != nil {
+		panic("Failed to start dispatcher")
+	  }
+  
+	  clientConfig := dispatcher.ClientConfig(CadenceService)
+  
+	  return compatibility.NewThrift2ProtoAdapter(
+		apiv1.NewDomainAPIYARPCClient(clientConfig),
+		apiv1.NewWorkflowAPIYARPCClient(clientConfig),
+		apiv1.NewWorkerAPIYARPCClient(clientConfig),
+		apiv1.NewVisibilityAPIYARPCClient(clientConfig),
+	  )
 }
 ```
 
@@ -107,18 +110,18 @@ func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
 Now we have all components ready for the worker, let's put them together. 
 
 ```Go
-package main
-
 import (
     "net/http"
     "go.uber.org/cadence/.gen/go/cadence/workflowserviceclient"
+    "go.uber.org/cadence/compatibility"
     "go.uber.org/cadence/worker"
 
+    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
     "github.com/uber-go/tally"
     "go.uber.org/zap"
     "go.uber.org/zap/zapcore"
     "go.uber.org/yarpc"
-    "go.uber.org/yarpc/transport/tchannel"
+    "go.uber.org/yarpc/transport/grpc"
 )
 
 var HostPort = "127.0.0.1:7933"
@@ -146,21 +149,24 @@ func buildLogger() *zap.Logger {
 }
 
 func buildCadenceClient() workflowserviceclient.Interface {
-    ch, err := tchannel.NewChannelTransport(tchannel.ServiceName(ClientName))
-    if err != nil {
-        panic("Failed to setup tchannel")
-    }
     dispatcher := yarpc.NewDispatcher(yarpc.Config{
-        Name: ClientName,
-        Outbounds: yarpc.Outbounds{
-            CadenceService: {Unary: ch.NewSingleOutbound(HostPort)},
-        },
-    })
-    if err := dispatcher.Start(); err != nil {
-        panic("Failed to start dispatcher")
-    }
-
-    return workflowserviceclient.New(dispatcher.ClientConfig(CadenceService))
+		Name: ClientName,
+		Outbounds: yarpc.Outbounds{
+		  CadenceService: {Unary: grpc.NewTransport().NewSingleOutbound(HostPort)},
+		},
+	  })
+	  if err := dispatcher.Start(); err != nil {
+		panic("Failed to start dispatcher")
+	  }
+  
+	  clientConfig := dispatcher.ClientConfig(CadenceService)
+  
+	  return compatibility.NewThrift2ProtoAdapter(
+		apiv1.NewDomainAPIYARPCClient(clientConfig),
+		apiv1.NewWorkflowAPIYARPCClient(clientConfig),
+		apiv1.NewWorkerAPIYARPCClient(clientConfig),
+		apiv1.NewVisibilityAPIYARPCClient(clientConfig),
+	  )
 }
 
 func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
