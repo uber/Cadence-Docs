@@ -40,7 +40,7 @@ var CadenceService = "cadence-frontend"
 
 Note that the domain is what we've already registered in advance. We will need to use this domain to interact with Cadence CLI tool.
 
-Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadecen backend continuously. 
+Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadence backend continuously. 
 
 ```Go
 func buildCadenceClient() workflowserviceclient.Interface {
