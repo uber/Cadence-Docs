@@ -19,6 +19,13 @@
             "date_modified": "2023-07-01T00:00:00.000Z"
         },
         {
+            "id": "/blog/2023/06/30/community-spotlight-june-2023/",
+            "url": "/blog/2023/06/30/community-spotlight-june-2023/",
+            "title": "Cadence Community Spotlight Update - June 2023",
+            "summary": "We've had a short break but now we are back. Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence Release 1.0\n\nJust in case you missed it - at the end of April Cadence v1.0 was officially released. This release is a significant milestone for the project and the community. It indicates that we are confident in the stability of the code that we can recommend it and promote it widely to more users. Kudos to everyone that worked together to make this release happen.\n\nAnd the Uber team also gave Cadence a writeup on the Uber Engineering Blog so please take a look.\n\nCommunity Survey Results\n\nThe results of our Community Survey have been published and you can find [the details right here on our blog](https://cadenceworkflow.io/blog/2 ...",
+            "date_modified": "2023-06-30T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/06/08/survey-results/",
             "url": "/blog/2023/06/08/survey-results/",
             "title": "2023 Cadence Community Survey Results",
@@ -32,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - March 2023",
             "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence at Open Source Summit, North America\nWe are very pleased to let you know that a talk on Cadence has been accepted for the Linux Foundation's Open Source Summit, North America in Vancouver on 10th - 12th May 2023.\n\nThe talk called Cadence: The New Open Source Project for Building Complex Distributed Applications will be given by Ender Demirkaya and Emrah Seker If you are planning to attend the Open Source Summit then please don't forget to attend the talk and take time catch up with Ender and Emrah!\n\nCommunity Activity\nOur Slack #support channel has been very active over the last fe ...",
             "date_modified": "2023-03-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/02/28/community-spotlight-february/",
-            "url": "/blog/2023/02/28/community-spotlight-february/",
-            "title": "Cadence Community Spotlight Update - February 2023",
-            "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCommunity Survey\nWe've been talking about doing a community survey for a while and during February we sent it out. We are still collating the results so it's not too late to send in your response.\n\nThe survey takes 5 minutes and is your opportunity to provide feedback to the project and highlight areas you think we need to focus on.\n\nUse this Survey Link\n\nPlease take a few minutes to give us your opinion.\n\nCadence and Temporal\nDuring user surveys we've had a few queries about whether Cadence and Temporal are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different ...",
-            "date_modified": "2023-02-28T00:00:00.000Z"
         }
     ]
 }
