@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/07/05/implement-cadence-worker-from-scratch/",
+            "url": "/blog/2023/07/05/implement-cadence-worker-from-scratch/",
+            "title": "Implement a Cadence worker service from scratch",
+            "summary": "In the previous blog, we have introduced three critical components for a Cadence application: the Cadence backend, domain, and worker. Among these, the worker service is the most crucial focus for developers as it hosts the activities and workflows of a Cadence application. In this blog, I will provide a short tutorial on how to implement a simple worker service from scratch in Go.\n\nTo finish this tutorial, there are two prerequisites you need to finish first\nRegister a Cadence domain for your worker. For this tutorial, I've already registered a domain named test-domain\nStart the Cadence backend server in background. You may find the instruction here\n\nTo get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port ...",
+            "date_modified": "2023-07-05T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/07/01/components-of-cadence-application-setup/",
             "url": "/blog/2023/07/01/components-of-cadence-application-setup/",
             "title": "Understanding components of Cadence application",
@@ -32,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - February 2023",
             "summary": "Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCommunity Survey\nWe've been talking about doing a community survey for a while and during February we sent it out. We are still collating the results so it's not too late to send in your response.\n\nThe survey takes 5 minutes and is your opportunity to provide feedback to the project and highlight areas you think we need to focus on.\n\nUse this Survey Link\n\nPlease take a few minutes to give us your opinion.\n\nCadence and Temporal\nDuring user surveys we've had a few queries about whether Cadence and Temporal are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different ...",
             "date_modified": "2023-02-28T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/01/31/community-spotlight-january-2023/",
-            "url": "/blog/2023/01/31/community-spotlight-january-2023/",
-            "title": "Cadence Community Spotlight Update - January 2023",
-            "summary": "Happy New Year everyone! Here’s the latest in our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nClosing Down Cadence Office Hours\nWe have been running Office Hours sessions every month since May last year. The aim was to give the community an opportunity to speak directly with some of the Cadence core developers and experts to answer questions on particular issues you may be having. We have found that the most preferred method for community questions has been the support Slack channel so have decided to stop this monthly call.\n\nThanks very much to Ender Demirkayaand the Uber team for making themselves available for these sessions.\n\nPlease remember that if you have question about Cadence or are facing a specific issue then  you can post your question in our #support Slack channel. If you al ...",
-            "date_modified": "2023-01-31T00:00:00.000Z"
         }
     ]
 }
