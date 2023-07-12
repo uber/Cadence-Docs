@@ -44,13 +44,15 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 - [Announcing Cadence 1.0: The Powerful Workflow Platform Built for Scale and Reliability](https://www.uber.com/en-SE/blog/announcing-cadence/)
 
-- [Video: Cadence - The New Open Source Project for Building Complex Distributed Applications](https://www.youtube.com/watch?v=vFPJlE6d4xs)
+- [Cadence 1.0 Released on the Instaclustr Managed Platform](https://www.instaclustr.com/blog/cadence-1-0-released-on-the-instaclustr-managed-platform/)
 
-- [Understanding Components of Cadence Application](https://cadenceworkflow.io/blog/2023/07/01/components-of-cadence-application-setup/)
+- [How to Overcome Some Maintenance Challenges of Temporal/Cadence Workflow Versioning](https://medium.com/@qlong/how-to-overcome-some-maintenance-challenges-of-temporal-cadence-workflow-versioning-f893815dd18d)
+
+- [Video: Cadence - The New Open Source Project for Building Complex Distributed Applications](https://www.youtube.com/watch?v=vFPJlE6d4xs)
 
 - [Instaclustr Releases Multi-Region Cadence Workflow](https://www.instaclustr.com/blog/instaclustr-releases-multi-region-cadence-workflow-2/)
 
-- [Cadence 1.0 Released on the Instaclustr Managed Platform](https://www.instaclustr.com/blog/cadence-1-0-released-on-the-instaclustr-managed-platform/)
+- [Understanding Components of Cadence Application](https://cadenceworkflow.io/blog/2023/07/01/components-of-cadence-application-setup/)
 
 - [Improving the Reliability of Cadence Search Queries That Use OpenSearch/Elasticsearch](https://www.instaclustr.com/blog/improving-the-reliability-of-cadence-search-queries/)
 
@@ -58,7 +60,7 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 ## Upcoming Events
 
-None
+- None
 
 If you have any news or topics you'd like us to include in our next update then please join our [Slack](http://t.uber.com/cadence-slack)#community channel.
 
