@@ -4,7 +4,7 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Wed, 12 Jul 2023 18:35:52 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 14 Jul 2023 15:59:22 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <item>
@@ -16,9 +16,18 @@
 
 To finish this tutorial, there are two prerequisites you need to finish first
 Register a Cadence domain for your worker. For this tutorial, I've already registered a domain named test-domain
-Start the Cadence backend server in background. You may find the instruction here
+Start the Cadence backend server in background.
 
-To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port ...]]></description>
+To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port for your Cadence backend.
+
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main( ...]]></description>
         </item>
         <item>
             <title><![CDATA[Understanding components of Cadence application]]></title>
