@@ -10,7 +10,7 @@ In the previous [blog](./2023-06-28-components-of-cadence-application-setup.md),
 
 To finish this tutorial, there are two prerequisites you need to finish first
 1. Register a Cadence domain for your worker. For this tutorial, I've already registered a domain named `test-domain`
-2. Start the Cadence backend server in background. You may find the instruction [here](../../docs/01-get-started/01-server-installation.md)
+2. Start the Cadence backend server in background.
 
 To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port for your Cadence backend.
 
