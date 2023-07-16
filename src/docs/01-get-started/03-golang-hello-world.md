@@ -178,7 +178,7 @@ http://localhost:8088
 You may see a dashboard below
 ![cadence-ui](../../shared/img/cadence_ui.png)
 
-Type the domain you used for the tutorial, in this case, we type `test-domain` and hit enter. Then you can a complete history of the workflows you have triggered associated to this domain.
+Type the domain you used for the tutorial, in this case, we type `test-domain` and hit enter. Then you can see a complete history of the workflows you have triggered associated to this domain.
 ![cadence-ui-detailed](../../shared/img/cadence_ui_detailed.png)
 
 ## What is Next
