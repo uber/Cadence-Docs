@@ -10,7 +10,7 @@ In the upcoming blog series, we will delve into a discussion about common bad pr
 
 * Reusing the same workflow ID for very active/continuous running workflows
 
-At first glance, the practice of maximizing workflow code reusability may seem like a good idea. However, it can cause significant performance problems. This is because Cadence organizes workflows based on their unique IDs, using a process called <b>partitioning</b>. If a workflow receives a large number of updates in a short period of time or frequently starts new runs using the `continueAsNew` function, all these updates will be directed to the same shard. Unfortunately, the Cadence backend is not equipped to handle this concentrated workload efficiently. As a result, a situation known as a "hot shard" arises, overloading the Cadence backend and worsening the problem.
+Cadence organizes workflows based on their unique IDs, using a process called <b>partitioning</b>. If a workflow receives a large number of updates in a short period of time or frequently starts new runs using the `continueAsNew` function, all these updates will be directed to the same shard. Unfortunately, the Cadence backend is not equipped to handle this concentrated workload efficiently. As a result, a situation known as a "hot shard" arises, overloading the Cadence backend and worsening the problem.
 
 Solution:
 Well, the best way to avoid this is simply just design your workflow in the way such that each workflow owns a uniformly distributed workflow ID across your Cadence domain. This will make sure that Cadence backend is able to evenly distribute the traffic with proper partition on your workflowIDs.
