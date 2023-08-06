@@ -12,6 +12,21 @@
             "date_modified": "2023-07-31T00:00:00.000Z"
         },
         {
+            "id": "/blog/2023/07/16/write-your-first-workflow-with-cadence/",
+            "url": "/blog/2023/07/16/write-your-first-workflow-with-cadence/",
+            "title": "Write your first workflow with Cadence",
+            "summary": "We have covered basic components of Cadence and how to implement a Cadence worker on local environment in previous blogs. In this blog, let's write your very first HelloWorld workflow with Cadence. I've started the Cadence backend server in background and registered a domain named test-domain. You may use the code snippet for the worker service in this blog  Let's first write a activity, which takes a single string argument and print a log in the console.\n\nfunc helloWorldActivity(ctx context.Context, name string) (string, error) {\n\tlogger := activity.GetLogger(ctx)\n\tlogger.Info(\"helloworld activity started\")\n\treturn \"Hello \" + name + \"!\", nil\n}\n\nThen let's write a workflow that invokes this activity\nfunc helloWorldWorkflow(ctx workflow.Context, name string) error {\n\tao := workflow.ActivityOptions{\n ...",
+            "image": "/../../shared/img/cadence_ui.png",
+            "date_modified": "2023-07-16T00:00:00.000Z"
+        },
+        {
+            "id": "/blog/2023/07/10/cadence-bad-practices-part-1/",
+            "url": "/blog/2023/07/10/cadence-bad-practices-part-1/",
+            "title": "Bad practices and Anti-patterns with Cadence (Part 1)",
+            "summary": "In the upcoming blog series, we will delve into a discussion about common bad practices and anti-patterns related to Cadence. As diverse teams often encounter distinct business use cases, it becomes imperative to address the most frequently reported issues in Cadence workflows. To provide valuable insights and guidance, the Cadence team has meticulously compiled these common challenges based on customer feedback.\n\nReusing the same workflow ID for very active/continuous running workflows\n\nCadence organizes workflows based on their unique IDs, using a process called partitioning. If a workflow receives a large number of updates in a short period of time or frequently starts new runs using the continueAsNew function, all these updates will be directed to the same shard. Unfortunately, the Cadence backend is not equipped to handle this concentrated workload efficiently. As a result, a situation known as a \"hot shard\" arises, overloading the Cadence backend and worsening the prob ...",
+            "date_modified": "2023-07-10T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/07/05/implement-cadence-worker-from-scratch/",
             "url": "/blog/2023/07/05/implement-cadence-worker-from-scratch/",
             "title": "Implement a Cadence worker service from scratch",
@@ -24,21 +39,6 @@
             "title": "Understanding components of Cadence application",
             "summary": "Cadence is a powerful, scalable, and fault-tolerant workflow orchestration framework that helps developers implement and manage complex workflow tasks. In most cases, developers contribute activities and workflows directly to their codebases, and they may not have a full understanding of the components behind a running Cadence application. We receive numerous inquiries about setting up Cadence in a local environment from scratch for testing. Therefore, in this article, we will explore the components that power a Cadence cluster.\n\nThere are three critical components that are essential for any Cadence application:\nA running Cadence backend server.\nA registered Cadence domain.\nA running Cadence worker that registers all workflows and activities.\n\nLet's go over these components in more details.\n\nThe Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dep ...",
             "date_modified": "2023-07-01T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/06/30/community-spotlight-june-2023/",
-            "url": "/blog/2023/06/30/community-spotlight-june-2023/",
-            "title": "Cadence Community Spotlight Update - June 2023",
-            "summary": "We've had a short break but now we are back. Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nCadence Release 1.0\n\nJust in case you missed it - at the end of April Cadence v1.0 was officially released. This release is a significant milestone for the project and the community. It indicates that we are confident in the stability of the code that we can recommend it and promote it widely to more users. Kudos to everyone that worked together to make this release happen.\n\nAnd the Uber team also gave Cadence a writeup on the Uber Engineering Blog so please take a look.\n\nCommunity Survey Results\n\nThe results of our Community Survey have been published and you can find [the details right here on our blog](https://cadenceworkflow.io/blog/2 ...",
-            "date_modified": "2023-06-30T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/06/08/survey-results/",
-            "url": "/blog/2023/06/08/survey-results/",
-            "title": "2023 Cadence Community Survey Results",
-            "summary": "We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our Slack workspace, cadenceworkflow.io Blog and LinkedIn. After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.\n\nHere are some highlights in text and you can check out the visuals to get more details:\n\nusing.png\n\njob_role.png\n\nMost of the people who replied to our survey were engineers who were already using Cadence, actively evaluating, or migrating from a similar technology. This was exciting to hear! Some of you have contacted us to learn more about benchmarks, scale, and ideal ...",
-            "image": "/../../shared/img/2023-survey-results/using.png",
-            "date_modified": "2023-06-08T00:00:00.000Z"
         }
     ]
 }

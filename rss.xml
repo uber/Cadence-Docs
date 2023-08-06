@@ -4,7 +4,7 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Sun, 06 Aug 2023 18:20:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 06 Aug 2023 19:06:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
         <item>
@@ -27,6 +27,37 @@ Thanks Chris for sharing your knowledge and helping others to get started.
 Cadence Go Client v1.0 Released
 
 This month saw the release of v1.0 of the Cadence Go Client. Note that the work done on this release was as a result ...]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Write your first workflow with Cadence]]></title>
+            <link>/blog/2023/07/16/write-your-first-workflow-with-cadence/</link>
+            <guid>/blog/2023/07/16/write-your-first-workflow-with-cadence/</guid>
+            <pubDate>Sun, 16 Jul 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We have covered basic components of Cadence and how to implement a Cadence worker on local environment in previous blogs. In this blog, let's write your very first HelloWorld workflow with Cadence. I've started the Cadence backend server in background and registered a domain named test-domain. You may use the code snippet for the worker service in this blog  Let's first write a activity, which takes a single string argument and print a log in the console.
+
+func helloWorldActivity(ctx context.Context, name string) (string, error) {
+	logger := activity.GetLogger(ctx)
+	logger.Info("helloworld activity started")
+	return "Hello " + name + "!", nil
+}
+
+Then let's write a workflow that invokes this activity
+func helloWorldWorkflow(ctx workflow.Context, name string) error {
+	ao := workflow.ActivityOptions{
+ ...]]></description>
+            <enclosure url="/../../shared/img/cadence_ui.png">
+            </enclosure>
+        </item>
+        <item>
+            <title><![CDATA[Bad practices and Anti-patterns with Cadence (Part 1)]]></title>
+            <link>/blog/2023/07/10/cadence-bad-practices-part-1/</link>
+            <guid>/blog/2023/07/10/cadence-bad-practices-part-1/</guid>
+            <pubDate>Mon, 10 Jul 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[In the upcoming blog series, we will delve into a discussion about common bad practices and anti-patterns related to Cadence. As diverse teams often encounter distinct business use cases, it becomes imperative to address the most frequently reported issues in Cadence workflows. To provide valuable insights and guidance, the Cadence team has meticulously compiled these common challenges based on customer feedback.
+
+Reusing the same workflow ID for very active/continuous running workflows
+
+Cadence organizes workflows based on their unique IDs, using a process called partitioning. If a workflow receives a large number of updates in a short period of time or frequently starts new runs using the continueAsNew function, all these updates will be directed to the same shard. Unfortunately, the Cadence backend is not equipped to handle this concentrated workload efficiently. As a result, a situation known as a "hot shard" arises, overloading the Cadence backend and worsening the prob ...]]></description>
         </item>
         <item>
             <title><![CDATA[Implement a Cadence worker service from scratch]]></title>
@@ -65,42 +96,6 @@ A running Cadence worker that registers all workflows and activities.
 Let's go over these components in more details.
 
 The Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dep ...]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Cadence Community Spotlight Update - June 2023]]></title>
-            <link>/blog/2023/06/30/community-spotlight-june-2023/</link>
-            <guid>/blog/2023/06/30/community-spotlight-june-2023/</guid>
-            <pubDate>Fri, 30 Jun 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[We've had a short break but now we are back. Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!
-
-Please see below for a roundup of the highlights:
-
-Cadence Release 1.0
-
-Just in case you missed it - at the end of April Cadence v1.0 was officially released. This release is a significant milestone for the project and the community. It indicates that we are confident in the stability of the code that we can recommend it and promote it widely to more users. Kudos to everyone that worked together to make this release happen.
-
-And the Uber team also gave Cadence a writeup on the Uber Engineering Blog so please take a look.
-
-Community Survey Results
-
-The results of our Community Survey have been published and you can find [the details right here on our blog](https://cadenceworkflow.io/blog/2 ...]]></description>
-        </item>
-        <item>
-            <title><![CDATA[2023 Cadence Community Survey Results]]></title>
-            <link>/blog/2023/06/08/survey-results/</link>
-            <guid>/blog/2023/06/08/survey-results/</guid>
-            <pubDate>Thu, 08 Jun 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our Slack workspace, cadenceworkflow.io Blog and LinkedIn. After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.
-
-Here are some highlights in text and you can check out the visuals to get more details:
-
-using.png
-
-job_role.png
-
-Most of the people who replied to our survey were engineers who were already using Cadence, actively evaluating, or migrating from a similar technology. This was exciting to hear! Some of you have contacted us to learn more about benchmarks, scale, and ideal ...]]></description>
-            <enclosure url="/../../shared/img/2023-survey-results/using.png">
-            </enclosure>
         </item>
     </channel>
 </rss>
