@@ -183,3 +183,32 @@ function matches the signature of the original :activity: function.
 
 Since this can be an entire function, there is no limitation as to what we can do here. In this
 example, we assert that the “value” param has the same content as the value param we passed to the :workflow:.
+
+## Testing signals
+
+To test signals we can use the functions `s.env.SignalWorkflow`, and `s.env.SignalWorkflowByID`. These 
+functions needs to be called inside `s.env.RegisterDelayedCallback`, as the signal should be send while the 
+:workflow: is running. It is important to register the signal before calling `s.env.ExecuteWorkflow`, otherwise
+the signal will not be send.
+
+If our :workflow: is waiting for a signal with name `signalName` we can register 
+to send this signal *before* the workflow is executed like this:
+
+```go
+func (s *UnitTestSuite) Test_SimpleWorkflow_Signal() {
+    // Send the signal
+	s.env.RegisterDelayedCallback(func() {
+		s.env.SignalWorkflow(signalName, signalData)
+	}, time.Minute*10)
+
+    // Execute the workflow
+    s.env.ExecuteWorkflow(SimpleWorkflow, "test_success")
+
+    s.True(s.env.IsWorkflowCompleted())
+    s.NoError(s.env.GetWorkflowError())
+}
+```
+
+Note that the `s.env.RegisterDelayedCallback` function does not actually wait 10 minutes in the unit test
+instead the cadence test framework uses an internal clock which knows which event is the next, and executes it
+immediately. 
