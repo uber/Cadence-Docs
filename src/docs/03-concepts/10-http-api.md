@@ -123,10 +123,18 @@ curl http://0.0.0.0:8808 \
 
  ## Reference
 
-|Procedure|Example|
-| --------- | --------- |
-|uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution|```bash curl http://0.0.0.0:8800 -H 'context-ttl-ms: 2000' -H 'rpc-caller: hello-client'  -H 'rpc-service: cadence-frontend' -H 'rpc-encoding: json'  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution'  -X POST -d '{ 
+<table>
+<tr>
+<td> Procedure </td> <td> Example </td>
+</tr>
+<tr>
+<td>
+uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution
+</td>
+<td>
 
+```bash
+curl http://0.0.0.0:8800 -H 'context-ttl-ms: 2000' -H 'rpc-caller: hello-client'  -H 'rpc-service: cadence-frontend' -H 'rpc-encoding: json'  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution'  -X POST -d '{ 
   "domain":"samples-domain", 
   "workflowId":"helloWorldGroup", 
   "execution_start_to_close_timeout": "11s", 
@@ -138,4 +146,26 @@ curl http://0.0.0.0:8808 \
   "input": {"data":"IkN1cmwhIg=="} 
 }' 
 
-{"runId":"3b448520-70aa-464f-ad8d-b8fcabf13628"}% ```|
+{"runId":"3b448520-70aa-464f-ad8d-b8fcabf13628"}% 
+```
+
+</td>
+</tr>
+<tr>
+<td> uber.cadence.api.v1.WorkflowAPI::SignalWorkflowExecution </td>
+<td>
+
+```bash
+curl http://0.0.0.0:8800 -H 'context-ttl-ms: 2000' -H 'rpc-caller: curl-client'  -H 'rpc-service: cadence-frontend' -H 'rpc-encoding: json'  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::SignalWorkflowExecution'  -X POST -d '{ 
+  "domain":"samples-domain", 
+  "workflow_execution": { 
+    "workflow_id": "long_running_signal_waiting", 
+    "run_id": "44eb0ca6-e929-442b-9587-390689232541" <- optional, allows to signal a specific run 
+  }, 
+  "signal_name":"channelA", 
+  "signal_input":{"data":"MTA="} 
+}' 
+```
+</td>
+</tr>
+</table>
