@@ -121,4 +121,21 @@ curl http://0.0.0.0:8808 \
   -X POST 
 ```
 
- 
+ ## Reference
+
+|Procedure|Example|
+| --------- | --------- |
+|uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution|```bash curl http://0.0.0.0:8800 -H 'context-ttl-ms: 2000' -H 'rpc-caller: hello-client'  -H 'rpc-service: cadence-frontend' -H 'rpc-encoding: json'  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution'  -X POST -d '{ 
+
+  "domain":"samples-domain", 
+  "workflowId":"helloWorldGroup", 
+  "execution_start_to_close_timeout": "11s", 
+  "task_start_to_close_timeout": "10s", 
+  "workflowType":{"name":"helloWorldWorkflow"}, 
+  "taskList":{"name":"helloWorldGroup"}, 
+  "identity": "client-name-visible-in-history", 
+  "requestId": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C", 
+  "input": {"data":"IkN1cmwhIg=="} 
+}' 
+
+{"runId":"3b448520-70aa-464f-ad8d-b8fcabf13628"}% ```|
