@@ -152,7 +152,9 @@ curl http://0.0.0.0:8800 -H 'context-ttl-ms: 2000' -H 'rpc-caller: hello-client'
 </td>
 </tr>
 <tr>
-<td> uber.cadence.api.v1.WorkflowAPI::SignalWorkflowExecution </td>
+<td>
+uber.cadence.api.v1.WorkflowAPI::SignalWorkflowExecution
+</td>
 <td>
 
 ```bash
