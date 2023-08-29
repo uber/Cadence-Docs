@@ -128,6 +128,44 @@ curl http://0.0.0.0:8808 \
 <td> Procedure </td> <td> Example </td>
 </tr>
 <tr>
+<th colspan="2"> AdminAPI </th>
+</tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::AddSearchAttribute</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::CloseShard</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::CountDLQMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::DescribeCluster</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::DescribeHistoryHost</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::DescribeQueue</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::DescribeShardDistribution</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::DescribeWorkflowExecution</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetCrossClusterTasks</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetDLQReplicationMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetDomainIsolationGroups</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetDomainReplicationMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetDynamicConfig</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetGlobalIsolationGroups</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetReplicationMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::GetWorkflowExecutionRawHistoryV2</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::ListDynamicConfig</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::MaintainCorruptWorkflow</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::MergeDLQMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::PurgeDLQMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::ReadDLQMessages</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::ReapplyEvents</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::RefreshWorkflowTasks</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::RemoveTask</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::ResendReplicationTasks</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::ResetQueue</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::RespondCrossClusterTasksCompleted/td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::RestoreDynamicConfig</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::UpdateDomainIsolationGroups</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::UpdateDynamicConfig</td><td>Example</td></tr>
+<tr><td>uber.cadence.admin.v1.AdminAPI::UpdateGlobalIsolationGroups</td><td>Example</td></tr>
+<tr><th colspan="2">DomainAPI</th></tr>
+<tr><th colspan="2">MetaAPI</th></tr>
+<tr><th colspan="2">VisibilityAPI</th></tr>
+<tr><th colspan="2">WorkflowAPI</th></tr>
+<tr>
 <td>
 uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution
 </td>
