@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/08/27/nondeterministic-errors-replayers-shadowers/",
+            "url": "/blog/2023/08/27/nondeterministic-errors-replayers-shadowers/",
+            "title": "Non-deterministic errors, replayers and shadowers",
+            "summary": "It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However,\nthe definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct\nthe workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible\nwith an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the\nfollowing workflow that executes two activities.\n\nfunc SampleWorkflow(ctx workflow.Context, data string) (string, error) {\n    ao := workflow.ActivityOptions{\n        ScheduleToStartTimeout: time.Minute,\n        StartToCloseTimeout:    time.Minute,\n    }\n    ctx = workflow.WithActivityOptions(ctx, ao)\n    var result1 string\n    err := workflow.ExecuteActivity(ctx, ActivityA, data).Get(ctx, &result1)\n    if err != nil {\n        return \"\", err\n    }\n    v ...",
+            "date_modified": "2023-08-27T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/07/31/community-spotlight-july-2023/",
             "url": "/blog/2023/07/31/community-spotlight-july-2023/",
             "title": "Cadence Community Spotlight Update - July 2023",
@@ -32,13 +39,6 @@
             "title": "Implement a Cadence worker service from scratch",
             "summary": "In the previous blog, we have introduced three critical components for a Cadence application: the Cadence backend, domain, and worker. Among these, the worker service is the most crucial focus for developers as it hosts the activities and workflows of a Cadence application. In this blog, I will provide a short tutorial on how to implement a simple worker service from scratch in Go.\n\nTo finish this tutorial, there are two prerequisites you need to finish first\nRegister a Cadence domain for your worker. For this tutorial, I've already registered a domain named test-domain\nStart the Cadence backend server in background.\n\nTo get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port for your Cadence backend.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main( ...",
             "date_modified": "2023-07-05T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/07/01/components-of-cadence-application-setup/",
-            "url": "/blog/2023/07/01/components-of-cadence-application-setup/",
-            "title": "Understanding components of Cadence application",
-            "summary": "Cadence is a powerful, scalable, and fault-tolerant workflow orchestration framework that helps developers implement and manage complex workflow tasks. In most cases, developers contribute activities and workflows directly to their codebases, and they may not have a full understanding of the components behind a running Cadence application. We receive numerous inquiries about setting up Cadence in a local environment from scratch for testing. Therefore, in this article, we will explore the components that power a Cadence cluster.\n\nThere are three critical components that are essential for any Cadence application:\nA running Cadence backend server.\nA registered Cadence domain.\nA running Cadence worker that registers all workflows and activities.\n\nLet's go over these components in more details.\n\nThe Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dep ...",
-            "date_modified": "2023-07-01T00:00:00.000Z"
         }
     ]
 }
