@@ -11,7 +11,7 @@ Please see below for a roundup of the highlights:
 
 ## More Cadence How To's ##
 
-You might have noticed that we have had a few more contributions to our blog from [Chris Qin](https://www.linkedin.com/in/chrisqin0610). Chris has been busy sharing insights, and tips on a few important Cadence topics. The objective it to help the community with any potential problems.
+You might have noticed that we have had a few more contributions to our blog from [Chris Qin](https://www.linkedin.com/in/chrisqin0610). Chris has been busy sharing insights, and tips on a few important Cadence topics. The objective is to help the community with any potential problems.
 
 Here are the latest topics:
 
