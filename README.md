@@ -5,6 +5,10 @@ This will start a local server and can be accessed at http://localhost:8080/
 1. Run `npm install`
 2. Run `npm run start`
 
+### Adding pages to docs
+1. Add the page under `Cadence-Docs/src/docs` in the correct place in the hierarchy
+2. Add the page to `Cadence-Docs/src/.vuepress/config.js` 
+
 ## Setting up for local development for blog pages
 This will start a local server and can be accessed at http://localhost:8080/blog
 1. Run `npm install`
