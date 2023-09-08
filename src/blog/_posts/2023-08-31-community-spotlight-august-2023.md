@@ -9,14 +9,6 @@ Welcome to the latest of our regular monthly Community Spotlight updates that gi
 
 Please see below for a roundup of the highlights:
 
-## Community Support! ##
-
-Our [Slack](http://t.uber.com/cadence-slack) channel continues to be the main place where people are asking for help and support with Cadence. During August (which is supposed to be holiday season), we still had 9 questions raised around various topics.
-
-Huge thanks to the following community members who took time to respond and help others: David, Edmondo, Chris Qin, Rony Rahman and Ben Slater.
-
-It's good to see that we are continuing to support each other - doing exactly what communities do!
-
 ## More Cadence How To's ##
 
 You might have noticed that we have had a few more contributions to our blog from [Chris Qin](https://www.linkedin.com/in/chrisqin0610). Chris has been busy sharing insights, and tips on a few important Cadence topics. The objective it to help the community with any potential problems.
@@ -37,9 +29,9 @@ Community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) has also 
 
 During August Long has published a couple of articles on using the 'ContinueAsNew' functionality in iWF. Links to Part 1 and Part are below:
 
-- [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 2](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-1-c24ae5266f07)
-
 - [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 1](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-2-cedabd732bec)
+
+- [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 2](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-1-c24ae5266f07)
 
 Please take a look and if you've enjoyed reading them then let Long and us know!
 
@@ -62,15 +54,16 @@ It's good to see that we are continuing to support each other - doing exactly wh
 Below are a selection of Cadence related articles, blogs and whitepapers.
 Please take a look and feel free to share via your own social media channels.
 
-- [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 2](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-1-c24ae5266f07)
 
 - [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 1](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-2-cedabd732bec)
+
+- [Guide to ContinueAsNew in Cadence/Temporal Workflow Using iWF as an example - Part 2](https://medium.com/@qlong/guide-to-continueasnew-in-cadence-temporal-workflow-using-iwf-as-an-example-part-1-c24ae5266f07)
 
 - [AWS PrivateLink Connectivity is now Available with Instaclustr for Cadence](https://www.instaclustr.com/blog/aws-privatelink-for-cadence-on-instaclustr-by-netapp/)
 
 ## Upcoming Events
 
-- [Webinar: Introducing the Cadence Workflow HTTP API] - 21st September 2023 (https://netapp.zoom.us/webinar/register/WN_Uh9Y6ruiQSS5EiylNlsMug#/registration)
+- [Webinar: Introducing the Cadence Workflow HTTP API - 21st September 2023 ](https://netapp.zoom.us/webinar/register/WN_Uh9Y6ruiQSS5EiylNlsMug#/registration)
 
 - [On Demand Webinar: Microservices - A Modern Orchestration Approach with Cadence](https://netapp.zoom.us/webinar/register/WN_Hv9lO9QtSqyPPWkSAIRj5g#/registration)
 
