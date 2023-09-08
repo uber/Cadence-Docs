@@ -21,7 +21,9 @@ Here are the latest topics:
 
 Even if you have not encountered these use cases - it is good to be prepared and have a solution ready.Please take a look and let us have your feedback.
 
-And thanks Chris!
+Chris is also going to take a look at the [Cadence Samples](https://cadenceworkflow.io/docs/java-client/client-overview/#samples) to make sure they are all working and if not - he's going to re-write them so that they do!
+
+Thanks very much Chris for all the work you are doing to help improve the project!
 
 ## More iWF Examaples ##
 
