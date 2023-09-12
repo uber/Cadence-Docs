@@ -18,7 +18,7 @@ supported by Cadence RPC declaration.
 
 ### Updating Cadence configuration files
 
-To enable “start workflow” HTTP API, add `http` section to Cadence RPC configuration settings:
+To enable “start workflow” HTTP API, add `http` section to Cadence RPC configuration settings (e.g., in `base.yaml` or `development.yaml`):
 
 ```yaml
 services:
@@ -31,10 +31,16 @@ services:
           - uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution 
 ```
 
+Then you can run Cadence server in the following ways to use HTTP API.
+
+### Using local binaries
+
+Build and run `./cadence-server` as described in [Developing Cadence](https://github.com/uber/cadence/blob/master/CONTRIBUTING.md).
+
 ### Using “docker run” command
 
 Refer to instructions described
-here: https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production
+in [Using docker image for production](https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production).
 
 Additionally add two more environment variables:
 
@@ -48,7 +54,7 @@ docker run
 
 ### Using docker-compose
 
-Add HTTP environment variables to docker/docker-compose.yml configuration:
+Add HTTP environment variables to `docker/docker-compose.yml` configuration:
 
 ```yaml
 cadence:
@@ -108,17 +114,6 @@ Where `data.json` content looks something like this:
 } 
 ```
 
-Describe a cluster using curl command
-
-```bash
-curl -X POST http://0.0.0.0:8800 \
-  -H 'context-ttl-ms: 2000' \
-  -H 'rpc-caller: curl-client' \
-  -H 'rpc-service: cadence-frontend' \
-  -H 'rpc-encoding: json' \
-  -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::DescribeCluster'
-```
-
 ## HTTP API Reference
 
 ### Admin API
@@ -144,7 +139,7 @@ curl -X POST http://0.0.0.0:8800 \
 
 ```json
 {
-  "searchAttribute": {
+  "search_attribute": {
     "custom_key": 1
   }
 }
@@ -171,7 +166,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::AddSearchAttribute' \
     -d \
     '{
-      "searchAttribute": {
+      "search_attribute": {
         "custom_key": 1
       }
     }'
@@ -208,7 +203,7 @@ HTTP code: 200
 
 ```json
 {
-  "shardID": 0
+  "shard_id": 0
 }
 ```
 
@@ -223,7 +218,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::CloseShard' \
     -d \
     '{ 
-      "shardID": 0
+      "shard_id": 0
     }'
 ```
 
@@ -411,21 +406,7 @@ HTTP code: 200
 
 ```json
 {
-  "hostAddress": "127.0.0.1:7934"
-}
-```
-
-```json
-{
-  "shardIdForHost": 0
-}
-```
-
-```json
-{
-  "executionForHost": {
-    "workflowId": "sample-workflow-id"
-  }
+  "host_address": "127.0.0.1:7934"
 }
 ```
 
@@ -440,7 +421,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::DescribeHistoryHost' \
     -d \
     '{
-      "hostAddress": "127.0.0.1:7934"
+      "host_address": "127.0.0.1:7934"
     }'
 ```
 
@@ -458,68 +439,6 @@ HTTP code: 200
   "shardControllerStatus": "started",
   "address": "127.0.0.1:7934"
 }
-```
-
-</details>
-
-------------------------------------------------------------------------------------------
-
-<details>
-<summary><code>POST</code> <code><b>uber.cadence.admin.v1.AdminAPI::DescribeQueue</b></code></summary>
-
-#### Describe processing queue states
-
-##### Headers
-
-| name           | example                                       |
-|----------------|-----------------------------------------------|
-| context-ttl-ms | 2000                                          |
-| rpc-caller     | curl-client                                   |
-| rpc-service    | cadence-frontend                              |
-| rpc-encoding   | json                                          |
-| rpc-procedure  | uber.cadence.admin.v1.AdminAPI::DescribeQueue |
-
-##### Example payload
-
-```json
-{
-  "shardID": 0,
-  "clusterName": "cluster0",
-  "type": 3
-}
-```
-
-Queue types
-
-| type                | value |
-|---------------------|-------|
-| transfer queue      | 2     |
-| timer queue         | 3     |
-| cross-cluster queue | 6     |
-
-##### Example cURL
-
-```bash
-curl -X POST http://0.0.0.0:8800 \
-    -H 'context-ttl-ms: 2000' \
-    -H 'rpc-caller: curl-client' \
-    -H 'rpc-service: cadence-frontend' \
-    -H 'rpc-encoding: json' \
-    -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::DescribeQueue' \
-    -d \
-    '{
-      "shardID": 0,
-      "clusterName": "cluster0",
-      "type": 3
-    }'
-```
-
-##### Example successful response
-
-HTTP code: 200
-
-```bash
-TODO - Got the error "Request is nil."
 ```
 
 </details>
@@ -545,8 +464,8 @@ TODO - Got the error "Request is nil."
 
 ```json
 {
-  "pageSize": 100,
-  "pageID": 0
+  "page_size": 100,
+  "page_id": 0
 }
 ```
 
@@ -561,8 +480,8 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::DescribeShardDistribution' \
     -d \
     '{
-      "pageSize": 100,
-      "pageID": 0
+      "page_size": 100,
+      "page_id": 0
     }'
 ```
 
@@ -589,7 +508,7 @@ HTTP code: 200
 <details>
 <summary><code>POST</code> <code><b>uber.cadence.admin.v1.AdminAPI::DescribeWorkflowExecution</b></code></summary>
 
-#### List shard distribution
+#### Describe internal information of workflow execution
 
 ##### Headers
 
@@ -745,7 +664,7 @@ HTTP code: 200
 <details>
 <summary><code>POST</code> <code><b>uber.cadence.api.v1.DomainAPI::DescribeDomain</b></code></summary>
 
-#### List shard distribution
+#### Describe existing workflow domain
 
 ##### Headers
 
@@ -821,7 +740,7 @@ HTTP code: 200
 <details>
 <summary><code>POST</code> <code><b>uber.cadence.api.v1.DomainAPI::ListDomains</b></code></summary>
 
-#### List shard distribution
+#### List all domains in the cluster
 
 ##### Headers
 
@@ -837,7 +756,7 @@ HTTP code: 200
 
 ```json
 {
-  "pageSize": 100
+  "page_size": 100
 }
 ```
 
@@ -852,7 +771,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-procedure: uber.cadence.api.v1.DomainAPI::ListDomains' \
     -d \
     '{
-      "pageSize": 100
+      "page_size": 100
     }'
 ```
 
@@ -962,7 +881,348 @@ HTTP code: 200
 
 ------------------------------------------------------------------------------------------
 
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.MetaAPI::Health</b></code></summary>
+
+#### Health check
+
+##### Headers
+
+| name           | example                             |
+|----------------|-------------------------------------|
+| context-ttl-ms | 2000                                |
+| rpc-caller     | curl-client                         |
+| rpc-service    | cadence-frontend                    |
+| rpc-encoding   | json                                |
+| rpc-procedure  | uber.cadence.api.v1.MetaAPI::Health |
+
+##### Example payload
+
+None
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+  -H 'context-ttl-ms: 2000' \
+  -H 'rpc-caller: curl-client' \
+  -H 'rpc-service: cadence-frontend' \
+  -H 'rpc-encoding: json' \
+  -H 'rpc-procedure: uber.cadence.api.v1.MetaAPI::Health'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "ok": true,
+  "message": "OK"
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
 ### Visibility API
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.VisibilityAPI::GetSearchAttributes</b></code></summary>
+
+#### Get search attributes
+
+##### Headers
+
+| name           | example                                                |
+|----------------|--------------------------------------------------------|
+| context-ttl-ms | 2000                                                   |
+| rpc-caller     | curl-client                                            |
+| rpc-service    | cadence-frontend                                       |
+| rpc-encoding   | json                                                   |
+| rpc-procedure  | uber.cadence.api.v1.VisibilityAPI::GetSearchAttributes |
+
+##### Example payload
+
+None
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+  -H 'context-ttl-ms: 2000' \
+  -H 'rpc-caller: curl-client' \
+  -H 'rpc-service: cadence-frontend' \
+  -H 'rpc-encoding: json' \
+  -H 'rpc-procedure: uber.cadence.api.v1.VisibilityAPI::GetSearchAttributes'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "keys": {
+    "BinaryChecksums": "INDEXED_VALUE_TYPE_KEYWORD",
+    "CadenceChangeVersion": "INDEXED_VALUE_TYPE_KEYWORD",
+    "CloseStatus": "INDEXED_VALUE_TYPE_INT",
+    "CloseTime": "INDEXED_VALUE_TYPE_INT",
+    "CustomBoolField": "INDEXED_VALUE_TYPE_BOOL",
+    "CustomDatetimeField": "INDEXED_VALUE_TYPE_DATETIME",
+    "CustomDomain": "INDEXED_VALUE_TYPE_KEYWORD",
+    "CustomDoubleField": "INDEXED_VALUE_TYPE_DOUBLE",
+    "CustomIntField": "INDEXED_VALUE_TYPE_INT",
+    "CustomKeywordField": "INDEXED_VALUE_TYPE_KEYWORD",
+    "CustomStringField": "INDEXED_VALUE_TYPE_STRING",
+    "DomainID": "INDEXED_VALUE_TYPE_KEYWORD",
+    "ExecutionTime": "INDEXED_VALUE_TYPE_INT",
+    "HistoryLength": "INDEXED_VALUE_TYPE_INT",
+    "IsCron": "INDEXED_VALUE_TYPE_KEYWORD",
+    "NewKey": "INDEXED_VALUE_TYPE_KEYWORD",
+    "NumClusters": "INDEXED_VALUE_TYPE_INT",
+    "Operator": "INDEXED_VALUE_TYPE_KEYWORD",
+    "Passed": "INDEXED_VALUE_TYPE_BOOL",
+    "RolloutID": "INDEXED_VALUE_TYPE_KEYWORD",
+    "RunID": "INDEXED_VALUE_TYPE_KEYWORD",
+    "ShardID": "INDEXED_VALUE_TYPE_INT",
+    "StartTime": "INDEXED_VALUE_TYPE_INT",
+    "TaskList": "INDEXED_VALUE_TYPE_KEYWORD",
+    "TestNewKey": "INDEXED_VALUE_TYPE_STRING",
+    "UpdateTime": "INDEXED_VALUE_TYPE_INT",
+    "WorkflowID": "INDEXED_VALUE_TYPE_KEYWORD",
+    "WorkflowType": "INDEXED_VALUE_TYPE_KEYWORD",
+    "addon": "INDEXED_VALUE_TYPE_KEYWORD",
+    "addon-type": "INDEXED_VALUE_TYPE_KEYWORD",
+    "environment": "INDEXED_VALUE_TYPE_KEYWORD",
+    "project": "INDEXED_VALUE_TYPE_KEYWORD",
+    "service": "INDEXED_VALUE_TYPE_KEYWORD",
+    "user": "INDEXED_VALUE_TYPE_KEYWORD"
+  }
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.VisibilityAPI::ListClosedWorkflowExecutions</b></code></summary>
+
+#### List closed workflow executions in a domain
+
+##### Headers
+
+| name           | example                                                         |
+|----------------|-----------------------------------------------------------------|
+| context-ttl-ms | 2000                                                            |
+| rpc-caller     | curl-client                                                     |
+| rpc-service    | cadence-frontend                                                |
+| rpc-encoding   | json                                                            |
+| rpc-procedure  | uber.cadence.api.v1.VisibilityAPI::ListClosedWorkflowExecutions |
+
+##### Example payloads
+
+`startTimeFilter` is required while `executionFilter` and `typeFilter` are optional.
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  }
+}
+```
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  },
+  "execution_filter": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "71c3d47b-454a-4315-97c7-15355140094b"
+  }
+}
+```
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  },
+  "type_filter": {
+    "name": "sample-workflow-type"
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.VisibilityAPI::ListClosedWorkflowExecutions' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "start_time_filter": {
+        "earliest_time": "2023-01-01T00:00:00Z",
+        "latest_time": "2023-12-31T00:00:00Z"
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "executions": [
+    {
+      "workflowExecution": {
+        "workflowId": "sample-workflow-id",
+        "runId": "71c3d47b-454a-4315-97c7-15355140094b"
+      },
+      "type": {
+        "name": "sample-workflow-type"
+      },
+      "startTime": "2023-09-08T06:31:18.778Z",
+      "closeTime": "2023-09-08T06:32:18.782Z",
+      "closeStatus": "WORKFLOW_EXECUTION_CLOSE_STATUS_TIMED_OUT",
+      "historyLength": "5",
+      "executionTime": "2023-09-08T06:31:18.778Z",
+      "memo": {},
+      "searchAttributes": {
+        "indexedFields": {}
+      },
+      "taskList": "sample-task-list"
+    }
+  ],
+  "nextPageToken": ""
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.VisibilityAPI::ListOpenWorkflowExecutions</b></code></summary>
+
+#### List open workflow executions in a domain
+
+##### Headers
+
+| name           | example                                                       |
+|----------------|---------------------------------------------------------------|
+| context-ttl-ms | 2000                                                          |
+| rpc-caller     | curl-client                                                   |
+| rpc-service    | cadence-frontend                                              |
+| rpc-encoding   | json                                                          |
+| rpc-procedure  | uber.cadence.api.v1.VisibilityAPI::ListOpenWorkflowExecutions |
+
+##### Example payloads
+
+`startTimeFilter` is required while `executionFilter` and `typeFilter` are optional.
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  }
+}
+```
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  },
+  "execution_filter": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "71c3d47b-454a-4315-97c7-15355140094b"
+  }
+}
+```
+
+```json
+{
+  "domain": "sample-domain",
+  "start_time_filter": {
+    "earliest_time": "2023-01-01T00:00:00Z",
+    "latest_time": "2023-12-31T00:00:00Z"
+  },
+  "type_filter": {
+    "name": "sample-workflow-type"
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+  -H 'context-ttl-ms: 2000' \
+  -H 'rpc-caller: curl-client' \
+  -H 'rpc-service: cadence-frontend' \
+  -H 'rpc-encoding: json' \
+  -H 'rpc-procedure: uber.cadence.api.v1.VisibilityAPI::ListOpenWorkflowExecutions' \
+  -d \
+  '{
+    "domain": "sample-domain",
+    "start_time_filter": {
+      "earliest_time": "2023-01-01T00:00:00Z",
+      "latest_time": "2023-12-31T00:00:00Z"
+    }
+  }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "executions": [
+    {
+      "workflowExecution": {
+        "workflowId": "sample-workflow-id",
+        "runId": "5dbabeeb-82a2-41ed-bf55-dc732a4d46ce"
+      },
+      "type": {
+        "name": "sample-workflow-type"
+      },
+      "startTime": "2023-09-12T02:17:46.596Z",
+      "executionTime": "2023-09-12T02:17:46.596Z",
+      "memo": {},
+      "searchAttributes": {
+        "indexedFields": {}
+      },
+      "taskList": "sample-task-list"
+    }
+  ],
+  "nextPageToken": ""
+}
+```
+
+</details>
 
 ------------------------------------------------------------------------------------------
 
@@ -973,7 +1233,7 @@ HTTP code: 200
 <details>
 <summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::DescribeTaskList</b></code></summary>
 
-#### Start a new workflow execution
+#### Describe pollers info of tasklist
 
 ##### Headers
 
@@ -990,16 +1250,16 @@ HTTP code: 200
 ```json
 {
   "domain": "sample-domain",
-  "taskList": {
+  "task_list": {
     "name": "sample-task-list",
     "kind": 1
   },
-  "taskListType": 1,
-  "includeTaskListStatus": true
+  "task_list_type": 1,
+  "include_task_list_status": true
 }
 ```
 
-`taskList` kind is optional.
+`task_list` kind is optional.
 
 Task list kinds
 
@@ -1019,20 +1279,21 @@ Task list types
 
 ```bash
 curl -X POST http://0.0.0.0:8800 \
-  -H 'context-ttl-ms: 2000' \
-  -H 'rpc-caller: curl-client' \
-  -H 'rpc-service: cadence-frontend' \
-  -H 'rpc-encoding: json' \
-  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::DescribeTaskList' \
-  -d \
-  '{
-    "domain": "sample-domain",
-    "taskList": {
-    "name": "sample-task-list"
-    },
-    "taskListType": 1,
-    "includeTaskListStatus": true
-  }'
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::DescribeTaskList' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "task_list": {
+        "name": "sample-task-list",
+        "kind": 1
+      },
+      "task_list_type": 1,
+      "include_task_list_status": true
+    }'
 ```
 
 ##### Example successful response
@@ -1057,38 +1318,217 @@ HTTP code: 200
 ------------------------------------------------------------------------------------------
 
 <details>
-<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution</b></code></summary>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::DescribeWorkflowExecution</b></code></summary>
 
-#### Start a new workflow execution
+#### Describe a workflow execution
 
 ##### Headers
 
-| name           | example                                                 |
-|----------------|---------------------------------------------------------|
-| context-ttl-ms | 2000                                                    |
-| rpc-caller     | curl-client                                             |
-| rpc-service    | cadence-frontend                                        |
-| rpc-encoding   | json                                                    |
-| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution |
+| name           | example                                                    |
+|----------------|------------------------------------------------------------|
+| context-ttl-ms | 2000                                                       |
+| rpc-caller     | curl-client                                                |
+| rpc-service    | cadence-frontend                                           |
+| rpc-encoding   | json                                                       |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::DescribeWorkflowExecution |
 
 ##### Example payload
 
 ```json
 {
   "domain": "sample-domain",
-  "workflowId": "sample-workflow-id",
-  "execution_start_to_close_timeout": "11s",
-  "task_start_to_close_timeout": "10s",
-  "workflowType": {
-    "name": "sample-workflow-type"
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "5dbabeeb-82a2-41ed-bf55-dc732a4d46ce"
+  }
+}
+```
+
+`run_id` is optional and allows to describe a specific run.
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+  -H 'context-ttl-ms: 2000' \
+  -H 'rpc-caller: curl-client' \
+  -H 'rpc-service: cadence-frontend' \
+  -H 'rpc-encoding: json' \
+  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::DescribeWorkflowExecution' \
+  -d \
+  '{
+    "domain": "sample-domain",
+    "workflow_execution": {
+      "workflow_id": "sample-workflow-id",
+      "run_id": "5dbabeeb-82a2-41ed-bf55-dc732a4d46ce"
+    }
+  }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "executionConfiguration": {
+    "taskList": {
+      "name": "sample-task-list"
+    },
+    "executionStartToCloseTimeout": "11s",
+    "taskStartToCloseTimeout": "10s"
   },
-  "taskList": {
-    "name": "sample-task-list"
+  "workflowExecutionInfo": {
+    "workflowExecution": {
+      "workflowId": "sample-workflow-id",
+      "runId": "5dbabeeb-82a2-41ed-bf55-dc732a4d46ce"
+    },
+    "type": {
+      "name": "sample-workflow-type"
+    },
+    "startTime": "2023-09-12T02:17:46.596Z",
+    "closeTime": "2023-09-12T02:17:57.602707Z",
+    "closeStatus": "WORKFLOW_EXECUTION_CLOSE_STATUS_TIMED_OUT",
+    "historyLength": "3",
+    "executionTime": "2023-09-12T02:17:46.596Z",
+    "memo": {},
+    "searchAttributes": {},
+    "autoResetPoints": {}
   },
-  "identity": "client-name-visible-in-history",
-  "requestId": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
-  "input": {
-    "data": "IkN1cmwhIg=="
+  "pendingDecision": {
+    "state": "PENDING_DECISION_STATE_SCHEDULED",
+    "scheduledTime": "2023-09-12T02:17:46.596982Z",
+    "originalScheduledTime": "2023-09-12T02:17:46.596982Z"
+  }
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::GetClusterInfo</b></code></summary>
+
+#### Get supported client versions for the cluster
+
+##### Headers
+
+| name           | example                                         |
+|----------------|-------------------------------------------------|
+| context-ttl-ms | 2000                                            |
+| rpc-caller     | curl-client                                     |
+| rpc-service    | cadence-frontend                                |
+| rpc-encoding   | json                                            |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::GetClusterInfo |
+
+##### Example payload
+
+None
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+  -H 'context-ttl-ms: 2000' \
+  -H 'rpc-caller: curl-client' \
+  -H 'rpc-service: cadence-frontend' \
+  -H 'rpc-encoding: json' \
+  -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::GetClusterInfo'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "supportedClientVersions": {
+    "goSdk": "1.7.0",
+    "javaSdk": "1.5.0"
+  }
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::GetTaskListsByDomain</b></code></summary>
+
+#### Get the task lists in a domain
+
+##### Headers
+
+| name           | example                                               |
+|----------------|-------------------------------------------------------|
+| context-ttl-ms | 2000                                                  |
+| rpc-caller     | curl-client                                           |
+| rpc-service    | cadence-frontend                                      |
+| rpc-encoding   | json                                                  |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::GetTaskListsByDomain |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain"
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::GetTaskListsByDomain' \
+    -d \
+    '{
+      "domain": "sample-domain"
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "decisionTaskListMap": {},
+  "activityTaskListMap": {}
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::GetWorkflowExecutionHistory</b></code></summary>
+
+#### Get the history of workflow executions
+
+##### Headers
+
+| name           | example                                                      |
+|----------------|--------------------------------------------------------------|
+| context-ttl-ms | 2000                                                         |
+| rpc-caller     | curl-client                                                  |
+| rpc-service    | cadence-frontend                                             |
+| rpc-encoding   | json                                                         |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::GetWorkflowExecutionHistory |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id"
   }
 }
 ```
@@ -1101,23 +1541,414 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-caller: curl-client' \
     -H 'rpc-service: cadence-frontend' \
     -H 'rpc-encoding: json' \
-    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::GetWorkflowExecutionHistory' \
     -d \
     '{
       "domain": "sample-domain",
-      "workflowId": "sample-workflow-id",
-      "execution_start_to_close_timeout": "11s",
-      "task_start_to_close_timeout": "10s",
-      "workflowType": {
-        "name": "sample-workflow-type"
+      "workflow_execution": {
+        "workflow_id": "sample-workflow-id"
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "history": {
+    "events": [
+      {
+        "eventId": "1",
+        "eventTime": "2023-09-12T05:34:46.107550Z",
+        "taskId": "9437321",
+        "workflowExecutionStartedEventAttributes": {
+          "workflowType": {
+            "name": "sample-workflow-type"
+          },
+          "taskList": {
+            "name": "sample-task-list"
+          },
+          "input": {
+            "data": "IkN1cmwhIg=="
+          },
+          "executionStartToCloseTimeout": "61s",
+          "taskStartToCloseTimeout": "60s",
+          "originalExecutionRunId": "fd7c2283-79dd-458c-8306-e2d1d8217613",
+          "identity": "client-name-visible-in-history",
+          "firstExecutionRunId": "fd7c2283-79dd-458c-8306-e2d1d8217613",
+          "firstDecisionTaskBackoff": "0s"
+        }
       },
-      "taskList": {
+      {
+        "eventId": "2",
+        "eventTime": "2023-09-12T05:34:46.107565Z",
+        "taskId": "9437322",
+        "decisionTaskScheduledEventAttributes": {
+          "taskList": {
+            "name": "sample-task-list"
+          },
+          "startToCloseTimeout": "60s"
+        }
+      },
+      {
+        "eventId": "3",
+        "eventTime": "2023-09-12T05:34:59.184511Z",
+        "taskId": "9437330",
+        "workflowExecutionCancelRequestedEventAttributes": {
+          "cause": "dummy",
+          "identity": "client-name-visible-in-history"
+        }
+      },
+      {
+        "eventId": "4",
+        "eventTime": "2023-09-12T05:35:47.112156Z",
+        "taskId": "9437332",
+        "workflowExecutionTimedOutEventAttributes": {
+          "timeoutType": "TIMEOUT_TYPE_START_TO_CLOSE"
+        }
+      }
+    ]
+  }
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::ListTaskListPartitions</b></code></summary>
+
+#### List all the task list partitions and the hostname for partitions
+
+##### Headers
+
+| name           | example                                                 |
+|----------------|---------------------------------------------------------|
+| context-ttl-ms | 2000                                                    |
+| rpc-caller     | curl-client                                             |
+| rpc-service    | cadence-frontend                                        |
+| rpc-encoding   | json                                                    |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::ListTaskListPartitions |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "task_list": {
+    "name": "sample-task-list"
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::ListTaskListPartitions' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "task_list": {
         "name": "sample-task-list"
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "activityTaskListPartitions": [
+    {
+      "key": "sample-task-list",
+      "ownerHostName": "127.0.0.1:7935"
+    }
+  ],
+  "decisionTaskListPartitions": [
+    {
+      "key": "sample-task-list",
+      "ownerHostName": "127.0.0.1:7935"
+    }
+  ]
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::RefreshWorkflowTasks</b></code></summary>
+
+#### Refresh all the tasks of a workflow
+
+##### Headers
+
+| name           | example                                               |
+|----------------|-------------------------------------------------------|
+| context-ttl-ms | 2000                                                  |
+| rpc-caller     | curl-client                                           |
+| rpc-service    | cadence-frontend                                      |
+| rpc-encoding   | json                                                  |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::RefreshWorkflowTasks |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "b7973fb8-2229-4fe7-ad70-c919c1ae8774"
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::RefreshWorkflowTasks' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "workflow_execution": {
+        "workflow_id": "sample-workflow-id",
+        "run_id": "b7973fb8-2229-4fe7-ad70-c919c1ae8774"
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::RequestCancelWorkflowExecution</b></code></summary>
+
+#### Cancel a workflow execution
+
+##### Headers
+
+| name           | example                                                         |
+|----------------|-----------------------------------------------------------------|
+| context-ttl-ms | 2000                                                            |
+| rpc-caller     | curl-client                                                     |
+| rpc-service    | cadence-frontend                                                |
+| rpc-encoding   | json                                                            |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::RequestCancelWorkflowExecution |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "b7973fb8-2229-4fe7-ad70-c919c1ae8774"
+  },
+  "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+  "cause": "dummy",
+  "identity": "client-name-visible-in-history",
+  "first_execution_run_id": "b7973fb8-2229-4fe7-ad70-c919c1ae8774"
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::RequestCancelWorkflowExecution' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "workflow_execution": {
+        "workflow_id": "sample-workflow-id",
+        "run_id": "fd7c2283-79dd-458c-8306-e2d1d8217613"
+      },
+      "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+      "cause": "dummy",
+      "identity": "client-name-visible-in-history",
+      "first_execution_run_id": "fd7c2283-79dd-458c-8306-e2d1d8217613"
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::RestartWorkflowExecution</b></code></summary>
+
+#### Restart a previous workflow execution
+
+##### Headers
+
+| name           | example                                                   |
+|----------------|-----------------------------------------------------------|
+| context-ttl-ms | 2000                                                      |
+| rpc-caller     | curl-client                                               |
+| rpc-service    | cadence-frontend                                          |
+| rpc-encoding   | json                                                      |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::RestartWorkflowExecution |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "0f95ad5b-03bc-4c6b-8cf0-1f3ea08eb86a"
+  },
+  "identity": "client-name-visible-in-history",
+  "reason": "dummy"
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::RestartWorkflowExecution' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "workflow_execution": {
+        "workflow_id": "sample-workflow-id",
+        "run_id": "0f95ad5b-03bc-4c6b-8cf0-1f3ea08eb86a"
       },
       "identity": "client-name-visible-in-history",
-      "requestId": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
-      "input": {
-        "data": "IkN1cmwhIg=="
+      "reason": "dummy"
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "runId": "82914458-3221-42b4-ae54-2e66dff864f7"
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::SignalWithStartWorkflowExecution</b></code></summary>
+
+#### Signal the current open workflow if exists, or attempt to start a new run based on IDResuePolicy and signals it
+
+##### Headers
+
+| name           | example                                                           |
+|----------------|-------------------------------------------------------------------|
+| context-ttl-ms | 2000                                                              |
+| rpc-caller     | curl-client                                                       |
+| rpc-service    | cadence-frontend                                                  |
+| rpc-encoding   | json                                                              |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::SignalWithStartWorkflowExecution |
+
+##### Example payload
+
+```json
+{
+  "start_request": {
+    "domain": "sample-domain",
+    "workflow_id": "sample-workflow-id",
+    "execution_start_to_close_timeout": "61s",
+    "task_start_to_close_timeout": "60s",
+    "workflow_type": {
+      "name": "sample-workflow-type"
+    },
+    "task_list": {
+      "name": "sample-task-list"
+    },
+    "identity": "client-name-visible-in-history",
+    "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+    "input": {
+      "data": "IkN1cmwhIg=="
+    }
+  },
+  "signal_name": "channelA",
+  "signal_input": {
+    "data": "MTA="
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::SignalWithStartWorkflowExecution' \
+    -d \
+    '{
+      "start_request": {
+        "domain": "sample-domain",
+        "workflow_id": "sample-workflow-id",
+        "execution_start_to_close_timeout": "61s",
+        "task_start_to_close_timeout": "60s",
+        "workflow_type": {
+          "name": "sample-workflow-type"
+        },
+        "task_list": {
+          "name": "sample-task-list"
+        },
+        "identity": "client-name-visible-in-history",
+        "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+        "input": {
+          "data": "IkN1cmwhIg=="
+        }
+      },
+      "signal_name": "channelA",
+      "signal_input": {
+        "data": "MTA="
       }
     }'
 ```
@@ -1182,12 +2013,160 @@ curl -X POST http://0.0.0.0:8800 \
     '{
       "domain": "sample-domain",
       "workflow_execution": {
-        "workflow_id": "sample-workflow-id",
-        "run_id": "cc09d5dd-b2fa-46d8-b426-54c96b12d18f"
+        "workflow_id": "sample-workflow-id"
       },
       "signal_name": "channelA",
       "signal_input": {
         "data": "MTA="
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution</b></code></summary>
+
+#### Start a new workflow execution
+
+##### Headers
+
+| name           | example                                                 |
+|----------------|---------------------------------------------------------|
+| context-ttl-ms | 2000                                                    |
+| rpc-caller     | curl-client                                             |
+| rpc-service    | cadence-frontend                                        |
+| rpc-encoding   | json                                                    |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution |
+
+##### Example payload
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_id": "sample-workflow-id",
+  "execution_start_to_close_timeout": "61s",
+  "task_start_to_close_timeout": "60s",
+  "workflow_type": {
+    "name": "sample-workflow-type"
+  },
+  "task_list": {
+    "name": "sample-task-list"
+  },
+  "identity": "client-name-visible-in-history",
+  "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+  "input": {
+    "data": "IkN1cmwhIg=="
+  }
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "workflow_id": "sample-workflow-id",
+      "execution_start_to_close_timeout": "61s",
+      "task_start_to_close_timeout": "60s",
+      "workflow_type": {
+        "name": "sample-workflow-type"
+      },
+      "task_list": {
+        "name": "sample-task-list"
+      },
+      "identity": "client-name-visible-in-history",
+      "request_id": "8049B932-6C2F-415A-9BB2-241DCF4CFC9C",
+      "input": {
+        "data": "IkN1cmwhIg=="
+      }
+    }'
+```
+
+##### Example successful response
+
+HTTP code: 200
+
+```json
+{
+  "runId": "cc09d5dd-b2fa-46d8-b426-54c96b12d18f"
+}
+```
+
+</details>
+
+------------------------------------------------------------------------------------------
+
+<details>
+<summary><code>POST</code> <code><b>uber.cadence.api.v1.WorkflowAPI::TerminateWorkflowExecution</b></code></summary>
+
+#### Terminate a new workflow execution
+
+##### Headers
+
+| name           | example                                                     |
+|----------------|-------------------------------------------------------------|
+| context-ttl-ms | 2000                                                        |
+| rpc-caller     | curl-client                                                 |
+| rpc-service    | cadence-frontend                                            |
+| rpc-encoding   | json                                                        |
+| rpc-procedure  | uber.cadence.api.v1.WorkflowAPI::TerminateWorkflowExecution |
+
+##### Example payloads
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id"
+  }
+}
+```
+
+```json
+{
+  "domain": "sample-domain",
+  "workflow_execution": {
+    "workflow_id": "sample-workflow-id",
+    "run_id": "0f95ad5b-03bc-4c6b-8cf0-1f3ea08eb86a"
+  },
+  "reason": "dummy",
+  "identity": "client-name-visible-in-history",
+  "first_execution_run_id": "0f95ad5b-03bc-4c6b-8cf0-1f3ea08eb86a"
+}
+```
+
+##### Example cURL
+
+```bash
+curl -X POST http://0.0.0.0:8800 \
+    -H 'context-ttl-ms: 2000' \
+    -H 'rpc-caller: curl-client' \
+    -H 'rpc-service: cadence-frontend' \
+    -H 'rpc-encoding: json' \
+    -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::TerminateWorkflowExecution' \
+    -d \
+    '{
+      "domain": "sample-domain",
+      "workflow_execution": {
+        "workflow_id": "sample-workflow-id"
       }
     }'
 ```
