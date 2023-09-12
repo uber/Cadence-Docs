@@ -8,11 +8,12 @@ permalink: /docs/concepts/http-api
 
 ## Introduction
 
-Cadence allows you to interact with server using HTTP API. What does it mean? HTTP/JSON communication is a versatile way
-to interact with servers. For Cadence, it means you can expose a list of RPC methods to be invoked using HTTP protocol.
-This opens possibilities to interact with Cadence server using any programming language with HTTP support. This can be
-used to start or terminate workflows from your bash scripts, observe cluster status or invoke any other operation
-supported by Cadence RPC declaration.
+From version 1.2.1 onwards, Cadence has introduced HTTP API support, which allows you to interact with the Cadence server 
+using the HTTP protocol. To put this into perspective, HTTP/JSON communication is a flexible method for server interaction. 
+In the context of Cadence, this implies that a range of RPC methods can be exposed and invoked using the HTTP protocol. 
+This enhancement broadens the scope of interaction with the Cadence server, enabling the use of any programming language that supports HTTP. 
+Consequently, you can leverage this functionality to initiate or terminate workflows from your bash scripts, monitor the 
+status of your cluster, or execute any other operation that the Cadence RPC declaration supports.
 
 ## Setup
 
