@@ -96,6 +96,7 @@ module.exports = {
             '03-concepts/07-archival',
             '03-concepts/08-cross-dc-replication',
             '03-concepts/09-search-workflows',
+            '03-concepts/10-http-api',
           ],
         },
         {
