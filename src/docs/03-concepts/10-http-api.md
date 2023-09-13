@@ -8,7 +8,7 @@ permalink: /docs/concepts/http-api
 
 ## Introduction
 
-From version 1.2.1 onwards, Cadence has introduced HTTP API support, which allows you to interact with the Cadence server 
+From **version 1.2.1** onwards, Cadence has introduced HTTP API support, which allows you to interact with the Cadence server 
 using the HTTP protocol. To put this into perspective, HTTP/JSON communication is a flexible method for server interaction. 
 In the context of Cadence, this implies that a range of RPC methods can be exposed and invoked using the HTTP protocol. 
 This enhancement broadens the scope of interaction with the Cadence server, enabling the use of any programming language that supports HTTP. 
