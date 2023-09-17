@@ -280,8 +280,3 @@ Hooray! You just finish the tutorial on Cadence workflow in Java from scratch.
 
 ### Bonus point
 For a bonus point, you may check your workflow history at `localhost:8088` on your browser. The Cadence backend server provides a nice UI to inspect your workflow histories. 
-
-
-
-
-
