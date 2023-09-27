@@ -131,6 +131,7 @@ module.exports = {
             '05-go-client/',
             '05-go-client/01-workers',
             '05-go-client/02-create-workflows',
+            '05-go-client/02.5-starting-workflows',
             '05-go-client/03-activities',
             '05-go-client/04-execute-activity',
             '05-go-client/05-child-workflows',
