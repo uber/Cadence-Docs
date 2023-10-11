@@ -34,7 +34,7 @@ import (
     "go.uber.org/yarpc/transport/grpc"
 )
 
-var HostPort = "127.0.0.1:7933"
+var HostPort = "127.0.0.1:7833"
 var Domain = "test-domain"
 var TaskListName = "test-worker"
 var ClientName = "test-worker"
