@@ -298,6 +298,8 @@ cadence workflow query -w <wid> -r <rid> --qt <query-type>
 cadence workflow query -w <wid> -r <rid> --qt __stack_trace
 # a shortcut to query using __stack_trace is (without --qt flag)
 cadence workflow stack -w <wid> -r <rid>
+# a shortcut to query using __query_types (without --qt flag) to list all available query types
+cadence workflow query-types -w <wid> -r <rid>
 ```
 
 #### Signal, cancel, terminate workflow
