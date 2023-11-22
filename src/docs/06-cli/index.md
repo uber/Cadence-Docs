@@ -104,6 +104,7 @@ USAGE:
    cadence workflow command [command options] [arguments...]
 
 COMMANDS:
+   restart, res        restarts a previous workflow execution
    activity, act       operate activities of workflow
    show                show workflow history
    showid              show workflow history with given workflow_id and run_id (a shortcut of `show -w <wid> -r <rid>`). run_id is only required for archived history
@@ -119,13 +120,14 @@ COMMANDS:
    scan, sc, scanall   scan workflow executions (need to enable Cadence server on ElasticSearch). It will be faster than listall, but result are not sorted.
    count, cnt          count number of workflow executions (need to enable Cadence server on ElasticSearch)
    query               query workflow execution
+   query-types         list all available query types
    stack               query workflow execution with __stack_trace as query type
    describe, desc      show information of workflow execution
    describeid, descid  show information of workflow execution with given workflow_id and optional run_id (a shortcut of `describe -w <wid> -r <rid>`)
    observe, ob         show the progress of workflow history
    observeid, obid     show the progress of workflow history with given workflow_id and optional run_id (a shortcut of `observe -w <wid> -r <rid>`)
    reset, rs           reset the workflow, by either eventID or resetType.
-   reset-batch         reset workflow in batch by resetType: LastDecisionCompleted,LastContinuedAsNew,BadBinary,DecisionCompletedTime,FirstDecisionScheduled,LastDecisionScheduled,FirstDecisionCompletedTo get base workflowIDs/runIDs to reset, source is from input file or visibility query.
+   reset-batch         reset workflow in batch by resetType: LastContinuedAsNew,BadBinary,DecisionCompletedTime,FirstDecisionScheduled,LastDecisionScheduled,FirstDecisionCompleted,LastDecisionCompletedTo get base workflowIDs/runIDs to reset, source is from input file or visibility query.
    batch               batch operation on a list of workflows from query.
 
 OPTIONS:
