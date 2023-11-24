@@ -49,7 +49,7 @@ Note that the old samples will be removed once the new samples are fully refresh
 
 ## Cadence Retrospective ##
 
-We are nearly at the end of another year and yes it has gone so fast! Over this year Cadence and the community have evolved and grown. We think that this would be a good time to reflect about all the things that have happened in the project over the year and think about a possible roadmap for the future.
+We are nearly at the end of another year and yes it has gone so fast! Over this year Cadence and the community have evolved and grown. This is a good time to reflect about all the things that have happened in the project over the year and think about a possible roadmap for the future. 
 
 If you have any feedback, or comments about the project or ideas about what features you'd like to see in the roadmap then please feel free to begin a discussion in the #community [Slack](http://t.uber.com/cadence-slack)  channel.
 
