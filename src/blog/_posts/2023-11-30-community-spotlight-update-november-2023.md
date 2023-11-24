@@ -21,7 +21,7 @@ Community member [Mantas Sidlauskas](https://lt.linkedin.com/in/mantassidlauskas
 
 ## iWF Deep Dive and More! ##
 
-During the last few months community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) has continued to share his thoughts not only about [iWF](https://github.com/indeedeng/iwf) tips and tricks but also about workflows and processes. There is now even a [Python SDK](https://github.com/indeedeng/iwf-python-sdk) for iWF. Links to Long's articles can be found below:
+During the last few months community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) has continued to share his thoughts about [iWF](https://github.com/indeedeng/iwf), a layer implemented on top of Cadence. Since our last update iWF now has a[Python SDK](https://github.com/indeedeng/iwf-python-sdk). Long has been busy writing articles to share iWF tips and tricks as well as some general ideas about workflows and processes.  Links to Long's articles can be found below:
 
 - [iWF Deep Dive: workflowState+Durable Timer#1](https://medium.com/@qlong/iwf-deep-dive-workflowstate-durable-timer-1-0bb89e6d6fd4)
 
@@ -31,21 +31,21 @@ During the last few months community member [Quanzheng Long](https://www.linkedi
 
 ## New Go Samples for Cadence ##
 
-The Cadence core team is deprecating the old samples for Go and replacing with new V2 samples. We have received a lot of feedback that the people are having trouble with old samples, so we will publish a completely new brand of samples first for Go.
+The Cadence core team is deprecating the old samples for Go and replacing them with new version 2 (V2) samples. They have received a lot of feedback from the community that people are having trouble with old samples, so are in the process of publishing a completely new set of samples for Go.
 
 Here are some major changes to the new samples:
 
-- Easy to use the read. New samples will be completely based on CLIs instead of running a binary. (This is consistent with current Cadence use experience)
-- Simple and transparent worker configuration. (The old samples did not provide user a clear demonstration about the relationship between the worker and workflow themselves)
-- The new samples will help you bootstrap your Cadence workflow much quicker and easier.
-- More vivid and self-explanatory. (Instead of traditional HelloWorld  type of samples, we try to make thing more interesting and engaging. Each sample is trying to simulate a real-life use case to make them more understandable and fun to learn.)
+- Easy to use the read - the new samples will be completely based on CLIs instead of running a binary. (This is consistent with current Cadence use experience)
+- Simple and transparent worker configuration - the old samples did not provide user a clear demonstration about the relationship between the worker and workflow themselves
+- The new samples will help you bootstrap your Cadence workflow faster and easier.
+- More vivid and self-explanatory - instead of the traditional "HelloWorld"  type of samples, we want to make it more interesting and engaging. (Each sample will try to simulate a real-life use case to make them more understandable and fun to learn!)
 
-If you have any questions or have new sample inquires, please reach out to [Chris Qin](https://www.linkedin.com/in/chrisqin0610).
+We hope the community will enjoy these changes. If you have any questions or have new an idea for a new sample then please reach out to [Chris Qin](https://www.linkedin.com/in/chrisqin0610).
 
-The new samples can be found at:
+The new Go samples can be found at:
 -  https://github.com/uber-common/cadence-samples/tree/master/new_samples.
 
-We will be removing the old samples after new samples are fully refreshed.
+Note that the old samples will be removed once the new samples are fully refreshed.
 
 ## Cadence Retrospective ##
 
