@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2023/11/30/community-spotlight-update-november-2023/",
+            "url": "/blog/2023/11/30/community-spotlight-update-november-2023/",
+            "title": "Cadence Community Spotlight Update - November 2023",
+            "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nIt's been a couple of months since our last update so we have a lot of updates to share with you.\n\nPlease see below for a roundup of the highlights:\n\nProposal for Cadence Native Authentication\n\nCommunity member Mantas Sidlauskas has drafted a proposal around Cadence native authentication and is asking for community feedback. If you are interested in reviewing the current proposal and providing comments or feedback then please find the proposal details at the link below:\n\nCadence Native Authentication Proposal\n\n This is a great example of how we can focus on collaborating together to find a collective solution. A big thank you to Mantas for initiating this work and we hope to see the result ...",
+            "date_modified": "2023-11-30T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/08/31/community-spotlight-august-2023/",
             "url": "/blog/2023/08/31/community-spotlight-august-2023/",
             "title": "Cadence Community Spotlight Update - August 2023",
@@ -32,13 +39,6 @@
             "summary": "We have covered basic components of Cadence and how to implement a Cadence worker on local environment in previous blogs. In this blog, let's write your very first HelloWorld workflow with Cadence. I've started the Cadence backend server in background and registered a domain named test-domain. You may use the code snippet for the worker service in this blog  Let's first write a activity, which takes a single string argument and print a log in the console.\n\nfunc helloWorldActivity(ctx context.Context, name string) (string, error) {\n\tlogger := activity.GetLogger(ctx)\n\tlogger.Info(\"helloworld activity started\")\n\treturn \"Hello \" + name + \"!\", nil\n}\n\nThen let's write a workflow that invokes this activity\nfunc helloWorldWorkflow(ctx workflow.Context, name string) error {\n\tao := workflow.ActivityOptions{\n ...",
             "image": "/../../shared/img/cadence_ui.png",
             "date_modified": "2023-07-16T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/07/10/cadence-bad-practices-part-1/",
-            "url": "/blog/2023/07/10/cadence-bad-practices-part-1/",
-            "title": "Bad practices and Anti-patterns with Cadence (Part 1)",
-            "summary": "In the upcoming blog series, we will delve into a discussion about common bad practices and anti-patterns related to Cadence. As diverse teams often encounter distinct business use cases, it becomes imperative to address the most frequently reported issues in Cadence workflows. To provide valuable insights and guidance, the Cadence team has meticulously compiled these common challenges based on customer feedback.\n\nReusing the same workflow ID for very active/continuous running workflows\n\nCadence organizes workflows based on their unique IDs, using a process called partitioning. If a workflow receives a large number of updates in a short period of time or frequently starts new runs using the continueAsNew function, all these updates will be directed to the same shard. Unfortunately, the Cadence backend is not equipped to handle this concentrated workload efficiently. As a result, a situation known as a \"hot shard\" arises, overloading the Cadence backend and worsening the prob ...",
-            "date_modified": "2023-07-10T00:00:00.000Z"
         }
     ]
 }
