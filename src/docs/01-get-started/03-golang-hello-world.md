@@ -13,7 +13,7 @@ To successfully run this hello world sample, follow this checklist of setting up
 2. Your Cadence server is running (check your background docker container process)
 3. You have successfully registered a domain for this workflow
 
-You must finish part 2 and 3 by following the [first section](./01-server-installation.md) to proceed the next steps.
+You must finish part 2 and 3 by following the [first section](/docs/get-started/installation) to proceed the next steps.
 We are using domain called `test-domain` for this tutorial project.
 
 ## Step 1. Implement A Cadence Worker Service
