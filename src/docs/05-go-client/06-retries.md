@@ -52,7 +52,7 @@ when you execute them.
 
 ``` go
 expiration := time.Minute * 10
-retryPolicy := &cadence.RetryPolicy{
+retryPolicy := &workflow.RetryPolicy{
     InitialInterval:    time.Second,
     BackoffCoefficient: 2,
     MaximumInterval:    expiration,
