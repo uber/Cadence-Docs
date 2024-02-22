@@ -96,6 +96,7 @@ module.exports = {
             '03-concepts/07-archival',
             '03-concepts/08-cross-dc-replication',
             '03-concepts/09-search-workflows',
+            '03-concepts/10-http-api',
           ],
         },
         {
@@ -130,6 +131,7 @@ module.exports = {
             '05-go-client/',
             '05-go-client/01-workers',
             '05-go-client/02-create-workflows',
+            '05-go-client/02.5-starting-workflows',
             '05-go-client/03-activities',
             '05-go-client/04-execute-activity',
             '05-go-client/05-child-workflows',
