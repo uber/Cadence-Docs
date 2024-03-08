@@ -15,13 +15,15 @@ Note that both types of :worker:workers: as well as external clients are roles a
 
 ## Cadence Service
 
-![Cadence Service](/img/content/overview.png)
+
+![Cadence Architecture](https://user-images.githubusercontent.com/14902200/160308507-2854a98a-0582-4748-87e4-e0695d3b6e86.jpg)
+
 
 At the core of Cadence is a highly scalable multitentant service. The service exposes all of its functionality through a strongly typed [gRPC API](https://github.com/uber/cadence-idl/tree/master/proto/uber/cadence/api/v1). A Cadence cluster include multiple services, each of which may run on multiple nodes for scalability and reliablity:
-- Front End (FE): which is a stateless service used to handle incoming requests from Workers. It is expected that an external load balancing mechanism is used to distribute load between Front End instances.
-- History Service (HS): where the core logic of orchestrating workflow steps and activities is implemented
-- Matching Service (MS): matches workflow/activity tasks that need to be executed to workflow/activity workers that are able to execute them. Matching is assigned task for execution by the history service
-- Worker Service (WS - not shown on diagram): implements Cadence workflows and activities for internal requirements such as archiving
+- Front End: which is a stateless service used to handle incoming requests from Workers. It is expected that an external load balancing mechanism is used to distribute load between Front End instances.
+- History Service: where the core logic of orchestrating workflow steps and activities is implemented
+- Matching Service: matches workflow/activity tasks that need to be executed to workflow/activity workers that are able to execute them. Matching is assigned task for execution by the history service
+- Internal Worker Service: implements Cadence workflows and activities for internal requirements such as archiving
 - Workers: are effectively the client apps for Cadence. This is where user created workflow and activity logic is executed
 
 Internally it depends on a persistent store. Currently, Apache Cassandra, MySQL, PostgreSQL, CockroachDB ([PostgreSQL compatible](https://www.cockroachlabs.com/docs/stable/postgresql-compatibility.html)) and TiDB ([MySQL compatible](https://docs.pingcap.com/tidb/dev/mysql-compatibility)) stores are supported out of the box. For listing :workflow:workflows: using complex predicates, ElasticSearch and OpenSearch cluster can be used.
@@ -30,7 +32,9 @@ Cadence service is responsible for keeping :workflow: state and associated durab
 
 Cadence service is multitentant. Therefore it is expected that multiple pools of :worker:workers: implementing different use cases connect to the same service instance. For example, at Uber a single service is used by more than a hundred applications. At the same time some external customers deploy an instance of Cadence service per application. For local development, a local Cadence service instance configured through docker-compose is used.
 
-![Cadence Overview](/img/content/cadence-overview.svg)
+
+![Cadence Overview](https://user-images.githubusercontent.com/14902200/160308592-400e11bc-0b21-4dd1-b568-8ac59005e6b7.svg)
+
 
 ## Workflow Worker
 

@@ -14,7 +14,7 @@ Cadence emits metrics for both Server and client libraries:
   * You can use other metrics emitter like [M3](https://github.com/uber-go/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-go/tally/blob/master/reporter.go)
 
-* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/pull/44/files#diff-573f38d2aa3389b6704ede52eafb46a67d9aad2b478788eb4ccc3819958a405f). Make sure you use v3.0.0 and above.
+* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloMetric.java) if using 3.x client, or [this example](https://github.com/longquanzheng/cadence-java-samples-1/pull/1) if using 2.x client. 
   * You can use other metrics emitter like [M3](https://github.com/uber-java/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-java/tally/blob/master/core/src/main/java/com/uber/m3/tally/Scope.java)
 
@@ -61,7 +61,7 @@ Note: `host.docker.internal` [may not work for some docker versions](https://doc
 
 * Go to [local Grafana](http://localhost:3000) , login as `admin/admin`.
 * Configure Prometheus as datasource: use `http://host.docker.internal:9090` as URL of prometheus.
-* Import the [Grafana dashboard tempalte](/docs/operation-guide/monitor/#grafana-dashboard-templates) as JSON files.
+* Import the [Grafana dashboard tempalte](/docs/operation-guide/monitor/#grafana-prometheus-dashboard-templates) as JSON files.
 
 Client side dashboard looks like this:
 <img width="1513" alt="Screen Shot 2021-02-20 at 12 32 23 PM" src="https://user-images.githubusercontent.com/4523955/108607838-b7fc4d80-7377-11eb-8fd9-edc0e58afaad.png">
@@ -84,9 +84,10 @@ This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) con
 To use DataDog with Cadence, follow [this instruction](https://docs.datadoghq.com/integrations/guide/prometheus-metrics/) to collect Prometheus metrics using DataDog agent.
 
 NOTE1: don't forget to adjust `max_returned_metrics` to a higher number(e.g. 100000). Otherwise DataDog agent won't be able to [collect all metrics(default is 2000)](https://docs.datadoghq.com/integrations/guide/prometheus-host-collection/).
-## Grafana+Prometheus dashboard templates
 
 NOTE2: the template contains templating variables `$App` and `$Availability_Zone`. Feel free to remove them if you don't have them in your setup. 
+
+## Grafana+Prometheus dashboard templates
 
 This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
@@ -313,6 +314,24 @@ max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Task
 max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist}
 ```
 
+### Decision Execution Failure 
+* This means some critical bugs in workflow code causing decision task execution failure
+* Monitor: application should set monitor on it to make sure no consistent failure 
+* When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover 
+* Datadog query example
+```
+sum:cadence_client.cadence_decision_execution_failed{$Domain,$Tasklist} by {tasklist,workflowtype}.as_count()
+```
+
+### Decision Execution Timeout 
+* This means some critical bugs in workflow code causing decision task execution timeout
+* Monitor: application should set monitor on it to make sure no consistent timeout 
+* When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover 
+* Datadog query example
+```
+sum:cadence_history.start_to_close_timeout{operation:timeractivetaskdecision*,$Domain}.as_count()
+```
+
 ### Workflow End to End Latency
 * This is for the client application to track their SLOs
 For example, if you expect a workflow to take duration d to complete, you can use this latency to set a monitor.
@@ -362,6 +381,14 @@ sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 sum:cadence_client.cadence_activity_task_failed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_completed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activitytype}.as_rate()
+```
+
+### Local Activity Task Operations
+* Local Activity execution counters
+* Monitor: not recommended  
+* Datadog query example
+```
+sum:cadence_client.cadence_local_activity_total{$Domain,$Tasklist} by {activitytype}.as_count()
 ```
 
 ### Activity Execution Latency

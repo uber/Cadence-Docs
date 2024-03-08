@@ -16,7 +16,8 @@ You can also start a :workflow: using the Cadence :CLI: with an optional cron sc
 For :workflow:workflows: with CronSchedule:
 
 * CronSchedule is based on UTC time. For example cron schedule "15 8 \* \* \*"
-  will run daily at 8:15am UTC.
+  will run daily at 8:15am UTC. Another example "*/2 * * * 5-6" will schedule a workflow every two minutes on fridays 
+  and saturdays.
 * If a :workflow: failed and a RetryPolicy is supplied to the StartWorkflowOptions
   as well, the :workflow: will retry based on the RetryPolicy. While the :workflow: is
   retrying, the server will not schedule the next cron run.
@@ -45,6 +46,8 @@ Cadence supports the standard cron spec:
 // * * * * *
 CronSchedule string
 ```
+
+Cadence also supports more [advanced cron expressions](https://pkg.go.dev/github.com/robfig/cron#hdr-CRON_Expression_Format).
 
 The [crontab guru site](https://crontab.guru/) is useful for testing your cron expressions.
 

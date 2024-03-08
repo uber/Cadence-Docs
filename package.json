@@ -6,14 +6,18 @@
   "scripts": {
     "build:blog": "vuepress build src/blog",
     "build:site": "vuepress build src",
-    "build": "npm run build:blog && npm run build:site && npm run copy:blog",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; npm run build:blog && npm run build:site && npm run copy:blog",
     "copy:blog": "cp -a dist-blog/. dist",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "start:blog": "vuepress dev src/blog",
-    "start": "vuepress dev src",
+    "start:blog": "export NODE_OPTIONS=--openssl-legacy-provider; vuepress dev src/blog",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider; vuepress dev src",
     "start:local": "http-server ./dist",
     "test": "npm run cypress:run"
+  },
+  "engines": {
+    "node": "v18.13.0",
+    "npm": "8.19.3"
   },
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.4.1",
@@ -25,7 +29,8 @@
     "vuepress-plugin-code-switcher": "^1.0.3",
     "vuepress-plugin-fulltext-search": "^2.0.6",
     "vuepress-plugin-glossary": "^1.0.2",
-    "vuepress-plugin-reading-progress": "^1.0.9"
+    "vuepress-plugin-reading-progress": "^1.0.9",
+    "vuepress-plugin-redirect": "^1.2.5"
   },
   "devDependencies": {
     "cypress": "^6.1.0",

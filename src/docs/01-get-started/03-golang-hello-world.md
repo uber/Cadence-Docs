@@ -5,42 +5,118 @@ permalink: /docs/get-started/golang-hello-world
 ---
 
 # Golang Hello World
-This section provides step by step instructions on how to write and run a HelloWorld with Golang. 
+This section provides step-by-step instructions on how to write and run a HelloWorld workflow in Cadence with Golang. You will learn two critical building blocks of Cadence: activities and workflows. First, you will write an activity function that prints a "Hello World!" message in the log. Then, you will write a workflow function that executes this activity. 
 
-For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+## Prerequisite
+To successfully run this hello world sample, follow this checklist of setting up Cadence environment
+1. Your worker is running properly and you have registered the hello world activity and workflow to the worker
+2. Your Cadence server is running (check your background docker container process)
+3. You have successfully registered a domain for this workflow
 
-You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
+You must finish part 2 and 3 by following the [first section](/docs/get-started/installation) to proceed the next steps.
+We are using domain called `test-domain` for this tutorial project.
 
-## Include Golang cadence-client dependency
-
-Add cadence-client library to your project by running the command:
-
-```bash
-go get go.uber.org/cadence
-```
-
-## Implement HelloWorld Workflow
+## Step 1. Implement A Cadence Worker Service
+Create a new `main.go` file in your local directory and paste the basic worker service layout.
 
 ```go
-package main
-
 import (
-	"context"
-	"time"
+    "net/http"
+    "go.uber.org/cadence/.gen/go/cadence/workflowserviceclient"
+    "go.uber.org/cadence/compatibility"
+    "go.uber.org/cadence/worker"
 
-	"go.uber.org/cadence/activity"
-	"go.uber.org/cadence/workflow"
-	"go.uber.org/zap"
+    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
+    "github.com/uber-go/tally"
+    "go.uber.org/zap"
+    "go.uber.org/zap/zapcore"
+    "go.uber.org/yarpc"
+    "go.uber.org/yarpc/transport/grpc"
 )
 
-/**
- * This is the hello world workflow sample.
- */
+var HostPort = "127.0.0.1:7933"
+var Domain = "test-domain"
+var TaskListName = "test-worker"
+var ClientName = "test-worker"
+var CadenceService = "cadence-frontend"
 
-// ApplicationName is the task list for this sample
-const ApplicationName = "helloWorldGroup"
+func main() {
+    startWorker(buildLogger(), buildCadenceClient())
+    http.ListenAndServe(":8080", nil)
+}
 
-// helloWorkflow workflow decider
+func buildLogger() *zap.Logger {
+    config := zap.NewDevelopmentConfig()
+    config.Level.SetLevel(zapcore.InfoLevel)
+
+    var err error
+    logger, err := config.Build()
+    if err != nil {
+        panic("Failed to setup logger")
+    }
+
+    return logger
+}
+
+func buildCadenceClient() workflowserviceclient.Interface {
+    dispatcher := yarpc.NewDispatcher(yarpc.Config{
+		Name: ClientName,
+		Outbounds: yarpc.Outbounds{
+		  CadenceService: {Unary: grpc.NewTransport().NewSingleOutbound(HostPort)},
+		},
+	  })
+	  if err := dispatcher.Start(); err != nil {
+		panic("Failed to start dispatcher")
+	  }
+  
+	  clientConfig := dispatcher.ClientConfig(CadenceService)
+  
+	  return compatibility.NewThrift2ProtoAdapter(
+		apiv1.NewDomainAPIYARPCClient(clientConfig),
+		apiv1.NewWorkflowAPIYARPCClient(clientConfig),
+		apiv1.NewWorkerAPIYARPCClient(clientConfig),
+		apiv1.NewVisibilityAPIYARPCClient(clientConfig),
+	  )
+}
+
+func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
+    // TaskListName identifies set of client workflows, activities, and workers.
+    // It could be your group or client or application name.
+    workerOptions := worker.Options{
+        Logger:       logger,
+        MetricsScope: tally.NewTestScope(TaskListName, map[string]string{}),
+    }
+
+    worker := worker.New(
+        service,
+        Domain,
+        TaskListName,
+        workerOptions)
+    err := worker.Start()
+    if err != nil {
+        panic("Failed to start worker")
+    }
+
+    logger.Info("Started Worker.", zap.String("worker", TaskListName))
+}
+```
+
+In this worker service, we start a HTTP server and create a new Cadence client running continously at the background. Then start the server on your local, you may see logs such like
+
+```bash
+2023-07-03T11:46:46.266-0700    INFO    internal/internal_worker.go:826 Worker has no workflows registered, so workflow worker will not be started.     {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
+2023-07-03T11:46:46.267-0700    INFO    internal/internal_worker.go:834 Started Workflow Worker {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
+2023-07-03T11:46:46.267-0700    INFO    internal/internal_worker.go:838 Worker has no activities registered, so activity worker will not be started.    {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
+2023-07-03T11:46:46.267-0700    INFO    cadence-worker/main.go:75       Started Worker. {"worker": "test-worker"}
+```
+
+You may see this because there are no activities and workflows registered to the worker. Let's proceed to next steps to write a hello world activity and workflow.
+
+## Step 2. Write a simple Cadence hello world activity and workflow
+
+Let's write a hello world activity, which take a single input called `name` and greet us after the workflow is finished.
+
+```go
 func helloWorldWorkflow(ctx workflow.Context, name string) error {
 	ao := workflow.ActivityOptions{
 		ScheduleToStartTimeout: time.Minute,
@@ -69,21 +145,45 @@ func helloWorldActivity(ctx context.Context, name string) (string, error) {
 	return "Hello " + name + "!", nil
 }
 ```
-## Implement Worker
-Follow the [worker documentation](/docs/go-client/workers) or the [samples](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/main.go) to implement the worker.
 
-## Start the Worker and Workflow
-Build the worker program with your project. You can follow the way in the [sample](https://github.com/uber-common/cadence-samples).
+Don't forget to register the workflow and activity to the worker.
 
-Then start the worker:
-```bash
-./bin/helloworld -m worker
+```Go
+func init() {
+    workflow.Register(helloWorldWorkflow)
+    activity.Register(helloWorldActivity)
+}
 ```
 
-And start a workflow:
+## Step 3. Run the workflow with Cadence CLI
+
+Restart your worker and run the following command to interact with your workflow.
+
 ```bash
-./bin/helloworld
+cadence --env development  --domain test-domain workflow start --et 60 --tl test-worker --workflow_type main.helloWorldWorkflow --input '"World"'
 ```
+
+You should see logs in your worker terminal like
+```bash
+2023-07-16T11:30:02.717-0700    INFO    cadence-worker/code.go:104      Workflow completed. {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "11294@uber-C02F18EQMD6R@test-worker@5829c68e-ace0-472f-b5f3-6ccfc7903dd5", "WorkflowType": "main.helloWorldWorkflow", "WorkflowID": "8acbda3c-d240-4f27-8388-97c866b8bfb5", "RunID": "4b91341f-056f-4f0b-ab64-83bcc3a53e5a", "Result": "Hello World!"}
+```
+
+Congratulations! You just launched your very first Cadence workflow from scratch
+
+## (Optional) Step 4. Monitor Cadence workflow with Cadence web UI
+When you start the Cadence backend server, it also automatically starts a front end portal for your workflow. Open you browser and go to 
+
+http://localhost:8088
+
+You may see a dashboard below
+![cadence-ui](../../shared/img/cadence_ui.png)
+
+Type the domain you used for the tutorial, in this case, we type `test-domain` and hit enter. Then you can see a complete history of the workflows you have triggered associated to this domain.
+![cadence-ui-detailed](../../shared/img/cadence_ui_detailed.png)
 
 ## What is Next
 Now you have completed the tutorials. You can continue to explore the key [concepts](/docs/concepts) in Cadence, and also how to use them with [Go Client](/docs/go-client)
+
+For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+
+You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.

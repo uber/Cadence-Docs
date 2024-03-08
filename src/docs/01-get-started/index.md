@@ -20,9 +20,11 @@ Cadence consists of a programming framework (or client library) and a managed se
 The framework enables developers to author and coordinate :task:tasks: in familiar languages
 ([Go](https://github.com/uber-go/cadence-client/) and [Java](https://github.com/uber/cadence-java-client)
 are supported officially, and [Python](https://github.com/firdaus/cadence-python) and
-[Ruby](https://github.com/coinbase/cadence-ruby) by the community.
+[Ruby](https://github.com/coinbase/cadence-ruby) by the community).
 
-The backend service is stateless and relies on a persistent store. Currently, Cassandra and MySQL/Postgres storages
+You can also use [iWF](https://github.com/indeedeng/iwf) as a DSL framework on top of Cadence.
+
+The Cadence backend service is stateless and relies on a persistent store. Currently, Cassandra and MySQL/Postgres storages
 are supported. An adapter to any other database that provides multi-row single shard transactions
 can be added. There are different service deployment models. At Uber, our team operates multitenant clusters
 that are shared by hundreds of applications. See service [topology](/docs/concepts/topology) to understand the overall architecture. The GitHub repo for the Cadence server is [uber/cadence](https://github.com/uber/cadence). The docker
