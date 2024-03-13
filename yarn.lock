@@ -9928,7 +9928,7 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress@^1.0.0, vuepress@^1.4.0, vuepress@^1.4.1, vuepress@^1.5.4, vuepress@1.x:
+vuepress@^1.0.0, vuepress@^1.4.0, vuepress@^1.5.4, vuepress@^1.9.10, vuepress@1.x:
   version "1.9.10"
   resolved "https://unpm.uberinternal.com/vuepress/-/vuepress-1.9.10.tgz"
   integrity sha1-FHAPzNhbxWyBDPNn7MeX/L7MfA8=
