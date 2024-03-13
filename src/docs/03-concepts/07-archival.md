@@ -73,10 +73,10 @@ domainDefaults:
   archival:
     history:
       status: "enabled"
-      URI: "s3://dev-cad"
+      URI: "s3://put-name-of-your-s3-bucket-here"
     visibility:
       status: "enabled"
-      URI: "s3://dev-cad"
+      URI: "s3://put-name-of-your-s3-bucket-here" # most proably the same as the previous URI
 ```
 
 ## FAQ
