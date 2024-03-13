@@ -4,8 +4,12 @@ heroText: Fault-Tolerant Stateful Code Platform
 tagline: Focus on your business logic and let Cadence take care of the complexity of distributed systems
 actionText: Get Started →
 actionLink: /docs/get-started/
-footer: © 2023 Uber Technologies, Inc.
+
 ---
+::: slot footer
+© {{ new Date().getFullYear() }}  [Uber Technologies, Inc.](https://uber.github.io/)
+:::
+
 
 <div class="section">
   <div class="content">
