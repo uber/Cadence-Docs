@@ -36,7 +36,7 @@ module.exports = {
      */
     footer: {
       copyright: [
-        { text: '© 2023 Uber Technologies, Inc.' },
+        { text: `© ${new Date().getFullYear()} Uber Technologies, Inc.` },
       ]
     },
     summaryLength: 1000,
