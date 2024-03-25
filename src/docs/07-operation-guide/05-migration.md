@@ -30,7 +30,7 @@ If you are using local domains, an easy way is to create a global domain and mig
 ## Migrate with [Global Domain Replication](/docs/concepts/cross-dc-replication/#running-in-production) feature
 NOTE 1: If a domain are NOT a global domain, you cannot use the XDC feature to migrate. The only way is to migrate in a [naive approach](/docs/operation-guide/maintain/#migrate-cadence-cluster)
 
-NOTE 2: Starting from [version 0.22.0](https://github.com/uber/cadence/releases/tag/v0.22.0) (by [PR](https://github.com/uber/cadence/pull/4239)), Cadence allows migrating to a cluster with higher value of numHistoryShards. Prior to the version, only migrating to the same numHistoryShards is allowed.
+NOTE 2: Only migrating to the same numHistoryShards is allowed.
 
 ### Step 0 - Verify clusters' setup is correct
 
@@ -42,7 +42,7 @@ cadence --address <currentClusterAddress> admin domain list
 ```
 
 Then
-For each global domain.
+For each global domain
 ```bash
 cadence --address <newClusterAddress> --do <domain_name> domain describe
 ```
@@ -86,7 +86,7 @@ clusterMetadata:
       initialFailoverVersion: 0
       rpcName: "cadence-frontend"
       rpcAddress: "<newClusterAddress>"
-```          
+```
 for newClusterName:
 ```yaml
 dcRedirectionPolicy:
@@ -108,7 +108,7 @@ clusterMetadata:
       initialFailoverVersion: 0
       rpcName: "cadence-frontend"
       rpcAddress: "<newClusterAddress>"
-```   
+```
 
 Deploy the config.
 In older versions(<= v0.22), only `selected-apis-forwarding` is supported. This would require you to deploy a different set of workflow/activity connected to the new Cadence cluster during migration, if high availability/seamless migration is required. Because `selected-apis-forwarding` only forwarding the non-worker APIs.
