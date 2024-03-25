@@ -37,7 +37,7 @@ There are quite many configs in Cadence. Here are the most basic configuration t
 | archival | This is for archival history feature, skip if you don’t need it. Go to [workflow archival](/docs/concepts/archival/#running-in-production) for how to configure archival in production | N/A |
 | blobstore | This is also for archival history feature Default cadence server is using file based blob store implementation.  | N/A |
 | domainDefaults | default config for each domain. Right now only being used for Archival feature.  | N/A |
-| dynamicConfigClient | Dynamic config is a config manager that you can change config without restarting servers. It’s a good way for Cadence to keep high availability and make things easy to configure. <br/><br/>Default cadence server is using FileBasedClientConfig. But you can implement the dynamic config interface if you have a better way to manage.| Same as the sample development config |
+| dynamicconfig (previously known as dynamicConfigClient) | Dynamic config is a config manager that enables you to change configs without restarting servers. It’s a good way for Cadence to keep high availability and make things easy to configure. <br/><br/>By default Cadence server uses `filebased` client which allows you to override default configs using a YAML file. However, this approach can be cumbersome in production environment because it's the operator's responsibility to sync the YAML files across Cadence nodes. <br/><br/>Therefore, we provide another option, `configstore` client, that stores config changes in the persistent data store for Cadence (e.g., Cassandra database) rather than the YAML file. This approach shifts the responsibility of syncing config changes from the operator to Cadence service. You can use Cadence CLI commands to list/get/update/restore config changes. <br/><br/>You can also implement the dynamic config interface if you have a better way to manage configs. | Same as the sample development config |
 | persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for detailed configuration of advanced visibility. See [persistence documentation](https://github.com/uber/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
 
 ### The full list of static configuration
@@ -124,7 +124,11 @@ NOTE 2: for <frontend,history,matching>.persistenceMaxQPS versus <frontend,histo
 
 ### How to update Dynamic Configuration
 
-* Local docker-compose by mounting volume: update the `cadence` section in the docker compose file, and mount `config` folder to host machine like the following:
+#### File-based client
+
+By default, Cadence uses file-based client to manage dynamic configurations. Following are the approaches to changing dynamic configs using a yaml file.
+
+* Local docker-compose by mounting volume: 1. Change the dynamic configs in `cadence/config/dynamicconfig/development.yaml`. 2. Update the `cadence` section in the docker compose file and mount `dynamicconfig` folder to host machine like the following:
 ```yaml
 cadence:
   image: ubercadence/server:master-auto-setup
@@ -156,6 +160,31 @@ Then you should see the logs like below
 cadence_1        | {"level":"info","ts":"2021-05-07T18:43:07.869Z","msg":"First loading dynamic config","service":"cadence-frontend","key":"frontend.visibilityListMaxQPS,domainName:sample,clusterName:primary","value":"10000","default-value":"10","logging-call-at":"config.go:93"}
 ```
 
+#### Config store client
+
+You can set the `dynamicconfig` client in the static configuration to `configstore` in order to store config changes in a database, as shown below. 
+```yaml
+dynamicconfig:
+  client: configstore
+  configstore:
+    pollInterval: "10s"
+    updateRetryAttempts: 2
+    FetchTimeout: "2s"
+    UpdateTimeout: "2s"
+```
+
+If you are still using the deprecated config `dynamicConfigClient` like below, you need to replace it with the new `dynamicconfig` as shown above to use `configstore` client.
+```yaml
+dynamicConfigClient:
+  filepath: "/etc/cadence/config/dynamicconfig/config.yaml"
+  pollInterval: "10s"
+```
+
+After changing the client to `configstore` and restarting Cadence, you can manage dynamic configs using `cadence admin config` CLI commands. You may need to set your custom dynamic configs again as the previous configs are not automatically migrated from the YAML file to the database.
+* `cadence admin config listdc` lists all dynamic config overrides
+* `cadence admin config getdc --dynamic_config_name <dynamic config keyname>` gets the value of a specific dynamic config
+* `cadence admin config updc --dynamic_config_name <dynamic config keyname> --dynamic_config_value '{"Value": <new value>}'` updates the value of a specific dynamic config
+* `cadence admin config resdc --dynamic_config_name <dynamic config keyname>` restores a specific dynamic config to its default value
 
 ## Other Advanced Features
 * Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for how to configure advanced visibility in production.
