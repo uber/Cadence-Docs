@@ -1,18 +1,18 @@
 ---
 title: Cadence non-derministic errors common question Q&A (part 1)
 
-date: 2023-08-27
+date: 2024-03-10
 author: Chris Qin
 authorlink: https://www.linkedin.com/in/chrisqin0610/
 ---
 
-#### If I change code logic inside an Cadence activity (for example, my activity is calling database A but now I want it to call database B),  will it trigger an non-deterministic error?
+### If I change code logic inside an Cadence activity (for example, my activity is calling database A but now I want it to call database B),  will it trigger an non-deterministic error?
 
 <b>NO</b>. This change will not trigger non-deterministic error.
 
 An Activity is the smallest unit of execution for Cadence and what happens inside activities are not recorded as historical events and therefore will not be replayed. In short, this change is deterministic and it is fine to modify logic inside activities.
 
-#### Does changing the workflow definition trigger non-determinstic errors?
+### Does changing the workflow definition trigger non-determinstic errors?
 
 <b>YES</b>. This is a very typical non-deterministic error.
 
@@ -30,7 +30,7 @@ trigger non-deterministic errors.
 - Changes of workflow return values
 - Changing workflow parameter names as they are just positional
 
-#### Does changing activity definitions trigger non-determinstic errors?
+### Does changing activity definitions trigger non-determinstic errors?
 
 <b>YES</b>. Similar to workflow definition change, this is also a very typical non-deterministic error.
 
@@ -45,7 +45,7 @@ As activity paremeters are also positional, these two changes will NOT trigger n
 
 Activity return values inside workflows are not recorded and replayed.
 
-#### What changes inside workflows may potentially trigger non-deterministic errors?
+### What changes inside workflows may potentially trigger non-deterministic errors?
 
 Cadence records each execution of a workflow and activity execution inside each of them.Therefore, new changes must be compatible with execution orders inside the workflow. The following changes will fail the non-deterministic check.
 
@@ -54,3 +54,15 @@ Cadence records each execution of a workflow and activity execution inside each 
 - Reordering activities
 
 If you really need to change the activity implementation based on new business requirements, you may consider using versioning your workflow.
+
+### Are Cadence signals replayed? If definition of signal is changed, will it trigger non-deterministic errors?
+
+Yes. If a signal is used in a workflow, it becomes a critical component of your workflow. Because signals also involve I/O to your workflow, it is also recorded and replayed. Modifications on signal definitions or usage may yield to non-deterministic errors, for instance, changing return type of a signal.
+
+### If I have new business requirement and really need to change the definition of a workflow, what should I do?
+
+You may introduce a new workflow registered to your worker and divert traffic to it or use versioning for your workflow. Check out [Cadence website](https://cadenceworkflow.io/docs/go-client/workflow-versioning/) for more information about versioning.
+
+### Does changes to local activities' definition trigger non-deterministic errors?
+
+Yes. Local activities are recorded and therefore replayed by Cadence. Imcompatible changes on local activity definitions will yield to non-deterministic errors.
