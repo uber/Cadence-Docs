@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2024/03/10/cadence-non-deterministic-common-qa/",
+            "url": "/blog/2024/03/10/cadence-non-deterministic-common-qa/",
+            "title": "Cadence non-derministic errors common question Q&A (part 1)",
+            "summary": "NO. This change will not trigger non-deterministic error.\n\nAn Activity is the smallest unit of execution for Cadence and what happens inside activities are not recorded as historical events and therefore will not be replayed. In short, this change is deterministic and it is fine to modify logic inside activities.\n\nDoes changing the workflow definition trigger non-determinstic errors?\n\nYES. This is a very typical non-deterministic error.\n\nWhen a new workflow code change is deployed, Cadence will find if it is compatible with\nCadence history. Changes to workflow definition will fail the replay process of Cadence\nas it finds the new workflow definition imcompatible with previous historical events.\n\nHere is a list of common workflow definition changes.\nChanging workflow parameter counts\nChanging workflow parameter types\nChanging workflow return types\n\nThe following changes are not categorized as definition changes and therefore will not\ntrigger non-deterministic e ...",
+            "date_modified": "2024-03-10T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2023/11/30/community-spotlight-update-november-2023/",
             "url": "/blog/2023/11/30/community-spotlight-update-november-2023/",
             "title": "Cadence Community Spotlight Update - November 2023",
@@ -23,13 +30,6 @@
             "url": "/blog/2023/08/27/nondeterministic-errors-replayers-shadowers/",
             "title": "Non-deterministic errors, replayers and shadowers",
             "summary": "It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However,\nthe definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct\nthe workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible\nwith an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the\nfollowing workflow that executes two activities.\n\nfunc SampleWorkflow(ctx workflow.Context, data string) (string, error) {\n    ao := workflow.ActivityOptions{\n        ScheduleToStartTimeout: time.Minute,\n        StartToCloseTimeout:    time.Minute,\n    }\n    ctx = workflow.WithActivityOptions(ctx, ao)\n    var result1 string\n    err := workflow.ExecuteActivity(ctx, ActivityA, data).Get(ctx, &result1)\n    if err != nil {\n        return \"\", err\n    }\n    v ...",
-            "date_modified": "2023-08-27T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/08/27/cadence-non-deterministic-common-qa/",
-            "url": "/blog/2023/08/27/cadence-non-deterministic-common-qa/",
-            "title": "Cadence non-derministic errors common question Q&A (part 1)",
-            "summary": "NO. This change will not trigger non-deterministic error.\n\nAn Activity is the smallest unit of execution for Cadence and what happens inside activities are not recorded as historical events and therefore will not be replayed. In short, this change is deterministic and it is fine to modify logic inside activities.\n\nDoes changing the workflow definition trigger non-determinstic errors?\n\nYES. This is a very typical non-deterministic error.\n\nWhen a new workflow code change is deployed, Cadence will find if it is compatible with\nCadence history. Changes to workflow definition will fail the replay process of Cadence\nas it finds the new workflow definition imcompatible with previous historical events.\n\nHere is a list of common workflow definition changes.\nChanging workflow parameter counts\nChanging workflow parameter types\nChanging workflow return types\n\nThe following changes are not categorized as definition changes and therefore will not\ntrigger non-deterministic ...",
             "date_modified": "2023-08-27T00:00:00.000Z"
         },
         {
