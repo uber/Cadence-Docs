@@ -24,7 +24,7 @@ For [advanced features](/docs/operation-guide/setup/#other-advanced-features) Ca
 The default directory for configuration files is named **config/**. This directory contains various configuration files, but not all files will necessarily be used in every scenario.
 #### Combining Configuration Files
 * Base Configuration: The `base.yaml` file is always loaded first, providing a common configuration that applies to all environments.
-* Runtime Environment File: The second file to be loaded is specific to the runtime environment. The environment name can be specified through the $CADENCE_ENVIRONMENT environment variable or passed as a command-line argument. If neither option is specified, `development.yaml` is used by default.
+* Runtime Environment File: The second file to be loaded is specific to the runtime environment. The environment name can be specified through the `$CADENCE_ENVIRONMENT` environment variable or passed as a command-line argument. If neither option is specified, `development.yaml` is used by default.
 * Availability Zone File: If an availability zone is specified (either through the `$CADENCE_AVAILABILITY_ZONE` environment variable or as a command-line argument), a file named after the zone will be merged. For example, if you specify "az1" as the zone, `production_az1.yaml` will be used as well.
 
 To merge `base.yaml`, `production.yaml`, and `production_az1.yaml` files, you need to specify "production" as the runtime environment and "az1" as the zone.
