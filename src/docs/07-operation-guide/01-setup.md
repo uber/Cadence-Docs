@@ -37,6 +37,8 @@ Configuration values can be provided using environment variables with a specific
 `$VAR`: This notation will be replaced with the value of the specified environment variable. If the environment variable is not set, the value will be left blank.
 You can declare a default value using the syntax `{$VAR:default}`. This means that if the environment variable VAR is not set, the default value will be used instead.
 
+Note: If you want to include the `$` symbol literally in your configuration file (without interpreting it as an environment variable substitution), escape it by using $$. This will prevent it from being replaced by an environment variable value.
+
 ### Understand the basic static configuration
 
 There are quite many configs in Cadence. Here are the most basic configuration that you should understand.
