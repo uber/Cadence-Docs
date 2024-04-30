@@ -20,6 +20,25 @@ For [advanced features](/docs/operation-guide/setup/#other-advanced-features) Ca
 
 ## Static configuration
 
+### Configuration Directory and Files
+The default directory for configuration files is named **config/**. This directory contains various configuration files, but not all files will necessarily be used in every scenario.
+#### Combining Configuration Files
+* Base Configuration: The `base.yaml` file is always loaded first, providing a common configuration that applies to all environments.
+* Runtime Environment File: The second file to be loaded is specific to the runtime environment. The environment name can be specified through the `$CADENCE_ENVIRONMENT` environment variable or passed as a command-line argument. If neither option is specified, `development.yaml` is used by default.
+* Availability Zone File: If an availability zone is specified (either through the `$CADENCE_AVAILABILITY_ZONE` environment variable or as a command-line argument), a file named after the zone will be merged. For example, if you specify "az1" as the zone, `production_az1.yaml` will be used as well.
+
+To merge `base.yaml`, `production.yaml`, and `production_az1.yaml` files, you need to specify "production" as the runtime environment and "az1" as the zone.
+```
+// base.yaml -> production.yaml -> production_az1.yaml = final configuration
+```
+
+#### Using Environment Variables
+Configuration values can be provided using environment variables with a specific syntax.
+`$VAR`: This notation will be replaced with the value of the specified environment variable. If the environment variable is not set, the value will be left blank.
+You can declare a default value using the syntax `{$VAR:default}`. This means that if the environment variable VAR is not set, the default value will be used instead.
+
+Note: If you want to include the `$` symbol literally in your configuration file (without interpreting it as an environment variable substitution), escape it by using $$. This will prevent it from being replaced by an environment variable value.
+
 ### Understand the basic static configuration
 
 There are quite many configs in Cadence. Here are the most basic configuration that you should understand.
