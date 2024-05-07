@@ -156,7 +156,7 @@ This usually means workflow history is corrupted due to some bug. For example, t
 
 ### I want to change my workflow implementation. What code changes may produce non-deterministic errors?
 
-As we discussed in previuos sections, if you changes mess up with decision tasks, then they will probably lead you to non-deterministic errors.
+As we discussed in previous sections, if your changes change decision tasks, then they will probably lead to non-deterministic errors.
 These are some common changes that can be categorized by these previous 4 types mentioned above.
 
 1. Changing the order of executing Cadence defined operations, such as activities, timer, child workflows, signals, cancelRequest.
