@@ -25,7 +25,7 @@ In the previous section, we learned that Cadence is able to replay workflow hist
 
 Workflow histories are built based on event-sourcing, and each history event are persisted in Cadence storage. In Cadence, we call these history events <b>decision tasks</b>, the foundation of history replay. Most decision tasks have three status - <b>Scheduled</b>, <b>Started</b>, <b>Completed</b> and we will go over decision tasks produced by each Cadence operation in section below.
 
-When changing a workflow ownership of host and replaying a workflow, the decision tasks are downloaded from database and persisted in memory. Then during the workflow replaying process, if Cadence finds a decision task already exists for a particular step, it will immediately return the value of a decision task instead of rerunning the whole workflow logic. Let's take a look at the following simple workflow implementation and explictly list all decision tasks produced by this workflow.
+When changing a workflow ownership of host and replaying a workflow, the decision tasks are downloaded from database and persisted in memory. Then during the workflow replaying process, if Cadence finds a decision task already exists for a particular step, it will immediately return the value of a decision task instead of rerunning the whole workflow logic. Let's take a look at the following simple workflow implementation and explicitly list all decision tasks produced by this workflow.
 
 ```go
 func SimpleWorkflow(ctx workflow.Context) error {
