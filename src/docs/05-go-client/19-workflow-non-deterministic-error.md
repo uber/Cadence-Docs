@@ -57,7 +57,7 @@ In this workflow, when it starts, it first execute ActivityA and then assign the
 The following table lists the decision tasks stack produced by this workflow. It may looks overwhelming first but if you associate each decision task with its corresponding Cadence operation, it becomes self-explanatory.
 | ID | Decision Task Type | Explanation
 | -------- | ------- | -------------- |
-| 1 | Workflow Started
+| 1 | WorkflowStarted | the recorded StartWorkflow call's data, which usually schedules a new decision task immediately
 | 2 | DecisionTaskScheduled  | workflow worker polling for work
 | 3 | DecisionTaskStarted    | worker gets the type `SimpleWorkflow`, lookup registred funcs, deserialize input, call it
 | 4 | DecisionTaskCompleted  | worker finishes
