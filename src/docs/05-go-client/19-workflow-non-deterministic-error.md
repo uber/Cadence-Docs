@@ -54,7 +54,7 @@ func SimpleWorkflow(ctx workflow.Context) error {
 
 In this workflow, when it starts, it first execute ActivityA and then assign the result to an integer. It sleeps for one minute and then use the integer as an input argument to execute ActivityB. Finally it sleeps for one hour and completes.
 
-The following table lists the decision tasks stack produced by this workflow. It may looks overwhelming first but if you associate each decision task with its corresponding Cadence operation, it becomes self-explanatory.
+The following table lists the decision tasks stack produced by this workflow. It may look overwhelming first but if you associate each decision task with its corresponding Cadence operation, it becomes self-explanatory.
 | ID | Decision Task Type | Explanation
 | -------- | ------- | -------------- |
 | 1 | WorkflowStarted | the recorded StartWorkflow call's data, which usually schedules a new decision task immediately
