@@ -171,7 +171,7 @@ Code changes that are free of non-deterministic erorrs normally do not involve d
 
 1. Activity input and output changes do not directly cause non-deterministic errors because the contents are not checked.  However, changes may produce serialization errors based on your data converter implementation (type or number-of-arg changes are particularly prone to problems, so we recommend you always use a single struct).  Cadence uses `json.Marshal` and `json.Unmarshal` (with `Decoder.UseNumber()`) by default.
 2. Code changes that does not modify history events are safe to be checked in. For example, logging or metrics implementations.
-3. Change of retry policies, which are not replayed by Cadence.
+3. Change of retry policies, as these are not compared.  Adding or removing retry policies is also safe.  Changes will only take effect on new calls however, not ones that have already been scheduled.
 
 ### I want to check if my code change will produce non-deterministic errors, how can I debug?
 
