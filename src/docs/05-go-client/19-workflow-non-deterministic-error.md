@@ -7,7 +7,7 @@ permalink: /docs/go-client/workflow-non-deterministic-errors
 # Workflow Non-deterministic errors
 
 ## Root cause of non-deterministic errors
-Cadence workflows are designed as long-running operations, and therefore the workflow code you write must be deterministic so that no matter how many time it is executed it alwasy produce the same results.
+Cadence workflows are designed as long-running operations, and therefore the workflow code you write must be deterministic so that no matter how many time it is executed it always produce the same results.
 
 In production environment, your workflow code will run on a distributed system orchestrated by clusters of machines. However, machine failures are inevitable and can happen anytime to your workflow host. If you have a workflow running for long period of time, maybe months even years, and it fails due to loss of a host, it will be resumed on another machine and continue the rest of its execution.
 
