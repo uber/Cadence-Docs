@@ -175,4 +175,4 @@ Code changes that are free of non-deterministic erorrs normally do not involve d
 
 ### I want to check if my code change will produce non-deterministic errors, how can I debug?
 
-Cadence provides replayer test, which functions as an unit test on your local machine to replay your workflow history comparing to your potential code change. If you introduce a non-deterministic change, the test will fail. Check out [this page](./18-workflow-replay-shadowing.md) for more details.
+Cadence provides replayer test, which functions as an unit test on your local machine to replay your workflow history comparing to your potential code change. If you introduce a non-deterministic change and your history triggers it, the test should fail. Check out [this page](./18-workflow-replay-shadowing.md) for more details.
