@@ -125,7 +125,7 @@ if err != nil {
 	return err
 }
 ```
-And restart worker, then it will run into this error. Because in the history, the workflow has scheduled only activityB after the one minute timer, however, during replay, there are two activities scheduled in a decision( in parallel).
+And restart worker, then it will run into this error. Because in the history, the workflow has scheduled only activityB after the one minute timer, however, during replay, there are two activities scheduled in a decision (in parallel).
 
 ### 3. Mismatched decisions
 ```go
