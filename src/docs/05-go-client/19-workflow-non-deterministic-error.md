@@ -61,8 +61,8 @@ The following table lists the decision tasks stack produced by this workflow. It
 | 2 | DecisionTaskScheduled  | workflow worker polling for work
 | 3 | DecisionTaskStarted    | worker gets the type `SimpleWorkflow`, lookup registred funcs, deserialize input, call it
 | 4 | DecisionTaskCompleted  | worker finishes
-| 5 | ActivityTaskScheduled  | activity worker polling for work
-| 6 | ActivityTaskStarted    | activity worker gets type `ActivityA` and do the job
+| 5 | ActivityTaskScheduled  | activity available for a worker
+| 6 | ActivityTaskStarted    | activity worker polls and gets type `ActivityA` and do the job
 | 7 | ActivityTaskCompleted  | activity work completed with result of var a
 | 8 | DecisionTaskScheduled  | triggered by ActivityCompleted. server schedule next task
 | 9 | DecisionTaskStarted    |
