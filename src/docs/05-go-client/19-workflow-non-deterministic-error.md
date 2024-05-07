@@ -83,7 +83,7 @@ The following table lists the decision tasks stack produced by this workflow. It
 | 24 | DecisionTaskScheduled | triggered by TimerFired
 | 25 | DecisionTaskStarted   |
 | 26 | DecisionTaskCompleted |
-| 27 | WorkflowCompleted     | completed by decision
+| 27 | WorkflowCompleted     | completed by decision (the function call returned)
 
 As you may observe that this stack has strict orders. The whole point of the table above is that if the code you write involves some orchestration by Cadence, either your worker or Cadence server, they produce decision tasks. When your workflow gets replayed, it will strive to reconstruct this stack. Therefore, code changes to your workflow needs to make sure that they do not mess up with these decision tasks, which trigger non-deterministic errors. Then let's explore different types of non-deterministic errors and their root causes.
 
