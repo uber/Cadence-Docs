@@ -47,7 +47,7 @@ func SimpleWorkflow(ctx workflow.Context) error {
 		return err
 	}
 
-    workflow.Sleep(time.Hour)
+	workflow.Sleep(time.Hour)
 	return nil
 }
 ```
