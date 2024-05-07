@@ -169,7 +169,7 @@ These are some common changes that can be categorized by these previous 4 types 
 
 Code changes that are free of non-deterministic erorrs normally do not involve decision tasks in Cadence.
 
-1. Activity input and output are structs but changing content of this struct does not produce non-deterministic errors. However, it may produce serialization errors based on your data converter implementation. Cadence uses `json.Marshal` and `json.Marshal` function by default.
+1. Activity input and output changes do not directly cause non-deterministic errors because the contents are not checked.  However, changes may produce serialization errors based on your data converter implementation (type or number-of-arg changes are particularly prone to problems, so we recommend you always use a single struct).  Cadence uses `json.Marshal` and `json.Unmarshal` (with `Decoder.UseNumber()`) by default.
 2. Code changes that does not modify history events are safe to be checked in. For example, logging or metrics implementations.
 3. Change of retry policies, which are not replayed by Cadence.
 
