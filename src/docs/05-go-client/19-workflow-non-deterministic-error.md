@@ -74,7 +74,7 @@ The following table lists the decision tasks stack produced by this workflow. It
 | 15 | DecisionTaskCompleted |
 | 16 | ActivityTaskScheduled | `ActivityB` scheduled by decision with param a
 | 17 | ActivityTaskStarted   | started by worker
-| 18 | ActivityTaskCompleted | completed with nil as error
+| 18 | ActivityTaskCompleted | completed with nil
 | 19 | DecisionTaskScheduled | triggered by ActivityCompleted
 | 20 | DecisionTaskStarted   |
 | 21 | DecisionTaskCompleted |
