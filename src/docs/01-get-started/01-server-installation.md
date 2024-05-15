@@ -8,7 +8,7 @@ permalink: /docs/get-started/installation
 
 To get started with Cadence, you need to set up three components successfully.
 
-* A Cadence server hosting dependencies that Cadence relis on such as Cassandra, Elastic Search, etc
+* A Cadence server hosting dependencies that Cadence relies on such as Cassandra, Elastic Search, etc
 * A Cadence domain for you workflow application
 * A Cadence worker service hosting your workflows
 
