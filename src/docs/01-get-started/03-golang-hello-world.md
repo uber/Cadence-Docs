@@ -20,6 +20,8 @@ We are using domain called `test-domain` for this tutorial project.
 Create a new `main.go` file in your local directory and paste the basic worker service layout.
 
 ```go
+package main
+
 import (
     "net/http"
     "go.uber.org/cadence/.gen/go/cadence/workflowserviceclient"
@@ -34,7 +36,7 @@ import (
     "go.uber.org/yarpc/transport/grpc"
 )
 
-var HostPort = "127.0.0.1:7933"
+var HostPort = "127.0.0.1:7833"
 var Domain = "test-domain"
 var TaskListName = "test-worker"
 var ClientName = "test-worker"
@@ -42,7 +44,10 @@ var CadenceService = "cadence-frontend"
 
 func main() {
     startWorker(buildLogger(), buildCadenceClient())
-    http.ListenAndServe(":8080", nil)
+    err := http.ListenAndServe(":8080", nil)
+    if err != nil {
+        panic(err)
+    }
 }
 
 func buildLogger() *zap.Logger {
@@ -101,7 +106,7 @@ func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
 }
 ```
 
-In this worker service, we start a HTTP server and create a new Cadence client running continously at the background. Then start the server on your local, you may see logs such like
+In this worker service, we start a HTTP server and create a new Cadence client running continuously at the background. Then start the server on your local, you may see logs such like
 
 ```bash
 2023-07-03T11:46:46.266-0700    INFO    internal/internal_worker.go:826 Worker has no workflows registered, so workflow worker will not be started.     {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
@@ -155,12 +160,19 @@ func init() {
 }
 ```
 
+Import the `context` module if it was not automatically added.
+```Go
+import (
+    "context"
+)
+```
+
 ## Step 3. Run the workflow with Cadence CLI
 
 Restart your worker and run the following command to interact with your workflow.
 
 ```bash
-cadence --env development  --domain test-domain workflow start --et 60 --tl test-worker --workflow_type main.helloWorldWorkflow --input '"World"'
+cadence --domain test-domain workflow start --et 60 --tl test-worker --workflow_type main.helloWorldWorkflow --input '"World"'
 ```
 
 You should see logs in your worker terminal like
