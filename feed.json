@@ -5,6 +5,14 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2024/07/11/yearly-roadmap-update/",
+            "url": "/blog/2024/07/11/yearly-roadmap-update/",
+            "title": "2024 Cadence Yearly Roadmap Update",
+            "summary": "If you haven’t heard about Cadence, this section is for you. In a short description, Cadence is a code-driven workflow orchestration engine. The definition itself may not tell enough, so it would help splitting it into three parts:\n\nWhat’s a workflow? (everyone has a different definition)\nWhy does it matter to be code-driven?\nBenefits of Cadence\n\nWhat is a Workflow?\n\nworkflow.png\n\nIn the simplest definition, it is “a multi-step execution”. Step here represents individual operations that are a little heavier than small in-process function calls. Although they are not limited to those: it could be a separate service call, processing a large dataset, map-reduce, thread sleep, scheduling next run, waiting for an external input, starting a sub workflow etc. It’s anything a user thinks as a single unit of logic in their code. Those steps often have dependencies among themselves. Some steps, including the very first step, might ...",
+            "image": "/../../shared/img/2024-yearly-update/workflow.png",
+            "date_modified": "2024-07-11T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2024/03/10/cadence-non-deterministic-common-qa/",
             "url": "/blog/2024/03/10/cadence-non-deterministic-common-qa/",
             "title": "Cadence non-derministic errors common question Q&A (part 1)",
@@ -31,13 +39,6 @@
             "title": "Non-deterministic errors, replayers and shadowers",
             "summary": "It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However,\nthe definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct\nthe workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible\nwith an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the\nfollowing workflow that executes two activities.\n\nfunc SampleWorkflow(ctx workflow.Context, data string) (string, error) {\n    ao := workflow.ActivityOptions{\n        ScheduleToStartTimeout: time.Minute,\n        StartToCloseTimeout:    time.Minute,\n    }\n    ctx = workflow.WithActivityOptions(ctx, ao)\n    var result1 string\n    err := workflow.ExecuteActivity(ctx, ActivityA, data).Get(ctx, &result1)\n    if err != nil {\n        return \"\", err\n    }\n    v ...",
             "date_modified": "2023-08-27T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/07/31/community-spotlight-july-2023/",
-            "url": "/blog/2023/07/31/community-spotlight-july-2023/",
-            "title": "Cadence Community Spotlight Update - July 2023",
-            "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nGetting Started with Cadence\n\nAre you new to  Cadence and want to understand the basic concepts and architecture? Well we have some great information for you!\n\nCommunity member Chris Qin has written a short blog post that takes you through the the three main components that make up a Cadence application. Please take a look and feel free to give us your comments and feedback.\n\nThanks Chris for sharing your knowledge and helping others to get started.\n\nCadence Go Client v1.0 Released\n\nThis month saw the release of v1.0 of the Cadence Go Client. Note that the work done on this release was as a result ...",
-            "date_modified": "2023-07-31T00:00:00.000Z"
         }
     ]
 }

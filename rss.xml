@@ -4,9 +4,28 @@
         <title></title>
         <link>/</link>
         <description></description>
-        <lastBuildDate>Tue, 28 May 2024 16:10:30 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 15 Jul 2024 23:49:34 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>https://github.com/webmasterish/vuepress-plugin-feed</generator>
+        <item>
+            <title><![CDATA[2024 Cadence Yearly Roadmap Update]]></title>
+            <link>/blog/2024/07/11/yearly-roadmap-update/</link>
+            <guid>/blog/2024/07/11/yearly-roadmap-update/</guid>
+            <pubDate>Thu, 11 Jul 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[If you haven’t heard about Cadence, this section is for you. In a short description, Cadence is a code-driven workflow orchestration engine. The definition itself may not tell enough, so it would help splitting it into three parts:
+
+What’s a workflow? (everyone has a different definition)
+Why does it matter to be code-driven?
+Benefits of Cadence
+
+What is a Workflow?
+
+workflow.png
+
+In the simplest definition, it is “a multi-step execution”. Step here represents individual operations that are a little heavier than small in-process function calls. Although they are not limited to those: it could be a separate service call, processing a large dataset, map-reduce, thread sleep, scheduling next run, waiting for an external input, starting a sub workflow etc. It’s anything a user thinks as a single unit of logic in their code. Those steps often have dependencies among themselves. Some steps, including the very first step, might ...]]></description>
+            <enclosure url="/../../shared/img/2024-yearly-update/workflow.png">
+            </enclosure>
+        </item>
         <item>
             <title><![CDATA[Cadence non-derministic errors common question Q&A (part 1)]]></title>
             <link>/blog/2024/03/10/cadence-non-deterministic-common-qa/</link>
@@ -97,27 +116,6 @@ func SampleWorkflow(ctx workflow.Context, data string) (string, error) {
         return "", err
     }
     v ...]]></description>
-        </item>
-        <item>
-            <title><![CDATA[Cadence Community Spotlight Update - July 2023]]></title>
-            <link>/blog/2023/07/31/community-spotlight-july-2023/</link>
-            <guid>/blog/2023/07/31/community-spotlight-july-2023/</guid>
-            <pubDate>Mon, 31 Jul 2023 00:00:00 GMT</pubDate>
-            <description><![CDATA[Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!
-
-Please see below for a roundup of the highlights:
-
-Getting Started with Cadence
-
-Are you new to  Cadence and want to understand the basic concepts and architecture? Well we have some great information for you!
-
-Community member Chris Qin has written a short blog post that takes you through the the three main components that make up a Cadence application. Please take a look and feel free to give us your comments and feedback.
-
-Thanks Chris for sharing your knowledge and helping others to get started.
-
-Cadence Go Client v1.0 Released
-
-This month saw the release of v1.0 of the Cadence Go Client. Note that the work done on this release was as a result ...]]></description>
         </item>
     </channel>
 </rss>
