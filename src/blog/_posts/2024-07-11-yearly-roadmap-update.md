@@ -63,7 +63,7 @@ It’s one of the most popular platforms at Uber executing ~100K workflow update
 
 ### Managed Solutions
 
-While Uber doesn’t officially sell a managed Cadence solution, there are companies (e.g. [Instaclustr](https://www.instaclustr.com/platform/managed-cadence/)) in our community that we work closely selling Managed Cadence. Due to efficiency investments and other factors, it’s significantly cheaper than its competitors. It can be run in users’ on-prem machines or their cloud service of choice. Pricing is defined based on allocated hosts instead of number of requests so users can get more with the same resources by utilizing multi-tenant clusters.
+While Uber doesn’t officially sell a managed Cadence solution, there are companies (e.g. [Instaclustr](https://www.instaclustr.com/platform/managed-cadence/)) in our community that we work closely with selling Managed Cadence. Due to efficiency investments and other factors, it’s significantly cheaper than its competitors. It can be run in users’ on-prem machines or their cloud service of choice. Pricing is defined based on allocated hosts instead of number of requests so users can get more with the same resources by utilizing multi-tenant clusters.
 
 ## After V1 Release
 
@@ -75,11 +75,11 @@ We announced plans to make more frequent releases last year and started making m
 
 ### Zonal Isolation
 
-Cadence clusters have already been regionally isolated until this change. However, in the cloud, inter-zone communications matter as they are more expensive and their latencies are higher. Zones can individually have problems without impacting other cloud zones. In a regional architecture, a single zone problem might impact every request; however, with zonal isolation traffic from a zone with issues can easily be failed over to other zones, eliminating its impact on the whole cluster. Therefore, we implemented zonal isolation keeping domain traffic inside a single zone would help improve efficiency and reliability.
+Cadence clusters have already been regionally isolated until this change. However, in the cloud, inter-zone communications matter as they are more expensive and their latencies are higher. Zones can individually have problems without impacting other cloud zones. In a regional architecture, a single zone problem might impact every request; however, with zonal isolation traffic from a zone with issues can easily be failed over to other zones, eliminating its impact on the whole cluster. Therefore, we implemented zonal isolation keeping domain traffic inside a single zone to help improve efficiency and reliability.
 
 ### Narrowing Blast Radius
 
-When there are issues in a Cadence cluster, it’s often from a single misbehaving workflow. When this happens the whole domain or the cluster could have had issues until this change. With this change, we are able to contain the issue only to the offending workflow without impacting others. This is the narrowest blast radius possible.
+When there are issues in a Cadence cluster, it’s often from a single misbehaving workflow. When this happens the whole domain or the cluster could have had issues until the specific workflow is addressed. With this change, we are able to contain the issue only to the offending workflow without impacting others. This is the narrowest blast radius possible.
 
 ### Async APIs
 
@@ -131,33 +131,33 @@ This feature and above are at MVP level where we plan to generalize, expand and 
 
 ### Client Based Migrations
 
-With 30 clusters and ~1000 domains in production, migrating a domain from a cluster to another became a somewhat frequent operation for Cadence. While this feature is mostly automated, we would like to fully automate it to a level that this would be a single click or command operation. Client based migrations (as opposed to server based ones) give us big flexibility that we can have migrations from many to many environments at the same time. Each migration happens in its isolation without impacting any other domain or the cluster.
+With 30 clusters and ~1000 domains in production, migrating a domain from a cluster to another became a somewhat frequent operation for Cadence. While this feature is mostly automated, we would like to fully automate it to a level that this would be a single click or command operation. Client based migrations (as opposed to server based ones) give us big flexibility that we can have migrations from many to many environments at the same time. Each migration happens in isolation without impacting any other domain or the cluster.
 
 This is an ongoing project where remaining parts are migrating long running workflows faster and seamless technology to technology migrations even if the “from-technology” is not Cadence in the first place. There are many users that migrated from Cadence-like or different technologies to Cadence so we hope to remove the repeating overhead for such users.
 
 ## Roadmap (Next Year)
 
-Our priorities for next year look similar with reliability & efficiency and new features focus. We have seen significant improvements especially in our users’ reliability and efficiency on top of the improvements in our servers’. This both reduces operational load on our users and makes Cadence one step closer to being a standard way to build services. Here is a short list to what’s coming next 12 months:
+Our priorities for next year look similar with reliability, efficiency, and new features as our focus. We have seen significant improvements especially in our users’ reliability and efficiency on top of the improvements in our servers. This both reduces operational load on our users and makes Cadence one step closer to being a standard way to build services. Here is a short list of what's coming over the next 12 months:
 
 ### Database efficiency
 
-We are increasing our investment in improving Cadence’s database usage. Even though Cadence’s cost looks a lot better compared to the same family of technologies; it can still be significantly improved by eliminating certain bottlenecks coming from its original design.
+We are increasing our investment in improving Cadence’s database usage. Even though Cadence’s cost looks a lot better compared to the same family of technologies, it can still be significantly improved by eliminating certain bottlenecks coming from its original design.
 
 ### Helm Charts
 
-We are grateful to the Cadence community to introduce and maintain our Helm charts for operating Cadence clusters. We are taking its ownership so it can be officially released and tested. We expect to release this in summer 2024.
+We are grateful to the Cadence community for introducing and maintaining our Helm charts for operating Cadence clusters. We are taking its ownership so it can be officially released and tested. We expect to release this in 2024.
 
 ### Dashboard Templates
 
-During our tech talks, demos and user talks, we have received inquiries about what metrics care and alert on while running Cadence at Uber. We plan to release templates for our dashboards so our community would look at a similar picture.
+During our tech talks, demos and user talks, we have received inquiries about what metrics care about. We plan to release templates for our dashboards so our community would look at a similar picture.
 
 ### Client V2 Modernization
 
-As we announced last year that we plan to make breaking changes to significantly improve our interfaces, we are working on modernizing our client interface
+As we announced last year that we plan to make breaking changes to significantly improve our interfaces, we are working on modernizing our client interface.
 
 ### Higher Parallelization and Prioritization in Task Processing
 
-In an effort to have better domain prioritization in multitenant Cadence clusters, we are improving our task processing with higher parallelization and better prioritization. This is a lot better model than just having domains with defined limits. We expect to provide more resources to high priority domains during their peak time while allowing low priority domains consume much bigger resources than allocated during quiet times.
+In an effort to have better domain prioritization in multitenant Cadence clusters, we are improving our task processing with higher parallelization and better prioritization. This is a lot better model than just having domains with defined limits. We expect to provide more resources to high priority domains during their peak hours while allowing low priority domains to consume much bigger resources than allocated during quiet times.
 
 ### Timer and Cron Burst Handling
 
@@ -185,7 +185,7 @@ Probably the two most common user questions are “What’s wrong with my domain
 
 ### Self Serve Operations
 
-Certain Cadence operations are performed through admin CLI operations. However, these should be able to be done via users themselves. Admins shouldn’t need to be involved in every step or the checks they validate should be able to be automated. This is what the initiative is about including domain registration, auth/authz onboarding or adding new search attributes but it’s not limited to these operations.
+Certain Cadence operations are performed through admin CLI operations. However, these should be able to be done via Cadence UI by users. Admins shouldn’t need to be involved in every step or the checks they validate should be able to be automated. This is what the initiative is about including domain registration, auth/authz onboarding or adding new search attributes but it’s not limited to these operations.
 
 ### Cost Estimation
 
@@ -193,7 +193,7 @@ One big question we receive when users are onboarding to Cadence is “How much 
 
 ### Domain Reports (continue)
 
-We plan to release this internal feature to open source as soon as possible. On top of presenting this data on built-in Cadence surfaces (web, CLI. etc.) and create APIs to make it integratable with deployment systems, user service UIs, periodic reports and any other service that would like to consume.
+We plan to release this internal feature to open source as soon as possible. On top of presenting this data on built-in Cadence surfaces (web, CLI. etc.) we will create APIs to make it integratable with deployment systems, user service UIs, periodic reports and any other service that would like to consume.
 
 ### Non-determinism Detection Improvements (continue)
 
