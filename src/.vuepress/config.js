@@ -65,7 +65,7 @@ module.exports = {
         /**/
         {
           title: 'Use cases',
-          path: '/docs/02-use-cases',
+          path: '/docs/use-cases',
           children: [
             '02-use-cases/',
             '02-use-cases/01-periodic-execution',
@@ -84,7 +84,7 @@ module.exports = {
         },
         {
           title: 'Concepts',
-          path: '/docs/03-concepts',
+          path: '/docs/concepts',
           children: [
             '03-concepts/',
             '03-concepts/01-workflows',
@@ -101,7 +101,7 @@ module.exports = {
         },
         {
           title: 'Java client',
-          path: '/docs/04-java-client',
+          path: '/docs/java-client',
           children: [
             '04-java-client/',
             '04-java-client/01-client-overview',
@@ -126,7 +126,7 @@ module.exports = {
         },
         {
           title: 'Go client',
-          path: '/docs/05-go-client',
+          path: '/docs/go-client',
           children: [
             '05-go-client/',
             '05-go-client/01-workers',
@@ -152,11 +152,11 @@ module.exports = {
         },
         {
           title: 'Command line interface',
-          path: '/docs/06-cli/',
+          path: '/docs/cli/',
         },
         {
           title: 'Production Operation',
-          path: '/docs/07-operation-guide/',
+          path: '/docs/operation-guide/',
           children: [
             '07-operation-guide/',
             '07-operation-guide/01-setup',
@@ -172,7 +172,7 @@ module.exports = {
         },
         {
           title: 'About',
-          path: '/docs/08-about',
+          path: '/docs/about',
           children: [
             '08-about/',
             '08-about/01-license',
