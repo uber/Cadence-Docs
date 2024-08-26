@@ -167,15 +167,22 @@ module.exports = {
           ],
         },
         {
+          title: 'Workflow Troubleshooting',
+          path: '/docs/08-workflow-troubleshooting/',
+          children: [
+            '08-workflow-troubleshooting/01-timeouts',
+          ],
+        },
+        {
           title: 'Glossary',
           path: '../GLOSSARY',
         },
         {
           title: 'About',
-          path: '/docs/08-about',
+          path: '/docs/09-about',
           children: [
-            '08-about/',
-            '08-about/01-license',
+            '09-about/',
+            '09-about/01-license',
           ],
         },
       ],
