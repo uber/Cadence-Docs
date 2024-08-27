@@ -6,6 +6,8 @@ permalink: /docs/workflow-troubleshooting/timeouts
 
 #  Timeouts
 
+A workflow could fail if an activity times out and will timeout when the entire workflow execution times out. Workflows or activities time out when their time to execute or time to start has been longer than their configured timeout. Some of the common causes for timeouts have been listed here.
+
 ## Missing Pollers
 
 Cadence workers are part of the service that hosts and executes the workflow. They are of two types: activity worker and workflow worker. Each of these workers are responsible for having pollers which are go-routines that poll for activity tasks and decision tasks respectively from the Cadence server. Without pollers, the workflow cannot proceed with the execution.
