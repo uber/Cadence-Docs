@@ -170,6 +170,7 @@ module.exports = {
           title: 'Workflow Troubleshooting',
           path: '/docs/08-workflow-troubleshooting/',
           children: [
+            '08-workflow-troubleshooting/',
             '08-workflow-troubleshooting/01-timeouts',
           ],
         },
