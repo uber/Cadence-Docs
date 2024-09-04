@@ -41,4 +41,11 @@ module.exports = {
     },
     summaryLength: 1000,
   },
+  head: [
+    ['script', {
+      async: true,
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-2GC513VQ70'
+    }],
+    ['script', {}, `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-2GC513VQ70');`],
+  ],
 }
