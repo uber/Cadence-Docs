@@ -22,18 +22,18 @@
   "dependencies": {
     "@vuepress/plugin-back-to-top": "^1.4.1",
     "@vuepress/plugin-search": "^1.6.0",
-    "@vuepress/theme-blog": "^2.3.3",
+    "@vuepress/theme-blog": "^1.2.6",
     "vuepress": "^1.9.10",
     "vuepress-plugin-clean-urls": "^1.1.1",
     "vuepress-plugin-code-copy": "^1.0.6",
-    "vuepress-plugin-code-switcher": "^1.0.3",
+    "vuepress-plugin-code-switcher": "^2.0.1",
     "vuepress-plugin-fulltext-search": "^2.0.6",
     "vuepress-plugin-glossary": "^1.0.2",
     "vuepress-plugin-reading-progress": "^1.0.9",
-    "vuepress-plugin-redirect": "^1.2.5"
+    "vuepress-plugin-redirect": "^2.0.0-rc.19"
   },
   "devDependencies": {
-    "cypress": "^6.1.0",
+    "cypress": "^13.14.2",
     "http-server": "^13.0.2"
   }
 }
