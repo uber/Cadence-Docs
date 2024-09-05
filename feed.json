@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2024/09/05/workflow-specific-rate-limits/",
+            "url": "/blog/2024/09/05/workflow-specific-rate-limits/",
+            "title": "Minimizing blast radius in Cadence: Introducing Workflow ID-based Rate Limits",
+            "summary": "At Uber, we run several big multitenant Cadence clusters with hundreds of domains in each. The clusters being multi-tenant means potential noisy neighbor effects between domains.\n\nAn essential aspect of avoiding this is managing how workflows interact with our infrastructure to prevent any single workflow from causing instability for the whole cluster. To this end, we are excited to introduce Workflow ID-based rate limits — a new feature designed to protect our clusters from problematic workflows and ensure stability across the board.\n\nWhy Workflow ID-based Rate Limits?\nWe already have rate limits for how many requests can be sent to a domain. However, since Cadence is sharded on the workflow ID, a user-provided input, an overused workflow with a particular id might overwhelm a shard by making too many requests. There are two main ways this happens:\n\nA user starts, or signals the ...",
+            "date_modified": "2024-09-05T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2024/07/11/yearly-roadmap-update/",
             "url": "/blog/2024/07/11/yearly-roadmap-update/",
             "title": "2024 Cadence Yearly Roadmap Update",
@@ -32,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - August 2023",
             "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nMore Cadence How To's\n\nYou might have noticed that we have had a few more contributions to our blog from Chris Qin. Chris has been busy sharing insights, and tips on a few important Cadence topics. The objective is to help the community with any potential problems.\n\nHere are the latest topics:\n\nBad Practices and Anti-Patterns with Cadence - Part 1\n\nNon-Determistic Errors, Replayers and Shadowers\n\nEven if you have not encountered these use cases - it is good to be prepared and have a solution ready.Please take a look and let us have your feedback.\n\nChris is also going to take a look at ...",
             "date_modified": "2023-08-31T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/08/27/nondeterministic-errors-replayers-shadowers/",
-            "url": "/blog/2023/08/27/nondeterministic-errors-replayers-shadowers/",
-            "title": "Non-deterministic errors, replayers and shadowers",
-            "summary": "It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However,\nthe definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct\nthe workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible\nwith an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the\nfollowing workflow that executes two activities.\n\nfunc SampleWorkflow(ctx workflow.Context, data string) (string, error) {\n    ao := workflow.ActivityOptions{\n        ScheduleToStartTimeout: time.Minute,\n        StartToCloseTimeout:    time.Minute,\n    }\n    ctx = workflow.WithActivityOptions(ctx, ao)\n    var result1 string\n    err := workflow.ExecuteActivity(ctx, ActivityA, data).Get(ctx, &result1)\n    if err != nil {\n        return \"\", err\n    }\n    v ...",
-            "date_modified": "2023-08-27T00:00:00.000Z"
         }
     ]
 }
