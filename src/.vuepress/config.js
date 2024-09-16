@@ -34,9 +34,9 @@ module.exports = {
     ['link', { rel: 'icon', href: `/img/favicon.ico` }],
     ['script', {
       async: true,
-      src: 'https://www.googletagmanager.com/gtag/js?id=G-2GC513VQ70'
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-W63QD8QE6E'
     }],
-    ['script', {}, `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-2GC513VQ70');`],
+    ['script', {}, `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W63QD8QE6E');`],
   ],
   themeConfig: {
     ...themeConfig,
