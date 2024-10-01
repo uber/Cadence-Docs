@@ -5,6 +5,13 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2024/10/01/announcing-cadence-helm-charts-v0/",
+            "url": "/blog/2024/10/01/announcing-cadence-helm-charts-v0/",
+            "title": "Announcement: Cadence Helm Charts v0 Release",
+            "summary": "We’ve heard your feedback: deploying Cadence has been a challenge, especially with limited documentation on operational aspects. So far, we’ve only provided a few docker compose files to help you get started on a development machine. However, deploying and managing Cadence at scale requires a deep understanding of underlying services, configurations and their dependencies.\n\nTo address these challenges, we’re launching several initiatives to make it easier to deploy and operate Cadence clusters. These include deployment specs for common scenarios, monitoring dashboards, alerts, runbooks, and more comprehensive documentation.\n\nIntroducing Cadence Kubernetes Helm Chart v0\n\nToday, we are happy to announce the release of Cadence Kubernetes Helm Chart v0. This will be the starting point for standardizing Cadence deployments on Kubernetes. We chose Kubernetes because it's the leading compute pla ...",
+            "date_modified": "2024-10-01T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2024/09/05/workflow-specific-rate-limits/",
             "url": "/blog/2024/09/05/workflow-specific-rate-limits/",
             "title": "Minimizing blast radius in Cadence: Introducing Workflow ID-based Rate Limits",
@@ -32,13 +39,6 @@
             "title": "Cadence Community Spotlight Update - November 2023",
             "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nIt's been a couple of months since our last update so we have a lot of updates to share with you.\n\nPlease see below for a roundup of the highlights:\n\nProposal for Cadence Native Authentication\n\nCommunity member Mantas Sidlauskas has drafted a proposal around Cadence native authentication and is asking for community feedback. If you are interested in reviewing the current proposal and providing comments or feedback then please find the proposal details at the link below:\n\nCadence Native Authentication Proposal\n\n This is a great example of how we can focus on collaborating together to find a collective solution. A big thank you to Mantas for initiating this work and we hope to see the result ...",
             "date_modified": "2023-11-30T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/08/31/community-spotlight-august-2023/",
-            "url": "/blog/2023/08/31/community-spotlight-august-2023/",
-            "title": "Cadence Community Spotlight Update - August 2023",
-            "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nPlease see below for a roundup of the highlights:\n\nMore Cadence How To's\n\nYou might have noticed that we have had a few more contributions to our blog from Chris Qin. Chris has been busy sharing insights, and tips on a few important Cadence topics. The objective is to help the community with any potential problems.\n\nHere are the latest topics:\n\nBad Practices and Anti-Patterns with Cadence - Part 1\n\nNon-Determistic Errors, Replayers and Shadowers\n\nEven if you have not encountered these use cases - it is good to be prepared and have a solution ready.Please take a look and let us have your feedback.\n\nChris is also going to take a look at ...",
-            "date_modified": "2023-08-31T00:00:00.000Z"
         }
     ]
 }
