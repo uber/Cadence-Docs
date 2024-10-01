@@ -45,7 +45,7 @@ The v0 chart contains only the basics at the moment:
 - Cadence backend services as separate deployments: frontend, history, matching, worker.
 - Customizable replica counts and resource limitations.
 - Customizable dynamic config as a configmap.
-- A single instance ephemeral Cassandra container. This is included so that no external depency is required to get started. Ideally you should have your own external (hosted or managed) DB instance that you can specify in values.yaml.
+- A single instance ephemeral Cassandra container. This is included so that no external dependency is required to get started. Ideally you should have your own external (hosted or managed) DB instance that you can specify in values.yaml.
 - The chart comes with `cadence:master-auto-setup` as the default image and capable of setting up Cassandra DB schema on first installation.
 
 What is (obviously) missing:
