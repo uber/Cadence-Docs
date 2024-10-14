@@ -5,6 +5,14 @@
     "feed_url": "/feed.json",
     "items": [
         {
+            "id": "/blog/2024/10/14/zonal-isolation-v1/",
+            "url": "/blog/2024/10/14/zonal-isolation-v1/",
+            "title": "Zonal Isolation for Cadence Workflows",
+            "summary": "At Uber, we want to achieve regional resilience such that losing a zone within a region can be tolerated without requiring a cross-region failover. We also want to make sure that losing a zone only affects a subset of workload, at most, rather than everything. However, in Cadence-based systems, the workload in a region is distributed randomly across all workers in the region at a “task-level granularity”, which means a workflow may be worked on by any worker in the region where the domain is active. To achieve this goal, we introduced Zonal Isolation for Cadence Workflows - a feature designed to pin workflows to the zone they are started in, so that zonal isolation can be achieved at a workflow-level.\n\nWhat is Zonal Isolation for Cadence Workflows?\nAt high-level, Zonal Isolation for Cadence Workflows can be thought in 2 levels:\n\nTask-level isolation: All decision tasks and activity tasks of a workflow are only processed by workers from the zone where the workflow was started\n ...",
+            "image": "/img/zone-isolation.png",
+            "date_modified": "2024-10-14T00:00:00.000Z"
+        },
+        {
             "id": "/blog/2024/10/01/announcing-cadence-helm-charts-v0/",
             "url": "/blog/2024/10/01/announcing-cadence-helm-charts-v0/",
             "title": "Announcement: Cadence Helm Charts v0 Release",
@@ -32,13 +40,6 @@
             "title": "Cadence non-derministic errors common question Q&A (part 1)",
             "summary": "NO. This change will not trigger non-deterministic error.\n\nAn Activity is the smallest unit of execution for Cadence and what happens inside activities are not recorded as historical events and therefore will not be replayed. In short, this change is deterministic and it is fine to modify logic inside activities.\n\nDoes changing the workflow definition trigger non-determinstic errors?\n\nYES. This is a very typical non-deterministic error.\n\nWhen a new workflow code change is deployed, Cadence will find if it is compatible with\nCadence history. Changes to workflow definition will fail the replay process of Cadence\nas it finds the new workflow definition imcompatible with previous historical events.\n\nHere is a list of common workflow definition changes.\nChanging workflow parameter counts\nChanging workflow parameter types\nChanging workflow return types\n\nThe following changes are not categorized as definition changes and therefore will not\ntrigger non-deterministic e ...",
             "date_modified": "2024-03-10T00:00:00.000Z"
-        },
-        {
-            "id": "/blog/2023/11/30/community-spotlight-update-november-2023/",
-            "url": "/blog/2023/11/30/community-spotlight-update-november-2023/",
-            "title": "Cadence Community Spotlight Update - November 2023",
-            "summary": "Welcome to the latest of our regular monthly Community Spotlight updates that gives you news from in and around the Cadence community!\n\nIt's been a couple of months since our last update so we have a lot of updates to share with you.\n\nPlease see below for a roundup of the highlights:\n\nProposal for Cadence Native Authentication\n\nCommunity member Mantas Sidlauskas has drafted a proposal around Cadence native authentication and is asking for community feedback. If you are interested in reviewing the current proposal and providing comments or feedback then please find the proposal details at the link below:\n\nCadence Native Authentication Proposal\n\n This is a great example of how we can focus on collaborating together to find a collective solution. A big thank you to Mantas for initiating this work and we hope to see the result ...",
-            "date_modified": "2023-11-30T00:00:00.000Z"
         }
     ]
 }
