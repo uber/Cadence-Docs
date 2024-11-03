@@ -32,6 +32,11 @@ module.exports = {
   ],
   head: [
     ['link', { rel: 'icon', href: `/img/favicon.ico` }],
+    ['script', {
+      async: true,
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-W63QD8QE6E'
+    }],
+    ['script', {}, `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-W63QD8QE6E');`],
   ],
   themeConfig: {
     ...themeConfig,
@@ -43,7 +48,7 @@ module.exports = {
         {
           title: 'Get Started',
           path: '/docs/01-get-started',
-          children:[
+          children: [
             '01-get-started/',
             '01-get-started/01-server-installation',
             '01-get-started/02-java-hello-world',
