@@ -1,8 +1,16 @@
+### macOS ###
+# General
 .DS_Store
+.AppleDouble
+.LSOverride
+
+# cypress
 cypress/fixtures
 cypress/plugins
 cypress/support
 cypress/videos
+
+# node
 dist
 dist-blog
 node_modules
@@ -11,3 +19,9 @@ npm-debug.log
 # See https://github.com/marketplace/actions/cypress-io#installation for more information.
 # package-lock.json
 yarn-error.log
+
+# Docusaurus cache and generated files
+.docusaurus
+
+### VisualStudioCode ###
+.vscode/*
