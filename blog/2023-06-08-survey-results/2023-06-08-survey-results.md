@@ -30,7 +30,7 @@ Most survey responders were from Europe compared to any other place. This is in-
 
 ![channels.png](./2023-survey-results/channels.png)
 
-Cadence is followed in [Slack](https://uber-cadence.slack.com/) the most, then [Github](https://github.com/uber/cadence) and [LinkedIn](https://www.linkedin.com/company/cadenceworkflow/). We are the most active in Slack and we plan to be more active in other mediums as well.
+Cadence is followed in [Slack](https://uber-cadence.slack.com/) the most, then [Github](https://github.com/cadence-workflow/cadence) and [LinkedIn](https://www.linkedin.com/company/cadenceworkflow/). We are the most active in Slack and we plan to be more active in other mediums as well.
 
 ![scenarios.png](./2023-survey-results/scenarios.png)
 All of our main use cases were used across the board. While we mentioned the most common cases, several others were mentioned as a comment: enhanced timers, leader election etc.

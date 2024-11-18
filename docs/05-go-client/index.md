@@ -18,6 +18,6 @@ For more information, see [Creating Workflows](/docs/go-client/create-workflows)
 
 ## Links
 
-- GitHub project: [https://github.com/uber-go/cadence-client](https://github.com/uber-go/cadence-client)
-- Samples: [https://github.com/uber-common/cadence-samples](https://github.com/uber-common/cadence-samples)
+- GitHub project: [https://github.com/cadence-workflow/cadence-go-client](https://github.com/cadence-workflow/cadence-go-client)
+- Samples: [https://github.com/cadence-workflow/cadence-samples](https://github.com/cadence-workflow/cadence-samples)
 - GoDoc documentation: [https://godoc.org/go.uber.org/cadence](https://godoc.org/go.uber.org/cadence)

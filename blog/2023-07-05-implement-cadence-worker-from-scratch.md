@@ -118,7 +118,7 @@ import (
     "go.uber.org/cadence/compatibility"
     "go.uber.org/cadence/worker"
 
-    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
+    apiv1 "github.com/cadence-workflow/cadence-idl/go/proto/api/v1"
     "github.com/uber-go/tally"
     "go.uber.org/zap"
     "go.uber.org/zap/zapcore"

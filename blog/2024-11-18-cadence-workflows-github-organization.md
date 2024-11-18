@@ -13,7 +13,7 @@ We’re excited to announce that all Cadence GitHub repositories have been conso
 Previously, Cadence repositories were distributed across multiple organizations at Uber: [`uber`](https://github.com/uber), [`uber-go`](https://github.com/uber-go), [`uber-common`](https://github.com/uber-common). To improve developer cohesiveness and simplify access, the Cadence Core team has migrated all open-source repositories to the[`cadence-workflow`](https://github.com/cadence-workflow) organization.
 
 For example, our main repository has moved from:
-👉 https://github.com/uber/cadence
+👉 https://github.com/cadence-workflow/cadence
 
 To its new home:
 👉 https://github.com/cadence-workflow/cadence

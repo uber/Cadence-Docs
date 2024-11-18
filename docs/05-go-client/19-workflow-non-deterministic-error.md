@@ -94,7 +94,7 @@ Programmatically, Cadence surfaces 4 categories of non-deterministic errors. Wit
 ```go
 fmt.Errorf("nondeterministic workflow: missing replay decision for %s", util.HistoryEventToString(e))
 ```
-For source code click [here](https://github.com/uber-go/cadence-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1206)
+For source code click [here](https://github.com/cadence-workflow/cadence-go-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1206)
 
 This means after replay code, the decision is scheduled less than history events. Using the previous history as an example, when the workflow is waiting at the one hour timer(event ID 22), if we delete the line of :
 ```go
@@ -106,7 +106,7 @@ and restart worker, then it will run into this error. Because in the history, th
 ```go
 fmt.Errorf("nondeterministic workflow: extra replay decision for %s", util.DecisionToString(d))
 ```
-For source code click [here](https://github.com/uber-go/cadence-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1210)
+For source code click [here](https://github.com/cadence-workflow/cadence-go-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1210)
 
 This is basically the opposite of the previous case, which means that during replay, Cadence generates more decisions than those in history events. Using the previous history as an example, when the workflow is waiting at the one hour timer(event ID 22), if we change the line of:
 ```go
@@ -131,7 +131,7 @@ And restart worker, then it will run into this error. Because in the history, th
 ```go
 fmt.Errorf("nondeterministic workflow: history event is %s, replay decision is %s",util.HistoryEventToString(e), util.DecisionToString(d))
 ```
-For source code click [here](https://github.com/uber-go/cadence-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1214)
+For source code click [here](https://github.com/cadence-workflow/cadence-go-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_task_handlers.go#L1214)
 
 This means after replay code, the decision scheduled is different than the one in history. Using the previous history as an example, when the workflow is waiting at the one hour timer(event ID 22),
 if we change the line of :
@@ -148,7 +148,7 @@ And restart worker, then it will run into this error. Because in the history, th
 ```go
 fmt.Sprintf("unknown decision %v, possible causes are nondeterministic workflow definition code"+" or incompatible change in the workflow definition", id)
 ```
-For source code click [here](https://github.com/uber-go/cadence-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_decision_state_machine.go#L693)
+For source code click [here](https://github.com/cadence-workflow/cadence-go-client/blob/e5081b085b0333bac23f198e57959681e0aee987/internal/internal_decision_state_machine.go#L693)
 
 This usually means workflow history is corrupted due to some bug. For example, the same activity can be scheduled and differentiated by activityID. So ActivityIDs for different activities are supposed to be unique in workflow history. If however we have an ActivityID collision, replay will run into this error.
 

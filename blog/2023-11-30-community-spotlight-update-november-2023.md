@@ -45,7 +45,7 @@ Here are some major changes to the new samples:
 We hope the community will enjoy these changes. If you have any questions or have new an idea for a new sample then please reach out to [Chris Qin](https://www.linkedin.com/in/chrisqin0610).
 
 The new Go samples can be found at:
--  https://github.com/uber-common/cadence-samples/tree/master/new_samples.
+-  https://github.com/cadence-workflow/cadence-samples/tree/master/new_samples.
 
 Note that the old samples will be removed once the new samples are fully refreshed.
 

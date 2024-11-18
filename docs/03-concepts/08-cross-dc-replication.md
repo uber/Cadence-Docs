@@ -29,7 +29,7 @@ Cadence will only dispatch tasks on the current active cluster; :worker:workers:
 until the Global :domain:Domain: is failed over. This is recommended if XDC is being used in multiple clusters running in very remote data centers(regions), which forwarding is expensive to do.
 
 When using `all-domain-api-forwarding`, applications only need to run activity & workflow :worker:workers: polling on one cluster. This makes it easier for the application setup. This is recommended
-when clusters are all in local or nearby datacenters.  See more details in [discussion](https://github.com/uber/cadence/discussions/4530).
+when clusters are all in local or nearby datacenters.  See more details in [discussion](https://github.com/cadence-workflow/cadence/discussions/4530).
 
 ### Conflict Resolution
 Unlike local :domain:domains: which provide at-most-once semantics for :activity: execution, Global :domain:Domains: can only support at-least-once
@@ -110,13 +110,13 @@ Feel free to explore the `cadence admin cluster failover` tab.
 
 ## Running Locally
 
-The best way is to use Cadence [docker-compose](https://github.com/uber/cadence/tree/master/docker):
+The best way is to use Cadence [docker-compose](https://github.com/cadence-workflow/cadence/tree/master/docker):
 `docker-compose -f docker-compose-multiclusters.yml up`
 
 
 ## Running in Production
 
-Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configs).  
+Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configs).
 
 Here we use clusterDCA and clusterDCB as an example. We pick clusterDCA as the primary(used to called "master") cluster.
 The only difference of being a primary cluster is that it is responsible for domain registration. Primary can be changed later but it needs to be the same across all clusters.
@@ -179,7 +179,7 @@ After the configuration is deployed:
 2. Run some workflow and failover domain from one to another
 `cadence --do <domain_name> domain update  --active_cluster clusterDCB`
 
-Then the domain should be failed over to clusterDCB. Now worklfows are read-only in clusterDCA. So your workers polling tasks from clusterDCA will become idle.  
+Then the domain should be failed over to clusterDCB. Now worklfows are read-only in clusterDCA. So your workers polling tasks from clusterDCA will become idle.
 
 Note 1: that even though clusterDCA is standy/read-only for this domain, it can be active for another domain. So being active/standy is per domain basis not per clusters. In other words, for example if you use XDC in case of DC failure of clusterDCA, you need to failover all domains from clusterDCA to clusterDCB.
 

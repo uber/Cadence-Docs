@@ -25,12 +25,12 @@ And don’t forget to share your news with us. We are looking forward to receivi
 
 ## Proposal to Change the Way We Write Workflows
 
-If you haven’t seen the proposal from community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) about creating a new way to write Cadence workflows then please take a look:[https://github.com/uber/cadence/issues/4785](https://github.com/uber/cadence/issues/4785). He has already received some initial feedback and is currently working on putting together a proof of concept demo to show the community. As soon as we have more news about it - we will let you know!
+If you haven’t seen the proposal from community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) about creating a new way to write Cadence workflows then please take a look:[https://github.com/cadence-workflow/cadence/issues/4785](https://github.com/cadence-workflow/cadence/issues/4785). He has already received some initial feedback and is currently working on putting together a proof of concept demo to show the community. As soon as we have more news about it - we will let you know!
 
 
 ## Help Us Improve Cadence
 
-Do you want to help us improve Cadence? We are always looking for contributors so any contribution you can make - however small is welcome. If you would like to start contributing then please take a look at the list of [Cadence Issues on Github](https://github.com/uber/cadence/issues). We have some issues flagged with a tag of *‘good first issue'* that would be a great place to start.
+Do you want to help us improve Cadence? We are always looking for contributors so any contribution you can make - however small is welcome. If you would like to start contributing then please take a look at the list of [Cadence Issues on Github](https://github.com/cadence-workflow/cadence/issues). We have some issues flagged with a tag of *‘good first issue'* that would be a great place to start.
 
 Remember that we are not only looking for code contributions but also non coding ones such as documentation improvements so please take a look and select something to work on.
 

@@ -9,14 +9,14 @@ permalink: /docs/java-client/distributed-cron
 It is relatively straightforward to turn any Cadence :workflow: into a Cron :workflow:. All you need
 is to supply a cron schedule when starting the :workflow: using the CronSchedule
 parameter of
-[StartWorkflowOptions](https://static.javadoc.io/com.uber.cadence/cadence-client/2.5.1/com/uber/cadence/client/WorkflowOptions.html).
+[StartWorkflowOptions](https://static.javadoc.io/com.uber.cadence/cadence-client/2.5.1/com/cadence-workflow/cadence/client/WorkflowOptions.html).
 
 You can also start a :workflow: using the Cadence :CLI: with an optional cron schedule using the `--cron` argument.
 
 For :workflow:workflows: with CronSchedule:
 
 * CronSchedule is based on UTC time. For example cron schedule "15 8 \* \* \*"
-  will run daily at 8:15am UTC. Another example "*/2 * * * 5-6" will schedule a workflow every two minutes on fridays 
+  will run daily at 8:15am UTC. Another example "*/2 * * * 5-6" will schedule a workflow every two minutes on fridays
   and saturdays.
 * If a :workflow: failed and a RetryPolicy is supplied to the StartWorkflowOptions
   as well, the :workflow: will retry based on the RetryPolicy. While the :workflow: is

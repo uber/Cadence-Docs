@@ -8,11 +8,11 @@ permalink: /docs/concepts/http-api
 
 ## Introduction
 
-From **version 1.2.0** onwards, Cadence has introduced HTTP API support, which allows you to interact with the Cadence server 
-using the HTTP protocol. To put this into perspective, HTTP/JSON communication is a flexible method for server interaction. 
-In the context of Cadence, this implies that a range of RPC methods can be exposed and invoked using the HTTP protocol. 
-This enhancement broadens the scope of interaction with the Cadence server, enabling the use of any programming language that supports HTTP. 
-Consequently, you can leverage this functionality to initiate or terminate workflows from your bash scripts, monitor the 
+From **version 1.2.0** onwards, Cadence has introduced HTTP API support, which allows you to interact with the Cadence server
+using the HTTP protocol. To put this into perspective, HTTP/JSON communication is a flexible method for server interaction.
+In the context of Cadence, this implies that a range of RPC methods can be exposed and invoked using the HTTP protocol.
+This enhancement broadens the scope of interaction with the Cadence server, enabling the use of any programming language that supports HTTP.
+Consequently, you can leverage this functionality to initiate or terminate workflows from your bash scripts, monitor the
 status of your cluster, or execute any other operation that the Cadence RPC declaration supports.
 
 ## Setup
@@ -29,28 +29,28 @@ services:
       http:
         port: 8800
         procedures:
-          - uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution 
+          - uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution
 ```
 
 Then you can run Cadence server in the following ways to use HTTP API.
 
 ### Using local binaries
 
-Build and run `./cadence-server` as described in [Developing Cadence](https://github.com/uber/cadence/blob/master/CONTRIBUTING.md).
+Build and run `./cadence-server` as described in [Developing Cadence](https://github.com/cadence-workflow/cadence/blob/master/CONTRIBUTING.md).
 
 ### Using “docker run” command
 
 Refer to instructions described
-in [Using docker image for production](https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production).
+in [Using docker image for production](https://github.com/cadence-workflow/cadence/tree/master/docker#using-docker-image-for-production).
 
 Additionally add two more environment variables:
 
 ```bash
 docker run
 <...>
-    -e FRONTEND_HTTP_PORT=8800                          -- HTTP PORT TO LISTEN 
+    -e FRONTEND_HTTP_PORT=8800                          -- HTTP PORT TO LISTEN
     -e FRONTEND_HTTP_PROCEDURES=uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution  -- List of API methods exposed
-    ubercadence/server:<tag> 
+    ubercadence/server:<tag>
 ```
 
 ### Using docker-compose
@@ -79,7 +79,7 @@ cadence:
     - "PROMETHEUS_ENDPOINT_3=0.0.0.0:8003"
     - "DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development.yaml"
     - "FRONTEND_HTTP_PORT=8800"
-    - "FRONTEND_HTTP_PROCEDURES=uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution" 
+    - "FRONTEND_HTTP_PROCEDURES=uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution"
 ```
 
 ## Using HTTP API
@@ -93,7 +93,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-service: cadence-frontend' \
     -H 'rpc-encoding: json' \
     -H 'rpc-procedure: uber.cadence.api.v1.WorkflowAPI::StartWorkflowExecution' \
-    -d @data.json 
+    -d @data.json
 ```
 
 Where `data.json` content looks something like this:
@@ -112,7 +112,7 @@ Where `data.json` content looks something like this:
   },
   "identity": "My custom caller identity",
   "requestId": "4D1E4058-6FCF-4BA8-BF16-8FA8B02F9651"
-} 
+}
 ```
 
 ## HTTP API Reference
@@ -218,7 +218,7 @@ curl -X POST http://0.0.0.0:8800 \
     -H 'rpc-encoding: json' \
     -H 'rpc-procedure: uber.cadence.admin.v1.AdminAPI::CloseShard' \
     -d \
-    '{ 
+    '{
       "shard_id": 0
     }'
 ```

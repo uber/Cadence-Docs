@@ -10,15 +10,15 @@ permalink: /docs/operation-guide/monitor
 
 Cadence emits metrics for both Server and client libraries:
 
-* Follow this example to emit [client side metrics for Golang client](https://github.com/uber-common/cadence-samples/pull/36)
+* Follow this example to emit [client side metrics for Golang client](https://github.com/cadence-workflow/cadence-samples/pull/36)
   * You can use other metrics emitter like [M3](https://github.com/uber-go/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-go/tally/blob/master/reporter.go)
 
-* Follow this example to emit [client side metrics for Java client](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloMetric.java) if using 3.x client, or [this example](https://github.com/longquanzheng/cadence-java-samples-1/pull/1) if using 2.x client.
+* Follow this example to emit [client side metrics for Java client](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloMetric.java) if using 3.x client, or [this example](https://github.com/longquanzheng/cadence-java-samples-1/pull/1) if using 2.x client.
   * You can use other metrics emitter like [M3](https://github.com/uber-java/tally/tree/master/m3)
   * Alternatively, you can implement the tally [Reporter interface](https://github.com/uber-java/tally/blob/master/core/src/main/java/com/uber/m3/tally/Scope.java)
 
-* For running Cadence services in production, please follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/uber/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
+* For running Cadence services in production, please follow this [example of hemlchart](https://github.com/banzaicloud/banzai-charts/blob/master/cadence/templates/server-service-monitor.yaml) to emit server side metrics. Or you can follow [the example of local environment](https://github.com/cadence-workflow/cadence/blob/master/config/development_prometheus.yaml#L40) to Prometheus. All services need to expose a HTTP port to provide metircs like below
 
 ```yaml
 metrics:
@@ -29,7 +29,7 @@ metrics:
 
 The rest of the instruction uses local environment as an example.
 
-For testing local server emitting metrics to Promethues, the easiest way is to use [docker-compose](https://github.com/uber/cadence/blob/master/docker/) to start a local Cadence instance.
+For testing local server emitting metrics to Promethues, the easiest way is to use [docker-compose](https://github.com/cadence-workflow/cadence/blob/master/docker/) to start a local Cadence instance.
 
 Make sure to update the `prometheus_config.yml` to add "host.docker.internal:9098" to the scrape list before starting the docker-compose:
 ```yaml
@@ -100,7 +100,7 @@ This [package](https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/
 
 ## Periodic tests(Canary) for health check
 
-It's recommended that you run periodical test to get signals on the healthness of your cluster. Please following instructions in [our canary package](https://github.com/uber/cadence/tree/master/canary) to set these tests up.
+It's recommended that you run periodical test to get signals on the healthness of your cluster. Please following instructions in [our canary package](https://github.com/cadence-workflow/cadence/tree/master/canary) to set these tests up.
 
 ## Cadence Frontend Monitoring
 This section describes recommended dashboards for monitoring Cadence services in your cluster. The structure mostly follows the DataDog dashboard template listed above.
