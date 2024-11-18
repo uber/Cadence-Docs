@@ -75,7 +75,7 @@ And server basic dashboard:
 
 ## DataDog dashboard templates
 
-This [package](https://github.com/uber/cadence-docs/tree/master/src/datadog) contains examples of Cadence dashboards with DataDog.
+This [package](https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/datadog) contains examples of Cadence dashboards with DataDog.
 
 * `Cadence-Client` is the dashboard that includes all the metrics to help you understand Cadence client behavior. Most of these metrics are emitted by the client SDKs, with a few exceptions from server side (for example, workflow timeout).
 
@@ -89,13 +89,13 @@ NOTE2: the template contains templating variables `$App` and `$Availability_Zone
 
 ## Grafana+Prometheus dashboard templates
 
-This [package](https://github.com/uber/cadence-docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
+This [package](https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/grafana/prometheus) contains examples of Cadence dashboards with Prometheus.
 
 * `Cadence-Client` is the dashboard of client metrics, and a few server side metrics that belong to client side but have to be emitted by server(for example, workflow timeout).
 
 * `Cadence-Server-Basic` is the the basic server dashboard to monitor/navigate the health/status of a Cadence cluster.
 
-* Apart from the basic server dashboard, it's recommended to set up dashboards on different components for Cadence server: Frontend, History, Matching, Worker, Persistence, Archival, etc. Any [contribution](https://github.com/uber/cadence-docs) is always welcome to enrich the existing templates or new templates!
+* Apart from the basic server dashboard, it's recommended to set up dashboards on different components for Cadence server: Frontend, History, Matching, Worker, Persistence, Archival, etc. Any [contribution](https://github.com/cadence-workflow/Cadence-Docs) is always welcome to enrich the existing templates or new templates!
 
 
 ## Periodic tests(Canary) for health check

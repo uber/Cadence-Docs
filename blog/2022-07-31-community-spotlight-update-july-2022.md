@@ -21,7 +21,7 @@ Don’t forget to try out the code yourself and remember if you have used Cadenc
 
 During July the main Cadence branch had 28 pull requests (PRs) merged. There were 214 files changed by 11 different authors. You can find more details [here](https://github.com/uber/cadence/pulse/monthly)
 
-The Cadence documentation repository was not as busy with only 2 PRs merged in July, 5 commits and 3 authors active. More details can be found [here](https://github.com/uber/Cadence-Docs/pulse/monthly )
+The Cadence documentation repository was not as busy with only 2 PRs merged in July, 5 commits and 3 authors active. More details can be found [here](https://github.com/cadence-workflow/Cadence-Docs/pulse/monthly )
 
 ## Cadence Roadmap
 
