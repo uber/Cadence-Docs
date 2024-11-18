@@ -4,7 +4,16 @@
 
 # cadenceworkflow.io
 
-[Cadence docs](https://cadenceworkflow.io) is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+[Cadence docs](https://cadenceworkflow.io) is built using [Docusaurus](https://docusaurus.io/).
+
+
+
+### Prerequesites
+
+```
+# install yarn
+$ npm install --global yarn
+```
 
 ### Installation
 
