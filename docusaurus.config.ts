@@ -62,6 +62,9 @@ const config: Config = {
             'https://github.com/uber/cadence-docs/tree/master/src/docs',
         },
         blog: {
+          blogTitle: 'Cadence Blog',
+          blogDescription: 'The latest news and updates from the Cadence team',
+          //postsPerPage: 'ALL',
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -74,6 +77,7 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: './src/css/custom.css',
