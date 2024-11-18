@@ -2,8 +2,9 @@
 title: Cadence Community Spotlight Update - December 2022
 
 date: 2022-12-23
-author: Sharan Foga
-authorlink: https://www.linkedin.com/in/sfoga/
+authors: sharanf
+tags:
+  - community-spotlight
 ---
 
 I know we are a little early this month as many people will be taking some time out for holidays.

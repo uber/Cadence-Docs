@@ -2,8 +2,9 @@
 title: Cadence non-derministic errors common question Q&A (part 1)
 
 date: 2024-03-10
-author: Chris Qin
-authorlink: https://www.linkedin.com/in/chrisqin0610/
+authors: chopincode
+tags:
+  - deep-dive
 ---
 
 ### If I change code logic inside an Cadence activity (for example, my activity is calling database A but now I want it to call database B),  will it trigger an non-deterministic error?

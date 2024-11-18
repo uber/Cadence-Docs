@@ -2,8 +2,10 @@
 title: Announcing Cadence OSS office hours and community sync up
 
 date: 2021-10-13
-author: Liang Mei
-authorlink: https://www.linkedin.com/in/meiliang86/
+authors: meiliang86
+tags:
+  - announcement
+  - roadmap
 ---
 
 Are you a current Cadence user, do you operate Cadence services, or are you interested in learning about workflow technologies and wonder what problems Cadence could solve for you? We would like to talk to you!

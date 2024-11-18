@@ -2,8 +2,10 @@
 title: Moving to gRPC
 
 date: 2021-10-19
-author: Vytautas Karpavicius
-authorlink: https://www.linkedin.com/in/vytautas-karpavicius
+authors: vytautas-karpavicius
+tags:
+  - deep-dive
+  - cadence-operations
 ---
 
 ## Background

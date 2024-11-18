@@ -1,11 +1,10 @@
 ---
 title: "Minimizing blast radius in Cadence: Introducing Workflow ID-based Rate Limits"
 
-subtitle: test
-
 date: 2024-09-05
-author: Jakob Haahr Taankvist
-authorlink: https://www.linkedin.com/in/jakob-taankvist/
+authors: jakobht
+tags:
+  - deep-dive
 ---
 
 At Uber, we run several big multitenant Cadence clusters with hundreds of domains in each. The clusters being multi-tenant means potential [noisy neighbor](https://en.wikipedia.org/wiki/Cloud_computing_issues#Performance_interference_and_noisy_neighbors) effects between domains.
