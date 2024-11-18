@@ -59,7 +59,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/uber/cadence-docs/tree/master/src/docs',
+            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/docs',
         },
         blog: {
           blogTitle: 'Cadence Blog',
@@ -72,7 +72,7 @@ const config: Config = {
           },
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/uber/cadence-docs/tree/master/src/blog/_posts',
+            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/blog/_posts',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -121,7 +121,7 @@ const config: Config = {
           // if (locale !== defaultLocale) {
           //   return `https://crowdin.com/project/cadence-docs/${locale}`;
           // }
-          return `https://github.com/uber/cadence-Docs/edit/master/${versionDocsDirPath}/${docPath}`;
+          return `https://github.com/cadence-workflow/Cadence-Docs/edit/master/${versionDocsDirPath}/${docPath}`;
         },
         remarkPlugins: [npm2yarn],
         editCurrentVersion: true,
