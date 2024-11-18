@@ -2,8 +2,9 @@
 title: Cadence Community Spotlight Update - February 2022
 
 date: 2022-02-28
-author: Sharan Foga
-authorlink: https://www.linkedin.com/in/sfoga/
+authors: sharanf
+tags:
+  - community-spotlight
 ---
 
 Welcome to the Cadence Community Spotlight update!

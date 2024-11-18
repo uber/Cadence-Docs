@@ -2,8 +2,10 @@
 title: Understanding components of Cadence application
 
 date: 2023-07-01
-author: Chris Qin
-authorlink: https://www.linkedin.com/in/chrisqin0610/
+authors: chopincode
+tags:
+  - deep-dive
+  - introduction-to-cadence
 ---
 
 Cadence is a powerful, scalable, and fault-tolerant workflow orchestration framework that helps developers implement and manage complex workflow tasks. In most cases, developers contribute activities and workflows directly to their codebases, and they may not have a full understanding of the components behind a running Cadence application. We receive numerous inquiries about setting up Cadence in a local environment from scratch for testing. Therefore, in this article, we will explore the components that power a Cadence cluster.
@@ -13,9 +15,9 @@ There are three critical components that are essential for any Cadence applicati
 2. A registered Cadence domain.
 3. A running Cadence worker that registers all workflows and activities.
 
-Let's go over these components in more details. 
+Let's go over these components in more details.
 
-The Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dependencies, our team has conveniently packaged them into a single Docker image. You can follow the instructions provided [here](../../docs/01-get-started/01-server-installation.md). 
+The Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dependencies, our team has conveniently packaged them into a single Docker image. You can follow the instructions provided [here](../../docs/01-get-started/01-server-installation.md).
 
 The Cadence domain functions as the namespace for your Cadence workflows. It helps segregate your workflows into manageable groups. When running workflows, you must specify the domain on which you want to execute them.
 

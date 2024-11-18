@@ -2,8 +2,9 @@
 title: "Announcement: Cadence Helm Charts v0 Release"
 
 date: 2024-10-01
-author: Taylan Isikdemir
-authorlink: https://www.linkedin.com/in/taylan-isikdemir
+authors: taylanisikdemir
+tags:
+  - announcement
 ---
 We’ve heard your feedback: deploying Cadence has been a challenge, especially with limited documentation on operational aspects. So far, we’ve only provided a few [docker compose files](https://github.com/uber/cadence/tree/master/docker) to help you get started on a development machine. However, deploying and managing Cadence at scale requires a deep understanding of underlying services, configurations and their dependencies.
 

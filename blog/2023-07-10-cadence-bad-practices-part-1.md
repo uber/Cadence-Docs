@@ -2,8 +2,10 @@
 title: Bad practices and Anti-patterns with Cadence (Part 1)
 
 date: 2023-07-10
-author: Chris Qin
-authorlink: https://www.linkedin.com/in/chrisqin0610/
+authors: chopincode
+tags:
+  - introduction-to-cadence
+  - deep-dive
 ---
 
 In the upcoming blog series, we will delve into a discussion about common bad practices and anti-patterns related to Cadence. As diverse teams often encounter distinct business use cases, it becomes imperative to address the most frequently reported issues in Cadence workflows. To provide valuable insights and guidance, the Cadence team has meticulously compiled these common challenges based on customer feedback.
@@ -22,4 +24,4 @@ Cadence has the capability to handle a large number of concurrent tasks initiate
 Moreover, Cadence workers utilize a sticky cache by default to optimize the runtime of workflows. However, when an overwhelming number of parallel workflows cannot fit into the cache, it can result in <b>cache thrashing</b>. This, in turn, leads to a quadratic increase in runtime complexity, specifically O(n^2), exacerbating the overall performance of the system.
 
 Solution:
-There are multiple ways to address this issue. Customers can either run jobs in a smaller batch or use start workflow jitter to randomly distribute timers within certain timeframe. 
+There are multiple ways to address this issue. Customers can either run jobs in a smaller batch or use start workflow jitter to randomly distribute timers within certain timeframe.
