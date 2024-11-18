@@ -10,7 +10,7 @@ In the Versioning section, we mentioned that incompatible changes to workflow de
 
 ## Workflow Replayer
 
-Workflow Replayer is a testing component for replaying existing workflow histories against a workflow definition. The replaying logic is the same as the one used for processing workflow tasks, so if there's any incompatible changes in the workflow definition, the replay test will fail. 
+Workflow Replayer is a testing component for replaying existing workflow histories against a workflow definition. The replaying logic is the same as the one used for processing workflow tasks, so if there's any incompatible changes in the workflow definition, the replay test will fail.
 
 ### Write a Replay Test
 
@@ -56,7 +56,7 @@ Replayer can read workflow history from a local json file or fetch it directly f
 cadence --do <domain> workflow show --wid <workflowID> --rid <runID> --of <output file name>
 ```
 
-The dumped workflow history will be stored in the file at the path you specified in json format. 
+The dumped workflow history will be stored in the file at the path you specified in json format.
 
 #### Step 4: Call the replay method
 
@@ -87,7 +87,7 @@ Note: currently an error will be returned if there are less than 3 events in the
 
 ### Sample Replay Test
 
-This sample is also available in our samples repo at [here](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/replay_test.go#L39).
+This sample is also available in our samples repo at [here](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/recipes/helloworld/replay_test.go#L39).
 
 ```go
 func TestReplayWorkflowHistoryFromFile(t *testing.T) {
@@ -102,17 +102,17 @@ func TestReplayWorkflowHistoryFromFile(t *testing.T) {
 
 Workflow Replayer works well when verifying the compatibility against a small number of workflow histories. If there are lots of workflows in production need to be verified, dumping all histories manually clearly won't work. Directly fetching histories from cadence server might be a solution, but the time to replay all workflow histories might be too long for a test.
 
-Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each of workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows. 
+Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each of workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows.
 
 ### Shadow Options
 
-Complete documentation on shadow options which includes default values, accepted values, etc. can be found [here](https://github.com/uber-go/cadence-client/blob/master/internal/workflow_shadower.go#L53). The following sections are just a brief description of each option.
+Complete documentation on shadow options which includes default values, accepted values, etc. can be found [here](https://github.com/cadence-workflow/cadence-go-client/blob/master/internal/workflow_shadower.go#L53). The following sections are just a brief description of each option.
 
 #### Scan Filters
 
 - WorkflowQuery: If you are familiar with our advanced visibility query syntax, you can specify a query directly. If specified, all other scan filters must be left empty.
 - WorkflowTypes: A list of workflow Type names.
-- WorkflowStatus: A list of workflow status. 
+- WorkflowStatus: A list of workflow status.
 - WorkflowStartTimeFilter: Min and max timestamp for workflow start time.
 - SamplingRate: Sampling workflows from the scan result before executing the replay test.
 
@@ -132,9 +132,9 @@ Complete documentation on shadow options which includes default values, accepted
 
 ### Local Shadowing Test
 
-Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that need to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found. 
+Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that need to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found.
 
-Here's a simple example. The example is also available [here](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/shadow_test.go).
+Here's a simple example. The example is also available [here](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/recipes/helloworld/shadow_test.go).
 
 ```go
 func TestShadowWorkflow(t *testing.T) {
@@ -159,18 +159,18 @@ func TestShadowWorkflow(t *testing.T) {
 
 ### Shadowing Worker
 
-NOTE: 
+NOTE:
 - **All shadow workflows are running in one Cadence system domain, and right now, every user domain can only have one shadow workflow at a time.**
 - **The Cadence server used for scanning and getting workflow history will also be the Cadence server for running your shadow workflow.** Currently, there's no way to specify different Cadence servers for hosting the shadowing workflow and scanning/fetching workflow.
 
 Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode workers. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
 
-When running in shadow mode, the normal decision, activity and session worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows. 
+When running in shadow mode, the normal decision, activity and session worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows.
 
-[Replay succeed, skipped and failed metrics](https://github.com/uber-go/cadence-client/blob/master/internal/common/metrics/constants.go#L105) will be emitted by your worker when executing the shadow workflow and you can monitor those metrics to see if there's any incompatible changes. 
+[Replay succeed, skipped and failed metrics](https://github.com/cadence-workflow/cadence-go-client/blob/master/internal/common/metrics/constants.go#L105) will be emitted by your worker when executing the shadow workflow and you can monitor those metrics to see if there's any incompatible changes.
 
-To enable the shadow mode, the only change needed is setting the `EnableShadowWorker` field in `worker.Options` to `true`, and then specify the `ShadowOptions`. 
+To enable the shadow mode, the only change needed is setting the `EnableShadowWorker` field in `worker.Options` to `true`, and then specify the `ShadowOptions`.
 
 Registered workflows will be forwarded to the underlying WorkflowReplayer. DataConverter, WorkflowInterceptorChainFactories, ContextPropagators, and Tracer specified in the `worker.Options` will also be used as ReplayOptions. Since all shadow workflows are running in one system domain, to avoid conflict, **the actual task list name used will be `domain-tasklist`.**
 
-A sample setup can be found [here](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/main.go#L24).
+A sample setup can be found [here](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/recipes/helloworld/main.go#L24).

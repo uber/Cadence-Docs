@@ -57,7 +57,7 @@ Today the Cadence team comprises 26 people. We have people working from Uber’s
 
 ### Community
 
-Cadence is an actively built open source project. We invest in both our internal and open source community ([Slack](http://t.uber.com/cadence-slack), [Github](https://github.com/uber/cadence/issues)), responding to new features and enhancements.
+Cadence is an actively built open source project. We invest in both our internal and open source community ([Slack](http://t.uber.com/cadence-slack), [Github](https://github.com/cadence-workflow/cadence/issues)), responding to new features and enhancements.
 
 ### Scale
 
@@ -211,7 +211,7 @@ Do you want to hear more about Cadence? Do you need help with your set-up or usa
 
 Slack: [https://uber-cadence.slack.com/](https://uber-cadence.slack.com/)
 
-Github: [https://github.com/uber/cadence](https://github.com/uber/cadence)
+Github: [https://github.com/cadence-workflow/cadence](https://github.com/cadence-workflow/cadence)
 
 Since last year, we have been contacted by various companies to take on bigger projects on the Cadence project. As we have been investing in code coverage and refactoring Cadence for a cleaner codebase, this will be a lot easier now. Let us know if you have project ideas to contribute or if you’d like to pick something we already planned.
 

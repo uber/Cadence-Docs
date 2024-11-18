@@ -13,7 +13,7 @@ This includes how to use and maintain a Cadence cluster for both clients and ser
   * See if the external traffic to frontend is normal
   * If the slowness is due to too many tasks on a tasklist, you may need to [scale up the tasklist](/docs/operation-guide/maintain/#scale-up-a-tasklist-using-scalable-tasklist-feature)
   * If persistence latency is getting too high, try scale up your DB instance
-* Never change the [`numOfShards` of a cluster](/docs/operation-guide/setup/#static-configuration). If you need that because the current one is too small, follow the instructions to [migrate your cluster to a new one](/docs/operation-guide/maintain/#migrate-cadence-cluster).  
+* Never change the [`numOfShards` of a cluster](/docs/operation-guide/setup/#static-configuration). If you need that because the current one is too small, follow the instructions to [migrate your cluster to a new one](/docs/operation-guide/maintain/#migrate-cadence-cluster).
 
 ## Scale up a tasklist using `Scalable tasklist` feature
 By default a tasklist is not scalable enough to support hundreds of tasks per second. That’s mainly because each tasklist is assigned to a Matching service node, and dispatching tasks in a tasklist is in sequence.
@@ -68,9 +68,9 @@ Make sure rolling restart to keep high availability.
 * MaxIdelConns should be less than MaxConns, so that the connections can be distributed better across hosts.
 
 
-## Upgrading Server  
+## Upgrading Server
 
-To get notified about release, please subscribe the release of project by : Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release".
+To get notified about release, please subscribe the release of project by : Go to https://github.com/cadence-workflow/cadence -> Click the right top "Watch" button -> Custom -> "Release".
 
 It's recommended to upgrade one minor version at a time. E.g, if you are at 0.10, you should upgrade to 0.11, stabilize it with running some normal workload to make sure that the upgraded server is happy with the schema changes. After ~1 hour, then upgrade to 0.12. then 0.13. etc.
 
@@ -81,7 +81,7 @@ The reason is that for each minor upgrade, you should be able to follow the rele
 Things that you may need to do for upgrading a minor version(patch version upgrades should not need it):
 * Schema(DB/ElasticSearch) changes
 * Configuration format/layout changes
-* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migration](https://github.com/uber/cadence/releases/tag/v0.16.0).
+* Data migration -- this is very rare. For example, [upgrading from 0.15.x to 0.16.0 requires a data migration](https://github.com/cadence-workflow/cadence/releases/tag/v0.16.0).
 
 You should read through the release instruction for each minor release to understand what needs to be done.
 
@@ -98,15 +98,15 @@ NOTE: Do not use “auto-setup” images to upgrade your schema. It's mainly for
 
 
 ### How to apply DB schema changes
-For how to apply database schema, refer to this doc: [SQL tool README](https://github.com/uber/cadence/tree/master/tools/sql)
-[Cassandra tool README](https://github.com/uber/cadence/tree/master/tools/cassandra)
+For how to apply database schema, refer to this doc: [SQL tool README](https://github.com/cadence-workflow/cadence/tree/master/tools/sql)
+[Cassandra tool README](https://github.com/cadence-workflow/cadence/tree/master/tools/cassandra)
 
 The tool makes use of a table called “schema_versions” to keep track of upgrading History. But there is no transaction guarantee for cross table operations. So in case of some error, you may need to fix or apply schema change manually.
 Also, the schema tool by default will upgrade schema to the latest, so no manual is required. ( you can also specify to let it upgrade to any place, like 0.14).
 
-Database schema changes are versioned in the folders: [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/cadence/versioned) for Default Store
-and [Versioned Schema Changes](https://github.com/uber/cadence/tree/master/schema/mysql/v57/visibility/versioned) for Visibility Store if you use database for basic visibility instead of ElasticSearch.
+Database schema changes are versioned in the folders: [Versioned Schema Changes](https://github.com/cadence-workflow/cadence/tree/master/schema/mysql/v57/cadence/versioned) for Default Store
+and [Versioned Schema Changes](https://github.com/cadence-workflow/cadence/tree/master/schema/mysql/v57/visibility/versioned) for Visibility Store if you use database for basic visibility instead of ElasticSearch.
 
 If you use homebrew, the schema files are located at `/usr/local/etc/cadence/schema/`.
 
-Alternatively, you can checkout the [repo](https://github.com/uber/cadence) and the release tag. E.g. `git checkout v0.21.0` and then the schema files is at `./schema/`
+Alternatively, you can checkout the [repo](https://github.com/cadence-workflow/cadence) and the release tag. E.g. `git checkout v0.21.0` and then the schema files is at `./schema/`

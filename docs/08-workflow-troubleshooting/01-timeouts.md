@@ -14,7 +14,7 @@ Cadence workers are part of the service that hosts and executes the workflow. Th
 
 Mitigation: Make sure these workers are configured with the task lists that are used in the workflow and activities so the server can dispatch tasks to the cadence workers.
 
-[Worker setup example](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/pageflow/main.go#L18)
+[Worker setup example](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/pageflow/main.go#L18)
 
 ## Tasklist backlog despite having pollers
 
@@ -25,7 +25,7 @@ Mitigation: Increase the number of cadence workers by horizontally scaling up th
 Optionally you can also increase the number of pollers per worker by providing this via worker options.
 
 [Link to options in go client](https://pkg.go.dev/go.uber.org/cadence@v1.2.9/internal#WorkerOptions)
-[Link to options in java client](https://github.com/uber/cadence-java-client/blob/master/src/main/java/com/uber/cadence/internal/worker/PollerOptions.java#L124)
+[Link to options in java client](https://github.com/cadence-workflow/cadence-java-client/blob/master/src/main/java/com/uber/cadence/internal/worker/PollerOptions.java#L124)
 
 ## Timeouts without heartbeating enabled
 
@@ -37,7 +37,7 @@ For long running activities, while the activity is executing, the worker can die
 
 Mitigation: Consider enabling heartbeating
 
-[Configuring heartbeat timeout example](https://github.com/uber-common/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/expense/workflow.go#L23)
+[Configuring heartbeat timeout example](https://github.com/cadence-workflow/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/expense/workflow.go#L23)
 
 For short running activities, heart beating is not required but maybe consider increasing the timeout value to suit the actual activity execution time.
 
@@ -47,7 +47,7 @@ Activity has enabled heart beating but the activity timed out with heart beat ti
 
 Mitigation: Once heartbeat timeout is configured in activity options, you need to make sure the activity periodically sends a heart beat to the server to make sure the server is aware of the activity being alive.
 
-[Example to send periodic heart beat](https://github.com/uber-common/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/fileprocessing/activities.go#L111)
+[Example to send periodic heart beat](https://github.com/cadence-workflow/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/fileprocessing/activities.go#L111)
 
 In go client, there is an option to register the activity with auto heart beating so that it is done automatically
 

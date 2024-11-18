@@ -26,7 +26,7 @@ We provide a standard way to propagate custom context across a :workflow:.
 allow configuring a context propagator. The context propagator extracts and passes on information present in the `context.Context`
 and `workflow.Context` objects across the :workflow:. Once a context propagator is configured, you should be able to access the required values
 in the context objects as you would normally do in Go.
-For a sample, the Go client implements a [tracing context propagator](https://github.com/uber-go/cadence-client/blob/master/internal/tracer.go).
+For a sample, the Go client implements a [tracing context propagator](https://github.com/cadence-workflow/cadence-go-client/blob/master/internal/tracer.go).
 
 ### Server-Side Headers Support
 
@@ -41,7 +41,7 @@ struct Header {
 
 The client leverages this to pass around selected context information. [HeaderReader](https://godoc.org/go.uber.org/cadence/internal#HeaderReader)
 and [HeaderWriter](https://godoc.org/go.uber.org/cadence/internal#HeaderWriter) are interfaces
-that allow reading and writing to the Cadence server headers. The client already provides [implementations](https://github.com/uber-go/cadence-client/blob/master/internal/headers.go)
+that allow reading and writing to the Cadence server headers. The client already provides [implementations](https://github.com/cadence-workflow/cadence-go-client/blob/master/internal/headers.go)
 for these. `HeaderWriter` sets a field in the header. Headers is a map, so setting a value for the the same key
 multiple times will overwrite the previous values. `HeaderReader` iterates through the headers map and runs the
 provided handler function on each key/value pair, allowing you to deal with the fields you are interested in.
@@ -66,7 +66,7 @@ headers using the [HeaderWriter](https://godoc.org/go.uber.org/cadence/internal#
 - `Extract` reads the headers and places the information of interest back into the [context.Context](https://golang.org/pkg/context/#Context) object
 - `ExtractToWorkflow` is the same as above, but operates on a [workflow.Context](https://godoc.org/go.uber.org/cadence/internal#Context) object
 
-The [tracing context propagator](https://github.com/uber-go/cadence-client/blob/master/internal/tracer.go)
+The [tracing context propagator](https://github.com/cadence-workflow/cadence-go-client/blob/master/internal/tracer.go)
 shows a sample implementation of context propagation.
 
 ```go
@@ -85,7 +85,7 @@ type ContextPropagator interface {
 
 ### Is there a complete example?
 
-The [context propagation sample](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/ctxpropagation/workflow.go)
+The [context propagation sample](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/recipes/ctxpropagation/workflow.go)
 configures a custom context propagator and shows context propagation of custom keys across a :workflow: and an :activity:.
 
 ### Can I configure multiple context propagators?

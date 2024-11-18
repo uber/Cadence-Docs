@@ -14,24 +14,24 @@ Let’s get started!
 ## Proposal for Cadence Plugin System ##
 Community member [Mantas Sidlauskas](https://lt.linkedin.com/in/mantassidlauskas) drafted a thorough proposal around putting together a plugin system in Cadence. Aimed at enhancing the flexibility of integrating various components like storage, document search, and archival, this system encourages the use of external plugins, promoting innovation and reducing dependency complications. Your insights and feedback are crucial; learn more and contribute your thoughts at the link below:
 
-- [Cadence Plugin System Proposal](https://github.com/uber/cadence/issues/5593)
+- [Cadence Plugin System Proposal](https://github.com/cadence-workflow/cadence/issues/5593)
 
 A huge thank you to Mantas for initiating this work. This is an excellent example of how we can collaborate together to bring about new features that benefit us all.
 
 ## Admin API Permissions Rethinking ##
-The community is deliberating on the permission requirements for the Admin API DescribeCluster endpoint. This vital discussion aims to ensure Cadence web's accessibility across different user levels. We're exploring various solutions and your participation would greatly influence the decision-making process. Feel free to chime in [here](https://github.com/uber/cadence/issues/5683)!
+The community is deliberating on the permission requirements for the Admin API DescribeCluster endpoint. This vital discussion aims to ensure Cadence web's accessibility across different user levels. We're exploring various solutions and your participation would greatly influence the decision-making process. Feel free to chime in [here](https://github.com/cadence-workflow/cadence/issues/5683)!
 
 ## New Java Samples for Cadence: Signal Workflow Interactions ##
-In some exciting news for Java enthusiasts, a new sample has been added to the Cadence Java Samples repository, demonstrating how to initiate and interact with a signal workflow using the Cadence client. This practical example is a huge win for developers looking to deepen their understanding of workflow signaling in Java. Explore the new sample and expand your Cadence toolkit [here](https://github.com/uber/cadence-java-samples/pull/78).
+In some exciting news for Java enthusiasts, a new sample has been added to the Cadence Java Samples repository, demonstrating how to initiate and interact with a signal workflow using the Cadence client. This practical example is a huge win for developers looking to deepen their understanding of workflow signaling in Java. Explore the new sample and expand your Cadence toolkit [here](https://github.com/cadence-workflow/cadence-java-samples/pull/78).
 
 ## New GoLang client & Cadence Web Enhancements ##
 Updates to the Cadence GoLang Client and Cadence Web have been rolled out, bringing new features and improvements that streamline user experiences. Highlights include upgraded Cassandra images, refined workflow interceptors, and more intuitive Cadence Web interfaces. Discover the full scope of updates on our GitHub repositories.
 
-- [GoLang Client Releases](https://github.com/uber-go/cadence-client/releases)
-- [Cadence Web Releases](https://github.com/uber/cadence-web/releases)
+- [GoLang Client Releases](https://github.com/cadence-workflow/cadence-go-client/releases)
+- [Cadence Web Releases](https://github.com/cadence-workflow/cadence-web/releases)
 
 ## Release Updates: v1.2.6 & v1.2.7 ##
-Cadence recently saw the release of versions v1.2.6 and v1.2.7, featuring significant improvements and fixes that enhance the overall Cadence experience. These updates reflect a commitment to respond to the community's valuable feedback. Check out the detailed release notes on the [GitHub releases page](https://github.com/uber/cadence/releases)!
+Cadence recently saw the release of versions v1.2.6 and v1.2.7, featuring significant improvements and fixes that enhance the overall Cadence experience. These updates reflect a commitment to respond to the community's valuable feedback. Check out the detailed release notes on the [GitHub releases page](https://github.com/cadence-workflow/cadence/releases)!
 
 ## Cadence in the News! ##
 Below is a selection of Cadence related articles and blogs. Take a look and feel free to share your own with us via your own social media channels!

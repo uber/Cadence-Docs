@@ -6,13 +6,13 @@ authors: taylanisikdemir
 tags:
   - announcement
 ---
-We’ve heard your feedback: deploying Cadence has been a challenge, especially with limited documentation on operational aspects. So far, we’ve only provided a few [docker compose files](https://github.com/uber/cadence/tree/master/docker) to help you get started on a development machine. However, deploying and managing Cadence at scale requires a deep understanding of underlying services, configurations and their dependencies.
+We’ve heard your feedback: deploying Cadence has been a challenge, especially with limited documentation on operational aspects. So far, we’ve only provided a few [docker compose files](https://github.com/cadence-workflow/cadence/tree/master/docker) to help you get started on a development machine. However, deploying and managing Cadence at scale requires a deep understanding of underlying services, configurations and their dependencies.
 
 To address these challenges, we’re launching several initiatives to make it easier to deploy and operate Cadence clusters. These include deployment specs for common scenarios, monitoring dashboards, alerts, runbooks, and more comprehensive documentation.
 
 ## Introducing Cadence Kubernetes Helm Chart v0
 
-Today, we are happy to announce the release of [Cadence Kubernetes Helm Chart v0](https://github.com/uber/cadence-charts). This will be the starting point for standardizing Cadence deployments on Kubernetes. We chose Kubernetes because it's the leading compute platform, but Cadence remains flexible and can run on any infrastructure.
+Today, we are happy to announce the release of [Cadence Kubernetes Helm Chart v0](https://github.com/cadence-workflow/cadence-charts). This will be the starting point for standardizing Cadence deployments on Kubernetes. We chose Kubernetes because it's the leading compute platform, but Cadence remains flexible and can run on any infrastructure.
 
 ## How to Get Started
 
@@ -36,7 +36,7 @@ To uninstall the chart:
 helm delete my-cadence
 ```
 
-See [CONTRIBUTING.md](https://github.com/uber/cadence-charts/blob/main/CONTRIBUTING.md) for details on how to validate the deployment by running sample workflows.
+See [CONTRIBUTING.md](https://github.com/cadence-workflow/cadence-charts/blob/main/CONTRIBUTING.md) for details on how to validate the deployment by running sample workflows.
 
 ## Current State of the Chart
 
@@ -60,8 +60,8 @@ What is (obviously) missing:
 
 ## Next Steps
 
-Since this is an early release, we would love to hear from you. Feel free to start [discussions](https://github.com/uber/cadence-charts/discussions) or report [issues](https://github.com/uber/cadence-charts/issues).
+Since this is an early release, we would love to hear from you. Feel free to start [discussions](https://github.com/cadence-workflow/cadence-charts/discussions) or report [issues](https://github.com/cadence-workflow/cadence-charts/issues).
 
-Also check out the [contribution guideline](https://github.com/uber/cadence-charts/blob/main/CONTRIBUTING.md) if you are interested to contribute. Don't hesitate to send a PR and ping us over slack if we miss it.
+Also check out the [contribution guideline](https://github.com/cadence-workflow/cadence-charts/blob/main/CONTRIBUTING.md) if you are interested to contribute. Don't hesitate to send a PR and ping us over slack if we miss it.
 
 P.S. Huge thanks to our summer intern [Nikita Bhardwaj](https://github.com/nikitab7) for kickstarting the Cadence Helm charts initiative.

@@ -10,7 +10,7 @@ permalink: /docs/concepts/search-workflows
 
 Cadence supports creating :workflow:workflows: with customized key-value pairs, updating the information within the :workflow: code, and then listing/searching :workflow:workflows: with a SQL-like :query:. For example, you can create :workflow:workflows: with keys `city` and `age`, then search all :workflow:workflows: with `city = seattle and age > 22`.
 
-Also note that normal :workflow: properties like start time and :workflow: type can be queried as well. For example, the following :query: could be specified when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)):
+Also note that normal :workflow: properties like start time and :workflow: type can be queried as well. For example, the following :query: could be specified when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/cadence-workflow/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)):
 
 ```sql
 WorkflowType = "main.Workflow" AND CloseStatus != "completed" AND (StartTime >
@@ -40,7 +40,7 @@ type StartWorkflowOptions struct {
 }
 ```
 
-In the Java client, the *WorkflowOptions.Builder* has similar methods for [memo](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/client/WorkflowOptions.Builder.html#setMemo-java.util.Map-) and [search attributes](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/client/WorkflowOptions.Builder.html#setSearchAttributes-java.util.Map-).
+In the Java client, the *WorkflowOptions.Builder* has similar methods for [memo](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/cadence-workflow/cadence/client/WorkflowOptions.Builder.html#setMemo-java.util.Map-) and [search attributes](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/cadence-workflow/cadence/client/WorkflowOptions.Builder.html#setSearchAttributes-java.util.Map-).
 
 Some important distinctions between memo and search attributes:
 
@@ -99,13 +99,13 @@ The numbers for the attribute types map as follows:
 
 #### Keyword vs String(Text)
 
-Note 1: **String** has been renamed to **Text** in [ElasticSearch](https://www.elastic.co/blog/strings-are-dead-long-live-strings). Cadence is also [planning](https://github.com/uber/cadence/issues/4604) to rename it.
+Note 1: **String** has been renamed to **Text** in [ElasticSearch](https://www.elastic.co/blog/strings-are-dead-long-live-strings). Cadence is also [planning](https://github.com/cadence-workflow/cadence/issues/4604) to rename it.
 
 Note 2: **Keyword** and **String(Text)** are concepts taken from Elasticsearch. Each word in a **String(Text)** is considered a searchable keyword. For a UUID, that can be problematic as Elasticsearch will index each portion of the UUID separately. To have the whole string considered as a searchable keyword, use the **Keyword** type.
 
 For example, key RunID with value "2dd29ab7-2dd8-4668-83e0-89cae261cfb1"
 
-- as a **Keyword** will only be matched by RunID = "2dd29ab7-2dd8-4668-83e0-89cae261cfb1" (or in the future with [regular expressions](https://github.com/uber/cadence/issues/1137))
+- as a **Keyword** will only be matched by RunID = "2dd29ab7-2dd8-4668-83e0-89cae261cfb1" (or in the future with [regular expressions](https://github.com/cadence-workflow/cadence/issues/1137))
 - as a **String(Text)** will be matched by RunID =  "2dd8", which may cause unwanted matches
 
 **Note:** String(Text) type can not be used in Order By :query:.
@@ -146,7 +146,7 @@ Cadence reserves keys like DomainID, WorkflowID, and RunID. These can only be us
 
 [UpsertSearchAttributes](https://godoc.org/go.uber.org/cadence/workflow#UpsertSearchAttributes) is used to add or update search attributes from within the :workflow: code.
 
-Go samples for search attributes can be found at [github.com/uber-common/cadence-samples](https://github.com/uber-common/cadence-samples/tree/master/cmd/samples/recipes/searchattributes).
+Go samples for search attributes can be found at [github.com/cadence-workflow/cadence-samples](https://github.com/cadence-workflow/cadence-samples/tree/master/cmd/samples/recipes/searchattributes).
 
 UpsertSearchAttributes will merge attributes to the existing map in the :workflow:. Consider this example :workflow: code:
 
@@ -187,7 +187,7 @@ When performing a [ContinueAsNew](/docs/go-client/continue-as-new/) or using [Cr
 
 ## Query Capabilities
 
-:query:Query: :workflow:workflows: by using a SQL-like where clause when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/uber/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)).
+:query:Query: :workflow:workflows: by using a SQL-like where clause when [listing workflows from the CLI](/docs/06-cli/#list-closed-or-open-workflow-executions) or using the list APIs ([Go](https://godoc.org/go.uber.org/cadence/client#Client), [Java](https://static.javadoc.io/com.uber.cadence/cadence-client/2.6.0/com/cadence-workflow/cadence/WorkflowService.Iface.html#ListWorkflowExecutions-com.uber.cadence.ListWorkflowExecutionsRequest-)).
 
 Note that you will only see :workflow:workflows: from one domain when :query:querying:.
 
@@ -229,7 +229,7 @@ Some names and types are as follows:
 There are some special considerations for these attributes:
 
 - CloseStatus, CloseTime, DomainID, ExecutionTime, HistoryLength, RunID, StartTime, WorkflowID, WorkflowType are reserved by Cadence and are read-only
-- Starting from [v0.18.0](https://github.com/uber/cadence/commit/6e69fa1a6e9ae5d2f683759820f09d1286ba7797), Cadence automatically maps(case insensitive) string to CloseStatus so that you don't need to use integer in the query, to make it easier to use.
+- Starting from [v0.18.0](https://github.com/cadence-workflow/cadence/commit/6e69fa1a6e9ae5d2f683759820f09d1286ba7797), Cadence automatically maps(case insensitive) string to CloseStatus so that you don't need to use integer in the query, to make it easier to use.
   - 0 = "completed"
   - 1 = "failed"
   - 2 = "canceled"
@@ -306,7 +306,7 @@ All above command can be done with CountWorkflowExecutions API.
 
 ### Web UI Support
 
-:query:Queries: are supported in [Cadence Web](https://github.com/uber/cadence-web) as of release 3.4.0. Use the "Basic/Advanced" button to switch to "Advanced" mode and type the :query: in the search box.
+:query:Queries: are supported in [Cadence Web](https://github.com/cadence-workflow/cadence-web) as of release 3.4.0. Use the "Basic/Advanced" button to switch to "Advanced" mode and type the :query: in the search box.
 
 ### TLS Support for connecting to Elasticsearch
 
@@ -331,7 +331,7 @@ elasticsearch:
 
 ## Running Locally
 1. Increase Docker memory to higher than 6GB. Navigate to Docker -> Preferences -> Advanced -> Memory
-2. Get the Cadence Docker compose file. Run `curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose-es.yml`
+2. Get the Cadence Docker compose file. Run `curl -O https://raw.githubusercontent.com/cadence-workflow/cadence/master/docker/docker-compose-es.yml`
 3. Start Cadence Docker (which contains Apache Kafka, Apache Zookeeper, and Elasticsearch) using `docker-compose -f docker-compose-es.yml up`
 4. From the Docker output log, make sure Elasticsearch and Cadence started correctly. If you encounter an insufficient disk space error, try `docker system prune -a --volumes`
 5. Register a local domain and start using it. `cadence --do samples-domain d re`
@@ -340,12 +340,12 @@ elasticsearch:
 ## Running in Production
 
 To enable this feature in a Cadence cluster:
-* Register index schema on ElasticSearch. Run two CURL commands following this [script](https://github.com/uber/cadence/blob/a05ce6b0328b89aa516ae09d5ff601e35df2cc4f/docker/start.sh#L59).
+* Register index schema on ElasticSearch. Run two CURL commands following this [script](https://github.com/cadence-workflow/cadence/blob/a05ce6b0328b89aa516ae09d5ff601e35df2cc4f/docker/start.sh#L59).
   * Create a index template by using the schema , choose v6/v7 based on your ElasticSearch version
   * Create an index follow the index template, remember the name
 * Register topic on Kafka, and  remember the name
   * Set up the right number of partitions based on your expected throughput(can be scaled up later)
-* [Configure Cadence for ElasticSearch + Kafka like this documentation](https://github.com/uber/cadence/blob/master/docs/visibility-on-elasticsearch.md#configuration)
+* [Configure Cadence for ElasticSearch + Kafka like this documentation](https://github.com/cadence-workflow/cadence/blob/master/docs/visibility-on-elasticsearch.md#configuration)
 Based on the full [static config](/docs/operation-guide/setup/#static-configuration), you may add some other fields like AuthN.
 Similarly for Kafka.
 

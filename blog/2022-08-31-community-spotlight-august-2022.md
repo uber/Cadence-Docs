@@ -32,7 +32,7 @@ We are looking always forward to receiving more of your questions!
 
 Do you remember our GitHub Statistics from last month? Don't worry if you don't! In July we had 28 pull requests (PRs) merged into the code repository. This month we have had 43 PRs merged (nearly double!)- so you can see the level of activity is also increasing in terms of the project code.
 
-If you are interested in contributing to Cadence then please take a look at our [Contribution Guidelines](https://github.com/uber/cadence/blob/86f645da952e15d7a7415cdf9fcd2726f28063a6/CONTRIBUTING.md) and also our list of [good first issues](https://github.com/uber/cadence/contribute) to work on.
+If you are interested in contributing to Cadence then please take a look at our [Contribution Guidelines](https://github.com/cadence-workflow/cadence/blob/86f645da952e15d7a7415cdf9fcd2726f28063a6/CONTRIBUTING.md) and also our list of [good first issues](https://github.com/cadence-workflow/cadence/contribute) to work on.
 
 ## Come Along to Our Next Cadence Meetup!
 
