@@ -2,8 +2,10 @@
 title: 2024 Cadence Yearly Roadmap Update
 
 date: 2024-07-11
-author: Ender Demirkaya
-authorlink: https://www.linkedin.com/in/enderdemirkaya/
+authors: enderdemirkaya
+tags:
+  - roadmap
+  - deep-dive
 ---
 ## Introduction
 

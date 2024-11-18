@@ -1,8 +1,9 @@
 ---
 title: Long-term commitment and support for the Cadence project, and its community
 date: 2021-09-30
-author: Liang Mei
-authorlink: https://www.linkedin.com/in/meiliang86/
+authors: meiliang86
+tags:
+  - announcement
 ---
 
 Dear valued Cadence users and developers,

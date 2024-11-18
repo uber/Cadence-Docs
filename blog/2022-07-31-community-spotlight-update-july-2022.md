@@ -2,8 +2,9 @@
 title: Cadence Community Spotlight Update - July 2022
 
 date: 2022-07-31
-author: Sharan Foga
-authorlink: https://www.linkedin.com/in/sfoga/
+authors: sharanf
+tags:
+  - community-spotlight
 ---
 
 Here’s our monthly Community Spotlight update that gives you news from in and around the Cadence community!

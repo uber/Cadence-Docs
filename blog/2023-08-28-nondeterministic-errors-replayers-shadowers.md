@@ -2,15 +2,17 @@
 title: Non-deterministic errors, replayers and shadowers
 
 date: 2023-08-27
-author: Chris Qin
-authorlink: https://www.linkedin.com/in/chrisqin0610/
+authors: chopincode
+tags:
+  - deep-dive
+  - testing
 ---
 
-It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However, 
-the definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct 
-the workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible 
-with an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the 
-following workflow that executes two activities. 
+It is conceivable that developers constantly update their Cadence workflow code based upon new business use cases and needs. However,
+the definition of a Cadence workflow must be deterministic because behind the scenes cadence uses event sourcing to construct
+the workflow state by replaying the historical events stored for this specific workflow. Introducing components that are not compatible
+with an existing running workflow will yield to non-deterministic errors and sometimes developers find it tricky to debug. Consider the
+following workflow that executes two activities.
 
 ```go
 func SampleWorkflow(ctx workflow.Context, data string) (string, error) {

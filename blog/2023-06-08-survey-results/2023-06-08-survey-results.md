@@ -2,8 +2,9 @@
 title: 2023 Cadence Community Survey Results
 
 date: 2023-06-08
-author: Ender Demirkaya
-authorlink: https://www.linkedin.com/in/enderdemirkaya/
+authors: enderdemirkaya
+tags:
+  - announcement
 ---
 
 We released a user survey earlier this year to learn about who our users are, how they use Cadence, and how we can help them. It was shared from our [Slack workspace](https://uber-cadence.slack.com/), [cadenceworkflow.io](https://cadenceworkflow.io) Blog and [LinkedIn](https://www.linkedin.com/company/cadenceworkflow/). After collecting the feedback, we wanted to share the results with our community. Thank you everyone for filling it out! Your feedback is invaluable and it helps us shape our roadmap for the future.

@@ -2,8 +2,10 @@
 title: Implement a Cadence worker service from scratch
 
 date: 2023-07-05
-author: Chris Qin
-authorlink: https://www.linkedin.com/in/chrisqin0610/
+authors: chopincode
+tags:
+  - deep-dive
+  - introduction-to-cadence
 ---
 
 In the previous [blog](./2023-06-28-components-of-cadence-application-setup.md), we have introduced three critical components for a Cadence application: the Cadence backend, domain, and worker. Among these, the worker service is the most crucial focus for developers as it hosts the activities and workflows of a Cadence application. In this blog, I will provide a short tutorial on how to implement a simple worker service from scratch in Go.
@@ -28,7 +30,7 @@ func main(){
 }
 ```
 
-Next, let's define some basic configurations for the worker. In real production environment, you may need to implement them in configurational languages, but in this tutorial, let's just hard code them for now. 
+Next, let's define some basic configurations for the worker. In real production environment, you may need to implement them in configurational languages, but in this tutorial, let's just hard code them for now.
 
 ```Go
 var HostPort = "127.0.0.1:7933"
@@ -40,7 +42,7 @@ var CadenceService = "cadence-frontend"
 
 Note that the domain is what we've already registered in advance. We will need to use this domain to interact with Cadence CLI tool.
 
-Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadence backend continuously. 
+Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadence backend continuously.
 
 ```Go
 func buildCadenceClient() workflowserviceclient.Interface {
@@ -53,9 +55,9 @@ func buildCadenceClient() workflowserviceclient.Interface {
 	  if err := dispatcher.Start(); err != nil {
 		panic("Failed to start dispatcher")
 	  }
-  
+
 	  clientConfig := dispatcher.ClientConfig(CadenceService)
-  
+
 	  return compatibility.NewThrift2ProtoAdapter(
 		apiv1.NewDomainAPIYARPCClient(clientConfig),
 		apiv1.NewWorkflowAPIYARPCClient(clientConfig),
@@ -107,7 +109,7 @@ func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
 }
 ```
 
-Now we have all components ready for the worker, let's put them together. 
+Now we have all components ready for the worker, let's put them together.
 
 ```Go
 import (
@@ -158,9 +160,9 @@ func buildCadenceClient() workflowserviceclient.Interface {
 	  if err := dispatcher.Start(); err != nil {
 		panic("Failed to start dispatcher")
 	  }
-  
+
 	  clientConfig := dispatcher.ClientConfig(CadenceService)
-  
+
 	  return compatibility.NewThrift2ProtoAdapter(
 		apiv1.NewDomainAPIYARPCClient(clientConfig),
 		apiv1.NewWorkflowAPIYARPCClient(clientConfig),
