@@ -59,7 +59,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/docs',
+            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/',
         },
         blog: {
           blogTitle: 'Cadence Blog',
@@ -72,7 +72,7 @@ const config: Config = {
           },
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/src/blog/_posts',
+            'https://github.com/cadence-workflow/Cadence-Docs/tree/master/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -131,13 +131,13 @@ const config: Config = {
       } satisfies DocsOptions,
     ],
     [
-      'client-redirects',
+      '@docusaurus/plugin-client-redirects',
       {
+        // redirects here only work in production build, not development
         fromExtensions: ['html'],
         createRedirects(routePath) {
-          // Redirect to /docs from /docs/introduction (now docs root doc)
           if (routePath === '/docs' || routePath === '/docs/') {
-            return [`${routePath}/introduction`];
+            return [`${routePath}/get-started`];
           }
           return [];
         },
@@ -253,19 +253,19 @@ const config: Config = {
             },
             {
               label: 'Go Client',
-              to: 'docs/get-started/',
+              to: 'docs/go-client/',
             },
             {
               label: 'Java Client',
-              to: 'docs/get-started/',
+              to: 'docs/java-client/',
             },
             {
               label: 'Command Line Interface',
-              to: 'docs/get-started/',
+              to: 'docs/cli/',
             },
             {
               label: 'Operation Guide',
-              to: 'docs/get-started/',
+              to: 'docs/operation-guide/',
             },
           ],
         },
