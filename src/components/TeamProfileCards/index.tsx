@@ -100,7 +100,12 @@ export function CoreTeamRow(): JSX.Element {
       <TeamProfileCardCol name="Bowen Xiao" githubUrl="https://github.com/bowenxia"> </TeamProfileCardCol>
       <TeamProfileCardCol name="chopincode" githubUrl="https://github.com/chopincode"> </TeamProfileCardCol>
       <TeamProfileCardCol name="David Porter" githubUrl="https://github.com/davidporter-id-au"> </TeamProfileCardCol>
-      <TeamProfileCardCol name="Ender Demirkaya" githubUrl="https://github.com/demirkayaender"> </TeamProfileCardCol>
+      <TeamProfileCardCol name="Ender Demirkaya" githubUrl="https://github.com/demirkayaender" linkedinUrl="https://www.linkedin.com/in/enderdemirkaya/">
+      Ender joined the Cadence team as a tech lead and later transitioned into a management role. <br />
+      His career started with his own startup, followed with Microsoft, working for another startup and Meta. <br />
+      His prior work involves building Bing's/Azure's key value store (ObjectStore), distributed NAS, and search engines. <br />
+      He's into outdoors and endurance sports while not working.
+      </TeamProfileCardCol>
       <TeamProfileCardCol name="Felipe Imanishi" githubUrl="https://github.com/fimanishi"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Gaziza Yestemirova" githubUrl="https://github.com/gazi-yestemirova"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Ilya Ozherelyev" githubUrl="https://github.com/3vilhamster"> </TeamProfileCardCol>
