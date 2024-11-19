@@ -50,7 +50,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/cadence-workflow/Cadence-Docs/tree/master/',
-        },
+        } satisfies DocsOptions,
         blog: {
           blogTitle: 'Cadence Blog',
           blogDescription: 'The latest news and updates from the Cadence team',
@@ -68,7 +68,7 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
           blogSidebarCount: 'ALL',
-        },
+        } satisfies BlogOptions,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -78,7 +78,7 @@ const config: Config = {
         gtag: {
           trackingID: 'G-W63QD8QE6E',
           anonymizeIP: true,
-        }
+        },
       } satisfies Preset.Options,
     ],
   ],
@@ -109,19 +109,13 @@ const config: Config = {
       },
     ],
     [
-      'content-docs',
+      '@docusaurus/plugin-content-docs',
       {
         id: 'community',
         path: 'community',
         routeBasePath: 'community',
-        editUrl: ({locale, versionDocsDirPath, docPath}) => {
-          // if (locale !== defaultLocale) {
-          //   return `https://crowdin.com/project/cadence-docs/${locale}`;
-          // }
-          return `https://github.com/cadence-workflow/Cadence-Docs/edit/master/${versionDocsDirPath}/${docPath}`;
-        },
+        editUrl: 'https://github.com/cadence-workflow/Cadence-Docs/edit/master/',
         remarkPlugins: [npm2yarn],
-        editCurrentVersion: true,
         sidebarPath: './sidebarsCommunity.js',
         showLastUpdateAuthor: true,
         showLastUpdateTime: true,
@@ -154,11 +148,6 @@ const config: Config = {
         ],
       } satisfies ClientRedirectsOptions,
     ],
-    ['@grnet/docusaurus-terminology', {
-      termsDir: './docs/terms',
-      docsDir: './docs/',
-      glossaryFilepath: './docs/GLOSSARY.md'
-    }],
   ],
 
   themeConfig: {
