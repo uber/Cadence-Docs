@@ -9,11 +9,11 @@ This includes how to use and maintain a Cadence cluster for both clients and ser
 
 ## Scale up & down Cluster
 * When CPU/Memory is getting bottleneck on Cadence instances, you may scale up or add more instances.
-* Watch [Cadence metrics](/docs/operation-guide/monitor/)
+* Watch [Cadence metrics](/docs/operation-guide/monitoring/)
   * See if the external traffic to frontend is normal
   * If the slowness is due to too many tasks on a tasklist, you may need to [scale up the tasklist](/docs/operation-guide/maintain/#scale-up-a-tasklist-using-scalable-tasklist-feature)
   * If persistence latency is getting too high, try scale up your DB instance
-* Never change the [`numOfShards` of a cluster](/docs/operation-guide/setup/#static-configuration). If you need that because the current one is too small, follow the instructions to [migrate your cluster to a new one](/docs/operation-guide/maintain/#migrate-cadence-cluster).
+* Never change the [`numOfShards` of a cluster](/docs/operation-guide/setup/#static-configuration). If you need that because the current one is too small, follow the instructions to [migrate your cluster to a new one](migration).
 
 ## Scale up a tasklist using `Scalable tasklist` feature
 By default a tasklist is not scalable enough to support hundreds of tasks per second. That’s mainly because each tasklist is assigned to a Matching service node, and dispatching tasks in a tasklist is in sequence.
@@ -36,7 +36,7 @@ matching.numTasklistReadPartitions is the number of partitions when your worker 
 There are a few things to know when using this feature:
 * Always make sure `matching.numTasklistWritePartitions <= matching.numTasklistReadPartitions` . Otherwise there may be some tasks that are sent to a tasklist partition but no poller(worker) will be able to pick up.
 * Because of above, when scaling down the number of partitions, you must decrease the WritePartitions first, to wait for a certain time to ensure that tasks are drained, and then decrease ReadPartitions.
-* Both domain names and taskListName should be specified in the dynamic config. An example of using this feature. See more details about dynamic config format using file based [dynamic config](/docs/operation-guide/setup/#static-configs).
+* Both domain names and taskListName should be specified in the dynamic config. An example of using this feature. See more details about dynamic config format using file based [dynamic config](/docs/operation-guide/setup/#static-configuration).
 
 ```
 matching.numTasklistWritePartitions:
