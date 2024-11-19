@@ -157,6 +157,11 @@ const config: Config = {
         ],
       } satisfies ClientRedirectsOptions,
     ],
+    ['@grnet/docusaurus-terminology', {
+      termsDir: './docs/terms',
+      docsDir: './docs/',
+      glossaryFilepath: './docs/GLOSSARY.md'
+    }],
   ],
 
   themeConfig: {
@@ -244,23 +249,23 @@ const config: Config = {
           items: [
             {
               label: 'Getting Started',
-              to: '/docs/intro',
+              to: 'docs/get-started/',
             },
             {
               label: 'Go Client',
-              to: '/docs/intro',
+              to: 'docs/get-started/',
             },
             {
               label: 'Java Client',
-              to: '/docs/intro',
+              to: 'docs/get-started/',
             },
             {
               label: 'Command Line Interface',
-              to: '/docs/intro',
+              to: 'docs/get-started/',
             },
             {
               label: 'Operation Guide',
-              to: '/docs/intro',
+              to: 'docs/get-started/',
             },
           ],
         },
