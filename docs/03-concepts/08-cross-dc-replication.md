@@ -116,7 +116,7 @@ The best way is to use Cadence [docker-compose](https://github.com/cadence-workf
 
 ## Running in Production
 
-Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configs).
+Enable global domain feature needs to be enabled in [static config](/docs/operation-guide/setup/#static-configuration).
 
 Here we use clusterDCA and clusterDCB as an example. We pick clusterDCA as the primary(used to called "master") cluster.
 The only difference of being a primary cluster is that it is responsible for domain registration. Primary can be changed later but it needs to be the same across all clusters.

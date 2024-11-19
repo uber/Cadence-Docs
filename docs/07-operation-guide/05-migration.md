@@ -28,7 +28,7 @@ NOTE 3: Starting from [version 0.22.0](https://github.com/cadence-workflow/caden
 If you are using local domains, an easy way is to create a global domain and migrate to the new global domain using the above steps.
 
 ## Migrate with [Global Domain Replication](/docs/concepts/cross-dc-replication/#running-in-production) feature
-NOTE 1: If a domain are NOT a global domain, you cannot use the XDC feature to migrate. The only way is to migrate in a [naive approach](/docs/operation-guide/maintain/#migrate-cadence-cluster)
+NOTE 1: If a domain are NOT a global domain, you cannot use the XDC feature to migrate. The only way is to migrate in a [naive approach](migration#migrate-with-naive-approach)
 
 NOTE 2: Only migrating to the same numHistoryShards is allowed.
 
