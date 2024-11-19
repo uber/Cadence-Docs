@@ -82,7 +82,7 @@ function TeamProfileCardCol(props: ProfileProps) {
 export function CoreTeamRow(): JSX.Element {
   return (
     <div className="row">
-      <TeamProfileCardCol name="Abhishek Jha" githubUrl="https://github.com/abhishekj720">🔬</TeamProfileCardCol>
+      <TeamProfileCardCol name="Abhishek Jha" githubUrl="https://github.com/abhishekj720">👋🏻Abhishek Jha is a Software Developer for Cadence Workflows at Uber, specializing in developing robust distributed systems. He is passionate about leveraging emerging technologies, particularly Applied AI, to enhance system reliability and scalability. Outside of work, Abhishek enjoys hiking, singing/guitar, and playing various sports. He is always eager to discuss the future of technology, investments, and other intriguing topics. 🧑🏻‍💻🥾🎾🎶</TeamProfileCardCol>
       <TeamProfileCardCol name="Adhitya Mamallan" githubUrl="https://github.com/adhityamamallan">⚙️</TeamProfileCardCol>
       <TeamProfileCardCol name="Andre Oliveira" githubUrl="https://github.com/uandreo">🌴</TeamProfileCardCol>
       <TeamProfileCardCol name="Assem Hafez" githubUrl="https://github.com/Assem-Uber">🌴</TeamProfileCardCol>
