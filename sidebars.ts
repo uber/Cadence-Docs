@@ -137,6 +137,7 @@ const sidebars: SidebarsConfig = {
     items: [
       {type: 'doc', id: 'workflow-troubleshooting/index'},
       {type: 'doc', id: 'workflow-troubleshooting/timeouts'},
+      {type: 'doc', id: 'workflow-troubleshooting/activity-failures'},
     ],
   },
   {
