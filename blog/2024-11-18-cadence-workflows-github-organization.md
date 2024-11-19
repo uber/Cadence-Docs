@@ -21,6 +21,8 @@ To its new home:
 You can find the full list of Cadence repositories here:
 👉 [https://github.com/orgs/cadence-workflow/repositories](https://github.com/orgs/cadence-workflow/repositories)
 
+<!-- truncate -->
+
 This move reflects our continued commitment to growing the Cadence community and making the project even more accessible to contributors and users. Please update your bookmarks and links accordingly.
 
 Thank you for being part of the Cadence journey! 🚀

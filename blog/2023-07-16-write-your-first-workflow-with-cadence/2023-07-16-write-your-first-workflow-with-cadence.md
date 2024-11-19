@@ -18,6 +18,8 @@ func helloWorldActivity(ctx context.Context, name string) (string, error) {
 }
 ```
 
+<!-- truncate -->
+
 Then let's write a workflow that invokes this activity
 ```go
 func helloWorldWorkflow(ctx workflow.Context, name string) error {

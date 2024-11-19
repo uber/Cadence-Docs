@@ -27,6 +27,8 @@ Below are a selection of Cadence related articles, blogs and whitepapers. Please
 
 - [Cadence Connection Examples Using TLS](https://www.instaclustr.com/blog/cadence-connection-examples-using-tls/)
 
+<!-- truncate -->
+
 ## Upcoming Events
 
 - [Cadence Technical Office Hours - 30th January 2023 @ 9am PT](https://calendar.google.com/calendar/u/0/embed?src=e6r40gp3c2r01054id7e99dlac@group.calendar.google.com&ctz=America/Los_Angeles)

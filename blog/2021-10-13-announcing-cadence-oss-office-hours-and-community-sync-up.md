@@ -31,5 +31,6 @@ Building and maintaining a healthy and growing community is the key to the succe
 
 As we have a geo-distributed userbase, we are still trying to figure out a time that works for most of the people. In the meanwhile, we will manually schedule the first few instances of the meeting until we settle on a fixed schedule. Our next office hours will take place on **Thursday, October 21 2pm-3pm PT/5pm-6pm EST/9pm-10pm GMT**. Please join via [this zoom link](https://uber.zoom.us/j/92356466350?pwd=RFVTc2pwV0xoVTdlK3VxN3N2eU5UZz09).
 
+<!-- truncate -->
 
 The Uber Cadence team

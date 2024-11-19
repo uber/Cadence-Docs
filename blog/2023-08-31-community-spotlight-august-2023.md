@@ -27,6 +27,8 @@ Chris is also going to take a look at the [Cadence Samples](https://cadenceworkf
 
 Thanks very much Chris for all the work you are doing to help improve the project!
 
+<!-- truncate -->
+
 ## More iWF Examaples ##
 
 Community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) has also been busy writing this month. In previous blogs Long has told us about [iWF](https://github.com/indeedeng/iwf) that is a layer implemented over of Cadence.

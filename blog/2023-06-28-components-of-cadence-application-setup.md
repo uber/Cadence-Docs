@@ -17,6 +17,8 @@ There are three critical components that are essential for any Cadence applicati
 
 Let's go over these components in more details.
 
+<!-- truncate -->
+
 The Cadence backend serves as the heart of your Cadence application. It is responsible for processing and scheduling your workflows and activities. While the backend relies on various dependencies, our team has conveniently packaged them into a single Docker image. You can follow the instructions provided [here](/docs/get-started/server-installation).
 
 The Cadence domain functions as the namespace for your Cadence workflows. It helps segregate your workflows into manageable groups. When running workflows, you must specify the domain on which you want to execute them.

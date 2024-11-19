@@ -23,6 +23,8 @@ We have now set up Cadence accounts on [LinkedIn](https://www.linkedin.com/compa
 
 And don’t forget to share your news with us. We are looking forward to receiving your feedback and comments. The more we interact - the more we build our community!
 
+<!-- truncate -->
+
 ## Proposal to Change the Way We Write Workflows
 
 If you haven’t seen the proposal from community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) about creating a new way to write Cadence workflows then please take a look:[https://github.com/cadence-workflow/cadence/issues/4785](https://github.com/cadence-workflow/cadence/issues/4785). He has already received some initial feedback and is currently working on putting together a proof of concept demo to show the community. As soon as we have more news about it - we will let you know!

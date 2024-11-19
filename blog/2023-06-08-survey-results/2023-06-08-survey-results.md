@@ -18,6 +18,8 @@ Here are some highlights in text and you can check out the visuals to get more d
 
 Most of the people who replied to our survey were engineers who were already using Cadence, actively evaluating, or migrating from a similar technology. This was exciting to hear! Some of you have contacted us to learn more about benchmarks, scale, and ideal use cases. We will share more guidelines about this but until then, feel free to contact us over our Slack workspace for guidance.
 
+<!-- truncate -->
+
 ![scale.png](./2023-survey-results/scale.png)
 
 The scale our users operating Cadence varies from thousands to billions of workflows per month. It was exciting to see it being used in both small and large scale companies.

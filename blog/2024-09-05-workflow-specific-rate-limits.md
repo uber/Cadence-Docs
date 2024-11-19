@@ -17,6 +17,8 @@ We already have rate limits for how many requests can be sent to a domain. Howev
 1. A user starts, or signals the same workflow ID too aggressively,
 2. A workflow starts too many activities over a short period of time (e.g. thousands of activities in seconds).
 
+<!-- truncate -->
+
 For example, the following workflow would cause issues for Cadence. It would create huge amounts of traffic to a single shard in a very small time frame:
 
 ```go

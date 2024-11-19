@@ -23,6 +23,8 @@ During July the main Cadence branch had 28 pull requests (PRs) merged. There wer
 
 The Cadence documentation repository was not as busy with only 2 PRs merged in July, 5 commits and 3 authors active. More details can be found [here](https://github.com/cadence-workflow/Cadence-Docs/pulse/monthly )
 
+<!-- truncate -->
+
 ## Cadence Roadmap
 
 The Cadence Core team has been busy this month looking at the various community feedback for potential improvements and features for Cadence. Planning is already in place for a development roadmap and  it is still a little too early to say what will be included so please watch out for future updates. All I know is that it’s going to be exciting!

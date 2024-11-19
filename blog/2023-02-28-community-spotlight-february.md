@@ -19,6 +19,8 @@ Use this [Survey Link](https://uber.surveymonkey.com/r/ZS83WJW)
 
 Please take a few minutes to give us your opinion.
 
+<!-- truncate -->
+
 ## Cadence and Temporal ##
 During user surveys we've had a few queries about whether Cadence and [Temporal](https://temporal.io/) are the same project. The answer is No - they are not the same project but they do share the same origin. At a high level Temporal is a fork of the Cadence project. Both Temporal and Cadence are now being developed by different communities so are independent.
 

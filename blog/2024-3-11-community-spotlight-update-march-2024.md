@@ -18,6 +18,8 @@ Community member [Mantas Sidlauskas](https://lt.linkedin.com/in/mantassidlauskas
 
 A huge thank you to Mantas for initiating this work. This is an excellent example of how we can collaborate together to bring about new features that benefit us all.
 
+<!-- truncate -->
+
 ## Admin API Permissions Rethinking ##
 The community is deliberating on the permission requirements for the Admin API DescribeCluster endpoint. This vital discussion aims to ensure Cadence web's accessibility across different user levels. We're exploring various solutions and your participation would greatly influence the decision-making process. Feel free to chime in [here](https://github.com/cadence-workflow/cadence/issues/5683)!
 

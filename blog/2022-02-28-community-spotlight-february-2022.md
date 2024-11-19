@@ -20,6 +20,8 @@ Just in case you missed it the alpha version of the Cadence notification service
 
 Thanks very much to everyone that worked on this!
 
+<!-- truncate -->
+
 ## Community Supporting the Community
 
 During February 16 questions were posted in the Cadence #support [Slack](http://t.uber.com/cadence-slack) channel from new Cadence users and existing community members looking for help and guidance. A very big thank you to the following community members who took the time to help others:  Ali, David, Tamas Weisz, Liang Mei, Quanzheng Long, peaceChoi, Emrah Seker, Ben Slater and Sathyaraju Sekaran.

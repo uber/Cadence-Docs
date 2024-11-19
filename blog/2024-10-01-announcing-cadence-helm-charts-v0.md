@@ -10,6 +10,8 @@ We’ve heard your feedback: deploying Cadence has been a challenge, especially 
 
 To address these challenges, we’re launching several initiatives to make it easier to deploy and operate Cadence clusters. These include deployment specs for common scenarios, monitoring dashboards, alerts, runbooks, and more comprehensive documentation.
 
+<!-- truncate -->
+
 ## Introducing Cadence Kubernetes Helm Chart v0
 
 Today, we are happy to announce the release of [Cadence Kubernetes Helm Chart v0](https://github.com/cadence-workflow/cadence-charts). This will be the starting point for standardizing Cadence deployments on Kubernetes. We chose Kubernetes because it's the leading compute platform, but Cadence remains flexible and can run on any infrastructure.

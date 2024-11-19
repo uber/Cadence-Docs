@@ -13,6 +13,8 @@ It's been a couple of months since our last update so we have a lot of updates t
 
 Please see below for a roundup of the highlights:
 
+<!-- truncate -->
+
 ## Proposal for Cadence Native Authentication ##
 
 Community member [Mantas Sidlauskas](https://lt.linkedin.com/in/mantassidlauskas) has drafted a proposal around Cadence native authentication and is asking for community feedback. If you are interested in reviewing the current proposal and providing comments or feedback then please find the proposal details at the link below:
