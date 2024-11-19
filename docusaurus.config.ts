@@ -2,14 +2,14 @@ import path from 'path';
 import npm2yarn from '@docusaurus/remark-plugin-npm2yarn';
 import remarkMath from 'remark-math';
 
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import type {Options as DocsOptions} from '@docusaurus/plugin-content-docs';
-import type {Options as BlogOptions} from '@docusaurus/plugin-content-blog';
-import type {Options as PageOptions} from '@docusaurus/plugin-content-pages';
-import type {Options as IdealImageOptions} from '@docusaurus/plugin-ideal-image';
-import type {Options as ClientRedirectsOptions} from '@docusaurus/plugin-client-redirects';
+import type { Options as DocsOptions } from '@docusaurus/plugin-content-docs';
+import type { Options as BlogOptions } from '@docusaurus/plugin-content-blog';
+import type { Options as PageOptions } from '@docusaurus/plugin-content-pages';
+import type { Options as IdealImageOptions } from '@docusaurus/plugin-ideal-image';
+import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
 
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -60,7 +60,7 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Remove this to remove the "edit this page" links.
+          blogSidebarTitle: 'Recent Posts',
           editUrl:
             'https://github.com/cadence-workflow/Cadence-Docs/tree/master/',
           // Useful options to enforce blogging best practices
@@ -224,14 +224,14 @@ const config: Config = {
           position: 'right',
           label: 'Repositories',
           items: [
-            {label: 'Cadence Service', href: 'https://github.com/cadence-workflow/cadence'},
-            {label: 'Go Client', href: 'https://github.com/cadence-workflow/cadence-go-client'},
-            {label: 'Java Client', href: 'https://github.com/cadence-workflow/cadence-java-client'},
-            {label: 'Go Samples', href: 'https://github.com/cadence-workflow/cadence-samples'},
-            {label: 'Java Samples', href: 'https://github.com/cadence-workflow/cadence-java-samples'},
-            {label: 'Cadence Web', href: 'https://github.com/cadence-workflow/cadence-web'},
-            {label: 'Cadence IDLs', href: 'https://github.com/cadence-workflow/cadence-idl'},
-            {label: 'Helm Charts', href: 'https://github.com/cadence-workflow/cadence-charts'},
+            { label: 'Cadence Service', href: 'https://github.com/cadence-workflow/cadence' },
+            { label: 'Go Client', href: 'https://github.com/cadence-workflow/cadence-go-client' },
+            { label: 'Java Client', href: 'https://github.com/cadence-workflow/cadence-java-client' },
+            { label: 'Go Samples', href: 'https://github.com/cadence-workflow/cadence-samples' },
+            { label: 'Java Samples', href: 'https://github.com/cadence-workflow/cadence-java-samples' },
+            { label: 'Cadence Web', href: 'https://github.com/cadence-workflow/cadence-web' },
+            { label: 'Cadence IDLs', href: 'https://github.com/cadence-workflow/cadence-idl' },
+            { label: 'Helm Charts', href: 'https://github.com/cadence-workflow/cadence-charts' },
           ],
         },
       ],
