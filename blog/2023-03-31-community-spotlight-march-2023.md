@@ -23,6 +23,8 @@ Our Slack #support channel has been very active over the last few months as we c
 
 All of these questions are being answered collaboratively by the community. Thanks everyone for sharing your knowledge and we are looking forward to receiving more of your questions!
 
+<!-- truncate -->
+
 ## Cadence Developer Advocate ##
 Please welcome Yizhe Qin - the new Cadence Developer Advocate from Uber team that will be working to help support the community.
 

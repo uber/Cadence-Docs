@@ -26,6 +26,8 @@ This month saw the release of [v1.0 of the Cadence Go Client](https://github.com
 
 Thanks very much to everyone who worked hard to get this release out!
 
+<!-- truncate -->
+
 ## Cadence Release Strategy ##
 
 A recent discussion on the Cadence Release strategy was posted in [Cadence Github Discussions](https://github.com/cadence-workflow/cadence/discussions/5362) (and also our #general channel on our [Slack](http://t.uber.com/cadence-slack) about the approach we'd like to take for future releases. As a community we want to ensure code stability and to not burden people with having to upgrade frequently.

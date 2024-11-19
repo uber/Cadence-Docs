@@ -22,6 +22,8 @@ We are working on putting together our first community survey to find out a bit 
 
 So please watch out for the survey which will be coming out to you via the Slack channel soon!
 
+<!-- truncate -->
+
 ## Support Activity
 
 We have noticed that community activity is increasing and that we are continuing to respond to questions in our Slack #support channel. Eight questions have been posted in the channel this month and another seven questions have been posted on StackOverflow. We encourage people to post their questions on StackOverflow so that the response can be shared. You can also post a link to the StackOverflow question in the support channel to be extra sure it gets seen by our community members.

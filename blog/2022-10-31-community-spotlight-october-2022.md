@@ -23,6 +23,8 @@ If you missed the session then you will be happy to know that it was recorded an
 
 Thanks to the Doordash team for running the session and helping support Cadence by sharing their knowledge.
 
+<!-- truncate -->
+
 ## iWF Support for Cadence ##
 
 Community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/) has been busy working on a new project that has been built on top of Cadence. The project is called [iWF - Interpreter for Workflow](https://github.com/indeedeng/iwf). It's great to see that Cadence is now growing it's own ecosystem!

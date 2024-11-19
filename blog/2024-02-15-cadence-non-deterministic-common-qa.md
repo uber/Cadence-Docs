@@ -31,6 +31,8 @@ trigger non-deterministic errors.
 - Changes of workflow return values
 - Changing workflow parameter names as they are just positional
 
+<!-- truncate -->
+
 ### Does changing activity definitions trigger non-determinstic errors?
 
 <b>YES</b>. Similar to workflow definition change, this is also a very typical non-deterministic error.

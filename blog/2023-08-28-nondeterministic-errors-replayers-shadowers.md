@@ -33,6 +33,8 @@ func SampleWorkflow(ctx workflow.Context, data string) (string, error) {
 
 ```
 
+<!-- truncate -->
+
 In this example, the workflow will execute ActivityA and Activity B in sequence. These activities may have other logics in background, such as polling long running operations or manipulate database reads or writes. Now if the developer replaces ActivityA with another activity ActivityC, a non-deterministic error could happen for an existing workflow. It is because the workflow expects results from ActivityA but since the definition of the workflow has been changed to use results from ActivityC, the workflow will fail due to failure of identifying history data of ActivityA. Such issues can be detected by introducing replayers and shadowers to the workflow unit tests.
 
 Cadence workflow replayer is a testing component for replaying existing workflow histories against a workflow definition. You may think of replayer as a mock which will rerun your workflow with exactly the same history as your real workflow. The replaying logic is the same as the one used for processing workflow tasks. If it detects any incompatible changes, the replay test will fail.

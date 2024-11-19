@@ -17,6 +17,8 @@ Just in case you missed it - at the end of April [Cadence v1.0](https://github.c
 
 And the Uber team also gave Cadence a writeup on the [Uber Engineering Blog](https://www.uber.com/en-SE/blog/announcing-cadence/) so please take a look.
 
+<!-- truncate -->
+
 ## Community Survey Results ##
 
 The results of our Community Survey have been published and you can find [the details right here on our blog](https://cadenceworkflow.io/blog/2023/06/08/survey-results/). From the results we can see that:

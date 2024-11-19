@@ -17,6 +17,8 @@ Thanks very much to [Ender Demirkaya](https://www.linkedin.com/in/enderdemirkaya
 
 Please remember that if you have question about Cadence or are facing a specific issue then  you can post your question in our #support [Slack](http://t.uber.com/cadence-slack) channel. If you also post the details on StackOverflow with the cadence workflow tag then there will be a searchable history for others who encounter the same issue to find a solution.
 
+<!-- truncate -->
+
 ## Update on iWF Support for Cadence ##
 Last October we featured an update in our monthly blog about [iWF - Interpreter for Workflow](https://github.com/indeedeng/iwf), a project built on top of Cadence by community member [Quanzheng Long](https://www.linkedin.com/in/prclqz/). It was announced recently that iWF has released a [Golang SDK](https://github.com/iworkflowio/iwf-golang-sdk) and updated  versions of the [Java SDK and server](https://github.com/indeedeng/iwf).
 

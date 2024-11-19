@@ -14,6 +14,8 @@ This monthly update focuses on news from the wider Cadence community and is all 
 
 Please see below for a short round up of things that have happened recently in the community.
 
+<!-- truncate -->
+
 ## Community Related Office Hours
 
 On the 12th January 2022 we held our first Cadence Community Related Office Hours. This session was focused on discussing how we plan and organise things for the community. This includes things such as Code of Conduct, managing social media and making sure we regularly communicate project news and events.

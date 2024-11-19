@@ -19,6 +19,8 @@ Did you know that we have an updated Cadence Service diagram on the website? Wel
 
 Special thanks to Ben Slater for updating the diagram and also to Ender, Emrah and Long for helping review it.
 
+<!-- truncate -->
+
 ## Monthly Cadence Technical Office Hours
 
 Every month we hold a Technical Office Hours session via Zoom where you can speak directly with some of our Cadence experts. If you have a question about Cadence or are facing a particular issue getting it setup then please come along and chat  to one of our experts!

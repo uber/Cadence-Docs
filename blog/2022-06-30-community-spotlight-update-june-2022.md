@@ -23,6 +23,8 @@ Over the last few months we have been holding regular monthly Office Hours meeti
 
 If you have any ideas or comments about how we can improve our community office hours sessions then please include this in your feedback or contact us in the #community Slack channel.
 
+<!-- truncate -->
+
 ## Cadence Stability Improvements
 
 Is Cadence getting better? Yes it is! Many of you may have noticed that Cadence is improving.That is because of the amount of work being done behind the scenes. The Cadence core team has been doing a lot of work to stabilise Cadence functionality. Keep watching out for even more improvements!

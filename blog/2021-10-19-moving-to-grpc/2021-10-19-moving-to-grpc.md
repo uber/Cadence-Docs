@@ -16,6 +16,8 @@ With ~500 services using Cadence at Uber and many more open source customers aro
 
 Cadence was using Thrift/TChannel not just for the API with client SDKs. They were also used for RPC calls between internal Cadence server components and also between different data centers. When starting this migration we had a choice of either starting with public APIs first or all the internal things within the server. We chose the latter one, so that we could gain experience and iterate faster within the server without disruption to the clients. With server side done and listening for both protocols, dynamic config flag was exposed to switch traffic internally. It allowed gradual deployment and provided an option to rollback if needed.
 
+<!-- truncate -->
+
 The next step - client migration. We have more users for the Go SDK at Uber, that is why we started with it. Current version of SDK exposes Thrift types via public API, therefore we can not remove them without breaking changes. While we have plans for revamped v2 SDK, current users are able to use gRPC as well - with the help of a [translation adapter](https://github.com/cadence-workflow/cadence-go-client/blob/v0.18.2/compatibility/thrift2proto.go). Migration is underway starting with [cadence canary service](https://github.com/cadence-workflow/cadence/tree/master/canary), and then onboarding user services one by one.
 
 We plan to support TChannel for a few more releases and then eventually drop it in a future.

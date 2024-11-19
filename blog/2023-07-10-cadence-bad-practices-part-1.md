@@ -17,6 +17,8 @@ Cadence organizes workflows based on their unique IDs, using a process called <b
 Solution:
 Well, the best way to avoid this is simply just design your workflow in the way such that each workflow owns a uniformly distributed workflow ID across your Cadence domain. This will make sure that Cadence backend is able to evenly distribute the traffic with proper partition on your workflowIDs.
 
+<!-- truncate -->
+
 * Excessive batch jobs or an enormous number of timers triggered at the same time
 
 Cadence has the capability to handle a large number of concurrent tasks initiated simultaneously, but tampering with this feature can lead to issues within the Cadence system. Consider a scenario where millions of jobs are scheduled to start at the same time and are expected to finish within a specific time interval. Cadence faces the challenge of understanding the desired behavior of customers in such cases. It is uncertain whether the intention is to complete all jobs simultaneously, provide progressive updates in parallel, or finish all jobs before a given deadline. This ambiguity arises due to the independent nature of each job and the difficulty in predicting their outcomes.

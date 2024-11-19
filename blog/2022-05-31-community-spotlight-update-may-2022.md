@@ -21,6 +21,8 @@ A [Github repository](https://github.com/instaclustr/cadence-cookbooks-instafood
 
 So please go ahead and try out the cookbook and don’t forget to let us have your feedback.
 
+<!-- truncate -->
+
 ## Congratulations to a First Time Contributor
 
 We are always looking for ways to encourage project participation.  It doesn't matter how large the contribution is or whether it is coding or non coding related. This month one of our community members had [their first PR merged](https://github.com/cadence-workflow/Cadence-Docs/pull/107)- so congratulations and many thanks for the contribution [tonyxrandall](https://github.com/tonyxrandall)!

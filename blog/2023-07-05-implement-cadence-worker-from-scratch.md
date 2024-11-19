@@ -16,7 +16,7 @@ To finish this tutorial, there are two prerequisites you need to finish first
 
 To get started, let's simply use the native HTTP package built in Go to start a process listening to port 3000. You may customize the port for your worker, but the port you choose should not conflict with existing port for your Cadence backend.
 
-```Go
+```go
 package main
 
 import (
@@ -29,6 +29,7 @@ func main(){
 	http.ListenAndServe(":3000", nil)
 }
 ```
+<!-- truncate -->
 
 Next, let's define some basic configurations for the worker. In real production environment, you may need to implement them in configurational languages, but in this tutorial, let's just hard code them for now.
 

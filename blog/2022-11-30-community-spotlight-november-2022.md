@@ -23,6 +23,8 @@ DevNetwork run a series of conferences and during November Cadence was featured 
 
 It is good to see that we are finding new channels for us to present the benefits of using Cadence. Huge hanks to Ben and Ender for the presentation and to everyone that attended.
 
+<!-- truncate -->
+
 ## Cadence at W-JAX ##
 
 It must be presentation month as we have had yet another Cadence presentation! Earlier this month a Cadence talk was featured at the [W-JAX Conference](https://jax.de/munich/) in Munich, Germany.  [Merlin Walter](https://www.linkedin.com/in/merlin-walter/) presented a talk called [Microservices - Modern Orchestration with Cadence](https://jax.de/microservices/microservices-modern-orchestration-approach-with-cadence/)

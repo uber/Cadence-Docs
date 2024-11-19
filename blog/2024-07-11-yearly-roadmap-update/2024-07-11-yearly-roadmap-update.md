@@ -21,6 +21,8 @@ If you haven’t heard about Cadence, this section is for you. In a short descri
 
 In the simplest definition, it is “a multi-step execution”. Step here represents individual operations that are a little heavier than small in-process function calls. Although they are not limited to those: it could be a separate service call, processing a large dataset, map-reduce, thread sleep, scheduling next run, waiting for an external input, starting a sub workflow etc. It’s anything a user thinks as a single unit of logic in their code. Those steps often have dependencies among themselves. Some steps, including the very first step, might require external triggers (e.g. button click) or schedules. In the more broader meaning, any multi-step function or service is a workflow in principle.
 
+<!-- truncate -->
+
 While the above is a more correct way to define workflows, specialized workflows are more widely known: such as data pipelines, directed acyclic graphs, state machines, cron jobs, (micro)service orchestration, etc. This is why typically everyone has a different workflow meaning in mind. Specialized workflows also have simplified interfaces such as UI, configs or a DSL (domain specific language) to make it easy to express the workflow definition.
 
 ### Code-Driven Workflows
