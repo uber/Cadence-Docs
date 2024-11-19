@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Simplify Stateful Application Development',
-    Svg: require('@site/static/img/docusaurus/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/arrow_divert_filled.svg').default,
     description: (
       <>
 Cadence uses workflow primitives to help developers encode complex business logic, while seamlessly managing scalability, reliability, and availability, freeing developers from these concerns      </>
@@ -19,7 +19,7 @@ Cadence uses workflow primitives to help developers encode complex business logi
   },
   {
     title: 'Resilient Workflows in Any Environment',
-    Svg: require('@site/static/img/docusaurus/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/gears_blue.svg').default,
     description: (
       <>
 Cadence uses workflow primitives to help developers encode complex business logic, while seamlessly managing scalability, reliability, and availability, freeing developers from these concerns      </>
@@ -27,7 +27,7 @@ Cadence uses workflow primitives to help developers encode complex business logi
   },
   {
     title: 'Horizontal Scalability for Massive Workflow Loads',
-    Svg: require('@site/static/img/docusaurus/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/chart_bar_ascending_filled.svg').default,
     description: (
       <>
 Cadence scales horizontally to handle millions of concurrent workflows, and it includes asynchronous history event replication out-of-the-box, providing robust recovery from zone failures
