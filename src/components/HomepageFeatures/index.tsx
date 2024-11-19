@@ -38,7 +38,7 @@ Cadence scales horizontally to handle millions of concurrent workflows, and it i
 
 function Feature({title, Svg, description}: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--12')}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>
