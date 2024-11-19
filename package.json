@@ -25,6 +25,7 @@
     "@docusaurus/preset-classic": "3.6.1",
     "@docusaurus/remark-plugin-npm2yarn": "^3.6.1",
     "@docusaurus/theme-search-algolia": "^3.6.1",
+    "@grnet/docusaurus-terminology": "^2.0.0-rc.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
