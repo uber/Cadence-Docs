@@ -63,7 +63,7 @@ describe a :domain: would look like this:
 cadence --domain samples-domain domain describe
 ```
 
-Alternatively, you can build the CLI image, see [instructions](docker/README.md#diy-building-an-image-for-any-tag-or-branch)
+Alternatively, you can build the CLI image, see [instructions](https://github.com/cadence-workflow/cadence/blob/master/docker/README.md#diy-building-an-image-for-any-tag-or-branch)
 
 ## Documentation
 CLI are documented by `--help` or `-h` in ANY tab of all levels:
