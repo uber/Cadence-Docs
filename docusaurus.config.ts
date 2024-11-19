@@ -41,19 +41,9 @@ const config: Config = {
     locales: ['en'],
   },
 
-  scripts: [
-    {
-      async: true,
-      src: 'https://www.googletagmanager.com/gtag/js?id=G-W63QD8QE6E'
-    },
-    {
-      src: 'js/gtag.js',
-    }
-  ],
-
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       {
         docs: {
           sidebarPath: './sidebars.ts',
@@ -82,6 +72,13 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        googleTagManager: {
+          containerId: 'G-W63QD8QE6E',
+        },
+        gtag: {
+          trackingID: 'G-W63QD8QE6E',
+          anonymizeIP: true,
+        }
       } satisfies Preset.Options,
     ],
   ],
@@ -165,6 +162,15 @@ const config: Config = {
   ],
 
   themeConfig: {
+    announcementBar: {
+      id: 'survey_announcement',
+      content:
+        'We are looking to hear your feedback, please fill the <a target="_blank" rel="noopener noreferrer" href="https://www.surveymonkey.com/r/9RL7YX9">Cadence 2024 OSS community survey</a>',
+      backgroundColor: '#fafbfc',
+      textColor: '#091E42',
+      isCloseable: true,
+    },
+
     algolia: {
       // The application ID provided by Algolia
       appId: 'J7SVDVT89Z',
