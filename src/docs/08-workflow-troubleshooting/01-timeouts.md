@@ -58,7 +58,7 @@ Mitigation: Consider adding retry policy to an activity
 
 [Check retry policy for activity](https://cadenceworkflow.io/docs/concepts/activities/#retries)
 
-## Heartbeat Timeouts after configuring heartbeat timeout
+## Heartbeat timeout seen after configuring heartbeat timeout
 
 Activity has configured heartbeat timeout and the activity timed out with heart beat timeout. This is because the server did not receive a heart beat in the time interval configured as the heart beat timeout.
 
