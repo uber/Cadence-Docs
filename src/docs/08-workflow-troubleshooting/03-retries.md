@@ -20,7 +20,7 @@ For workflow retries, when a workflow fails or times out and is retried, it comp
 
 ## Configuration of activity retries and workflow retries
 
-Some of the configurable values could be misconfigured and a result will not have the intended behaviour. These are listed here.
+Some of the configurable values could be misconfigured and as a result will not have the intended behaviour. These are listed here.
 
 ## MaximumAttempts set to 1
 
