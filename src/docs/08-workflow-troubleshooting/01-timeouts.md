@@ -60,7 +60,7 @@ Mitigation: Consider adding retry policy to an activity
 
 ## Heartbeat timeout seen after configuring heartbeat timeout
 
-Activity has configured heartbeat timeout and the activity timed out with heart beat timeout. This is because the server did not receive a heart beat in the time interval configured as the heart beat timeout.
+Activity has configured heartbeat timeout and the activity timed out with heart beat timeout. This is because the server did not receive a heart beat in the time interval configured as the heart beat timeout. This could happen if the activity is actually not executing or the activity is not sending periodic heartbeats. The first case is good since the activity now times out instead of being stuck until startToClose or scheduleToClose kicks in. The second case needs a fix.
 
 Mitigation: Once heartbeat timeout is configured in activity options, you need to make sure the activity periodically sends a heart beat to the server to make sure the server is aware of the activity being alive.
 
