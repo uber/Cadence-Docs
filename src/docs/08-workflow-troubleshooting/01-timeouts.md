@@ -52,7 +52,7 @@ Mitigation: Consider configuring heartbeat timeout
 
 ## Heartbeat timeout configured without a retry policy
 
-Heartbeat timeouts are used to detect when a worker died or restarted during deployments. With heartbeat timeout configured, the activity will timeout faster. But without a retry policy, it will not be scheduled again on a healthy worker.
+Heartbeat timeouts are used to detect when a worker died or restarted. With heartbeat timeout configured, the activity will timeout faster. But without a retry policy, it will not be scheduled again on a healthy worker.
 
 Mitigation: Consider adding retry policy to an activity
 
