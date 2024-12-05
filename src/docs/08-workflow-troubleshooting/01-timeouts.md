@@ -44,7 +44,7 @@ For short running activities, heart beating is not required but maybe consider i
 
 ## Retry policy configured without setting heartbeat timeout
 
-Retry policies are good to be configured so that activities can be retried after timeouts or failures. For long running activities, while the activity is executing, the worker can die due to regular deployments or host restarts or failures. Cadence doesn't know about this and will wait for  StartToClose or ScheduleToClose timeouts to kick in. The retry is attempted only after this timeout. Configuring heartbeat timeout would cause the activity to timeout earlier and will be retried on another worker.
+Retry policies are configured so activities can be retried after timeouts or failures. For long-running activities, the worker can die while the activity is executing, e.g. due to regular deployments or host restarts or failures. Cadence doesn't know about this and will wait for  StartToClose or ScheduleToClose timeouts to kick in. The retry is attempted only after this timeout. Configuring heartbeat timeout would cause the activity to timeout earlier so it can be retried on another worker.
 
 Mitigation: Consider configuring heartbeat timeout
 
