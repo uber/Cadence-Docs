@@ -14,7 +14,7 @@ Read more about [activity retries](https://cadenceworkflow.io/docs/concepts/acti
 
 One thing to note is how activity retries and workflow retries are shown in the Cadence Web UI. Information about activity retries is not stored in Cadence. Only the last attempt is shown with the attempt number.
 
-Moreover, attempt number starts from 0, so Attempt:0 refers to the first and original attempt or Attempt:1 refers to the second attempt or first retried attempt.
+Moreover, attempt number starts from 0, so `Attempt: 0` refers to the first and original attempt, `Attempt: 1` refers to the second attempt or first retried attempt.
 
 For workflow retries, when a workflow fails or times out and is retried, it completes the previous execution with a ContinuedAsNew event and a new execution is started with Attempt 1. The ContinuedAsNew event holds the details of the failure reason.
 
