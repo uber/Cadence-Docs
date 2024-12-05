@@ -6,7 +6,7 @@ permalink: /docs/workflow-troubleshooting/retries
 
 # Retries
 
-Cadence has a retry feature where a retry policy can be configured so that an activity or a workflow can be retried when it fails or times out.
+Cadence has a retry feature where a retry policy can be configured so that an activity or a workflow will be retried when it fails or times out.
 
 Read more about [activity retries](https://cadenceworkflow.io/docs/concepts/activities/#retries) and [workflow retries](https://cadenceworkflow.io/docs/concepts/workflows/#workflow-retries)
 
