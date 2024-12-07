@@ -1,6 +1,7 @@
 import path from 'path';
 import npm2yarn from '@docusaurus/remark-plugin-npm2yarn';
 import remarkMath from 'remark-math';
+import glossary from './src/remark/glossary.js';
 
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
@@ -16,7 +17,7 @@ import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-clien
 const defaultLocale = 'en';
 
 const config: Config = {
-  title: 'Cadence ⚙️',
+  title: 'Cadence',
   tagline: 'Orchestrate with Confidence: The Open-Source Workflow Engine for Tomorrow',
   favicon: 'img/favicon.ico',
 
@@ -27,7 +28,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'uber', // Usually your GitHub org/user name.
+  organizationName: 'cadence-workflow', // Usually your GitHub org/user name.
   projectName: 'cadence-Docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -50,6 +51,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/cadence-workflow/Cadence-Docs/tree/master/',
+          remarkPlugins: [glossary],
         } satisfies DocsOptions,
         blog: {
           blogTitle: 'Cadence Blog',
@@ -176,10 +178,10 @@ const config: Config = {
       externalUrlRegex: 'external\\.com|domain\\.com',
 
       // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-      replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
-      },
+      // replaceSearchResultPathname: {
+      //   from: '/docs/', // or as RegExp: /\/docs\//
+      //   to: '/',
+      // },
 
       // Optional: Algolia search parameters
       searchParameters: {},
