@@ -30,6 +30,21 @@ $ npm run build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Environment Variables
+
+In order to deploy to multiple environments, some configuration options in `docusaurus.config.ts` are made available for override through environment variables.
+
+```bash
+# Can be replaced by your GH pages url, ie. https://<userId>.github.io/
+CADENCE_DOCS_URL=https://cadenceworkflow.io
+
+# For GitHub pages deployment, it is often /<projectName>/ defaults to `/`
+CADENCE_DOCS_BASE_URL=/cadence-docs/
+
+# For Github pages only, this is your Github org/user name.
+CADENCE_DOCS_ORGANIZATION=cadence-workflow
+```
+
 ### Deployment
 
 Using SSH:

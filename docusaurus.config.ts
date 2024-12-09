@@ -11,7 +11,7 @@ import type { Options as BlogOptions } from '@docusaurus/plugin-content-blog';
 import type { Options as PageOptions } from '@docusaurus/plugin-content-pages';
 import type { Options as IdealImageOptions } from '@docusaurus/plugin-ideal-image';
 import type { Options as ClientRedirectsOptions } from '@docusaurus/plugin-client-redirects';
-
+import { envReplace } from '@pnpm/config.env-replace';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 const defaultLocale = 'en';
@@ -21,15 +21,16 @@ const config: Config = {
   tagline: 'Orchestrate with Confidence: The Open-Source Workflow Engine for Tomorrow',
   favicon: 'img/favicon.ico',
 
-  url: 'https://cadenceworkflow.io/',
+  url: envReplace('${CADENCE_DOCS_URL:-https://cadenceworkflow.io}', process.env),
+
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: envReplace('${CADENCE_DOCS_BASE_URL:-/}', process.env),
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'cadence-workflow', // Usually your GitHub org/user name.
-  projectName: 'cadence-Docs', // Usually your repo name.
+  organizationName: envReplace('${CADENCE_DOCS_ORGANIZATION:-cadence-workflow}', process.env),
+  projectName: 'cadence-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
