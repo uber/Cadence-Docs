@@ -29,12 +29,12 @@ jobs:
       - name: Configure domain
         uses: finnp/create-file-action@1.0.0
         env:
-          FILE_NAME: "dist/CNAME"
+          FILE_NAME: "build/CNAME"
           FILE_DATA: ${{ secrets.CUSTOM_DOMAIN }}
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch
