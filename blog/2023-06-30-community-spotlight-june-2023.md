@@ -13,7 +13,7 @@ Please see below for a roundup of the highlights:
 
 ## Cadence Release 1.0 ##
 
-Just in case you missed it - at the end of April [Cadence v1.0](https://github.com/uber/cadence/releases/tag/v1.0.0) was officially released. This release is a significant milestone for the project and the community. It indicates that we are confident in the stability of the code that we can recommend it and promote it widely to more users. Kudos to everyone that worked together to make this release happen.
+Just in case you missed it - at the end of April [Cadence v1.0](https://github.com/cadence-workflow/cadence/releases/tag/v1.0.0) was officially released. This release is a significant milestone for the project and the community. It indicates that we are confident in the stability of the code that we can recommend it and promote it widely to more users. Kudos to everyone that worked together to make this release happen.
 
 And the Uber team also gave Cadence a writeup on the [Uber Engineering Blog](https://www.uber.com/en-SE/blog/announcing-cadence/) so please take a look.
 

@@ -21,7 +21,7 @@ Follow the Docker installation instructions found here: [https://docs.docker.com
 Download the Cadence docker-compose file:
 ```bash
 
-curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/docker-compose.yml && curl -O https://raw.githubusercontent.com/uber/cadence/master/docker/prometheus/prometheus.yml
+curl -O https://raw.githubusercontent.com/cadence-workflow/cadence/master/docker/docker-compose.yml && curl -O https://raw.githubusercontent.com/cadence-workflow/cadence/master/docker/prometheus/prometheus.yml
 ```
 Then start Cadence Service by running:
 ```bash
@@ -55,21 +55,20 @@ Bad binaries to reset:
 >
 ```
 
-Please remember the domains you created because they will be used in your worker implementation and Cadence CLI  commands. 
+Please remember the domains you created because they will be used in your worker implementation and Cadence CLI  commands.
 
 ## What's Next
 So far you've successfully finished two prerequisites to your Cadence application. The next steps are to implement a simple worker service that hosts your workflows and to run your very first hello world Cadence workflow.
 
 Go to [Java HelloWorld](/docs/get-started/java-hello-world) or [Golang HelloWorld](/docs/get-started/golang-hello-world).
 
-## Troubleshooting 
+## Troubleshooting
 There can be various reasons that `docker-compose up` cannot succeed:
 * In case of the image being too old, update the docker image by `docker pull ubercadence/server:master-auto-setup` and retry
 * In case of the local docker env is messed up: `docker system prune --all` and retry (see [details about it](https://docs.docker.com/config/pruning/) )
 * See logs of different container:
-  * If Cassandra is not able to get up: `docker logs -f docker_cassandra_1` 
+  * If Cassandra is not able to get up: `docker logs -f docker_cassandra_1`
   * If Cadence is not able to get up: `docker logs -f docker_cadence_1`
   * If Cadence Web is not able to get up: `docker logs -f docker_cadence-web_1`
 
-If the above is still not working, [open an issue in Server(main) repo](https://github.com/uber/cadence/issues/new/choose ). 
-
+If the above is still not working, [open an issue in Server(main) repo](https://github.com/cadence-workflow/cadence/issues/new/choose ).

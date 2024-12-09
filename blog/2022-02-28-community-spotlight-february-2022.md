@@ -35,7 +35,7 @@ Please subscribe and let us know what other videos you’d like to see there.
 
 ## Help us to Make Cadence even better
 
-Are you interested in helping us improve Cadence? We are always looking for contributors to help share the workload. If you’d like to help then you can start by taking a look at our list of [open issues](https://github.com/uber/cadence/issues) on Github. We currently have 320 of them that need to be worked on so if you want to learn more about Cadence and solve some of the reported issues then please take a look and volunteer to fix it.
+Are you interested in helping us improve Cadence? We are always looking for contributors to help share the workload. If you’d like to help then you can start by taking a look at our list of [open issues](https://github.com/cadence-workflow/cadence/issues) on Github. We currently have 320 of them that need to be worked on so if you want to learn more about Cadence and solve some of the reported issues then please take a look and volunteer to fix it.
 
 If you are new to Cadence or you’d like to try something simple then we have some issues labelled as ‘good first issue’. These are a great place to start to get more Cadence experience.
 

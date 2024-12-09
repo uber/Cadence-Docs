@@ -6,7 +6,7 @@ permalink: /docs/java-client/client-overview
 
 # Client SDK Overview
 
-- Samples: [https://github.com/uber/cadence-java-samples](https://github.com/uber/cadence-java-samples)
+- Samples: [https://github.com/cadence-workflow/cadence-java-samples](https://github.com/cadence-workflow/cadence-java-samples)
 - JavaDoc documentation: [https://www.javadoc.io/doc/com.uber.cadence/cadence-client](https://www.javadoc.io/doc/com.uber.cadence/cadence-client)
 
 ## [JavaDoc Packages](https://www.javadoc.io/doc/com.uber.cadence/cadence-client/latest/index.html)
@@ -17,7 +17,7 @@ APIs to implement activity: accessing activity info, or sending heartbeat.
 APIs for external application code to interact with Cadence workflows: start workflows, send signals or query workflows.
 
 ### com.uber.cadence.workflow
-APIs to implement workflows.  
+APIs to implement workflows.
 
 ### com.uber.cadence.worker
 APIs to configure and start workers.
@@ -25,7 +25,7 @@ APIs to configure and start workers.
 ### com.uber.cadence.testing
 APIs to write unit tests for workflows.
 
-## [Samples](https://github.com/uber/cadence-java-samples/tree/master/src/main/java/com/uber/cadence/samples)
+## [Samples](https://github.com/cadence-workflow/cadence-java-samples/tree/master/src/main/java/com/uber/cadence/samples)
 ### com.uber.cadence.samples.hello
 Samples of how to use the basic feature: activity, local activity, ChildWorkflow, Query, etc.
 This is the most important package you need to start with.

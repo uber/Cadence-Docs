@@ -124,7 +124,7 @@ token := workflow.GetSessionInfo(sessionCtx).GetRecreateToken()
 ## Q & A
 
 ### Is there a complete example?
-Yes, the [file processing example](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/fileprocessing/workflow.go) in the cadence-sample repo has been updated to use the session framework.
+Yes, the [file processing example](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/fileprocessing/workflow.go) in the cadence-sample repo has been updated to use the session framework.
 
 ### What happens to my activity if the worker dies?
 If your :activity: has already been scheduled, it will be cancelled. If not, you will get a `workflow.ErrSessionFailed` error when you call `workflow.ExecuteActivity()`.
@@ -135,8 +135,8 @@ It's per :worker: process, so make sure there's only one :worker: process runnin
 
 ## Future Work
 
-* **[Support automatic session re-establishing](https://github.com/uber-go/cadence-client/issues/775)**
+* **[Support automatic session re-establishing](https://github.com/cadence-workflow/cadence-go-client/issues/775)**
 Right now a session is considered failed if the :worker: process dies. However, for some use cases, you may only care whether :worker: host is alive or not. For these uses cases, the session should be automatically re-established if the :worker: process is restarted.
 
-* **[Support fine-grained concurrent session limitation](https://github.com/uber-go/cadence-client/issues/776)**
+* **[Support fine-grained concurrent session limitation](https://github.com/cadence-workflow/cadence-go-client/issues/776)**
 The current implementation assumes that all sessions are consuming the same type of resource and there's only one global limitation. Our plan is to allow you to specify what type of resource your session will consume and enforce different limitations on different types of resources.

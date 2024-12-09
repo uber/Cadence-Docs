@@ -57,25 +57,25 @@ There are quite many configs in Cadence. Here are the most basic configuration t
 | blobstore | This is also for archival history feature Default cadence server is using file based blob store implementation.  | N/A |
 | domainDefaults | default config for each domain. Right now only being used for Archival feature.  | N/A |
 | dynamicconfig (previously known as dynamicConfigClient) | Dynamic config is a config manager that enables you to change configs without restarting servers. It’s a good way for Cadence to keep high availability and make things easy to configure. <br/><br/>By default Cadence server uses `filebased` client which allows you to override default configs using a YAML file. However, this approach can be cumbersome in production environment because it's the operator's responsibility to sync the YAML files across Cadence nodes. <br/><br/>Therefore, we provide another option, `configstore` client, that stores config changes in the persistent data store for Cadence (e.g., Cassandra database) rather than the YAML file. This approach shifts the responsibility of syncing config changes from the operator to Cadence service. You can use Cadence CLI commands to list/get/update/restore config changes. <br/><br/>You can also implement the dynamic config interface if you have a better way to manage configs. | Same as the sample development config |
-| persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for detailed configuration of advanced visibility. See [persistence documentation](https://github.com/uber/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
+| persistence | Configuration for data store / persistence layer. <br/><br/>Values of DefaultStore VisibilityStore AdvancedVisibilityStore should be keys of map DataStores. <br/><br/>DefaultStore is for core Cadence functionality. <br/><br/>VisibilityStore is for basic visibility feature <br/><br/>AdvancedVisibilityStore is for advanced visibility<br/><br/> Go to [advanced visibility](/docs/concepts/search-workflows/#running-in-production) for detailed configuration of advanced visibility. See [persistence documentation](https://github.com/cadence-workflow/cadence/blob/master/docs/persistence.md) about using different database for Cadence| As explanation |
 
 ### The full list of static configuration
 
 Starting from v0.21.0, all the static configuration are defined by GoDocs in details.
 |Version|GoDocs Link| Github Link |
 | --------- | --------- | --------- |
-| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.21.0/common/config/config.go#L37)|
-| ...[other higher versions](https://pkg.go.dev/github.com/uber/cadence@v0.21.0?tab=versions) | ...Replace the version in the URL of v0.21.0| ...Replace the version in the URL of v0.21.0|
+| v0.21.0 | [Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.21.0/common/config#Config) | [Configuration](https://github.com/cadence-workflow/cadence/blob/v0.21.0/common/config/config.go#L37)|
+| ...[other higher versions](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.21.0?tab=versions) | ...Replace the version in the URL of v0.21.0| ...Replace the version in the URL of v0.21.0|
 
 
 For earlier versions, you can find all the configurations similarly:
 |Version|GoDocs Link| Github Link |
 | --------- | --------- | --------- |
-| v0.20.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.20.0/common/service/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.20.0/common/service/config/config.go#L37)|
-| v0.19.2 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.19.2/common/service/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.19.2/common/service/config/config.go#L37)|
-| v0.18.2 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.18.2/common/service/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.18.2/common/service/config/config.go#L37)|
-| v0.17.0 | [Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/config#Config) | [Configuration](https://github.com/uber/cadence/blob/v0.17.0/common/service/config/config.go#L37)|
-| ...[other lower versions](https://pkg.go.dev/github.com/uber/cadence@v0.20.0?tab=versions) | ...Replace the version in the URL of v0.20.0| ...Replace the version in the URL of v0.20.0 |
+| v0.20.0 | [Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.20.0/common/service/config#Config) | [Configuration](https://github.com/cadence-workflow/cadence/blob/v0.20.0/common/service/config/config.go#L37)|
+| v0.19.2 | [Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.19.2/common/service/config#Config) | [Configuration](https://github.com/cadence-workflow/cadence/blob/v0.19.2/common/service/config/config.go#L37)|
+| v0.18.2 | [Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.18.2/common/service/config#Config) | [Configuration](https://github.com/cadence-workflow/cadence/blob/v0.18.2/common/service/config/config.go#L37)|
+| v0.17.0 | [Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.17.0/common/service/config#Config) | [Configuration](https://github.com/cadence-workflow/cadence/blob/v0.17.0/common/service/config/config.go#L37)|
+| ...[other lower versions](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.20.0?tab=versions) | ...Replace the version in the URL of v0.20.0| ...Replace the version in the URL of v0.20.0 |
 
 ## Dynamic Configuration
 
@@ -83,23 +83,23 @@ Dynamic configuration is for fine tuning a Cadence cluster.
 
 There are a lot more dynamic configurations than static configurations. Most of the default values are good for small clusters. As a cluster is scaled up, you may look for tuning it for the optimal performance.
 
-Starting from v0.21.0 with this [change](https://github.com/uber/cadence/pull/4156/files), all the dynamic configuration are well defined by GoDocs.
+Starting from v0.21.0 with this [change](https://github.com/cadence-workflow/cadence/pull/4156/files), all the dynamic configuration are well defined by GoDocs.
 |Version|GoDocs Link| Github Link |
 | --------- | --------- | --------- |
-| v0.21.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/uber/cadence/blob/v0.21.0/common/dynamicconfig/constants.go#L58)|
-| ...[other higher versions](https://pkg.go.dev/github.com/uber/cadence@v0.21.0?tab=versions) | ...Replace the version in the URL of v0.21.0| ...Replace the version in the URL of v0.21.0|
+| v0.21.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.21.0/common/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/cadence-workflow/cadence/blob/v0.21.0/common/dynamicconfig/constants.go#L58)|
+| ...[other higher versions](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.21.0?tab=versions) | ...Replace the version in the URL of v0.21.0| ...Replace the version in the URL of v0.21.0|
 
 For earlier versions, you can find all the configurations similarly:
 |Version|GoDocs Link| Github Link |
 | --------- | --------- | --------- |
-| v0.20.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.20.0/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/uber/cadence/blob/v0.20.0/common/service/dynamicconfig/constants.go#L53)|
-| v0.19.2 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.19.2/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/uber/cadence/blob/v0.19.2/common/service/dynamicconfig/constants.go#L53)|
-| v0.18.2 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.18.2/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/uber/cadence/blob/v0.18.2/common/service/dynamicconfig/constants.go#L53)|
-| v0.17.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/uber/cadence@v0.17.0/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/uber/cadence/blob/v0.17.0/common/service/dynamicconfig/constants.go#L53)|
-| ...[other lower versions](https://pkg.go.dev/github.com/uber/cadence@v0.20.0?tab=versions) | ...Replace the version in the URL of v0.20.0| ...Replace the version in the URL of v0.20.0 |
+| v0.20.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.20.0/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/cadence-workflow/cadence/blob/v0.20.0/common/service/dynamicconfig/constants.go#L53)|
+| v0.19.2 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.19.2/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/cadence-workflow/cadence/blob/v0.19.2/common/service/dynamicconfig/constants.go#L53)|
+| v0.18.2 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.18.2/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/cadence-workflow/cadence/blob/v0.18.2/common/service/dynamicconfig/constants.go#L53)|
+| v0.17.0 | [Dynamic Configuration Docs](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.17.0/common/service/dynamicconfig#Key) | [Dynamic Configuration](https://github.com/cadence-workflow/cadence/blob/v0.17.0/common/service/dynamicconfig/constants.go#L53)|
+| ...[other lower versions](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.20.0?tab=versions) | ...Replace the version in the URL of v0.20.0| ...Replace the version in the URL of v0.20.0 |
 
 However, the GoDocs in earlier versions don't contain detailed information. You need to look it up the newer version of GoDocs.
-For example, search for "EnableGlobalDomain" in Dynamic Configuration [Comments in v0.21.0](https://github.com/uber/cadence/blob/667b7c68e67682a8d23f4b8f93e91a791313d8d6/common/dynamicconfig/constants.go) or [Docs of v0.21.0](https://pkg.go.dev/github.com/uber/cadence@v0.21.0/common/dynamicconfig#Key), as the usage of DynamicConfiguration never changes.
+For example, search for "EnableGlobalDomain" in Dynamic Configuration [Comments in v0.21.0](https://github.com/cadence-workflow/cadence/blob/667b7c68e67682a8d23f4b8f93e91a791313d8d6/common/dynamicconfig/constants.go) or [Docs of v0.21.0](https://pkg.go.dev/github.com/cadence-workflow/cadence@v0.21.0/common/dynamicconfig#Key), as the usage of DynamicConfiguration never changes.
 
 
 * **KeyName** is the key that you will use in the dynamicconfig yaml content
@@ -215,16 +215,16 @@ After changing the client to `configstore` and restarting Cadence, you can manag
 ## Deployment & Release
 Kubernetes is the most popular way to deploy Cadence cluster. And easiest way is to use [Cadence Helm Charts](https://github.com/banzaicloud/banzai-charts/tree/master/cadence) that maintained by a community project.
 
-If you are looking for deploying Cadence using other technologies, then it's reccomended to use Cadence docker images. You can use offical ones, or you may customize it based on what you need. See [Cadence docker package](https://github.com/uber/cadence/tree/master/docker#using-docker-image-for-production) for how to run the images.
+If you are looking for deploying Cadence using other technologies, then it's reccomended to use Cadence docker images. You can use offical ones, or you may customize it based on what you need. See [Cadence docker package](https://github.com/cadence-workflow/cadence/tree/master/docker#using-docker-image-for-production) for how to run the images.
 
-It's always recommended to use the latest release. See [Cadence release pages](https://github.com/uber/cadence/releases).
+It's always recommended to use the latest release. See [Cadence release pages](https://github.com/cadence-workflow/cadence/releases).
 
 Please subscribe the release of project by :
 
-Go to https://github.com/uber/cadence -> Click the right top "Watch" button -> Custom -> "Release".
+Go to https://github.com/cadence-workflow/cadence -> Click the right top "Watch" button -> Custom -> "Release".
 
 And see [how to upgrade a Cadence cluster](/docs/operation-guide/maintain/#upgrading-server)
 
 ## Stress/Bench Test a cluster
 
-It's recommended to run bench test on your cluster following this [package](https://github.com/uber/cadence/tree/master/bench) to see the maximum throughput that it can take, whenever you change some setup.
+It's recommended to run bench test on your cluster following this [package](https://github.com/cadence-workflow/cadence/tree/master/bench) to see the maximum throughput that it can take, whenever you change some setup.

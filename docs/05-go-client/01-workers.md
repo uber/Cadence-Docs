@@ -103,7 +103,7 @@ import (
     "go.uber.org/cadence/compatibility"
     "go.uber.org/cadence/worker"
 
-    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
+    apiv1 "github.com/cadence-workflow/cadence-idl/go/proto/api/v1"
     "github.com/uber-go/tally"
     "go.uber.org/zap"
     "go.uber.org/zap/zapcore"
@@ -153,7 +153,7 @@ import (
     "go.uber.org/cadence/compatibility"
     "go.uber.org/cadence/worker"
 
-    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
+    apiv1 "github.com/cadence-workflow/cadence-idl/go/proto/api/v1"
     "github.com/uber-go/tally"
     "go.uber.org/zap"
     "go.uber.org/zap/zapcore"
@@ -176,29 +176,29 @@ import (
 func buildCadenceClient() workflowserviceclient.Interface {
      grpcTransport := grpc.NewTransport()
      var dialOptions []grpc.DialOption
- 
+
      caCert, err := ioutil.ReadFile("/path/to/cert/file")
      if err != nil {
           fmt.Printf("Failed to load server CA certificate: %v", zap.Error(err))
      }
- 
+
      caCertPool := x509.NewCertPool()
      if !caCertPool.AppendCertsFromPEM(caCert) {
           fmt.Errorf("Failed to add server CA's certificate")
      }
- 
+
      tlsConfig := tls.Config{
           RootCAs: caCertPool,
      }
- 
+
      creds := credentials.NewTLS(&tlsConfig)
      dialOptions = append(dialOptions, grpc.DialerCredentials(creds))
- 
+
      dialer := grpcTransport.NewDialer(dialOptions...)
      outbound := grpcTransport.NewOutbound(
                         peer.NewSingle(hostport.PeerIdentifier(HostPort), dialer)
                  )
- 
+
      dispatcher := yarpc.NewDispatcher(yarpc.Config{
           Name: ClientName,
           Outbounds: yarpc.Outbounds{
@@ -208,9 +208,9 @@ func buildCadenceClient() workflowserviceclient.Interface {
      if err := dispatcher.Start(); err != nil {
           panic("Failed to start dispatcher")
      }
- 
+
      clientConfig := dispatcher.ClientConfig(CadenceService)
- 
+
      return compatibility.NewThrift2ProtoAdapter(
           apiv1.NewDomainAPIYARPCClient(clientConfig),
           apiv1.NewWorkflowAPIYARPCClient(clientConfig),

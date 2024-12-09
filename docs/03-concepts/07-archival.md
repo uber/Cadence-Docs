@@ -16,7 +16,7 @@ The current implementation of the :archival:Archival: feature has two limitation
 
 ## Concepts
 
-- **Archiver:** Archiver is the component that is responsible for archiving and retrieving :workflow: histories and visibility records.  Its interface is generic and supports different kinds of :archival: locations: local file system, S3, Kafka, etc. Check [this README](https://github.com/uber/cadence/blob/master/common/archiver/README.md) if you would like to add a new archiver implementation for your data store.
+- **Archiver:** Archiver is the component that is responsible for archiving and retrieving :workflow: histories and visibility records.  Its interface is generic and supports different kinds of :archival: locations: local file system, S3, Kafka, etc. Check [this README](https://github.com/cadence-workflow/cadence/blob/master/common/archiver/README.md) if you would like to add a new archiver implementation for your data store.
 - **URI:** An URI is used to specify the :archival: location. Based on the scheme part of an URI, the corresponding archiver will be selected by the system to perform the :archival: operation.
 
 ## Configuring Archival
@@ -43,7 +43,7 @@ A :domain: includes two pieces of :archival: related config:
 You can follow the steps below to run and test the :archival: feature locally:
 1. `./cadence-server start`
 2. `./cadence --do samples-domain domain register --gd false --history_archival_status enabled --visibility_archival_status enabled --retention 0`
-3. Run the [helloworld cadence-sample](https://github.com/uber-common/cadence-samples) by following the README
+3. Run the [helloworld cadence-sample](https://github.com/cadence-workflow/cadence-samples) by following the README
 4. Copy the workflowID the completed :workflow: from log output
 5. Retrieve runID through archived visibility record `./cadence --do samples-domain wf listarchived -q 'WorkflowID = "<workflowID>"'`
 6. Retrieve archived history `./cadence --do samples-domain wf show --wid <workflowID> --rid <runID>`
@@ -52,10 +52,10 @@ In step 2, we registered a new :domain: and enabled both history and visibility 
 
 ## Running in Production
 Cadence supports uploading workflow histories to Google Cloud and Amazon S3 for archival in production.
-Check documentation in [GCloud archival component](https://github.com/uber/cadence/tree/master/common/archiver/gcloud) and [S3 archival component](https://github.com/uber/cadence/tree/master/common/archiver/s3store).
+Check documentation in [GCloud archival component](https://github.com/cadence-workflow/cadence/tree/master/common/archiver/gcloud) and [S3 archival component](https://github.com/cadence-workflow/cadence/tree/master/common/archiver/s3store).
 
 Below is an example of Amazon S3 archival configuration:
-```yaml 
+```yaml
 archival:
   history:
     status: "enabled"
@@ -85,12 +85,12 @@ domainDefaults:
 In theory, we would like both history and visibility archival happen after workflow closes and retention period passes. However, due to some limitations in the implementation, only history archival happens after the retention period, while visibility archival happens immediately after workflow closes. Please treat this as an implementation details inside Cadence and do not relay on this fact. Archived data should only be checked after the retention period, and we may change the way we do visibility archival in the future.
 
 ### What's the query syntax for visibility archival?
-The `listArchived` CLI command and API accept a SQL-like query for retrieving archived visibility records, similar to how the `listWorkflow` command works. Unfortunately, since different Archiver implementations have very different capability, there's currently no universal query syntax that works for all Archiver implementations. Please check the README (for example, [S3](https://github.com/uber/cadence/tree/master/common/archiver/s3store) and [GCP](https://github.com/uber/cadence/tree/master/common/archiver/gcloud)) of the Archiver used by your domain for the supported query syntax and limitations.
+The `listArchived` CLI command and API accept a SQL-like query for retrieving archived visibility records, similar to how the `listWorkflow` command works. Unfortunately, since different Archiver implementations have very different capability, there's currently no universal query syntax that works for all Archiver implementations. Please check the README (for example, [S3](https://github.com/cadence-workflow/cadence/tree/master/common/archiver/s3store) and [GCP](https://github.com/cadence-workflow/cadence/tree/master/common/archiver/gcloud)) of the Archiver used by your domain for the supported query syntax and limitations.
 
 ### How does archival interact with global domains?
 If you have a global domain, when :archival: occurs it will first run on the active cluster and some time later it will run on the standby cluster when replication happens.
-For history archival, Cadence will check if upload operation has been performed and skip duplicate efforts. 
-For visibility archival, there's no such check and duplicated visibility records will be uploaded. Depending on the Archiver implementation, those duplicated upload may consume more space in the underlying storage and duplicated entries may be returned. 
+For history archival, Cadence will check if upload operation has been performed and skip duplicate efforts.
+For visibility archival, there's no such check and duplicated visibility records will be uploaded. Depending on the Archiver implementation, those duplicated upload may consume more space in the underlying storage and duplicated entries may be returned.
 
 ### Can I specify multiple archival URIs?
 Each :domain: can only have one URI for history :archival: and one URI for visibility :archival:. Different :domain:domains:, however, can have different URIs (with different schemes).

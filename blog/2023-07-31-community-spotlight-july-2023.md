@@ -22,13 +22,13 @@ Thanks Chris for sharing your knowledge and helping others to get started.
 
 ## Cadence Go Client v1.0 Released ##
 
-This month saw the release of [v1.0 of the Cadence Go Client](https://github.com/uber-go/cadence-client/releases/tag/v1.0.0). Note that the work done on this release was as a result of community feedback asking for it - so we are listening and responding to community needs.
+This month saw the release of [v1.0 of the Cadence Go Client](https://github.com/cadence-workflow/cadence-go-client/releases/tag/v1.0.0). Note that the work done on this release was as a result of community feedback asking for it - so we are listening and responding to community needs.
 
 Thanks very much to everyone who worked hard to get this release out!
 
 ## Cadence Release Strategy ##
 
-A recent discussion on the Cadence Release strategy was posted in [Cadence Github Discussions](https://github.com/uber/cadence/discussions/5362) (and also our #general channel on our [Slack](http://t.uber.com/cadence-slack) about the approach we'd like to take for future releases. As a community we want to ensure code stability and to not burden people with having to upgrade frequently.
+A recent discussion on the Cadence Release strategy was posted in [Cadence Github Discussions](https://github.com/cadence-workflow/cadence/discussions/5362) (and also our #general channel on our [Slack](http://t.uber.com/cadence-slack) about the approach we'd like to take for future releases. As a community we want to ensure code stability and to not burden people with having to upgrade frequently.
 
 Based on feedback from the community we will be introducing quarterly release cycles but also give people the ability to make use of patches and minor releases. We will be communicating the intention to make a release at least a month beforehand so that the community has time to finalise any features they want to be included in the upcoming release.
 

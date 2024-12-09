@@ -6,9 +6,9 @@ permalink: /docs/java-client/testing
 
 # Activity Test Environment
 
-[TestActivityEnvironment](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/uber/cadence/testing/TestActivityEnvironment.html) is the helper class for unit testing activity implementations. Supports calls to Activity methods from the tested activities. An example test:
+[TestActivityEnvironment](https://www.javadoc.io/static/com.uber.cadence/cadence-client/2.7.9-alpha/com/cadence-workflow/cadence/testing/TestActivityEnvironment.html) is the helper class for unit testing activity implementations. Supports calls to Activity methods from the tested activities. An example test:
 
-[See full example here.](https://github.com/uber/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloActivityTest.java)
+[See full example here.](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloActivityTest.java)
 
 ```java
 
@@ -36,9 +36,9 @@ permalink: /docs/java-client/testing
 ## Workflow Test Environment
 TestWorkflowEnvironment provides workflow unit testing capabilities.
 
-Testing the workflow code is hard as it might be potentially very long running. The included in-memory implementation of the Cadence service supports an automatic time skipping. Anytime a workflow under the test as well as the unit test code are waiting on a timer (or sleep) the internal service time is automatically advanced to the nearest time that unblocks one of the waiting threads. This way a workflow that runs in production for months is unit tested in milliseconds. Here is an example of a test that executes in a few milliseconds instead of over two hours that are needed for the workflow to complete. 
+Testing the workflow code is hard as it might be potentially very long running. The included in-memory implementation of the Cadence service supports an automatic time skipping. Anytime a workflow under the test as well as the unit test code are waiting on a timer (or sleep) the internal service time is automatically advanced to the nearest time that unblocks one of the waiting threads. This way a workflow that runs in production for months is unit tested in milliseconds. Here is an example of a test that executes in a few milliseconds instead of over two hours that are needed for the workflow to complete.
 
-[See full example here. ](https://github.com/uber/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloSignalTest.java#L76)
+[See full example here. ](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloSignalTest.java#L76)
 
 ```java
 public class SignaledWorkflowImpl implements SignaledWorkflow {

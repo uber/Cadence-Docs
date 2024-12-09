@@ -24,7 +24,7 @@ NOTE 1: With this approach, workflow history/visibility will not be migrated to 
 
 NOTE 2: This is the only way to migrate a local domain, because a local domain cannot be converted to a global domain, even after a cluster enables XDC feature.
 
-NOTE 3: Starting from [version 0.22.0](https://github.com/uber/cadence/releases/tag/v0.22.0), global domain is preferred/recommended. Please ensure you create and use global domains only.
+NOTE 3: Starting from [version 0.22.0](https://github.com/cadence-workflow/cadence/releases/tag/v0.22.0), global domain is preferred/recommended. Please ensure you create and use global domains only.
 If you are using local domains, an easy way is to create a global domain and migrate to the new global domain using the above steps.
 
 ## Migrate with [Global Domain Replication](/docs/concepts/cross-dc-replication/#running-in-production) feature

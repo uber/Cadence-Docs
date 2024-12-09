@@ -4,14 +4,14 @@ title: Introduction
 permalink: /docs/java-client
 ---
 
-# Java client ![Java Client Release](https://img.shields.io/github/v/release/uber/cadence-java-client?sort=semver&display_name=tag&label=Latest%20Release&link=https%3A%2F%2Fgithub.com%2Fuber%2Fcadence-java-client%2Freleases%2Flatest)
+# Java client ![Java Client Release](https://img.shields.io/github/v/release/cadence-workflow/cadence-java-client?sort=semver&display_name=tag&label=Latest%20Release&link=https%3A%2F%2Fgithub.com%2Fuber%2Fcadence-java-client%2Freleases%2Flatest)
 
 
 The following are important links for the Cadence Java client:
 
 
-- GitHub project: [https://github.com/uber/cadence-java-client](https://github.com/uber/cadence-java-client)
-- Samples: [https://github.com/uber/cadence-java-samples](https://github.com/uber/cadence-java-samples)
+- GitHub project: [https://github.com/cadence-workflow/cadence-java-client](https://github.com/cadence-workflow/cadence-java-client)
+- Samples: [https://github.com/cadence-workflow/cadence-java-samples](https://github.com/cadence-workflow/cadence-java-samples)
 - JavaDoc documentation: [https://www.javadoc.io/doc/com.uber.cadence/cadence-client](https://www.javadoc.io/doc/com.uber.cadence/cadence-client)
 
 
@@ -41,4 +41,4 @@ If you are using [gradle 6.9 or older](https://docs.gradle.org/current/userguide
     }
 ```
 
-Release versions are available in the [release page](https://github.com/uber/cadence-java-client/releases)
+Release versions are available in the [release page](https://github.com/cadence-workflow/cadence-java-client/releases)

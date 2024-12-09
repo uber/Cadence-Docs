@@ -21,7 +21,7 @@ After the installation is done, you can use CLI:
 ```
 cadence --help
 ```
-This will always install the latest version. Follow [this instructions](https://github.com/uber/cadence/discussions/4457) if you need to install older versions of Cadence CLI. 
+This will always install the latest version. Follow [this instructions](https://github.com/cadence-workflow/cadence/discussions/4457) if you need to install older versions of Cadence CLI.
 
 ### Docker
 The Cadence :CLI: can be used directly from the Docker Hub image *ubercadence/cli* or by building the :CLI: tool
@@ -36,9 +36,9 @@ docker run -it --rm ubercadence/cli:master --address <frontendAddress> --domain 
 ```bash
 docker run -it --rm ubercadence/cli:<version> --address <frontendAddress> --domain samples-domain domain describe
 ```
-For example `docker run --rm ubercadence/cli:0.21.3 --domain samples-domain domain describe` will be the CLI that is released as part of the [v0.21.3 release](https://github.com/uber/cadence/releases/tag/v0.21.3). 
-See [docker hub page](https://hub.docker.com/r/ubercadence/cli/tags?page=1&ordering=last_updated) for all the CLI image tags. 
-Note that CLI versions of 0.20.0 works for all server versions of 0.12 to 0.19 as well. That's because [the CLI version doesn't change in those versions](https://stackoverflow.com/questions/68217385/what-is-clientversionnotsupportederror-and-how-to-resolve-it). 
+For example `docker run --rm ubercadence/cli:0.21.3 --domain samples-domain domain describe` will be the CLI that is released as part of the [v0.21.3 release](https://github.com/cadence-workflow/cadence/releases/tag/v0.21.3).
+See [docker hub page](https://hub.docker.com/r/ubercadence/cli/tags?page=1&ordering=last_updated) for all the CLI image tags.
+Note that CLI versions of 0.20.0 works for all server versions of 0.12 to 0.19 as well. That's because [the CLI version doesn't change in those versions](https://stackoverflow.com/questions/68217385/what-is-clientversionnotsupportederror-and-how-to-resolve-it).
 
 NOTE: On Docker versions 18.03 and later, you may get a "connection refused" error when connecting to local server. You can work around this by setting the host to "host.docker.internal" (see [here](https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds) for more info).
 
@@ -55,17 +55,17 @@ docker exec -it docker_cadence_1 /bin/bash
 # cadence --address $(hostname -i):7933 --do samples domain register
 ```
 
-### Build it yourself 
-To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/uber/cadence), check out the version tag (e.g. `git checkout v0.21.3`) and run
+### Build it yourself
+To build the :CLI: tool locally, clone the [Cadence server repo](https://github.com/cadence-workflow/cadence), check out the version tag (e.g. `git checkout v0.21.3`) and run
 `make tools`. This produces an executable called `cadence`. With a local build, the same command to
 describe a :domain: would look like this:
 ```bash
 cadence --domain samples-domain domain describe
 ```
 
-Alternatively, you can build the CLI image, see [instructions](docker/README.md#diy-building-an-image-for-any-tag-or-branch) 
+Alternatively, you can build the CLI image, see [instructions](docker/README.md#diy-building-an-image-for-any-tag-or-branch)
 
-## Documentation 
+## Documentation
 CLI are documented by `--help` or `-h` in ANY tab of all levels:
 
 ```
@@ -94,7 +94,7 @@ GLOBAL OPTIONS:
    --help, -h                           show help
    --version, -v                        print the version
 ```
-And 
+And
 ```
 $cadence workflow -h
 NAME:
@@ -173,7 +173,7 @@ Run `cadence tasklist` for help on tasklist operations
 ```bash
 cadence --domain samples-domain domain register
 # OR using short alias
-cadence --do samples-domain d re 
+cadence --do samples-domain d re
 ```
 If your Cadence cluster has enable [global domain(XDC replication)](https://cadenceworkflow.io/docs/concepts/cross-dc-replication/), then you have to specify the replicaiton settings when registering a domain:
 ```bash
@@ -203,7 +203,7 @@ To run a :workflow:, the user must specify the following:
 3. Execution start to close timeout in seconds (--et)
 4. Input in JSON format (--i) (optional)
 
-s example uses [this cadence-samples workflow](https://github.com/uber-common/cadence-samples/blob/master/cmd/samples/recipes/helloworld/helloworld_workflow.go)
+s example uses [this cadence-samples workflow](https://github.com/cadence-workflow/cadence-samples/blob/master/cmd/samples/recipes/helloworld/helloworld_workflow.go)
 and takes a string as input with the `-i '"cadence"'` parameter. Single quotes (`''`) are used to wrap input as JSON.
 
 **Note:** You need to start the :worker: so that the :workflow: can make progress.

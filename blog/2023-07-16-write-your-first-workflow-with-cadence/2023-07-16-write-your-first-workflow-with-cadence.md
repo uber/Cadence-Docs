@@ -74,7 +74,7 @@ For a bonus point, the Cadence team has also developed a demonstrative web dashb
 
 ![cadencde-ui](./cadence_ui.png)
 
-This web portal persists all historical workflow you have run recently. Search for the domain you used for this tutorial. In our case, type `test-domain` and hit enter. You may see a list of workflows with detailed information. Feel free to explore the web UI and raise your suggestions to our [Github repo](https://github.com/uber/cadence-web).
+This web portal persists all historical workflow you have run recently. Search for the domain you used for this tutorial. In our case, type `test-domain` and hit enter. You may see a list of workflows with detailed information. Feel free to explore the web UI and raise your suggestions to our [Github repo](https://github.com/cadence-workflow/cadence-web).
 
 ![cadence-ui-detailed](./cadence_ui_detailed.png)
 

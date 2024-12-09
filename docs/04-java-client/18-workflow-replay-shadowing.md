@@ -10,7 +10,7 @@ In the Versioning section, we mentioned that incompatible changes to workflow de
 
 ## Workflow Replayer
 
-Workflow Replayer is a testing component for replaying existing workflow histories against a workflow definition. The replaying logic is the same as the one used for processing workflow tasks, so if there's any incompatible changes in the workflow definition, the replay test will fail. 
+Workflow Replayer is a testing component for replaying existing workflow histories against a workflow definition. The replaying logic is the same as the one used for processing workflow tasks, so if there's any incompatible changes in the workflow definition, the replay test will fail.
 
 ### Write a Replay Test
 
@@ -22,7 +22,7 @@ Replayer can read workflow history from a local json file or fetch it directly f
 cadence --do <domain> workflow show --wid <workflowID> --rid <runID> --of <output file name>
 ```
 
-The dumped workflow history will be stored in the file at the path you specified in json format. 
+The dumped workflow history will be stored in the file at the path you specified in json format.
 
 #### Step 2: Call the replay method
 
@@ -45,7 +45,7 @@ If an exception is returned from the replay method, it means there's a incompati
 
 ### Sample Replay Test
 
-This sample is also available in our samples repo at [here](https://github.com/uber/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloActivityReplayTest.java).
+This sample is also available in our samples repo at [here](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloActivityReplayTest.java).
 
 ```java
 public class HelloActivityReplayTest {
@@ -61,17 +61,17 @@ public class HelloActivityReplayTest {
 
 Workflow Replayer works well when verifying the compatibility against a small number of workflows histories. If there are lots of workflows in production that need to be verified, dumping all histories manually clearly won't work. Directly fetching histories from cadence server might be a solution, but the time to replay all workflow histories might be too long for a test.
 
-Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows. 
+Workflow Shadower is built on top of Workflow Replayer to address this problem. The basic idea of shadowing is: scan workflows based on the filters you defined, fetch history for each workflow in the scan result from Cadence server and run the replay test. It can be run either as a test to serve local development purpose or as a workflow in your worker to continuously replay production workflows.
 
 ### Shadow Options
 
-Complete documentation on shadow options which includes default values, accepted values, etc. can be found [here](https://github.com/uber/cadence-java-client/blob/master/src/main/java/com/uber/cadence/worker/ShadowingOptions.java). The following sections are just a brief description of each option.
+Complete documentation on shadow options which includes default values, accepted values, etc. can be found [here](https://github.com/cadence-workflow/cadence-java-client/blob/master/src/main/java/com/uber/cadence/worker/ShadowingOptions.java). The following sections are just a brief description of each option.
 
 #### Scan Filters
 
 - WorkflowQuery: If you are familiar with our advanced visibility query syntax, you can specify a query directly. If specified, all other scan filters must be left empty.
 - WorkflowTypes: A list of workflow Type names.
-- WorkflowStatuses: A list of workflow status. 
+- WorkflowStatuses: A list of workflow status.
 - WorkflowStartTimeFilter: Min and max timestamp for workflow start time.
 - WorkflowSamplingRate: Sampling workflows from the scan result before executing the replay test.
 
@@ -91,9 +91,9 @@ Complete documentation on shadow options which includes default values, accepted
 
 ### Local Shadowing Test
 
-Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that needs to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found. 
+Local shadowing test is similar to the replay test. First create a workflow shadower with optional shadow and replay options, then register the workflow that needs to be shadowed. Finally, call the `Run` method to start the shadowing. The method will return if shadowing has finished or any non-deterministic error is found.
 
-Here's a simple example. The example is also available [here](https://github.com/uber/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloWorkflowShadowingTest.java).
+Here's a simple example. The example is also available [here](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/test/java/com/uber/cadence/samples/hello/HelloWorkflowShadowingTest.java).
 
 ```java
 public void testShadowing() throws Throwable {
@@ -116,19 +116,19 @@ public void testShadowing() throws Throwable {
 
 ### Shadowing Worker
 
-NOTE: 
+NOTE:
 - **All shadow workflows are running in one Cadence system domain, and right now, every user domain can only have one shadow workflow at a time.**
 - **The Cadence server used for scanning and getting workflow history will also be the Cadence server for running your shadow workflow.** Currently, there's no way to specify different Cadence servers for hosting the shadowing workflow and scanning/fetching workflow.
 
 Your worker can also be configured to run in shadow mode to run shadow tests as a workflow. This is useful if there's a number of workflows that need to be replayed. Using a workflow can make sure the shadowing won't accidentally fail in the middle and the replay load can be distributed by deploying more shadow mode workers. It can also be incorporated into your deployment process to make sure there's no failed replay checks before deploying your change to production workers.
 
-When running in shadow mode, the normal decision worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows. 
+When running in shadow mode, the normal decision worker will be disabled so that it won't update any production workflows. A special shadow activity worker will be started to execute activities for scanning and replaying workflows. The actual shadow workflow logic is controlled by Cadence server and your worker is only responsible for scanning and replaying workflows.
 
-[Replay succeed, skipped and failed metrics](https://github.com/uber/cadence-java-client/blob/master/src/main/java/com/uber/cadence/internal/metrics/MetricsType.java#L169-L172) will be emitted by your worker when executing the shadow workflow and you can monitor those metrics to see if there's any incompatible changes. 
+[Replay succeed, skipped and failed metrics](https://github.com/cadence-workflow/cadence-java-client/blob/master/src/main/java/com/uber/cadence/internal/metrics/MetricsType.java#L169-L172) will be emitted by your worker when executing the shadow workflow and you can monitor those metrics to see if there's any incompatible changes.
 
 To enable the shadow mode, you can initialize a shadowing worker and pass in the shadowing options.
 
-To enable the shadowing worker, here is a example. The example is also available [here](https://github.com/uber/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/shadowing/ShadowTraffic.java):
+To enable the shadowing worker, here is a example. The example is also available [here](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/shadowing/ShadowTraffic.java):
 
 ```java
 WorkflowClient workflowClient =

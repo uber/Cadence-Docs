@@ -56,13 +56,13 @@ Explicitly draining a zone can be done at two levels:
 1. **Domain-level drain:** This applies to a specific domain, allowing the zone to be drained only for workflows within that domain.
 2. **Cluster-level drain:** This applies to the entire Cadence cluster, draining the zone for all domains and workflows within the cluster.
 
-For domain-level drain, the draining status is stored in [`domains`](https://github.com/uber/cadence/blob/v1.2.13/schema/cassandra/cadence/schema.cql#L412) table. For cluster-level drain, the status is stored in [`cluster_config`](https://github.com/uber/cadence/blob/v1.2.13/schema/cassandra/cadence/schema.cql#L498) table.
+For domain-level drain, the draining status is stored in [`domains`](https://github.com/cadence-workflow/cadence/blob/v1.2.13/schema/cassandra/cadence/schema.cql#L412) table. For cluster-level drain, the status is stored in [`cluster_config`](https://github.com/cadence-workflow/cadence/blob/v1.2.13/schema/cassandra/cadence/schema.cql#L498) table.
 
 ## How to enable Zonal Isolation?
 ### Server Update
-In order to enable this feature, please upgrade Cadence server to [v1.2.1](https://github.com/uber/cadence/releases/tag/v1.2.1) or later.
+In order to enable this feature, please upgrade Cadence server to [v1.2.1](https://github.com/cadence-workflow/cadence/releases/tag/v1.2.1) or later.
 
-**NOTE:** If you're not using the provided main binary located in `cmd/server`, you must adopt this [middleware](https://github.com/uber/cadence/blob/v1.2.1/common/rpc/middleware.go#L188). Depends on the appoach to [determine the origin zone of requests](#determine-the-zone-of-a-workflow-and-workers), you can adopt this [middleware](https://github.com/uber/cadence/blob/v1.2.1/common/rpc/middleware.go#L229) or build your own middleware using [`partition.ContextWithConfig`](https://github.com/uber/cadence/blob/v1.2.1/common/partition/context.go#L42) function to inject origin zone into the context.
+**NOTE:** If you're not using the provided main binary located in `cmd/server`, you must adopt this [middleware](https://github.com/cadence-workflow/cadence/blob/v1.2.1/common/rpc/middleware.go#L188). Depends on the appoach to [determine the origin zone of requests](#determine-the-zone-of-a-workflow-and-workers), you can adopt this [middleware](https://github.com/cadence-workflow/cadence/blob/v1.2.1/common/rpc/middleware.go#L229) or build your own middleware using [`partition.ContextWithConfig`](https://github.com/cadence-workflow/cadence/blob/v1.2.1/common/partition/context.go#L42) function to inject origin zone into the context.
 
 This feature is controlled by 2 dynamic config properties.
 - `system.allIsolationGroups`: This property provides the list of available zones within a region.
@@ -93,14 +93,14 @@ In this example, the Cadence cluster spans two regions, each containing three zo
 NOTE: This update is only necessary if you're using the 1st approach to [determine the origin zone of requests](#determine-the-zone-of-a-workflow-and-workers).
 
 To support Zonal Isolation, please upgrade your SDK versions:
-- **Go SDK:** Upgrade to [v1.0.2](https://github.com/uber-go/cadence-client/releases/tag/v1.0.2) or later.
-- **Java SDK:** Upgrade to [v3.9.0](https://github.com/uber/cadence-java-client/releases/tag/v3.9.0) or later.
+- **Go SDK:** Upgrade to [v1.0.2](https://github.com/cadence-workflow/cadence-go-client/releases/tag/v1.0.2) or later.
+- **Java SDK:** Upgrade to [v3.9.0](https://github.com/cadence-workflow/cadence-java-client/releases/tag/v3.9.0) or later.
 
-**For Java SDK users**, set the [`isolationGroup`](https://github.com/uber/cadence-java-client/blob/v3.9.0/src/main/java/com/uber/cadence/serviceclient/ClientOptions.java#L83) field to the zone of the instance when creating `serviceClient`.
+**For Java SDK users**, set the [`isolationGroup`](https://github.com/cadence-workflow/cadence-java-client/blob/v3.9.0/src/main/java/com/uber/cadence/serviceclient/ClientOptions.java#L83) field to the zone of the instance when creating `serviceClient`.
 
-**For Go SDK users**, set the [`isolationGroup`](https://github.com/uber-go/cadence-client/blob/v1.0.2/internal/worker.go#L132) field to the zone of the instance when creating `Worker`. Additionally, you need to use [this method](https://github.com/uber-go/cadence-client/blob/v1.0.2/isolationgroup/wrapper.go#L29C39-L29C70) to wrap `workflowserviceclient.Interface`.
+**For Go SDK users**, set the [`isolationGroup`](https://github.com/cadence-workflow/cadence-go-client/blob/v1.0.2/internal/worker.go#L132) field to the zone of the instance when creating `Worker`. Additionally, you need to use [this method](https://github.com/cadence-workflow/cadence-go-client/blob/v1.0.2/isolationgroup/wrapper.go#L29C39-L29C70) to wrap `workflowserviceclient.Interface`.
 ## How to drain a zone explicitly?
-Drains can be done via the [Admin APIs](https://github.com/uber/cadence-idl/blob/50a4ee241e50c6baab8e5d47540b176c5ee022a4/proto/uber/cadence/admin/v1/service.proto#L125) of cadence-frontend or CLI.
+Drains can be done via the [Admin APIs](https://github.com/cadence-workflow/cadence-idl/blob/50a4ee241e50c6baab8e5d47540b176c5ee022a4/proto/cadence-workflow/cadence/admin/v1/service.proto#L125) of cadence-frontend or CLI.
 
 You can check the help message for the CLI by running:
 ```

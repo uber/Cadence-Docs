@@ -28,7 +28,7 @@ import (
     "go.uber.org/cadence/compatibility"
     "go.uber.org/cadence/worker"
 
-    apiv1 "github.com/uber/cadence-idl/go/proto/api/v1"
+    apiv1 "github.com/cadence-workflow/cadence-idl/go/proto/api/v1"
     "github.com/uber-go/tally"
     "go.uber.org/zap"
     "go.uber.org/zap/zapcore"
@@ -196,6 +196,6 @@ Type the domain you used for the tutorial, in this case, we type `test-domain` a
 ## What is Next
 Now you have completed the tutorials. You can continue to explore the key [concepts](/docs/concepts) in Cadence, and also how to use them with [Go Client](/docs/go-client)
 
-For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/uber-common/cadence-samples) for more examples.
+For complete, ready to build samples covering all the key Cadence concepts go to [Cadence-Samples](https://github.com/cadence-workflow/cadence-samples) for more examples.
 
-You can also review [Cadence-Client](https://github.com/uber-go/cadence-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
+You can also review [Cadence-Client](https://github.com/cadence-workflow/cadence-go-client/) and [go-docs](https://pkg.go.dev/go.uber.org/cadence) for more documentation.
