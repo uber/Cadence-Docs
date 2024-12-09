@@ -48,7 +48,7 @@ Retry policies are configured so activities can be retried after timeouts or fai
 
 Mitigation: Consider configuring heartbeat timeout
 
-[Example](https://github.com/uber-common/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/expense/workflow.go#L23)
+[Example](https://github.com/cadence-workflow/cadence-samples/blob/df6f7bdba978d6565ad78e9f86d9cd31dfac9f78/cmd/samples/expense/workflow.go#L23)
 
 ## Heartbeat timeout configured without a retry policy
 
