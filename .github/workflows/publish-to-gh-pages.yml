@@ -11,13 +11,13 @@ jobs:
     steps:
       # same as build.yml
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Use Node.js v18
-        uses: actions/setup-node@v3
+      - name: Use Node.js lts/hydrogen (v18)
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: lts/hydrogen
           # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
           cache: 'npm'
       - name: Install and Build 🔧
@@ -36,5 +36,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+          FOLDER: build # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
