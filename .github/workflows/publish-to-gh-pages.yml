@@ -24,6 +24,10 @@ jobs:
         run: |
           npm install
           npm run build
+        env:
+          CADENCE_DOCS_URL: ${{ vars.CADENCE_DOCS_URL }}
+          CADENCE_DOCS_BASE_URL: ${{ vars.CADENCE_DOCS_BASE_URL }}
+          CADENCE_DOCS_ORGANIZATION: ${{ vars.CADENCE_DOCS_ORGANIZATION }}
 
       # additional steps to deploy
       - name: Configure domain
