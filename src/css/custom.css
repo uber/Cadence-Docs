@@ -1,0 +1,36 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* @import url('https://fonts.cdnfonts.com/css/uber-move-text'); */
+/* @import url('https://fonts.cdnfonts.com/css/uber-move-2'); */
+
+/* https://baseweb.design/guides/theming/#colors */
+:root {
+  --ifm-color-primary: #000000;
+  --ifm-color-primary-dark: #363636;
+  --ifm-color-primary-darker: #343434;
+  --ifm-color-primary-darkest: #161616;
+  --ifm-color-primary-light: #DEDEDE;
+  --ifm-color-primary-lighter: #DEDEDE;
+  --ifm-color-primary-lightest: #FFFFFF;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  /* --ifm-font-family-base: '"UberMoveText", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
+  --ifm-font-family-monospace: '"UberMove", UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
+  --ifm-heading-font-family: '"UberMoveMono", "Lucida Console", Monaco, monospace'; */
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #DEDEDE;
+  --ifm-color-primary-darker: #868686;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #868686;
+  --ifm-color-primary-lighter: #DEDEDE;
+  --ifm-color-primary-lightest: #FFFFFF;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
