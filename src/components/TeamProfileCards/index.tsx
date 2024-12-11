@@ -81,7 +81,7 @@ function TeamProfileCard({
 
 function TeamProfileCardCol(props: ProfileProps) {
   return (
-    <TeamProfileCard {...props} className="col col--12 margin-bottom--lg" />
+    <TeamProfileCard {...props} className="col col--6 margin-bottom--lg" />
   );
 }
 
@@ -106,7 +106,9 @@ export function CoreTeamRow(): JSX.Element {
       His prior work involves building Bing's/Azure's key value store (ObjectStore), distributed NAS, and search engines. <br />
       He's into outdoors and endurance sports while not working.
       </TeamProfileCardCol>
-      <TeamProfileCardCol name="Felipe Imanishi" githubUrl="https://github.com/fimanishi"> </TeamProfileCardCol>
+      <TeamProfileCardCol name="Felipe Imanishi" githubUrl="https://github.com/fimanishi" linkedinUrl="https://www.linkedin.com/in/fimanishi">
+      Felipe is a Software Engineer contributing to Cadence from San Francisco. He found CS later in his career, and he is glad he did. Felipe is always looking to learn more and Cadence is provides an endless source of topics. Outside of work, Felipe is probably doing something with his two sons.
+      </TeamProfileCardCol>
       <TeamProfileCardCol name="Gaziza Yestemirova" githubUrl="https://github.com/gazi-yestemirova"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Ilya Ozherelyev" githubUrl="https://github.com/3vilhamster"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Jakob Haahr Taankvist" githubUrl="https://github.com/jakobht" linkedinUrl="https://www.linkedin.com/in/jakob-taankvist/">
@@ -124,8 +126,12 @@ export function CoreTeamRow(): JSX.Element {
         Nate originally got into programming by modding Minecraft and has been contributing to open source software ever since.
         When he's not working on Cadence he's on a mission to try every pizza in Seattle.
       </TeamProfileCardCol>
-      <TeamProfileCardCol name="Neil Xie" githubUrl="https://github.com/neil-xie"> </TeamProfileCardCol>
-      <TeamProfileCardCol name="Sankari Gopalakrishnan" githubUrl="https://github.com/sankari165"> </TeamProfileCardCol>
+      <TeamProfileCardCol name="Neil Xie" githubUrl="https://github.com/neil-xie" linkedinUrl="https://www.linkedin.com/in/neil-huakun-xie-b9373a162/">
+      Neil is a Software Engineer contrinuting to Cadence based in Seattle. He is a camping enthusiast who enjoys exploring the outdoors with his two dogs.
+      </TeamProfileCardCol>
+      <TeamProfileCardCol name="Sankari Gopalakrishnan" githubUrl="https://github.com/sankari165" linkedinUrl="https://www.linkedin.com/in/sankari-gopalakrishnan165">
+      Sankari is a Software Engineer at Uber, working on Cadence from Denmark. With a career spanning multiple domains, she has mastered the art of connecting the dots. Outside her technical pursuits, she finds joy in therapeutic art, channeling her love for sugar, spices, and colors into creative expression.
+      </TeamProfileCardCol>
       <TeamProfileCardCol name="Shaddoll" githubUrl="https://github.com/Shaddoll"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Shijie Sheng" githubUrl="https://github.com/shijiesheng"> </TeamProfileCardCol>
       <TeamProfileCardCol name="Steven L" githubUrl="https://github.com/Groxx"> </TeamProfileCardCol>
