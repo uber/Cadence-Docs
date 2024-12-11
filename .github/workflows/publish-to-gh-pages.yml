@@ -1,23 +1,36 @@
 name: Build and Deploy
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # Load environment variables from repository settings,
+    # environment should be named "production"
+    # https://github.com/cadence-workflow/Cadence-Docs/settings/environments
+    environment: production
+    env:
+      CADENCE_DOCS_URL: ${{ vars.CADENCE_DOCS_URL || 'https://cadenceworkflow.io' }}
+      CADENCE_DOCS_BASE_URL: ${{ vars.CADENCE_DOCS_BASE_URL || '/Cadence-Docs/' }}
+      CADENCE_DOCS_ORGANIZATION: ${{ vars.CADENCE_DOCS_ORGANIZATION || 'cadence-workflow' }}
+
     steps:
       # same as build.yml
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Use Node.js v18
-        uses: actions/setup-node@v3
+      - name: Use Node.js lts/hydrogen (v18)
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: lts/hydrogen
           # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
           cache: 'npm'
       - name: Install and Build 🔧
@@ -29,12 +42,11 @@ jobs:
       - name: Configure domain
         uses: finnp/create-file-action@1.0.0
         env:
-          FILE_NAME: "dist/CNAME"
+          FILE_NAME: "build/CNAME"
           FILE_DATA: ${{ secrets.CUSTOM_DOMAIN }}
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
+          clean: true # Automatically remove deleted files from the deploy branch
