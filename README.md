@@ -10,13 +10,13 @@
 
 ### Installation
 
-```
+```console
 $ npm install
 ```
 
 ### Local Development
 
-```
+```console
 $ npm run start
 ```
 
@@ -24,7 +24,7 @@ This command starts a local development server and opens up a browser window at 
 
 ### Build
 
-```
+```console
 $ npm run build
 ```
 
@@ -49,13 +49,13 @@ CADENCE_DOCS_ORGANIZATION=cadence-workflow
 
 Using SSH:
 
-```
+```console
 $ USE_SSH=true npm run deploy
 ```
 
 Not using SSH:
 
-```
+```console
 $ GIT_USER=<Your GitHub username> npm run deploy
 ```
 
