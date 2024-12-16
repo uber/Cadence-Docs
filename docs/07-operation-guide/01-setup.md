@@ -28,7 +28,7 @@ The default directory for configuration files is named **config/**. This directo
 * Availability Zone File: If an availability zone is specified (either through the `$CADENCE_AVAILABILITY_ZONE` environment variable or as a command-line argument), a file named after the zone will be merged. For example, if you specify "az1" as the zone, `production_az1.yaml` will be used as well.
 
 To merge `base.yaml`, `production.yaml`, and `production_az1.yaml` files, you need to specify "production" as the runtime environment and "az1" as the zone.
-```
+```log
 // base.yaml -> production.yaml -> production_az1.yaml = final configuration
 ```
 
@@ -115,7 +115,7 @@ For example, search for "EnableGlobalDomain" in Dynamic Configuration [Comments 
   * `N/A` means no filters can be set. The config will be global.
 
 For example, if you want to change the ratelimiting for List API, below is the config:
-```
+```clike
 // FrontendVisibilityListMaxQPS is max qps frontend can list open/close workflows
 // KeyName: frontend.visibilityListMaxQPS
 // Value type: Int
@@ -152,9 +152,9 @@ By default, Cadence uses file-based client to manage dynamic configurations. Fol
 cadence:
   image: ubercadence/server:master-auto-setup
   ports:
-    ...(don't change anything here)
+    # ...(don't change anything here)
   environment:
-    ...(don't change anything here)
+    # ...(don't change anything here)
     - "DYNAMIC_CONFIG_FILE_PATH=/etc/custom-dynamicconfig/development.yaml"
   volumes:
     - "/Users/<?>/cadence/config/dynamicconfig:/etc/custom-dynamicconfig"
@@ -175,7 +175,7 @@ After restarting Cadence instances, execute a command like this to let Cadence l
 `cadence --domain <> workflow list`
 
 Then you should see the logs like below
-```
+```log
 cadence_1        | {"level":"info","ts":"2021-05-07T18:43:07.869Z","msg":"First loading dynamic config","service":"cadence-frontend","key":"frontend.visibilityListMaxQPS,domainName:sample,clusterName:primary","value":"10000","default-value":"10","logging-call-at":"config.go:93"}
 ```
 

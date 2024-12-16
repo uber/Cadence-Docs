@@ -129,44 +129,44 @@ cadence --address <currentClusterAddress> --do <domain_name> domain update --clu
 
 Run the command below to refresh the domain after adding a new cluster to the cluster list; we need to update the active_cluster to the same value that it appears to be.
 
-```
+```bash
 cadence --address <currentClusterAddress> --do <domain_name> domain update --active_cluster <currentClusterName>
 ```
 
 
 * 2.2 failover the domain to be active in new cluster
-```
+```bash
 cadence --address <currentClusterAddress> --do workflow-prototype domain update --active_cluster <newClusterName>
 ```
 
 Use the domain describe command to verify the entire domain is replicated to the new cluster.
 
-```
+```bash
 cadence --address <newClusterAddress> --do <domain_name> domain describe
 ```
 Find an open workflowID that we want to replicate (you can get it from the UI). Use this command to describe it to make sure it’s open and running:
 
-```
+```bash
 cadence --address <initialClusterAddress> --do <domain_name> workflow describe --workflow_id <wfID>
 ```
 Run a signal command against any workflow and check that it was replicated to the new cluster. Example:
 
-```
+```bash
 cadence --address <initialClusterAddress> --do <domain_name> workflow signal --workflow_id <wfID> --name <anything not functional, e.g. replicationTriggeringSignal>
 ```
 This command will send a noop signal to workflows to trigger a decision, which will trigger history replication if needed.
 
 
 Verify the workflow is replicated in the new cluster
-```
+```bash
 cadence --address <newClusterAddress> --st <adminOperationToken> --do <domain_name> workflow describe --workflow_id <wfID>
 ```
 Also compare the history between the two clusters:
-```
+```bash
 cadence --address <newClusterAddress> --do <domain_name> workflow show --workflow_id <wfID>
 ```
 
-```
+```bash
 cadence --address <initialClusterAddress> --do <domain_name> workflow show --workflow_id <wfID>
 ```
 
@@ -178,7 +178,7 @@ You can repeat Step 2 for all the domains. Or you can use the managed failover f
 Because replication cannot be triggered without a decision. Again best way is to send a garbage signal to all the workflows.
 
 If advanced visibility is enabled, then use batch signal command to start a batch job to trigger replication for all open workflows:
-```
+```bash
 cadence --address <initialClusterAddress> --do <domain_name> workflow batch start --batch_type signal --query “CloseTime = missing” --signal_name <anything, e.g. xdcTest> --reason <anything> --input <anything> --yes
 ```
 
@@ -193,7 +193,7 @@ A few things need to do in order to shutdown the old cluster.
 * Migrate all applications to connect to the frontend of new cluster instead of relying on the forwarding
 * Watch metric dashboard to make sure no any traffic is happening on the old cluster
 * Delete the old cluster from domain cluster list. This needs to be done for every domain.
-```
+```bash
 cadence --address <newHostAddress> --do <domain_name> domain update --clusters <newClusterName>
 ```
 * Delete the old cluster from the configuration of the new cluster.

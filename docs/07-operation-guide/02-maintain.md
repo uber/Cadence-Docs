@@ -38,7 +38,7 @@ There are a few things to know when using this feature:
 * Because of above, when scaling down the number of partitions, you must decrease the WritePartitions first, to wait for a certain time to ensure that tasks are drained, and then decrease ReadPartitions.
 * Both domain names and taskListName should be specified in the dynamic config. An example of using this feature. See more details about dynamic config format using file based [dynamic config](/docs/operation-guide/setup/#static-configuration).
 
-```
+```yaml
 matching.numTasklistWritePartitions:
   - value: 10
     constraints:

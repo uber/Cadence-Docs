@@ -303,6 +303,8 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['go', 'java', 'bash', 'markup', 'json', 'shell-session', 'yaml', 'gradle', 'log',],
+
     },
   } satisfies Preset.ThemeConfig,
 };

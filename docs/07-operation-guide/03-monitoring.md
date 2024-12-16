@@ -110,7 +110,7 @@ This section describes recommended dashboards for monitoring Cadence services in
 * Suggested monitor: below 95% > 5 min then alert, below 99% for > 5 min triggers a warning
 * Monitor action: When fired, check if there is any persistence errors.  If so then check the healthness of the database(may need to restart or scale up). If not then check the error logs.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_errors{*}
 sum:cadence_frontend.cadence_requests{*}
 (1 - a / b) * 100
@@ -120,7 +120,7 @@ sum:cadence_frontend.cadence_requests{*}
 * Meaning: how many workflows are started per second. This helps determine if your server is overloaded.
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{(operation IN (startworkflowexecution,signalwithstartworkflowexecution))} by {operation}.as_rate()
 ```
 
@@ -128,7 +128,7 @@ sum:cadence_frontend.cadence_requests{(operation IN (startworkflowexecution,sign
 * Meaning: How many activities are started per second. Helps determine if the server is overloaded.
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{operation:pollforactivitytask} by {operation}.as_rate()
 ```
 
@@ -136,7 +136,7 @@ sum:cadence_frontend.cadence_requests{operation:pollforactivitytask} by {operati
 * Meaning: How many workflow decisions are started per second. Helps determine if the server is overloaded.
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{operation:pollfordecisiontask} by {operation}.as_rate()
 ```
 
@@ -144,7 +144,7 @@ sum:cadence_frontend.cadence_requests{operation:pollfordecisiontask} by {operati
 * Meaning: The success counter of canary test suite
 * Suggested monitor: Monitor needed. If fired, look at the failed canary test case and investigate the reason of failure.
 * Datadog query example
-```
+```dql
 sum:cadence_history.workflow_success{workflowtype:workflow_sanity} by {workflowtype}.as_count()
 ```
 
@@ -152,7 +152,7 @@ sum:cadence_history.workflow_success{workflowtype:workflow_sanity} by {workflowt
 * Meaning: all API on frontend per second. Information only.
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{*}.as_rate()
 ```
 
@@ -160,7 +160,7 @@ sum:cadence_frontend.cadence_requests{*}.as_rate()
 * Meaning: API on frontend per second. Information only.
 * Suggested monitor: This is a business metrics. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{*} by {operation}.as_rate()
 ```
 
@@ -168,7 +168,7 @@ sum:cadence_frontend.cadence_requests{*} by {operation}.as_rate()
 * Meaning: API error on frontend per second. Information only.
 * Suggested monitor: This is to facilitate investigation. No monitoring required.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_errors{*} by {operation}.as_rate()
 sum:cadence_frontend.cadence_errors_bad_request{*} by {operation}.as_rate()
 sum:cadence_frontend.cadence_errors_domain_not_active{*} by {operation}.as_rate()
@@ -210,7 +210,7 @@ sum:cadence_frontend.cadence_errors_timer_id_exceeded_warn_limit{*} by {operatio
 * Suggested monitor: 95% of all apis and of all operations that take over 1.5 seconds triggers a warning,  over 2 seconds triggers an alert
 * Monitor action: If fired, investigate the database read/write latency. May need to throttle some spiky traffic from certain domains, or scale up the database
 * Datadog query example
-```
+```dql
 avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecisiontask,pollforactivitytask,getworkflowexecutionhistory,queryworkflow,listworkflowexecutions,listclosedworkflowexecutions,listopenworkflowexecutions)) AND $pXXLatency} by {operation}
 ```
 
@@ -219,7 +219,7 @@ avg:cadence_frontend.cadence_latency.quantile{(operation NOT IN (pollfordecision
 * Monitor: 95% of all apis and of all operations that take over 2 seconds triggers a warning,  over 3 seconds triggers an alert
 * Monitor action: If fired, investigate the ElasticSearch read latency. May need to throttle some spiky traffic from certain domains, or scale up ElasticSearch cluster.
 * Datadog query example
-```
+```dql
 avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowexecutions,listopenworkflowexecutions,listworkflowexecutions,countworkflowexecutions)) AND $pXXLatency} by {operation}
 ```
 
@@ -227,7 +227,7 @@ avg:cadence_frontend.cadence_latency.quantile{(operation IN (listclosedworkflowe
 * Meaning: Long poll means that the worker is waiting for a task. The latency is an Indicator for how busy the worker is. Poll for activity task and poll for decision task are the types of long poll requests.The api call times out at 50 seconds if no task can be picked up.A very low latency could mean that more workers need to be added.
 * Suggested monitor: No monitor needed as long latency is expected.
 * Datadog query example
-```
+```dql
 avg:cadence_frontend.cadence_latency.quantile{$pXXLatency,operation:pollforactivitytask} by {operation}
 avg:cadence_frontend.cadence_latency.quantile{$pXXLatency,operation:pollfordecisiontask} by {operation}
 ```
@@ -237,7 +237,7 @@ avg:cadence_frontend.cadence_latency.quantile{$pXXLatency,operation:pollfordecis
 This latency depends on the time it takes for the workflow to complete. QueryWorkflow API latency is also unpredictable as it depends on the availability and performance of workflow workers, which are owned by the application and workflow implementation(may require replaying history).
 * Suggested monitor: No monitor needed
 * Datadog query example
-```
+```dql
 avg:cadence_frontend.cadence_latency.quantile{(operation IN (getworkflowexecutionhistory,queryworkflow)) AND $pXXLatency} by {operation}
 ```
 
@@ -246,7 +246,7 @@ avg:cadence_frontend.cadence_latency.quantile{(operation IN (getworkflowexecutio
 In the future it can be used to set some rate limiting per domain.
 * Suggested monitor: No monitor needed.
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.cadence_requests{(operation IN (signalwithstartworkflowexecution,signalworkflowexecution,startworkflowexecution,terminateworkflowexecution,resetworkflowexecution,requestcancelworkflowexecution,listworkflowexecutions))} by {domain,operation}.as_rate()
 ```
 
@@ -257,7 +257,7 @@ This section describes the recommended dashboards for monitoring Cadence applica
 * Workflow successfully started/signalWithStart and completed/canceled/continuedAsNew
 * Monitor: not recommended
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_workflow_start{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
 sum:cadence_client.cadence_workflow_completed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,env,domain,tasklist}.as_rate()
 sum:cadence_client.cadence_workflow_canceled{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env,tasklist}.as_rate()
@@ -271,7 +271,7 @@ sum:cadence_client.cadence_workflow_signal_with_start{$Domain,$Tasklist,$Workflo
 * Monitor: application should set monitor on timeout and failure to make sure workflow are not failing. Cancel/terminate are usually triggered by human intentionally.
 * When the metrics fire, go to Cadence UI to find the failed workflows and investigate the workflow history to understand the type of failure
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_workflow_failed{$Domain,$Tasklist,$WorkflowType} by {workflowtype,domain,env}.as_count()
 sum:cadence_history.workflow_failed{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
 sum:cadence_history.workflow_terminate{$Domain,$WorkflowType} by {domain,env,workflowtype}.as_count()
@@ -286,7 +286,7 @@ The timeout for this long poll api is 50 seconds. If no task is received within 
 * Monitor: application can should monitor on it to make sure workers are available
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_decision_poll_total{$Domain,$Tasklist}.as_count()
 sum:cadence_client.cadence_decision_poll_failed{$Domain,$Tasklist}.as_count()
 sum:cadence_client.cadence_decision_poll_no_task{$Domain,$Tasklist}.as_count()
@@ -297,7 +297,7 @@ sum:cadence_client.cadence_decision_poll_succeed{$Domain,$Tasklist}.as_count()
 * Indicate how many decision tasks are scheduled
 * Monitor: not recommended -- Information only to know whether or not a tasklist is overloaded
 * Datadog query example
-```
+```dql
 sum:cadence_matching.cadence_requests_per_tl{*,operation:adddecisiontask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
 ```
 
@@ -308,7 +308,7 @@ The task list is overloaded(confirmed by DecisionTaskScheduled per second widget
 * Monitor: application can set monitor on it to make sure latency is tolerable
 * When fired, check if worker capacity is enough, then check if tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
-```
+```dql
 avg:cadence_client.cadence_decision_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist}
 max:cadence_client.cadence_decision_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist}
 max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist}
@@ -319,7 +319,7 @@ max:cadence_client.cadence_decision_scheduled_to_start_latency.95percentile{$Dom
 * Monitor: application should set monitor on it to make sure no consistent failure
 * When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_decision_execution_failed{$Domain,$Tasklist} by {tasklist,workflowtype}.as_count()
 ```
 
@@ -328,7 +328,7 @@ sum:cadence_client.cadence_decision_execution_failed{$Domain,$Tasklist} by {task
 * Monitor: application should set monitor on it to make sure no consistent timeout
 * When fired, you may need to terminate the problematic workflows to mitigate the issue. After you identify the bugs, you can fix the code and then reset the workflow to recover
 * Datadog query example
-```
+```dql
 sum:cadence_history.start_to_close_timeout{operation:timeractivetaskdecision*,$Domain}.as_count()
 ```
 
@@ -338,7 +338,7 @@ For example, if you expect a workflow to take duration d to complete, you can us
 * Monitor: application can monitor this metrics if expecting workflow to complete within a certain duration.
 * When fired, investigate the workflow history to see the workflow takes longer than expected to complete
 * Datadog query example
-```
+```dql
 avg:cadence_client.cadence_workflow_endtoend_latency.median{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
 avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Tasklist,$WorkflowType} by {env,domain,tasklist,workflowtype}
 ```
@@ -348,7 +348,7 @@ avg:cadence_client.cadence_workflow_endtoend_latency.95percentile{$Domain,$Taskl
 * A monitor should be set on this metric
 * When fired, you may rollback the deployment to mitigate your issue. Usually this caused by bad (non-backward compatible) code change. After rollback, look at your worker error logs to see where the bug is.
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_worker_panic{$Domain} by {env,domain}.as_rate()
 sum:cadence_client.cadence_non_deterministic_error{$Domain} by {env,domain}.as_rate()
 ```
@@ -367,7 +367,7 @@ CacheHitRate too low means workers will have to replay history to rebuild the wo
 * A monitor can be set on this metric, if performance is important.
 * When fired, adjust the stickyCacheSize in the WorkerFactoryOption, or add more workers
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_sticky_cache_miss{$Domain} by {env,domain}.as_count()
 sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 (b / (a+b)) * 100
@@ -377,7 +377,7 @@ sum:cadence_client.cadence_sticky_cache_hit{$Domain} by {env,domain}.as_count()
 * Activity started/completed counters
 * Monitor: not recommended
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_activity_task_failed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_completed{$Domain,$Tasklist} by {activitytype}.as_rate()
 sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activitytype}.as_rate()
@@ -387,7 +387,7 @@ sum:cadence_client.cadence_activity_task_timeouted{$Domain,$Tasklist} by {activi
 * Local Activity execution counters
 * Monitor: not recommended
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_local_activity_total{$Domain,$Tasklist} by {activitytype}.as_count()
 ```
 
@@ -396,7 +396,7 @@ sum:cadence_client.cadence_local_activity_total{$Domain,$Tasklist} by {activityt
 * Monitor: application can set monitor on it if expecting workflow start/complete activities with certain latency
 * When fired, investigate the activity code and its dependencies
 * Datadog query example
-```
+```dql
 avg:cadence_client.cadence_activity_execution_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 max:cadence_client.cadence_activity_execution_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 ```
@@ -409,7 +409,7 @@ The timeout for this long poll api is 50 seconds. If within that 50 seconds, no 
 * Monitor: application can set monitor on it to make sure activity workers are available
 * When fires, investigate the worker deployment to see why they are not available, also check if they are using the right domain/tasklist
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_activity_poll_total{$Domain,$Tasklist} by {activitytype}.as_count()
 sum:cadence_client.cadence_activity_poll_failed{$Domain,$Tasklist} by {activitytype}.as_count()
 sum:cadence_client.cadence_activity_poll_succeed{$Domain,$Tasklist} by {activitytype}.as_count()
@@ -420,7 +420,7 @@ sum:cadence_client.cadence_activity_poll_no_task{$Domain,$Tasklist} by {activity
 * Indicate how many activities tasks are scheduled
 * Monitor: not recommended -- Information only to know whether or not a tasklist is overloaded
 * Datadog query example
-```
+```dql
 sum:cadence_matching.cadence_requests_per_tl{*,operation:addactivitytask,$Tasklist,$Domain} by {tasklist,domain}.as_rate()
 ```
 
@@ -431,7 +431,7 @@ There are too many activities scheduled into the same tasklist and the tasklist 
 * Monitor: application Should set monitor on it
 * When fired, check if workers are enough, then check if the tasklist is overloaded. If needed, contact the Cadence cluster Admin to enable scalable tasklist to add more partitions to the tasklist
 * Datadog query example
-```
+```dql
 avg:cadence_client.cadence_activity_scheduled_to_start_latency.avg{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 max:cadence_client.cadence_activity_scheduled_to_start_latency.max{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
 max:cadence_client.cadence_activity_scheduled_to_start_latency.95percentile{$Domain,$Tasklist} by {env,domain,tasklist,activitytype}
@@ -448,7 +448,7 @@ cadence_activity_task_failed counter increase per activity attempt
 cadence_activity_execution_failed counter increase when activity fails after all attempts
 * should only monitor on cadence_activity_execution_failed
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_activity_execution_failed{$Domain} by {domain,env}.as_rate()
 sum:cadence_client.cadence_activity_task_panic{$Domain} by {domain,env}.as_count()
 sum:cadence_client.cadence_activity_task_failed{$Domain} by {domain,env}.as_rate()
@@ -468,7 +468,7 @@ sum:cadence_history.schedule_to_close_timeout{$Domain} by {domain,env}.as_count(
 * Monitor: application can set monitor on it
 * When fired, check application logs to see if the error is Cadence server error or client side error. Error like EntityNotExists/ExecutionAlreadyStarted/QueryWorkflowFailed/etc are client side error, meaning that the application is misusing the APIs. If most errors are server side errors(internalServiceError), you can contact Cadence admin.
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_error{*} by {domain}.as_count()
 sum:cadence_client.cadence_request{*} by {domain}.as_count()
 (1 - a / b) * 100
@@ -478,7 +478,7 @@ sum:cadence_client.cadence_request{*} by {domain}.as_count()
 * The latency of the API, excluding long poll APIs.
 * Application can set monitor on certain APIs, if necessary.
 * Datadog query example
-```
+```dql
 avg:cadence_client.cadence_latency.95percentile{$Domain,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}
 ```
 
@@ -486,7 +486,7 @@ avg:cadence_client.cadence_latency.95percentile{$Domain,!cadence_metric_scope:ca
 * A counter breakdown by API to help investigate availability
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_request{$Domain,!cadence_metric_scope:cadence-pollforactivitytask,!cadence_metric_scope:cadence-pollfordecisiontask} by {cadence_metric_scope}.as_count()
 ```
 
@@ -494,7 +494,7 @@ sum:cadence_client.cadence_request{$Domain,!cadence_metric_scope:cadence-pollfor
 * A counter breakdown by API error to help investigate availability
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_client.cadence_error{$Domain} by {cadence_metric_scope}.as_count()
 ```
 
@@ -505,7 +505,7 @@ It should never be greater than 2MB.
 * A monitor should be set on this metric.
 * When fired, please review the design/code ASAP to reduce the blob size. Reducing the input/output of workflow/activity/signal will help.
 * Datadog query example
-```
+```dql
 ​​max:cadence_history.event_blob_size.quantile{!domain:all,$Domain} by {domain}
 ```
 
@@ -516,7 +516,7 @@ As a suggestion for workflow design, workflow history should never grow greater 
 * A monitor should be set on this metric.
 * When fired, please review the design/code ASAP to reduce the history size. Reducing the input/output of workflow/activity/signal will help. Also you may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
-```
+```dql
 ​​max:cadence_history.history_size.quantile{!domain:all,$Domain} by {domain}
 ```
 
@@ -528,7 +528,7 @@ It should never be greater than 50K(workflow exceeding 200K events will be termi
 * A monitor should be set on this metric.
 * When fired, please review the design/code ASAP to reduce the history length. You may need to use ContinueAsNew to break a single execution into smaller pieces.
 * Datadog query example
-```
+```dql
 ​​max:cadence_history.history_count.quantile{!domain:all,$Domain} by {domain}
 ```
 
@@ -541,7 +541,7 @@ History is the most critical/core service for cadence which implements the workf
 If there’s shard movement without deployments then that’s unexpected and there’s probably a performance issue. The shard ownership is assigned by a particular history host, so if the shard is moving it’ll be hard for the frontend service to route a request to a particular history shard and to find it.
 * A monitor can be set to be alerted on shard movements without deployment.
 * Datadog query example
-```
+```dql
 sum:cadence_history.membership_changed_count{operation:shardcontroller}
 sum:cadence_history.shard_closed_count{operation:shardcontroller}
 sum:cadence_history.sharditem_created_count{operation:shardcontroller}
@@ -552,28 +552,28 @@ sum:cadence_history.sharditem_removed_count{operation:shardcontroller}
 * TransferTask is an internal background task that moves workflow state and transfers an action task from the history engine to another service(e.g. Matching service, ElasticSearch, etc)
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_history.task_requests{operation:transferactivetask*} by {operation}.as_rate()
 ```
 
 ### Timer Tasks Per Second
 * Timer tasks are tasks that are scheduled to be triggered at a given time in future. For example, workflow.sleep() will wait an x amount of time then the task will be pushed somewhere for a worker to pick up.
 * Datadog query example
-```
+```dql
 sum:cadence_history.task_requests{operation:timeractivetask*} by {operation}.as_rate()
 ```
 
 ### Transfer Tasks Per Domain
 * Count breakdown by domain
 * Datadog query example
-```
+```dql
 sum:cadence_history.task_requests_per_domain{operation:transferactive*} by {domain}.as_count()
 ```
 
 ### Timer Tasks Per Domain
 * Count breakdown by domain
 * Datadog query example
-```
+```dql
 sum:cadence_history.task_requests_per_domain{operation:timeractive*} by {domain}.as_count()
 ```
 
@@ -584,7 +584,7 @@ sum:cadence_history.task_requests_per_domain{operation:timeractive*} by {domain}
 If so then investigate the database(may need to scale up)
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
-```
+```dql
 avg:cadence_history.task_latency.quantile{$pXXLatency,operation:transfer*} by {operation}
 avg:cadence_history.task_latency_processing.quantile{$pXXLatency,operation:transfer*} by {operation}
 avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:transfer*} by {operation}
@@ -597,7 +597,7 @@ avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:transfer*}
 If so then investigate the database(may need to scale up) [Mostly]
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
-```
+```dql
 avg:cadence_history.task_latency.quantile{$pXXLatency,operation:timer*} by {operation}
 avg:cadence_history.task_latency_processing.quantile{$pXXLatency,operation:timer*} by {operation}
 avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:timer*} by {operation}
@@ -622,7 +622,7 @@ avg:cadence_history.task_latency_queue.quantile{$pXXLatency,operation:timer*} by
 ### History API per Second
 Information about history API
 Datadog query example
-```
+```dql
 sum:cadence_history.cadence_requests{*} by {operation}.as_rate()
 ```
 
@@ -631,7 +631,7 @@ sum:cadence_history.cadence_requests{*} by {operation}.as_rate()
 * Information about history API
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_history.cadence_errors{*} by {operation}.as_rate()
 sum:cadence_history.cadence_errors_bad_request{*} by {operation}.as_rate()
 sum:cadence_history.cadence_errors_domain_not_active{*} by {operation}.as_rate()
@@ -690,7 +690,7 @@ Matching service is to match/assign tasks from cadence service to workers. Match
 * API processed by matching service per second
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_matching.cadence_requests{*} by {operation}.as_rate()
 ```
 
@@ -698,7 +698,7 @@ sum:cadence_matching.cadence_requests{*} by {operation}.as_rate()
 * API errors by matching service per second
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_matching.cadence_errors_per_tl{*} by {operation,domain,tasklist}.as_rate()
 sum:cadence_matching.cadence_errors_bad_request_per_tl{*} by {operation,domain,tasklist}
 sum:cadence_matching.cadence_errors_bad_request{*} by {operation,domain,tasklist}
@@ -746,7 +746,7 @@ sum:cadence_matching.cadence_errors_event_already_started{*} by {operation,domai
 * Regular APIs are the APIs excluding long polls
 * No monitor needed
 * Datadog query example
-```
+```dql
 avg:cadence_matching.cadence_latency_per_tl.quantile{$pXXLatency,!operation:pollfor*,!operation:queryworkflow} by {operation,tasklist}
 ```
 
@@ -755,7 +755,7 @@ avg:cadence_matching.cadence_latency_per_tl.quantile{$pXXLatency,!operation:poll
 To confirm if there are too many tasks being added to the tasklist, use “AddTasks per second - domain, tasklist breakdown”
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_matching.syncmatch_latency_per_tl.quantile{$pXXLatency} by {operation,tasklist,domain}
 ```
 
@@ -763,7 +763,7 @@ sum:cadence_matching.syncmatch_latency_per_tl.quantile{$pXXLatency} by {operatio
 * If a match is done asynchronously it writes a match to the db to use later. Measures the time when the worker is not actively looking for tasks. If this is high, more workers are needed.
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_matching.asyncmatch_latency_per_tl.quantile{$pXXLatency} by {operation,tasklist,domain}
 ```
 
@@ -777,7 +777,7 @@ The following monotors should be set up for Cadence persistence.
 If so then investigate the database(may need to scale up) [Mostly]
 If not then see if need to scale up Cadence deployment(K8s instance)
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.persistence_errors{*} by {operation}.as_count()
 sum:cadence_frontend.persistence_requests{*} by {operation}.as_count()
 sum:cadence_matching.persistence_errors{*} by {operation}.as_count()
@@ -795,7 +795,7 @@ sum:cadence_worker.persistence_requests{*} by {operation}.as_count()
 ### Persistence By Service TPS
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.persistence_requests{*}.as_rate()
 sum:cadence_history.persistence_requests{*}.as_rate()
 sum:cadence_worker.persistence_requests{*}.as_rate()
@@ -806,7 +806,7 @@ sum:cadence_matching.persistence_requests{*}.as_rate()
 ### Persistence By Operation TPS
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.persistence_requests{*} by {operation}.as_rate()
 sum:cadence_history.persistence_requests{*} by {operation}.as_rate()
 sum:cadence_worker.persistence_requests{*} by {operation}.as_rate()
@@ -819,7 +819,7 @@ sum:cadence_matching.persistence_requests{*} by {operation}.as_rate()
 * When fired, investigate the database(may need to scale up) [Mostly]
 If there’s a high latency, then there could be errors or something wrong with the db
 * Datadog query example
-```
+```dql
 avg:cadence_matching.persistence_latency.quantile{$pXXLatency} by {operation}
 avg:cadence_worker.persistence_latency.quantile{$pXXLatency} by {operation}
 avg:cadence_frontend.persistence_latency.quantile{$pXXLatency} by {operation}
@@ -830,7 +830,7 @@ avg:cadence_history.persistence_latency.quantile{$pXXLatency} by {operation}
 * It's to help investigate availability issue
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.persistence_errors{*} by {operation}.as_count()
 sum:cadence_history.persistence_errors{*} by {operation}.as_count()
 sum:cadence_worker.persistence_errors{*} by {operation}.as_count()
@@ -893,7 +893,7 @@ For reading visibility records, Frontend service will query ElasticSearch direct
 * The availability of Cadence server using database
 * Monitor can be set
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.elasticsearch_errors{*} by {operation}.as_count()
 sum:cadence_frontend.elasticsearch_requests{*} by {operation}.as_count()
 sum:cadence_history.elasticsearch_errors{*} by {operation}.as_count()
@@ -906,7 +906,7 @@ sum:cadence_history.elasticsearch_requests{*} by {operation}.as_count()
 * The error of persistence API call by service
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.elasticsearch_requests{*}.as_rate()
 sum:cadence_history.elasticsearch_requests{*}.as_rate()
 ```
@@ -915,7 +915,7 @@ sum:cadence_history.elasticsearch_requests{*}.as_rate()
 * The rate of persistence API call by API
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.elasticsearch_requests{*} by {operation}.as_rate()
 sum:cadence_history.elasticsearch_requests{*} by {operation}.as_rate()
 ```
@@ -925,7 +925,7 @@ sum:cadence_history.elasticsearch_requests{*} by {operation}.as_rate()
 * The latency of persistence API call
 * No monitor needed
 * Datadog query example
-```
+```dql
 avg:cadence_frontend.elasticsearch_latency.quantile{$pXXLatency} by {operation}
 avg:cadence_history.elasticsearch_latency.quantile{$pXXLatency} by {operation}
 ```
@@ -934,7 +934,7 @@ avg:cadence_history.elasticsearch_latency.quantile{$pXXLatency} by {operation}
 * The error of persistence API call
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_frontend.elasticsearch_errors{*} by {operation}.as_count()
 sum:cadence_history.elasticsearch_errors{*} by {operation}.as_count()
 ```
@@ -945,7 +945,7 @@ sum:cadence_history.elasticsearch_errors{*} by {operation}.as_count()
 * When fired, restart Cadence service first to mitigate. Then look at logs to see why the process is stopped(process panic/error/etc).
 May consider add more pods (replicaCount) to sys-worker service for higher availability
 * Datadog query example
-```
+```dql
 sum:cadence_worker.es_processor_requests{*} by {operation}.as_count()
 sum:cadence_worker.es_processor_retries{*} by {operation}.as_count()
 ```
@@ -957,7 +957,7 @@ Almost all errors are retryable errors so it’s not a problem.
 * When fired, Go to Kibana to find logs about the error details.
 The most common error is missing the ElasticSearch index field -- an index field is added in dynamicconfig but not in ElasticSearch, or vice versa . If so, follow the runbook to add the field to ElasticSearch or dynamic config.
 * Datadog query example
-```
+```dql
 sum:cadence_worker.es_processor_error{*} by {operation}.as_count()
 sum:cadence_worker.es_processor_corrupted_data{*} by {operation}.as_count()
 ```
@@ -966,7 +966,7 @@ sum:cadence_worker.es_processor_corrupted_data{*} by {operation}.as_count()
 * The latency of the processing logic
 * No monitor needed
 * Datadog query example
-```
+```dql
 sum:cadence_worker.es_processor_process_msg_latency.quantile{$pXXLatency} by {operation}.as_count()
 ```
 
