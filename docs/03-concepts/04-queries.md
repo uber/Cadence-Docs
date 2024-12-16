@@ -20,8 +20,8 @@ The Cadence client libraries expose some predefined :query:queries: out of the b
 
 Example
 <!-- TODO: enable wordWrap on this codeblock, at the moment its not yet supported. https://github.com/facebook/docusaurus/issues/7875 -->
-```sh wordWrap=true
-cadence --do samples-domain wf query -w <workflowID> -qt __stack_trace
+```shell-session wordWrap=true
+$ cadence --do samples-domain wf query -w <workflowID> -qt __stack_trace
 
 "coroutine 1 [blocked on selector-1.Select]:\nmain.sampleSignalCounterWorkflow(0x1a99ae8, 0xc00009d700, 0x0, 0x0, 0x0)\n\t/Users/qlong/indeed/cadence-samples/cmd/samples/recipes/signalcounter/signal_counter_workflow.go:38 +0x1be\nreflect.Value.call(0x1852ac0, 0x19cb608, 0x13, 0x1979180, 0x4, 0xc00045aa80, 0x2, 0x2, 0x2, 0x18, ...)\n\t/usr/local/Cellar/go/1.16.3/libexec/src/reflect/value.go:476 +0x8e7\nreflect.Value.Call(0x1852ac0, 0x19cb608, 0x13, 0xc00045aa80, 0x2, 0x2, 0x1, 0x2, 0xc00045a720)\n\t/usr/local/Cellar/go/1.16.3/libexec/src/reflect/value.go:337 +0xb9\ngo.uber.org/cadence/internal.(*workflowEnvironmentInterceptor).ExecuteWorkflow(0xc00045a720, 0x1a99ae8, 0xc00009d700, 0xc0001ca820, 0x20, 0xc00007fad0, 0x1, 0x1, 0x1, 0x1, ...)\n\t/Users/qlong/go/pkg/mod/go.uber.org/cadence@v0.17.1-0.20210708064625-c4a7e032cc13/internal/workflow.go:372 +0x2cb\ngo.uber.org/cadence/internal.(*workflowExecutor).Execute(0xc000098d80, 0x1a99ae8, 0xc00009d700, 0xc0001b127e, 0x2, 0x2, 0xc00044cb01, 0xc000070101, 0xc000073738, 0x1729f25, ...)\n\t/Users/qlong/go/pkg/mod/go.uber.org/cadence@v0.17.1-0.20210708064625-c4a7e032cc13/internal/internal_worker.go:699 +0x28d\ngo.uber.org/cadence/internal.(*syncWorkflowDefinition).Execute.func1(0x1a99ce0, 0xc00045a9f0)\n\t/Users/qlong/go/pkg/mod/go.uber.org/cadence@v0.17.1-0.20210708064625-c4a7e032cc13/internal/internal_workflow.go:466 +0x106"
 ```

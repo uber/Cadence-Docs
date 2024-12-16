@@ -49,10 +49,12 @@ docker run -it --rm ubercadence/cli:master --address host.docker.internal:7933 -
 NOTE: Be sure to update your image when you want to try new features: `docker pull ubercadence/cli:master `
 
 NOTE: If you are running docker-compose Cadence server, you can also logon to the container to execute CLI:
-```bash
-docker exec -it docker_cadence_1 /bin/bash
+```sh-session
+# this logs you onto the Cadence docker container
+$ docker exec -it docker_cadence_1 /bin/bash
 
-# cadence --address $(hostname -i):7933 --do samples domain register
+# this command runs within the container
+% cadence --address $(hostname -i):7933 --do samples domain register
 ```
 
 ### Build it yourself

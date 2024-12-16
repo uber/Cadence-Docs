@@ -108,7 +108,7 @@ func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
 
 In this worker service, we start a HTTP server and create a new Cadence client running continuously at the background. Then start the server on your local, you may see logs such like
 
-```bash
+```log
 2023-07-03T11:46:46.266-0700    INFO    internal/internal_worker.go:826 Worker has no workflows registered, so workflow worker will not be started.     {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
 2023-07-03T11:46:46.267-0700    INFO    internal/internal_worker.go:834 Started Workflow Worker {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
 2023-07-03T11:46:46.267-0700    INFO    internal/internal_worker.go:838 Worker has no activities registered, so activity worker will not be started.    {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "35987@uber-C02F18EQMD6R@test-worker@90c0260e-ba5c-4652-9f10-c6d1f9e29c1d"}
