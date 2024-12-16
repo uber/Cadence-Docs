@@ -25,7 +25,7 @@ To enable “start workflow” HTTP API, add `http` section to Cadence RPC confi
 services:
   frontend:
     rpc:
-      <...>
+      # ...
       http:
         port: 8800
         procedures:

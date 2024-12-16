@@ -153,7 +153,7 @@ func helloWorldActivity(ctx context.Context, name string) (string, error) {
 
 Don't forget to register the workflow and activity to the worker.
 
-```Go
+```go
 func init() {
     workflow.Register(helloWorldWorkflow)
     activity.Register(helloWorldActivity)
@@ -161,7 +161,7 @@ func init() {
 ```
 
 Import the `context` module if it was not automatically added.
-```Go
+```go
 import (
     "context"
 )
@@ -176,7 +176,7 @@ cadence --domain test-domain workflow start --et 60 --tl test-worker --workflow_
 ```
 
 You should see logs in your worker terminal like
-```bash
+```log
 2023-07-16T11:30:02.717-0700    INFO    cadence-worker/code.go:104      Workflow completed. {"Domain": "test-domain", "TaskList": "test-worker", "WorkerID": "11294@uber-C02F18EQMD6R@test-worker@5829c68e-ace0-472f-b5f3-6ccfc7903dd5", "WorkflowType": "main.helloWorldWorkflow", "WorkflowID": "8acbda3c-d240-4f27-8388-97c866b8bfb5", "RunID": "4b91341f-056f-4f0b-ab64-83bcc3a53e5a", "Result": "Hello World!"}
 ```
 

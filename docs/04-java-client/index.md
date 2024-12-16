@@ -17,7 +17,7 @@ The following are important links for the Cadence Java client:
 
 Add *cadence-client* as a dependency to your *pom.xml*:
 
-```
+```xml
     <dependency>
       <groupId>com.uber.cadence</groupId>
       <artifactId>cadence-client</artifactId>
@@ -27,7 +27,7 @@ Add *cadence-client* as a dependency to your *pom.xml*:
 
 or to *build.gradle*:
 
-```
+```gradle
     dependencies {
       implementation group: 'com.uber.cadence', name: 'cadence-client', version: 'LATEST.RELEASE.VERSION'
     }
@@ -35,7 +35,7 @@ or to *build.gradle*:
 
 If you are using [gradle 6.9 or older](https://docs.gradle.org/current/userguide/upgrading_version_6.html#sec:configuration_removal), you can use `compile group`
 
-```
+```gradle
     dependencies {
       compile group: 'com.uber.cadence', name: 'cadence-client', version: 'LATEST.RELEASE.VERSION'
     }

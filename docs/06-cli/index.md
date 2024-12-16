@@ -13,12 +13,12 @@ The Cadence :CLI: is a command-line tool you can use to perform various :task:ta
 ## Using the CLI
 
 ### Homebrew
-```
+```bash
 brew install cadence-workflow
 ```
 
 After the installation is done, you can use CLI:
-```
+```bash
 cadence --help
 ```
 This will always install the latest version. Follow [this instructions](https://github.com/cadence-workflow/cadence/discussions/4457) if you need to install older versions of Cadence CLI.
@@ -49,7 +49,7 @@ docker run -it --rm ubercadence/cli:master --address host.docker.internal:7933 -
 NOTE: Be sure to update your image when you want to try new features: `docker pull ubercadence/cli:master `
 
 NOTE: If you are running docker-compose Cadence server, you can also logon to the container to execute CLI:
-```
+```bash
 docker exec -it docker_cadence_1 /bin/bash
 
 # cadence --address $(hostname -i):7933 --do samples domain register
@@ -68,8 +68,8 @@ Alternatively, you can build the CLI image, see [instructions](https://github.co
 ## Documentation
 CLI are documented by `--help` or `-h` in ANY tab of all levels:
 
-```
-$cadence --help
+```sh-session
+$ cadence --help
 NAME:
    cadence - A command-line tool for cadence users
 
@@ -95,8 +95,8 @@ GLOBAL OPTIONS:
    --version, -v                        print the version
 ```
 And
-```
-$cadence workflow -h
+```sh-session
+$ cadence workflow -h
 NAME:
    cadence workflow - Operate cadence workflow
 
@@ -132,8 +132,8 @@ OPTIONS:
    --help, -h  show help
 ```
 
-```
-$cadence wf signal -h
+```sh-session
+$ cadence wf signal -h
 NAME:
    cadence workflow signal - signal a workflow execution
 

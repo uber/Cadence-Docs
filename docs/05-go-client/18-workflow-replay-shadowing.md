@@ -52,7 +52,7 @@ replayer.RegisterWorkflow(myWorkflowFunc2, workflow.RegisterOptions{
 
 Replayer can read workflow history from a local json file or fetch it directly from the Cadence server. If you would like to use the first method, you can use the following CLI command, otherwise you can skip to the next step.
 
-```
+```bash
 cadence --do <domain> workflow show --wid <workflowID> --rid <runID> --of <output file name>
 ```
 

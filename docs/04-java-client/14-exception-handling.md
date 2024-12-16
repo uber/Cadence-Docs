@@ -16,7 +16,7 @@ Exceptions thrown by a workflow are received by a workflow client wrapped into `
  In this [example](https://github.com/cadence-workflow/cadence-java-samples/blob/master/src/main/java/com/uber/cadence/samples/hello/HelloException.java) a Workflow Client executes a workflow which executes a child workflow which
  executes an activity which throws an IOException. The resulting exception stack trace is:
 
-```
+```log
  com.uber.cadence.client.WorkflowFailureException: WorkflowType="GreetingWorkflow::getGreeting", WorkflowID="38b9ce7a-e370-4cd8-a9f3-35e7295f7b3d", RunID="37ceb58c-9271-4fca-b5aa-ba06c5495214
      at com.uber.cadence.internal.dispatcher.UntypedWorkflowStubImpl.getResult(UntypedWorkflowStubImpl.java:139)
      at com.uber.cadence.internal.dispatcher.UntypedWorkflowStubImpl.getResult(UntypedWorkflowStubImpl.java:111)
