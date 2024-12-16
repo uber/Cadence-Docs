@@ -103,7 +103,7 @@ To support Zonal Isolation, please upgrade your SDK versions:
 Drains can be done via the [Admin APIs](https://github.com/cadence-workflow/cadence-idl/blob/50a4ee241e50c6baab8e5d47540b176c5ee022a4/proto/cadence-workflow/cadence/admin/v1/service.proto#L125) of cadence-frontend or CLI.
 
 You can check the help message for the CLI by running:
-```
+```bash
 cadence admin isolation-groups -h
 ```
 ## Monitoring

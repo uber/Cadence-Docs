@@ -33,7 +33,7 @@ func main(){
 
 Next, let's define some basic configurations for the worker. In real production environment, you may need to implement them in configurational languages, but in this tutorial, let's just hard code them for now.
 
-```Go
+```go
 var HostPort = "127.0.0.1:7933"
 var Domain = "test-domain"
 var TaskListName = "test-worker"
@@ -45,7 +45,7 @@ Note that the domain is what we've already registered in advance. We will need t
 
 Then let's write a simple function to build a Cadence client on gRPC in your worker, which will communicate with the Cadence backend continuously.
 
-```Go
+```go
 func buildCadenceClient() workflowserviceclient.Interface {
     dispatcher := yarpc.NewDispatcher(yarpc.Config{
 		Name: ClientName,
@@ -70,7 +70,7 @@ func buildCadenceClient() workflowserviceclient.Interface {
 
 Let's also build a logger to help us debug our application
 
-```Go
+```go
 func buildLogger() *zap.Logger {
     config := zap.NewDevelopmentConfig()
     config.Level.SetLevel(zapcore.InfoLevel)
@@ -87,7 +87,7 @@ func buildLogger() *zap.Logger {
 
 With both client and logger helper function ready, let's write the function that starts our worker.
 
-```Go
+```go
 func startWorker(logger *zap.Logger, service workflowserviceclient.Interface) {
     // TaskListName identifies set of client workflows, activities, and workers.
     // It could be your group or client or application name.
