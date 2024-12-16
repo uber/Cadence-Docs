@@ -4,33 +4,58 @@
  * work well for content-centric websites.
  */
 
-/* @import url('https://fonts.cdnfonts.com/css/uber-move-text'); */
-/* @import url('https://fonts.cdnfonts.com/css/uber-move-2'); */
+@import url('fonts.css');
 
-/* https://baseweb.design/guides/theming/#colors */
 :root {
-  --ifm-color-primary: #000000;
-  --ifm-color-primary-dark: #363636;
-  --ifm-color-primary-darker: #343434;
-  --ifm-color-primary-darkest: #161616;
-  --ifm-color-primary-light: #DEDEDE;
-  --ifm-color-primary-lighter: #DEDEDE;
-  --ifm-color-primary-lightest: #FFFFFF;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  /*
+  Verdana could provide good fallback.
+  UberMove-Bold used for headings,
+  UberMoveText-Regular for body
+  system-ui, Helvetica for fallback
+  */
+  --ifm-font-family-base: UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ifm-font-family-monospace: UberMoveMono, UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ifm-heading-font-family: UberMove, UberMoveMono, "Lucida Console", Monaco, monospace;
 
-  /* --ifm-font-family-base: '"UberMoveText", system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
-  --ifm-font-family-monospace: '"UberMove", UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
-  --ifm-heading-font-family: '"UberMoveMono", "Lucida Console", Monaco, monospace'; */
+  --ifm-font-color-base: #000000;
+  --ifm-link-color: #276ef1;
+
+  --ifm-color-primary: #5B4636; /* A rich brown for primary text and key elements */
+  --ifm-color-primary-dark: #45362A; /* A darker shade for headings or important elements */
+  --ifm-color-primary-darker: #2E241C; /* Even darker for small accents or dividers */
+  --ifm-color-primary-darkest: #1A140E; /* The darkest shade for maximum contrast areas */
+  --ifm-color-primary-light: #FFF1D5; /* A slightly darker variant of Cosmic Latte for backgrounds */
+  --ifm-color-primary-lighter: #FFF5DB; /* A lighter variant for secondary UI areas */
+  --ifm-color-primary-lightest: #FFF8E7; /* Cosmic Latte as the base lightest color */
+  --ifm-code-font-size: 100%; /* Ensure code font size is clear and legible */
+  --docusaurus-highlighted-code-line-bg: rgba(91, 70, 54, 0.1); /* Subtle highlight for code lines */
+}
+[data-theme='dark'] {
+
+  --ifm-font-color-base: #FFE6CC;
+  --ifm-link-color: #FFF8E7;
+
+  --ifm-color-primary: #FFE6CC; /* A warm cream for primary text and key elements */
+  --ifm-color-primary-dark: #CCB3A1; /* A slightly muted cream for secondary text */
+  --ifm-color-primary-darker: #996F6F; /* A deeper, warm accent color */
+  --ifm-color-primary-darkest: #2E241C; /* Deep brown for the darkest contrast areas */
+  --ifm-color-primary-light: #4A3B2D; /* A subtle brown shade for UI elements */
+  --ifm-color-primary-lighter: #5B4636; /* Rich brown for secondary elements */
+  --ifm-color-primary-lightest: #FFF8E7; /* Cosmic Latte as the highlight */
+  --docusaurus-highlighted-code-line-bg: rgba(255, 230, 204, 0.1); /* Warm tone for code line highlights */
 }
 
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #DEDEDE;
-  --ifm-color-primary-darker: #868686;
-  --ifm-color-primary-darkest: #000000;
-  --ifm-color-primary-light: #868686;
-  --ifm-color-primary-lighter: #DEDEDE;
-  --ifm-color-primary-lightest: #FFFFFF;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+.hero.hero--primary[data-theme='light'] {
+  --ifm-hero-background-color: #1A140E; /* A warm background color for hero sections */
+}
+.hero.hero--primary[data-theme='dark'] {
+  --ifm-hero-background-color: #FFE6CC; /* A darker background color for dark mode hero sections */
+}
+
+html[data-theme='light'] .DocSearch-Hit  {
+  --docsearch-highlight-color: #276ef1; /* Highlight color for search results */
+}
+
+html[data-theme='dark'] .DocSearch-Hit,.DocSearch-Hit-path {
+  --docsearch-highlight-color: #276ef1; /* Highlight color for search results */
 }
