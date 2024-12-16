@@ -19,8 +19,8 @@ Follow the Docker installation instructions found here: [https://docs.docker.com
 ## 1. Run Cadence Server Using Docker Compose
 
 Download the Cadence docker-compose file:
-```bash
 
+```bash
 curl -O https://raw.githubusercontent.com/cadence-workflow/cadence/master/docker/docker-compose.yml && curl -O https://raw.githubusercontent.com/cadence-workflow/cadence/master/docker/prometheus/prometheus.yml
 ```
 Then start Cadence Service by running:
@@ -35,8 +35,8 @@ In a new terminal, create a new domain called `test-domain` (or choose whatever 
 docker run --network=host --rm ubercadence/cli:master --do test-domain domain register -rd 1
 ```
 Check that the domain is indeed registered:
-```bash
-> docker run --network=host --rm ubercadence/cli:master --do test-domain domain describe
+```shell-session
+$ docker run --network=host --rm ubercadence/cli:master --do test-domain domain describe
 Name: test-domain
 Description:
 OwnerEmail:
@@ -52,7 +52,7 @@ Bad binaries to reset:
 | BINARY CHECKSUM | OPERATOR | START TIME | REASON |
 +-----------------+----------+------------+--------+
 +-----------------+----------+------------+--------+
->
+$
 ```
 
 Please remember the domains you created because they will be used in your worker implementation and Cadence CLI  commands.

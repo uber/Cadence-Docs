@@ -111,8 +111,8 @@ Note that the restart of the :worker: didn't affect the :workflow_execution:. It
 This is the most important feature of Cadence. The :workflow: code doesn't need to deal with :worker: failures at all. Its state is fully recovered to its current state that includes all the local variables and threads.
 
 Let's look at the line where the :workflow: is blocked:
-```bash
-> docker run --network=host --rm ubercadence/cli:master --do test-domain workflow stack --workflow_id "Hello2"
+```sh-session
+$ docker run --network=host --rm ubercadence/cli:master --do test-domain workflow stack --workflow_id "Hello2"
 Query result:
 "workflow-root: (BLOCKED on await)
 com.uber.cadence.internal.sync.SyncDecisionContext.await(SyncDecisionContext.java:546)
@@ -125,7 +125,7 @@ sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)"
 Yes, indeed the :workflow: is blocked on await. This feature works for any open :workflow:, greatly simplifying troubleshooting in production.
 Let's complete the :workflow: by sending a :signal: with a "Bye" greeting:
 
-```bash
+```log
 16:58:22.962 [workflow-root] INFO  c.u.c.samples.hello.GettingStarted - 4: Bye World!
 ```
 Note that the value of the count variable was not lost during the restart.
@@ -141,8 +141,8 @@ run and then send the :signal:. `SignalWithStartWorkflow` therefore doesn't take
 parameter.
 
 Learn more from the `--help` manual:
-```bash
-docker run --network=host --rm ubercadence/cli:master --do test-domain workflow signalwithstart -h
+```sh-session
+$ docker run --network=host --rm ubercadence/cli:master --do test-domain workflow signalwithstart -h
 NAME:
    cadence workflow signalwithstart - signal the current open workflow if exists, or attempt to start a new run based on IDResuePolicy and signals it
 
