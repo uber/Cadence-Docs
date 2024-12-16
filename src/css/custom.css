@@ -52,10 +52,11 @@
   --ifm-hero-background-color: #FFE6CC; /* A darker background color for dark mode hero sections */
 }
 
-html[data-theme='light'] .DocSearch-Hit  {
+/* https://docusaurus.io/docs/search */
+[data-theme='light'] .DocSearch  {
   --docsearch-highlight-color: #276ef1; /* Highlight color for search results */
 }
 
-html[data-theme='dark'] .DocSearch-Hit,.DocSearch-Hit-path {
+[data-theme='dark'] .DocSearch {
   --docsearch-highlight-color: #276ef1; /* Highlight color for search results */
 }
