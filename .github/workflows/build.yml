@@ -13,15 +13,13 @@ jobs:
 
     steps:
     - name: Checkout 🛎️
-      # https://github.com/actions/checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
       with:
         persist-credentials: false
     - name: Use Node.js v18
-      # https://github.com/actions/setup-node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
-        node-version: lts/hydrogen
+        node-version: 18.x
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
         cache: 'npm'
     - name: Install and Build 🔧
