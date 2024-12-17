@@ -32,6 +32,8 @@ const config: Config = {
   organizationName: envReplace('${CADENCE_DOCS_ORGANIZATION:-cadence-workflow}', process.env),
   projectName: 'cadence-docs', // Usually your repo name.
 
+  trailingSlash: false,
+
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
